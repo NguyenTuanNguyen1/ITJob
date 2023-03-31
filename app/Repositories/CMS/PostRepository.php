@@ -28,15 +28,18 @@ class PostRepository implements IPostRepository
     {
         return Post::find($id);
     }
-
+    public function update($id,array $data)
+    {
+        $result = Post::find($id)->update([
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'image' => $data['image']
+        ]);
+        return $result;
+    }
     public function delete($id)
     {
         return Post::find($id)->delete();
-    }
-
-    public function update(array $data)
-    {
-        // TODO: Implement update() method.
     }
 
     public function storage($id)

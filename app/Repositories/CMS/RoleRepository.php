@@ -26,14 +26,17 @@ class RoleRepository implements IRoleRepository
         return Role::find($id);
     }
 
+    public function update($id,array $data)
+    {
+        $data = Role::find($id)->update([
+            'name' => $data['name']
+        ]);
+        return $data;
+    }
+
     public function delete($id)
     {
         return Role::find($id)->delete();
-    }
-
-    public function update(array $data)
-    {
-        // TODO: Implement update() method.
     }
 
     public function storage($id)

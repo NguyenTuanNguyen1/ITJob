@@ -20,6 +20,7 @@ class Company extends Model
         'name',
         'username',
         'email',
+        'phone',
         'type',
         'staff',
         'headquarters',

@@ -26,15 +26,16 @@ class ReviewRepository implements IReviewRepository
     {
         return Review::find($id);
     }
-
+    public function update($id,array $data)
+    {
+        $result = Review::find($id)->update([
+            'content' => $data['content'],
+            'user_id' => $data['user_id'],
+        ]);
+    }
     public function delete($id)
     {
         return Review::find($id)->delete();
-    }
-
-    public function update(array $data)
-    {
-        // TODO: Implement update() method.
     }
 
     public function trashed()

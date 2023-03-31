@@ -12,14 +12,30 @@ class ContactRepository implements IContactRepository
         return Contact::orderBy('id','DESC')->paginate(8);
     }
 
-    public function create(array $data)
+    public function create(array $contact)
     {
-        // TODO: Implement create() method.
+        $data = new Contact();
+        $data->name = $contact['name'];
+        $data->email = $contact['email'];
+        $data->content = $contact['content'];
+        $data->user_id = $contact['user_id'];
+        $data->save();
+        return $data;
     }
 
     public function find($id)
     {
         return Contact::find($id)->get();
+    }
+    public function update($id, array $data)
+    {
+        $result = Contact::find($id)->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'content' => $data['content'],
+            'user_id' => $data['user_id'],
+        ]);
+        return $result;
     }
 
     public function delete($id)

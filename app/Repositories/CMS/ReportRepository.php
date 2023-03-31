@@ -11,14 +11,26 @@ class ReportRepository implements IReportRepository
         return Report::orderBy('id','DESC')->paginate(8);
     }
 
-    public function create(array $data)
+    public function create(array $report)
     {
-        // TODO: Implement create() method.
+        $data = new Report();
+        $data->content = $report['content'];
+        $data->user_id = $report['user_id'];
+        $data->save();
+        return $data;
     }
 
     public function find($id)
     {
         return Report::find($id)->get();
+    }
+
+    public function update($id, array $data)
+    {
+        $result = Report::find($id)->update([
+            'content' => $data['content'],
+            'user_id' => $data['user_id'],
+        ]);
     }
 
     public function delete($id)

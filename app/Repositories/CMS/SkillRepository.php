@@ -11,9 +11,12 @@ class SkillRepository implements ISkillRepository
         return Skill::orderBy('id', 'DESC')->paginate(8);
     }
 
-    public function create(array $data)
+    public function create(array $skill)
     {
-        // TODO: Implement create() method.
+        $data = new Skill();
+        $data->name = $skill['name'];
+        $data->save();
+        return $data;
     }
 
     public function find($id)
@@ -21,9 +24,12 @@ class SkillRepository implements ISkillRepository
         return Skill::find($id);
     }
 
-    public function update(array $data)
+    public function update($id,array $data)
     {
-        // TODO: Implement update() method.
+        $result = Skill::find($id)->update([
+            'name' => $data['name']
+        ]);
+        return $result;
     }
 
     public function delete($id)

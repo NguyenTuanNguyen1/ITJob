@@ -10,7 +10,7 @@ interface IReviewRepository
 
     public function find($id);
 
-    public function update(array $data);
+    public function update($id,array $data);
 
     public function delete($id);
     public function trashed();
