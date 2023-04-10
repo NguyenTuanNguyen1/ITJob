@@ -25,6 +25,11 @@ class HomeController extends Controller
         return View('dang-ky');
     }
 
+    public function Text()
+    {
+        return View('layout.menu-layout');
+    }
+
     public function handle_login(LoginRequest $request)
     {
         $user = [

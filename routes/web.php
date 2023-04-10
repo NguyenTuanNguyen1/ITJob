@@ -32,3 +32,5 @@ Route::get('/chinh-sach-quyen-rieng-tu', function(){
 });
 Route::get('/login-facebook/{provider}',[HomeController::class,'redirect_Facebook'])->name('LoginFacebook');
 Route::get('/callback-facebook/{provider}',[HomeController::class,'callback_Facebook'])->name('CallbackFacebook');
+
+Route::get('/123menu-layout',[HomeController::class,'Text']);
