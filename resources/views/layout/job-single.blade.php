@@ -526,5 +526,4 @@
     <script src="board-master/js/custom.js"></script>
      
   </body>
-  @include('layout.page-js')
 </html>

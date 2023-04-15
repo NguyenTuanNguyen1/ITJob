@@ -548,6 +548,21 @@
 
 
 {{--</body>--}}
-@include('layout.page-js')
+<script src="board-master/js/jquery.min.js"></script>
+    <script src="board-master/js/bootstrap.bundle.min.js"></script>
+    <script src="board-master/js/isotope.pkgd.min.js"></script>
+    <script src="board-master/js/stickyfill.min.js"></script>
+    <script src="board-master/js/jquery.fancybox.min.js"></script>
+    <script src="board-master/js/jquery.easing.1.3.js"></script>
+    
+    <script src="board-master/js/jquery.waypoints.min.js"></script>
+    <script src="board-master/js/jquery.animateNumber.min.js"></script>
+    <script src="board-master/js/owl.carousel.min.js"></script>
+    <script src="board-master/js/quill.min.js"></script>
+    
+    
+    <script src="board-master/js/bootstrap-select.min.js"></script>
+    
+    <script src="board-master/js/custom.js"></script>
 
 </html>
