@@ -1670,3 +1670,8 @@ h1, h2, h3, h4 {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
+ .selectpicker{
+  width: 100%;
+  padding: 13px;
+  border-radius: 5px;
+ }
