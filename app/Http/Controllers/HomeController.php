@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function Text()
     {
-        return View('layout.menu-layout');
+        return View('layout.index');
     }
 
     public function handle_login(LoginRequest $request)

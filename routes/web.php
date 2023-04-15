@@ -34,3 +34,4 @@ Route::get('/login-facebook/{provider}',[HomeController::class,'redirect_Faceboo
 Route::get('/callback-facebook/{provider}',[HomeController::class,'callback_Facebook'])->name('CallbackFacebook');
 
 Route::get('/123menu-layout',[HomeController::class,'Text']);
+
