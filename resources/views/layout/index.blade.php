@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <meta name="author" content="Free-Template.co" />
     <link rel="shortcut icon" href="ftco-32x32.png">
     <link rel="stylesheet" href="{{url('board-master/css/jquery.fancybox.min.css')}}">
-    <!-- <link rel="stylesheet" href="{{url('board-master/css/bootstrap-select.min.css')}}"> -->
+    <link rel="stylesheet" href="{{url('board-master/css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{url('board-master/fonts/icomoon/style.css')}}">
     <link rel="stylesheet" href="{{url('board-master/fonts/line-icons/style.css')}}">
     <link rel="stylesheet" href="{{url('board-master/css/owl.carousel.min.css')}}">

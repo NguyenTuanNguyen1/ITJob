@@ -9,7 +9,7 @@
 
 
 <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ url('js/isotope.pkgd.min.js"') }}"></script>
+<script src="{{ url('js/isotope.pkgd.min.js) }}"></script>
 <script src="{{ url('js/stickyfill.min.js') }}"></script>
 <script src="{{ url('js/jquery.fancybox.min.js') }}"></script>
 <script src="{{ url('js/jquery.easing.1.3.js') }}"></script>
@@ -17,4 +17,4 @@
 {{--<script src="{{ url('js/jquery.animateNumber.min.js') }}"></script>--}}
 <script src="{{ url('js/owl.carousel.min.js') }}"></script>
 <script src="{{ url('js/bootstrap-select.min.js') }}"></script>
-<script src="{{ url('js/custom.js') }}"></script> -->
+<script src="{{ url('js/custom.js') }}"></script> 
