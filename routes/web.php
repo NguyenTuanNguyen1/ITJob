@@ -17,8 +17,8 @@ use App\Http\Controllers\HomeController;
 //     return view('welcome');
 // });
 
-Route::get('/',[HomeController::class,'index'])->name('trang-chu');
-Route::get('/user_login',[HomeController::class,'login'])->name('user_Login');
+Route::get('/',[HomeController::class,'index'])->name('home');
+    Route::get('/user_login',[HomeController::class,'login'])->name('user_Login');
 Route::post('/user_login',[HomeController::class,'handle_login'])->name('.handle-Login');
 
 Route::get('/user_register',[HomeController::class,'register'])->name('user_Register');
