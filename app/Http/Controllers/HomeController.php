@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function Text()
     {
-        return View('layout.post-job');
+        return View('layout.portfolio');
     }   
 
     public function handle_login(LoginRequest $request)

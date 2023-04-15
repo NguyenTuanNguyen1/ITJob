@@ -18,3 +18,4 @@
 <script src="{{ url('js/owl.carousel.min.js') }}"></script>
 <script src="{{ url('js/bootstrap-select.min.js') }}"></script>
 <script src="{{ url('js/custom.js') }}"></script> 
+

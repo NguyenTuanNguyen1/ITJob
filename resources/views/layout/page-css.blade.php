@@ -5,3 +5,5 @@
 <link href="{{ url('assets/css/pages/data-table.css') }}" rel="stylesheet">
 <link href="{{ url('menu-layout/menu.css') }}" rel="stylesheet">
 <link href="{{ url('content-job/content-recruitment.css') }}" rel="stylesheet">
+
+<link href="{{ url('information-candidate/information-candidate.css') }}" rel="stylesheet" >
