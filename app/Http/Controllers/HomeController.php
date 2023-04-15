@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return View('trang-chu');
+        return View('home');
     }
 
     public function login()
@@ -35,7 +35,7 @@ class HomeController extends Controller
         $user = [
             'username'  => $request->username,
             'password'  => $request->password,
-            
+
         ];
 
         $admin = [
@@ -117,7 +117,7 @@ class HomeController extends Controller
         {
             //Tạo người dùng qua Google
             $user = $this->createUser($getInfo,$provider);
-            $name=$getInfo->name;    
+            $name=$getInfo->name;
             return 'hello';
         }
     }
@@ -133,11 +133,11 @@ class HomeController extends Controller
         {
             //Tạo người dùng qua Google
             $user = $this->createUser($getInfo,$provider);
-            $name=$getInfo->name;        
+            $name=$getInfo->name;
             return 'hello';
         }
-    }    
-    
+    }
+
     //Tạo người dùng
     function createUser($getInfo,$provider)
     {
