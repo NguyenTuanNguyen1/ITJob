@@ -6,4 +6,13 @@
 <link href="{{ url('menu-layout/menu.css') }}" rel="stylesheet">
 <link href="{{ url('content-job/content-recruitment.css') }}" rel="stylesheet">
 
+{{--Login--}}
+<link rel="stylesheet" href="{{ url('Login/css/style.css') }}" type="text/css" media="all" />
+
+{{--Register--}}
+<link rel="stylesheet" href="{{ url('Register/css/style.css') }}" type="text/css" media="all" />
+
+{{--Home--}}
+<link rel="stylesheet" href="{{ url('board-master/css/style.css') }}">
+
 <link href="{{ url('information-candidate/information-candidate.css') }}" rel="stylesheet" >

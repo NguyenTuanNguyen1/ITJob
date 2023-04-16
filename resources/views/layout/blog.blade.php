@@ -1,22 +1,11 @@
-
 <!doctype html>
 <html lang="en">
   <head>
     <title>JobBoard &mdash; Website Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    
-    <link rel="stylesheet" href="board-master/css/custom-bs.css">
-    <link rel="stylesheet" href="board-master/css/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="board-master/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="board-master/fonts/icomoon/style.css">
-    <link rel="stylesheet" href="board-master/fonts/line-icons/style.css">
-    <link rel="stylesheet" href="board-master/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="board-master/css/animate.min.css">
-
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="board-master/css/style.css">  
+@include('layout.page-css')
+    <link rel="stylesheet" href="{{ url('board-master/css/style.css') }}">
   </head>
   <body id="top">
 
@@ -26,7 +15,7 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div> -->
-    
+
 
 <div class="site-wrap">
 
@@ -38,7 +27,7 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
-    
+
 
     <!-- NAVBAR -->
     <header class="site-navbar mt-3">
@@ -76,7 +65,7 @@
               <li class="d-lg-none"><a href="login.html">Log In</a></li>
             </ul>
           </nav>
-          
+
           <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
               <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
@@ -108,7 +97,7 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-6 col-lg-4 mb-5">
-            <a href="blog-single.html"><img src="images/sq_img_1.jpg" alt="Image" class="img-fluid rounded mb-4"></a>
+            <a href="blog-single.html"><img src="board-master/images/sq_img_1.jpg" alt="Image" class="img-fluid rounded mb-4"></a>
             <h3><a href="blog-single.html" class="text-black">7 Factors for Choosing Between Two Jobs</a></h3>
             <div>April 15, 2019 <span class="mx-2">|</span> <a href="#">2 Comments</a></div>
           </div>
@@ -139,7 +128,7 @@
           </div>
         </div>
         <div class="row pagination-wrap mt-5">
-          
+
           <div class="col-md-12 text-center ">
             <div class="custom-pagination ml-auto">
               <a href="#" class="prev">Prev</a>
@@ -156,7 +145,7 @@
 
       </div>
     </section>
-    
+
     <footer class="site-footer">
 
       <a href="#top" class="smoothscroll scroll-top">
@@ -214,27 +203,8 @@
         </div>
       </div>
     </footer>
-  
+
   </div>
-
-    <!-- SCRIPTS -->
-    <script src="board-master/js/jquery.min.js"></script>
-    <script src="board-master/js/bootstrap.bundle.min.js"></script>
-    <script src="board-master/js/isotope.pkgd.min.js"></script>
-    <script src="board-master/js/stickyfill.min.js"></script>
-    <script src="board-master/js/jquery.fancybox.min.js"></script>
-    <script src="board-master/js/jquery.easing.1.3.js"></script>
-    
-    <script src="board-master/js/jquery.waypoints.min.js"></script>
-    <script src="board-master/js/jquery.animateNumber.min.js"></script>
-    <script src="board-master/js/owl.carousel.min.js"></script>
-    <script src="board-master/js/quill.min.js"></script>
-
-    <script src="board-master/js/bootstrap-select.min.js"></script>
-    
-    <script src="board-master/js/custom.js"></script>
-   
-   
-     
+  @include('layout.page-js')
   </body>
 </html>

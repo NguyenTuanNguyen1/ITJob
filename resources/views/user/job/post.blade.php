@@ -5,8 +5,8 @@
     <title>JobBoard &mdash; Website Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
+    
+    
     <link rel="stylesheet" href="board-master/css/custom-bs.css">
     <link rel="stylesheet" href="board-master/css/jquery.fancybox.min.css">
     <link rel="stylesheet" href="board-master/css/bootstrap-select.min.css">
@@ -14,19 +14,20 @@
     <link rel="stylesheet" href="board-master/fonts/line-icons/style.css">
     <link rel="stylesheet" href="board-master/css/owl.carousel.min.css">
     <link rel="stylesheet" href="board-master/css/animate.min.css">
-
+    <link rel="stylesheet" href="board-master/css/quill.snow.css">
+    @include('layout.page-css')
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="board-master/css/style.css">
+    <link rel="stylesheet" href="board-master/css/style.css"> 
   </head>
   <body id="top">
 
-  <div id="overlayer"></div>
+  <!-- <div id="overlayer"></div>
   <div class="loader">
     <div class="spinner-border text-primary" role="status">
       <span class="sr-only">Loading...</span>
     </div>
-  </div>
-
+  </div> -->
+    
 
 <div class="site-wrap">
 
@@ -38,7 +39,7 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
-
+    
 
     <!-- NAVBAR -->
     <header class="site-navbar mt-3">
@@ -48,23 +49,23 @@
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-              <li><a href="index.html" class="nav-link">Home</a></li>
+              <li><a href="index.html" class="nav-link active">Home</a></li>
               <li><a href="about.html">About</a></li>
               <li class="has-children">
-                <a href="job-listings.html">Job Listings</a>
+                <a href="job-listings.html" class="active">Job Listings</a>
                 <ul class="dropdown">
                   <li><a href="job-single.html">Job Single</a></li>
-                  <li><a href="post-job.html">Post a Job</a></li>
+                  <li><a href="post-job.html" class="active">Post a Job</a></li>
                 </ul>
               </li>
               <li class="has-children">
-                <a href="services.html" class="active">Pages</a>
+                <a href="services.html">Pages</a>
                 <ul class="dropdown">
                   <li><a href="services.html">Services</a></li>
                   <li><a href="service-single.html">Service Single</a></li>
                   <li><a href="blog-single.html">Blog Single</a></li>
                   <li><a href="portfolio.html">Portfolio</a></li>
-                  <li><a href="portfolio-single.html" class="active">Portfolio Single</a></li>
+                  <li><a href="portfolio-single.html">Portfolio Single</a></li>
                   <li><a href="testimonials.html">Testimonials</a></li>
                   <li><a href="faq.html">Frequently Ask Questions</a></li>
                   <li><a href="gallery.html">Gallery</a></li>
@@ -76,7 +77,7 @@
               <li class="d-lg-none"><a href="login.html">Log In</a></li>
             </ul>
           </nav>
-
+          
           <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
               <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
@@ -94,149 +95,164 @@
       <div class="container">
         <div class="row">
           <div class="col-md-7">
-            <h1 class="text-white font-weight-bold">Portfolio Single (Extra Pages)</h1>
+            <h1 class="text-white font-weight-bold">Post A Job</h1>
             <div class="custom-breadcrumbs">
-              <a href="index.html">Home</a> <span class="mx-2 slash">/</span>
-              <a href="portfolio.html">Portfolio</a> <span class="mx-2 slash">/</span>
-              <span class="text-white"><strong>Portfolio Single</strong></span>
+              <a href="#">Home</a> <span class="mx-2 slash">/</span>
+              <a href="#">Job</a> <span class="mx-2 slash">/</span>
+              <span class="text-white"><strong>Post a Job</strong></span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="site-section pb-0 portfolio-single" id="next-section">
-
+    
+    <section class="site-section">
       <div class="container">
 
-        <div class="row mb-5 mt-5">
-
-          <div class="col-lg-8">
-            <figure>
-              <a href="images/sq_img_6.jpg" data-fancybox="gallery"><img src="images/sq_img_6.jpg" alt="Image" class="img-fluid"></a>
-            </figure>
-            <figure>
-              <a href="images/sq_img_2.jpg" data-fancybox="gallery"><img src="images/sq_img_2.jpg" alt="Image" class="img-fluid"></a>
-            </figure>
-            <figure>
-              <a href="images/sq_img_7.jpg" data-fancybox="gallery"><img src="images/sq_img_7.jpg" alt="Image" class="img-fluid"></a>
-            </figure>
-            <figure class="mb-0">
-              <a href="images/sq_img_8.jpg" data-fancybox="gallery"><img src="images/sq_img_8.jpg" alt="Image" class="img-fluid"></a>
-            </figure>
-          </div>
-
-          <div class="col-lg-4 ml-auto h-100 jm-sticky-top">
-
-
-            <div class="mb-4">
-              <h3 class="mb-4 h4 border-bottom">Project Description</h3>
-
-              <p class="mb-0">Nostrum iure atque enim quisquam minima distinctio omnis consequatur aliquam suscipit quidem esse aspernatur Libero excepturi animi repellendus porro impedit</p>
-            </div>
-
-            <div class="row mb-4">
-
-              <div class="col-sm-12 col-md-12 mb-4 col-lg-12">
-                <strong class="d-block text-black">Client</strong>
-                Google, Inc.
-              </div>
-              <div class="col-sm-12 col-md-12 mb-4 col-lg-12">
-                <strong class="d-block text-black">Role</strong>
-                Design, Front-End and Back-End (WordPress)
-              </div>
-              <div class="col-sm-12 col-md-12 mb-4 col-lg-12">
-                <strong class="d-block text-black">Year Started</strong>
-                2019
-              </div>
-              <div class="col-sm-12 col-md-12 mb-4 col-lg-12">
-                <strong class="d-block text-black mb-3">Website URL</strong>
-                <a href="#" class="btn btn-outline-primary border-width-2">Visit Website</a>
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <div>
+                <h2>Post A Job</h2>
               </div>
             </div>
-
-            <div class="block__87154 mb-0">
-
-                <blockquote>
-                  <p>Ipsum harum assumenda in eum vel eveniet numquam, cumque vero vitae enim cupiditate deserunt eligendi officia modi consectetur. Expedita tempora quos nobis earum hic ex asperiores quisquam optio nostrum sit</p>
-                </blockquote>
-                <div class="block__91147 d-flex align-items-center">
-                  <figure class="mr-4"><img src="images/person_2.jpg" alt="Image" class="img-fluid"></figure>
-                  <div>
-                    <h3>Chris Peter</h3>
-                    <span class="position">Web Designer</span>
-                  </div>
-                </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-6">
+                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
               </div>
-
+              <div class="col-6">
+                <a href="#" class="btn btn-block btn-primary btn-md">Save Job</a>
+              </div>
+            </div>
           </div>
         </div>
-
-
-
-
-      </div>
-    </section>
-    <section class=" py-3 site-section mb-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 text-center">
-            <a href="#" class="btn btn-md btn-outline-primary border-width-2 d-block">Previous Project</a>
-          </div>
-          <div class="col-md-4 text-center">
-            <a href="#" class="btn btn-md btn-primary border-width-2 d-block">All Projects</a>
-          </div>
-          <div class="col-md-4 text-center">
-            <a href="#" class="btn btn-md btn-outline-primary border-width-2 d-block">Next Project</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="site-section bg-light">
-      <div class="container">
         <div class="row mb-5">
-          <div class="col-12 text-center" data-aos="fade">
-            <h2 class="section-title mb-3">Happy Candidates Says</h2>
+          <div class="col-lg-12">
+            <form class="p-4 p-md-5 border rounded" method="post">
+              <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
+              
+              <div class="form-group">
+                <label for="company-website-tw d-block">Upload Featured Image</label> <br>
+                <label class="btn btn-primary btn-md btn-file">
+                  Browse File<input type="file" hidden>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="you@yourdomain.com">
+              </div>
+              <div class="form-group">
+                <label for="job-title">Job Title</label>
+                <input type="text" class="form-control" id="job-title" placeholder="Product Designer">
+              </div>
+              <div class="form-group">
+                <label for="job-location">Location</label>
+                <input type="text" class="form-control" id="job-location" placeholder="e.g. New York">
+              </div>
+
+              <div class="form-group">
+                <label for="job-region">Job Region</label>
+                <select class="selectpicker border rounded" id="job-region" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
+                      <option>Anywhere</option>
+                      <option>San Francisco</option>
+                      <option>Palo Alto</option>
+                      <option>New York</option>
+                      <option>Manhattan</option>
+                      <option>Ontario</option>
+                      <option>Toronto</option>
+                      <option>Kansas</option>
+                      <option>Mountain View</option>
+                    </select>
+              </div>
+
+              <div class="form-group">
+                <label for="job-type">Job Type</label>
+                <select class="selectpicker border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
+                  <option>Part Time</option>
+                  <option>Full Time</option>
+                </select>
+              </div>
+
+
+              <div class="form-group">
+                <label for="job-description">Job Description</label>
+                <div class="editor" id="editor-1">
+                  <p>Write Job Description!</p>
+                </div>
+              </div>
+
+
+              <h3 class="text-black my-5 border-bottom pb-2">Company Details</h3>
+              <div class="form-group">
+                <label for="company-name">Company Name</label>
+                <input type="text" class="form-control" id="company-name" placeholder="e.g. New York">
+              </div>
+
+              <div class="form-group">
+                <label for="company-tagline">Tagline (Optional)</label>
+                <input type="text" class="form-control" id="company-tagline" placeholder="e.g. New York">
+              </div>
+
+              <div class="form-group">
+                <label for="job-description">Company Description (Optional)</label>
+                <div class="editor" id="editor-2">
+                  <p>Description</p>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="company-website">Website (Optional)</label>
+                <input type="text" class="form-control" id="company-website" placeholder="https://">
+              </div>
+
+              <div class="form-group">
+                <label for="company-website-fb">Facebook Username (Optional)</label>
+                <input type="text" class="form-control" id="company-website-fb" placeholder="companyname">
+              </div>
+
+              <div class="form-group">
+                <label for="company-website-tw">Twitter Username (Optional)</label>
+                <input type="text" class="form-control" id="company-website-tw" placeholder="@companyname">
+              </div>
+              <div class="form-group">
+                <label for="company-website-tw">Linkedin Username (Optional)</label>
+                <input type="text" class="form-control" id="company-website-tw" placeholder="companyname">
+              </div>
+
+              <div class="form-group">
+                <label for="company-website-tw d-block">Upload Logo</label> <br>
+                <label class="btn btn-primary btn-md btn-file">
+                  Browse File<input type="file" hidden>
+                </label>
+              </div>
+
+            </form>
           </div>
+
+         
         </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="block__87154 bg-white rounded">
-              <blockquote>
-                <p>Ipsum harum assumenda in eum vel eveniet numquam cumque vero vitae enim cupiditate deserunt eligendi officia modi consectetur. Expedita tempora quos nobis earum hic ex asperiores quisquam optio nostrum sit</p>
-              </blockquote>
-              <div class="block__91147 d-flex align-items-center">
-                <figure class="mr-4"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                <div>
-                  <h3>Elisabeth Smith</h3>
-                  <span class="position">Creative Director</span>
-                </div>
+        <div class="row align-items-center mb-5">
+          
+          <div class="col-lg-4 ml-auto">
+            <div class="row">
+              <div class="col-6">
+                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
+              </div>
+              <div class="col-6">
+                <a href="#" class="btn btn-block btn-primary btn-md">Save Job</a>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-6">
-            <div class="block__87154 bg-white rounded">
-              <blockquote>
-                <p>Ipsum harum assumenda in eum vel eveniet numquam, cumque vero vitae enim cupiditate deserunt eligendi officia modi consectetur. Expedita tempora quos nobis earum hic ex asperiores quisquam optio nostrum sit</p>
-              </blockquote>
-              <div class="block__91147 d-flex align-items-center">
-                <figure class="mr-4"><img src="images/person_2.jpg" alt="Image" class="img-fluid"></figure>
-                <div>
-                  <h3>Chris Peter</h3>
-                  <span class="position">Web Designer</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
         </div>
       </div>
     </section>
 
+    
+    
     <footer class="site-footer">
 
       <a href="#top" class="smoothscroll scroll-top">
@@ -294,7 +310,7 @@
         </div>
       </div>
     </footer>
-
+  
   </div>
 
     <!-- SCRIPTS -->
@@ -304,17 +320,17 @@
     <script src="board-master/js/stickyfill.min.js"></script>
     <script src="board-master/js/jquery.fancybox.min.js"></script>
     <script src="board-master/js/jquery.easing.1.3.js"></script>
-
+    
     <script src="board-master/js/jquery.waypoints.min.js"></script>
+    <script src="board-master/js/jquery.animateNumber.min.js"></script>
     <script src="board-master/js/owl.carousel.min.js"></script>
     <script src="board-master/js/quill.min.js"></script>
-
-
+    
+    
     <script src="board-master/js/bootstrap-select.min.js"></script>
-
+    
     <script src="board-master/js/custom.js"></script>
-
-
-
+   
   </body>
+
 </html>
