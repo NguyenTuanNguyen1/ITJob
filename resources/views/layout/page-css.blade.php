@@ -18,6 +18,9 @@
 
 <link href="{{ url('information-candidate/information-candidate.css') }}" rel="stylesheet">
 
+{{--update-profile--}}
+<link rel="stylesheet" href="{{ url('board-master/css/update-in4.css') }}">
+
 <link rel="stylesheet" href="board-master/css/custom-bs.css">
 <link rel="stylesheet" href="board-master/css/jquery.fancybox.min.css"> 
 <!-- <link rel="stylesheet" href="board-master/css/bootstrap-select.min.css"> -->
