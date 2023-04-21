@@ -19,69 +19,6 @@
 body {
     font-family: Arial;
 }
-
-/* Style the tab */
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-    width: 50%;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-}
-
-/**
- * FilePond Custom Styles
- */
-.filepond--drop-label {
-    color: #4c4e53;
-}
-
-.filepond--label-action {
-    text-decoration-color: #babdc0;
-}
-
-.filepond--panel-root {
-    border-radius: 2em;
-    background-color: #edf0f4;
-    height: 1em;
-}
-
-.filepond--item-panel {
-    background-color: #595e68;
-}
-
-.filepond--drip-blob {
-    background-color: #7f8a9a;
-}
 </style>
 
 <body>
@@ -127,9 +64,6 @@ body {
                         <input type="text" name="tax-code" placeholder="Mã số thuế" />
                     </div>
                     <div class="form-sub-w3">
-                        <input type="text" name="nameuser" placeholder="Tên hiển thị" />
-                    </div>
-                    <div class="form-sub-w3">
                         <input type="text" name="username" placeholder="Tên đăng nhập " />
                     </div>
                     @error('username')
@@ -151,10 +85,10 @@ body {
                     <p style="color:red">{{session('Error')}}</p>
                     @endif
                     <div class="clear"></div>
-                    <label for="">Thêm ảnh đại diện:</label>
+                    <label for="" style="color:white">Thêm ảnh đại diện:</label>
                     <!--The classic file input element we'll enhance to a file pond-->
                     <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB"
-                        data-max-files="3" />
+                        data-max-files="3" style="color:white;border-radius:10px;"/>
                     <!-- file upload itself is disabled in this pen -->
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">

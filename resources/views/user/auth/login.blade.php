@@ -28,7 +28,8 @@
             <form action="{{ route('.handle-Login')}}" method="POST">
                 @csrf
                 <div class="form-sub-w3">
-                    <input type="text" name="username" placeholder="Tên đăng nhập " class="@error('username') is-invalid @enderror"/>
+                    <input type="text" name="username" placeholder="Tên đăng nhập "
+                        class="@error('username') is-invalid @enderror" />
                     <div class="icon-w3">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </div>
@@ -59,12 +60,13 @@
                 </div>
             </form>
             <div class="icon-flat-form">
-                <a href="/login-facebook/Facebook" class="fa fa-facebook"></a>
-                <a href="/login-google/Google" class="fa fa-google"></a>
+                <a href="/login-facebook/Facebook"><i class="fab fa-facebook-square"></i></a>
+                <a href="/login-google/Google" style="margin-top: 1px;margin-left: 15px;"><i class="fab fa-google-plus-square" style="color: #ea3434;"></i></a>
             </div>
 
         </div>
 
     </div>
 </body>
+
 </html>

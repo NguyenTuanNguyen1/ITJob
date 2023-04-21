@@ -47,6 +47,8 @@
                             class="mr-2 icon-add"></span>Đăng việc</a>
                     <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                             class="mr-2 icon-lock_outline"></span>Đăng nhập</a>
+                    <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                            class="mr-2 icon-contacts"></span>Đăng kí</a>
                 </div>
                 <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
@@ -69,7 +71,7 @@
                         perferendis.</p>
                 </div> -->
                 <div class="text-fix">
-                    <p>Cách dễ dàng để có được một công việc mơ ước</p>
+                    <p>The Easiest Way To Get Your Dream Job</p>
                 </div>
 
                 <form method="post" class="search-jobs-form">
@@ -135,7 +137,7 @@
 </body>
 
 <footer class="site-footer">
-<!-- <a id="back-to-top" href="#" class="btn btn-danger btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a> -->
+    <!-- <a id="back-to-top" href="#" class="btn btn-danger btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a> -->
     <!-- <a href="#top" class="smoothscroll scroll-top">
         <span class="icon-keyboard_arrow_up"></span>
     </a> -->

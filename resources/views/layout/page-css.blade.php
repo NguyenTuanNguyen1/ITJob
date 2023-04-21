@@ -8,10 +8,10 @@
 <link href="{{ url('content-job/content-recruitment.css') }}" rel="stylesheet">
 
 {{--Login--}}
-<link rel="stylesheet" href="{{ url('Login/css/style.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ url('Login/css/lg-res.css') }}" type="text/css" media="all" />
 
 {{--Register--}}
-<link rel="stylesheet" href="{{ url('Register/css/style.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ url('Register/css/lg-res.css') }}" type="text/css" media="all" />
 
 {{--Home--}}
 <link rel="stylesheet" href="{{ url('board-master/css/style.css') }}">
@@ -19,7 +19,7 @@
 <link href="{{ url('information-candidate/information-candidate.css') }}" rel="stylesheet">
 
 <link rel="stylesheet" href="board-master/css/custom-bs.css">
-<link rel="stylesheet" href="board-master/css/jquery.fancybox.min.css">
+<link rel="stylesheet" href="board-master/css/jquery.fancybox.min.css"> 
 <!-- <link rel="stylesheet" href="board-master/css/bootstrap-select.min.css"> -->
 <link rel="stylesheet" href="board-master/fonts/icomoon/style.css">
 <link rel="stylesheet" href="board-master/fonts/line-icons/style.css">

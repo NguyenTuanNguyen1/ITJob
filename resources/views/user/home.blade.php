@@ -47,11 +47,11 @@
     <section class="site-section">
         <div class="container">
 
-            <div class="row mb-5 justify-content-center">
+            <!-- <div class="row mb-5 justify-content-center">
                 <div class="col-md-7 text-center">
                     <h2 class="section-title mb-2">43,167 Job Listed</h2>
                 </div>
-            </div>
+            </div> -->
 
             <ul class="job-listings mb-5">
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
@@ -197,10 +197,7 @@
             </ul>
 
             <div class="row pagination-wrap">
-                <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-                    <span>Showing 1-7 Of 43,167 Jobs</span>
-                </div>
-                <div class="col-md-6 text-center text-md-right">
+                <div class="col-md-8 text-center text-md-right">
                     <div class="custom-pagination ml-auto">
                         <a href="#" class="prev">Prev</a>
                         <div class="d-inline-block">

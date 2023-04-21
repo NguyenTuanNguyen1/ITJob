@@ -602,7 +602,7 @@ h1,
 h2,
 h3,
 h4 {
-    color: #000;
+    color: white;
 }
 
 .site-section {
@@ -1187,7 +1187,6 @@ h4 {
 .popular-keywords h3 {
     font-size: 1.2rem;
     display: inline-block;
-    color: black;
     margin-right: 0.5rem;
 }
 
@@ -1201,8 +1200,8 @@ h4 {
     border-radius: 5px;
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
-    border: 2px solid black;
-    color: black;
+    border: 2px solid white;
+    /* color: black; */
     padding: 0.2rem 0.7rem;
     font-size: 0.7rem;
     font-weight: 700;
@@ -2169,11 +2168,11 @@ h4 {
     line-height: initial;
     word-spacing: normal !important;
 }
-.col-md-12 {
+/* .col-md-12 {
     background-color: white;
     border-radius: 10px;
     margin-bottom: 18px;
-}
+} */
 .text-fix {
     padding-top: 18px;
     padding-bottom: 22px;
@@ -2181,7 +2180,7 @@ h4 {
     line-height: initial;
 }
 .text-fix p {
-    color: black;
+    color:white;
     font-size: 50px;
     text-shadow: 3px 4px 6px;
 }
