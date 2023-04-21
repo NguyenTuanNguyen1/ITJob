@@ -256,9 +256,9 @@
     
     <footer class="site-footer">
 
-      <a href="#top" class="smoothscroll scroll-top">
+      <!-- <a href="#top" class="smoothscroll scroll-top">
         <span class="icon-keyboard_arrow_up"></span>
-      </a>
+      </a> -->
 
       <div class="container">
         <div class="row mb-5">

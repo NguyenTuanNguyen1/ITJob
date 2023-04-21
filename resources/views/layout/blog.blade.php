@@ -127,6 +127,9 @@
             <div>April 15, 2019 <span class="mx-2">|</span> <a href="#">2 Comments</a></div>
           </div>
         </div>
+        <div id="btnTop">
+        <a href="#top">^</a>
+    </div>
         <div class="row pagination-wrap mt-5">
 
           <div class="col-md-12 text-center ">
@@ -142,15 +145,16 @@
             </div>
           </div>
         </div>
-
       </div>
+      <div id="btnTop">
+        <a href="#top">^</a>
+    </div>
     </section>
 
     <footer class="site-footer">
-
-      <a href="#top" class="smoothscroll scroll-top">
+      <!-- <a href="#top" class="smoothscroll scroll-top">
         <span class="icon-keyboard_arrow_up"></span>
-      </a>
+      </a> -->
 
       <div class="container">
         <div class="row mb-5">
@@ -192,7 +196,6 @@
             </div>
           </div>
         </div>
-
         <div class="row text-center">
           <div class="col-12">
             <p class="copyright"><small>
@@ -203,7 +206,6 @@
         </div>
       </div>
     </footer>
-
   </div>
   @include('layout.page-js')
   </body>

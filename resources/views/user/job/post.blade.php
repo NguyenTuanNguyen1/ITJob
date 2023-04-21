@@ -255,10 +255,10 @@
     
     <footer class="site-footer">
 
-      <a href="#top" class="smoothscroll scroll-top">
+      <!-- <a href="#top" class="smoothscroll scroll-top">
         <span class="icon-keyboard_arrow_up"></span>
       </a>
-
+ -->
       <div class="container">
         <div class="row mb-5">
           <div class="col-6 col-md-3 mb-4 mb-md-0">

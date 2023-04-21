@@ -1,23 +1,24 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <title>JobBoard &mdash; Website Template by Colorlib</title>
     @include('layout.page-css')
 </head>
 <!-- NAVBAR -->
-<header class="site-navbar mt-3">
+<header class="site-navbar mt-3" id="top">
     <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="site-logo col-6"><a href="">JobBoard</a></div>
+            <div class="site-logo col-6"><a href="">ItJob</a></div>
             <nav class="mx-auto site-navigation">
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-                    <li><a href="" class="nav-link active">Home</a></li>
-                    <li><a href="">About</a></li>
+                    <li><a href="" class="nav-link active">Trang chủ</a></li>
+                    <!-- <li><a href="">About</a></li> -->
                     <li class="has-children">
                         <a href="">Job Listings</a>
                         <ul class="dropdown">
-                            <li><a href="">Job Single</a></li>
-                            <li><a href="">Post a Job</a></li>
+                            <li><a href="">Việc theo dõi</a></li>
+                            <li><a href="">Đăng công việc</a></li>
                         </ul>
                     </li>
                     <li class="has-children">
@@ -33,19 +34,19 @@
                             <li><a href="gallery.html">Gallery</a></li>
                         </ul>
                     </li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <!-- <li><a href="blog.html">Blog</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a Job</a></li>
-                    <li class="d-lg-none"><a href="login.html">Log In</a></li>
+                    <li class="d-lg-none"><a href="login.html">Log In</a></li> -->
                 </ul>
             </nav>
 
             <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
                 <div class="ml-auto">
                     <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
-                            class="mr-2 icon-add"></span>Post a Job</a>
+                            class="mr-2 icon-add"></span>Đăng việc</a>
                     <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class="mr-2 icon-lock_outline"></span>Log In</a>
+                            class="mr-2 icon-lock_outline"></span>Đăng nhập</a>
                 </div>
                 <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
@@ -62,11 +63,15 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
-                <div class="mb-5 text-center">
-                    <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
+                <!-- <div class="mb-5 text-center ">
+                    <h1 class="text-black font-weight-bold ">The Easiest Way To Get Your Dream Job</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur
                         perferendis.</p>
+                </div> -->
+                <div class="text-fix">
+                    <p>Cách dễ dàng để có được một công việc mơ ước</p>
                 </div>
+
                 <form method="post" class="search-jobs-form">
                     <div class="row mb-5">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -74,7 +79,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
-                                    data-live-search="true" title="Select Region">
+                                data-live-search="true" title="Select Region">
                                 <option>Anywhere</option>
                                 <option>San Francisco</option>
                                 <option>Palo Alto</option>
@@ -88,7 +93,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
-                                    data-live-search="true" title="Select Job Type">
+                                data-live-search="true" title="Select Job Type">
                                 <option>Part Time</option>
                                 <option>Full Time</option>
                             </select>
@@ -110,29 +115,37 @@
                         </div>
                     </div>
                 </form>
+
             </div>
+
         </div>
     </div>
 
-    <a href="#next" class="scroll-button smoothscroll">
+    <!-- <a href="#next" class="scroll-button smoothscroll">
         <span class=" icon-keyboard_arrow_down"></span>
-    </a>
+    </a> -->
+
 </section>
 
 <body>
-@yield('content')
-
+    @yield('content')
+    <!-- <div id="btnTop">
+        <a href="#top">^</a>
+    </div> --><a id="button"></a>
 </body>
 
 <footer class="site-footer">
-    <a href="#top" class="smoothscroll scroll-top">
+<!-- <a id="back-to-top" href="#" class="btn btn-danger btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a> -->
+    <!-- <a href="#top" class="smoothscroll scroll-top">
         <span class="icon-keyboard_arrow_up"></span>
-    </a>
-
+    </a> -->
+    <!-- <div id="btnTop">
+        <a href="#top">^</a>
+    </div> -->
     <div class="container">
         <div class="row mb-5">
             <div class="col-6 col-md-3 mb-4 mb-md-0">
-                <h3>Search Trending</h3>
+                <h3>Tìm kiếm nhiều nhất</h3>
                 <ul class="list-unstyled">
                     <li><a href="#">Web Design</a></li>
                     <li><a href="#">Graphic Design</a></li>
@@ -142,7 +155,7 @@
                     <li><a href="#">CSS3</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-md-3 mb-4 mb-md-0">
+            <!-- <div class="col-6 col-md-3 mb-4 mb-md-0">
                 <h3>Company</h3>
                 <ul class="list-unstyled">
                     <li><a href="#">About Us</a></li>
@@ -150,9 +163,9 @@
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">Resources</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-6 col-md-3 mb-4 mb-md-0">
-                <h3>Support</h3>
+                <h3>Hỗ trợ</h3>
                 <ul class="list-unstyled">
                     <li><a href="#">Support</a></li>
                     <li><a href="#">Privacy</a></li>
@@ -160,7 +173,7 @@
                 </ul>
             </div>
             <div class="col-6 col-md-3 mb-4 mb-md-0">
-                <h3>Contact Us</h3>
+                <h3>Thông tin liên hệ</h3>
                 <div class="footer-social">
                     <a href="#"><span class="icon-facebook"></span></a>
                     <a href="#"><span class="icon-twitter"></span></a>
@@ -186,4 +199,5 @@
     </div>
 </footer>
 @include('layout.page-js')
+
 </html>

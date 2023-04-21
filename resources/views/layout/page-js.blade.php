@@ -8,13 +8,14 @@
 <script src="{{ url('assets/libs/tinymce/tinymce.min.js') }}"></script>
 
 
-<script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ url('js/isotope.pkgd.min.js') }}"></script>
-<script src="{{ url('js/stickyfill.min.js') }}"></script>
-<script src="{{ url('js/jquery.fancybox.min.js') }}"></script>
-<script src="{{ url('js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ url('js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ url('js/owl.carousel.min.js') }}"></script>
-<script src="{{ url('js/bootstrap-select.min.js') }}"></script>
-<script src="{{ url('js/custom.js') }}"></script>
+<script src="{{ url('board-master/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url('board-master/js/isotope.pkgd.min.js') }}"></script>
+<script src="{{ url('board-master/js/stickyfill.min.js') }}"></script>
+<script src="{{ url('board-master/js/jquery.fancybox.min.js') }}"></script>
+<script src="{{ url('board-master/js/jquery.easing.1.3.js') }}"></script>
+<script src="{{ url('board-master/js/jquery.waypoints.min.js') }}"></script>
+<script src="{{ url('board-master/js/owl.carousel.min.js') }}"></script>
+<!-- <script src="{{ url('board-master/js/bootstrap-select.min.js') }}"></script> -->
+<script src="{{ url('board-master/js/custom.js') }}"></script>
+<script src="{{ url('board-master/js/back-to-top.js') }}"></script>
 
