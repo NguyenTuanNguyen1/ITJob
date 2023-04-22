@@ -19,6 +19,6 @@ class Skill extends Model
 
     protected $table = 'skill';
     protected $fillable = [
-        'name'
+        'content'
     ];
 }

@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function test()
     {
-        return View('user.job.update-infor');
+        return View('user.job.detail');
     }
 
     public function redirect_Google($provider)

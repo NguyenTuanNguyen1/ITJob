@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Constant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,37 +11,49 @@ class LoginController extends Controller
 {
     public function index()
     {
-
+        return view('user.auth.login');
     }
 
-    public function handle_login(Request $request)
+    public function handleLogin(Request $request)
     {
-        $user = [
-            'username'  => $request->username,
-            'password'  => $request->password,
+        $input = $request->all();
 
+        $user = [
+            'username'  => $input['username'],
+            'password'  => $input['password'],
+            'role_id' => Constant::ROLE_CANDIDATE
+        ];
+
+        $company = [
+            'username'  => $input['username'],
+            'password'  => $input['password'],
+            'role_id' => Constant::ROLE_COMPANY
         ];
 
         $admin = [
-            'username'  => $request->username,
-            'password'  => $request->password,
-            // 'loaitaikhoan_id' => 2,
+            'username'  => $input['username'],
+            'password'  => $input['password'],
+            'role_id' => Constant::ROLE_ADMIN
         ];
 
-        //remember_token dùng để ghi nhớ đăng nhập
-        if(Auth::attempt($user, $request->has('remember_token')))
+        if (Auth::attempt($user, $input['remember_token']))
         {
-            //return View('User.Menu',compact(['Post','New']));
-            return 'hello';
+            toast('Đăng nhập thành công','success');
+            return redirect()->route('home123');
         }
-        else if(Auth::attempt($admin, $request->has('remember_token')))
+        elseif (Auth::attempt($company, $input['remember_token']))
         {
-            //return view('Admin.Menu');
+            toast('Đăng nhập thành công', 'success');
+            return redirect()->route('home');
+        }
+        elseif(Auth::attempt($admin, $input['remember_token']))
+        {
+            toast('Đăng nhập thành công','success');
+            return redirect()->route('homeAdmin');
         }
         else
         {
-            return redirect()->back()->with("Error","Đăng nhập không thành công!");
+            return redirect()->back()->with('Error','Đăng nhập thất bại');
         }
-
     }
 }

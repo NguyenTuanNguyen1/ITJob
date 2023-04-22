@@ -1,5 +1,5 @@
-
-<!doctype html>
+@include('sweetalert::alert')
+    <!doctype html>
 <html lang="en">
   <head>
     <title>JobBoard &mdash; Website Template by Colorlib</title>

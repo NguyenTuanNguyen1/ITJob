@@ -2,19 +2,24 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\CMS\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/',[UserController::class,'logout'])->name('logout');
 
 //User
 Route::prefix('user')->group(function () {
-    Route::get('/user_login',[HomeController::class,'login'])->name('user_Login');
-    Route::post('/user_login',[LoginController::class,'handle_login'])->name('.handle-Login');
+    Route::get('/user_login',[LoginController::class,'index'])->name('user_Login');
+    Route::post('/user_login',[LoginController::class,'handleLogin'])->name('.handle-Login');
 
-    Route::get('/user_register',[HomeController::class,'register'])->name('user_Register');
-    Route::post('/user_register',[RegisterController::class,'handle_register'])->name('.handle-Register');
+    Route::get('/user_register',[RegisterController::class,'index'])->name('user_Register');
+    Route::post('/user_register',[RegisterController::class,'handleRegister'])->name('.handle-Register');
+
+    Route::post('/user_update',[UserController::class,'handleUpdate'])->name('.handle-Update');
+
 });
 
 //Post

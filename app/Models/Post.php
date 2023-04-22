@@ -20,11 +20,17 @@ class Post extends Model
     protected $table = 'post';
     protected $fillable = [
         'title',
-        'count',
+        'requirements',
+        'description',
+        'benefit',
+        'quantity',
+        'position',
+        'workplace',
+        'level',
+        'major',
         'status',
         'approved_user_id',
         'skill_id',
-        'company_id',
-        'level_id',
+        'user_id',
     ];
 }

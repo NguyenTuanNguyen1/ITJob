@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class config extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'config';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle(): void
+    {
+        $this->call('view:clear');
+        $this->call('view:cache');
+        $this->call('route:clear');
+        $this->call('optimize:clear');
+        $this->call('config:cache');
+        $this->call('config:clear');
+        $this->call('cache:clear');
+        $this->info('Successfully reload caches.');
+    }
+}

@@ -1,10 +1,10 @@
 <?php
 namespace App\Interfaces;
 
-interface IReviewRepository
+interface ITicketRepository
 {
     public function all();
-    public function create(array $review);
+    public function create(array $data);
     public function find($id);
     public function update($id,array $data);
     public function delete($id);

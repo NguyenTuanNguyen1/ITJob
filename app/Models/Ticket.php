@@ -9,19 +9,20 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method static orderBy(string $string, string $string1)
- * @method static find($id)
  */
-class Review extends Model
+
+//Contact and TicketType
+class Ticket extends Model
 {
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
 
-    protected $table = 'review';
+    protected $table = 'ticket';
     protected $fillable = [
         'content',
         'image',
-        'form_user_id',
-        'to_user_id',
+        'ticket_id',
+        'user_id'
     ];
 }

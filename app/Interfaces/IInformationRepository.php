@@ -1,14 +1,20 @@
 <?php
+
 namespace App\Interfaces;
 
-interface IReviewRepository
+interface IInformationRepository
 {
     public function all();
-    public function create(array $review);
+
+    public function create(array $data);
+
     public function find($id);
+
     public function update($id,array $data);
+
     public function delete($id);
-    public function storage($id);
     public function trashed();
+    public function storage($id);
+
     public function restore($id);
 }

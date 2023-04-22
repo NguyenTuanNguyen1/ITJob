@@ -49,6 +49,12 @@ body {
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
+                        <input type="text" name="username" placeholder="Tên đăng nhập " />
+                    </div>
+                    @error('username')
+                    <div style="color:red;">{{ $message }}</div><br>
+                    @enderror
+                    <div class="form-sub-w3">
                         <input type="text" name="email" placeholder="Email" />
                     </div>
                     @error('email')
@@ -61,12 +67,9 @@ body {
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
-                        <input type="text" name="tax-code" placeholder="Mã số thuế" />
+                        <input type="text" name="address" placeholder="Địa chỉ" />
                     </div>
-                    <div class="form-sub-w3">
-                        <input type="text" name="username" placeholder="Tên đăng nhập " />
-                    </div>
-                    @error('username')
+                    @error('address')
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
@@ -85,11 +88,7 @@ body {
                     <p style="color:red">{{session('Error')}}</p>
                     @endif
                     <div class="clear"></div>
-                    <label for="" style="color:white">Thêm ảnh đại diện:</label>
-                    <!--The classic file input element we'll enhance to a file pond-->
-                    <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB"
-                        data-max-files="3" style="color:white;border-radius:10px;"/>
-                    <!-- file upload itself is disabled in this pen -->
+                    <input type="hidden" name="role_id" value="2">
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
                     </div>
@@ -99,30 +98,33 @@ body {
                 <form action="{{ route('.handle-Register') }}" method="post">
                     @csrf
                     <div class="form-sub-w3">
-                        <input type="text" name="name" placeholder="Họ và tên " />
+                        <input type="text" name="name" placeholder="Tên hiển thị" />
                     </div>
                     @error('name')
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
-                        <input type="text" name="email" placeholder="Email " />
+                        <input type="text" name="username" placeholder="Tên đăng nhập " />
+                    </div>
+                    @error('username')
+                    <div style="color:red;">{{ $message }}</div><br>
+                    @enderror
+                    <div class="form-sub-w3">
+                        <input type="text" name="email" placeholder="Email" />
                     </div>
                     @error('email')
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
-                        <input type="text" name="phone" placeholder="Số điện thoại " />
+                        <input type="text" name="phone" placeholder="Số điện thoại" />
                     </div>
                     @error('phone')
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
-                        <input type="text" name="username" placeholder="Tên đăng nhập " />
+                        <input type="text" name="address" placeholder="Địa chỉ" />
                     </div>
-                    <div class="form-sub-w3">
-                        <input type="text" name="username" placeholder="Tên hiển thị " />
-                    </div>
-                    @error('username')
+                    @error('address')
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
@@ -138,13 +140,13 @@ body {
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     @if(session('Error'))
-                    <p style="color:red">{{session('Error')}}</p>
+                        <p style="color:red">{{session('Error')}}</p>
                     @endif
-                    <label for="Thêm ảnh đại diện:"></label>
+                    <div class="clear"></div>
+                    <input type="hidden" name="role_id" value="3">
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
                     </div>
-                    <div class="clear"></div>
                 </form>
             </div>
 

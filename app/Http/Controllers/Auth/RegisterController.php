@@ -2,44 +2,88 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Constant;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Interfaces\ICompanyRepository;
+use App\Interfaces\IUserRepository;
+use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
+/**
+ * @property IUserRepository $user_repo
+ * @property ICompanyRepository $company_repo
+ */
 class RegisterController extends Controller
 {
-    public function handle_register(Request $request)
+    use Service;
+
+    public function __construct
+    (
+        IUserRepository $userRepository,
+        ICompanyRepository $companyRepository
+    ) {
+        $this->user_repo = $userRepository;
+        $this->company_repo = $companyRepository;
+    }
+
+    public function index()
     {
-        $emailExists = User::where('email',$request->email)->count();
-        if ($emailExists > 0) {
-            return redirect()->back()->with("Error","Tài khoản Gmail đã tồn tại!");
-        }
+        return view('auth.register');
+    }
 
-        $userExists = User::where('username',$request->username)->count();
-        if ($userExists >0) {
-            return redirect()->back()->with("Error","Tài khoản người dùng đã tồn tại!");
-        }
+    public function handleRegister(Request $request)
+    {
+        $input = $request->all();
 
-        $Users = User::create([
-            'username'   =>  $request->username,
-            'name'       =>  $request->name,
-            'email'      =>  $request->email,
-            'phone'      =>  $request->phone,
-            'password'   =>  Hash::make($request->password),
-            'type'       =>  $request->type,
-            'img_avatar' =>  'Avatar.jpg',
-            'status'     =>  1,
-        ]);
+        $this->checkExist($request, Constant::CHECK_USERNAME);
+        $this->checkExist($request, Constant::CHECK_EMAIL_EXIST);
 
-        if(!empty($Users))
+        switch ($input['role_id'])
         {
-            //Auth::Login($Users);
-            return 'hello';
-        }
-        else
-        {
-            return 'loi';
+            case Constant::ROLE_CANDIDATE:
+                $input['password'] = Hash::make($input['password']);
+                $input['img_avatar'] = $this->uploadImage($request);
+                $user = $this->user_repo->create($input);
+
+                if (empty($user)) {
+                    return redirect()->back()->with('Error', 'Đăng ký thất bại');
+                }
+
+                Auth::login($user);
+                toast('Đăng ký thành công', 'success');
+                return redirect()->route('home');
+
+            case Constant::ROLE_COMPANY:
+                $input['password'] = Hash::make($input['password']);
+                $input['img_avatar'] = $this->uploadImage($request);
+                $user = $this->user_repo->create($input);
+                $company = $this->company_repo->create($user['id'],(array)null);
+
+                if (empty($user)) {
+                    return redirect()->back()->with('Error', 'Đăng ký thất bại');
+                }
+
+                Auth::login($user);
+                toast('Đăng ký thành công', 'success');
+                return redirect()->route('home12');
+
+            default:
+                $input['password'] = Hash::make($input['password']);
+                $input['role_id'] = Constant::ROLE_ADMIN;
+                $input['img_avatar'] = $this->uploadImage($request);
+                $user = $this->user_repo->create($input);
+
+                if (empty($user))
+                {
+                    return redirect()->route('home');
+                }
+
+                Auth::login($user);
+                toast('Đăng ký thành công', 'success');
+                return redirect()->route('home');
         }
     }
 }

@@ -5,23 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 
 /**
- * @method static orderBy(string $string, string $string1)
  * @method static find($id)
+ * @method static orderBy(string $string, string $string1)
  */
-class Review extends Model
+class Information extends Model
 {
     use HasFactory;
-    use Notifiable;
     use SoftDeletes;
 
-    protected $table = 'review';
+    protected $table = 'information';
     protected $fillable = [
         'content',
-        'image',
-        'form_user_id',
-        'to_user_id',
+        'ticket_reply',
+        'user_id',
+        'type_id',
     ];
 }
