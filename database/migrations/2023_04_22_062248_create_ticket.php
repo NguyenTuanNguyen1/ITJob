@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('content')->nullable();
             $table->string('image')->nullable();
+            $table->integer('status')->nullable()->default(0);
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
