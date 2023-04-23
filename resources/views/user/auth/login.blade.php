@@ -25,7 +25,7 @@
     <div class="main-w3layouts-agileinfo">
         <div class="wthree-form">
             <h2>Điền đầy đủ các thông tin trước khi đăng nhập</h2>
-            <form action="{{ route('.handle-Login')}}" method="POST">
+            <form action="{{ route('handle.login')}}" method="POST">
                 @csrf
                 <div class="form-sub-w3">
                     <input type="text" name="username" placeholder="Tên đăng nhập "
@@ -49,7 +49,7 @@
                 <label class="anim">
                     <input type="checkbox" name="remember_token" class="checkbox">
                     <span>Nhớ mật khẩu</span>
-                    <a href="#">Quên mật khẩu</a>
+                    <a href="{{ route('send.forgot.mail') }}">Quên mật khẩu</a>
                 </label>
                 @if(session('Error'))
                 <p style="color:red">{{session('Error')}}</p>
@@ -59,6 +59,12 @@
                     <input type="submit" value="Đăng nhập">
                 </div>
             </form>
+
+            <form action="{{ route('send.forgot.mail') }}">
+                <input type="text" name="email">
+                <input type="submit" value="nhap">
+            </form>
+
             <div class="icon-flat-form">
                 <a href="/login-facebook/Facebook"><i class="fab fa-facebook-square"></i></a>
                 <a href="/login-google/Google" style="margin-top: 1px;margin-left: 15px;"><i class="fab fa-google-plus-square" style="color: #ea3434;"></i></a>

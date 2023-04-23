@@ -40,7 +40,7 @@ body {
 
             <div id="London" class="tabcontent">
 
-                <form action="{{ route('.handle-Register') }}" method="post">
+                <form action="{{ route('user.register') }}" method="post">
                     @csrf
                     <div class="form-sub-w3">
                         <input type="text" name="name" placeholder="Tên doanh nghiệp" />
@@ -55,10 +55,10 @@ body {
                     <div style="color:red;">{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
-                        <input type="text" name="email" placeholder="Email" />
+                        <input type="text" name="email" placeholder="Email"/>
                     </div>
                     @error('email')
-                    <div style="color:red;">{{ $message }}</div><br>
+                    <div style="color:red;" >{{ $message }}</div><br>
                     @enderror
                     <div class="form-sub-w3">
                         <input type="text" name="phone" placeholder="Số điện thoại" />
@@ -95,7 +95,7 @@ body {
                 </form>
             </div>
             <div id="Paris" class="tabcontent">
-                <form action="{{ route('.handle-Register') }}" method="post">
+                <form action="{{ route('user.register') }}" method="post">
                     @csrf
                     <div class="form-sub-w3">
                         <input type="text" name="name" placeholder="Tên hiển thị" />
