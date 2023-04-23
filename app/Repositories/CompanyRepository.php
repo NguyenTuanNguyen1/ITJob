@@ -7,17 +7,21 @@ use App\Models\Company;
 
 class CompanyRepository implements ICompanyRepository
 {
+    public function find($id)
+    {
+        return Company::where('user_id', $id)->get();
+    }
 
     public function create($user_id, array $company)
     {
         $data = new Company();
-        $data->type = $company['type'];
-        $data->staff = $company['staff'];
-        $data->headquarters = $company['headquarters'];
-        $data->taxcode = $company['taxcode'];
-        $data->website = $company['website'];
-        $data->token = $company['token'];
-        $data->business_license = $company['business_license'];
+        $data->type = null;
+        $data->staff = null;
+        $data->headquarters = null;
+        $data->taxcode = null;
+        $data->website = null;
+        $data->token = null;
+        $data->business_license = null;
         $data->user_id = $user_id;
         $data->save();
         return $data;

@@ -24,8 +24,8 @@ class PostRepository implements IPostRepository
         $data->workplace = $post['workplace'];
         $data->level = $post['level'];
         $data->major = $post['major'];
-        $data->status = $post['status'];
-        $data->approved_user_id = $post['approved_user_id'];
+        $data->status = 1;
+        $data->approved_user_id = null;
         $data->skill_id = $post['skill_id'];
         $data->user_id = $post['user_id'];
         $data->save();

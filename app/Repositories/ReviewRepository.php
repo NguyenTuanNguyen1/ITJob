@@ -49,11 +49,11 @@ class ReviewRepository implements IReviewRepository
 
     public function trashed()
     {
-        Review::onlyTrashed()->get();
+        return Review::onlyTrashed()->get();
     }
 
     public function restore($id)
     {
-        Review::onlyTrashed()->where('id', $id)->restore();
+        return Review::onlyTrashed()->where('id', $id)->restore();
     }
 }

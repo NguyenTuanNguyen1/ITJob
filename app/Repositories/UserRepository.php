@@ -20,18 +20,16 @@ class UserRepository implements IUserRepository
         $data->email = $user['email'];
         $data->phone = $user['phone'];
         $data->address = $user['address'];
-        $data->img_avatar = $user['img_avatar'];
-        $data->position = $user['position'];
-        $data->major = $user['major'];
-        $data->description = $user['description'];
-        $data->status = $user['status'];
-        $data->start = $user['start'];
-        $data->password = $user['password'];
-        $data->provider = $user['provider'];
-        $data->remember_token = $user['remember_token'];
-        $data->token = $user['token'];
-        $data->role_id = $user['role_id'];
-        $data->company_id = $user['company_id'];
+        $data->img_avatar = 'avatar.jpg';
+        $data->position = null;
+        $data->major = null;
+        $data->description = null;
+        $data->status = null;
+        $data->start = null;
+        $data->password = null;
+        $data->provider = null;
+        $data->remember_token = null;
+        $data->token = null;
         $data->save();
         return $data;
     }
@@ -54,7 +52,7 @@ class UserRepository implements IUserRepository
             'description' => $data['description'],
             'status' => $data['status'],
             'start' => $data['start'],
-            'password' => $data['password'],
+//            'password' => $data['password'],
             'provider' => $data['provider'],
             'remember_token' => $data['remember_token'],
             'token' => $data['token'],

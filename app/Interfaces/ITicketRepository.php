@@ -3,12 +3,11 @@ namespace App\Interfaces;
 
 interface ITicketRepository
 {
-    public function all();
+    public function all($action);
     public function create(array $data);
     public function find($id);
-    public function update($id,array $data);
+    public function reply($id);
     public function delete($id);
-    public function storage($id);
-    public function trashed();
     public function restore($id);
+    public function replied();
 }

@@ -12,13 +12,13 @@ class InformationRepository implements IInformationRepository
         return Information::orderBy('id','DESC')->paginate(5);
     }
 
-    public function create(array $review)
+    public function create($user_id, array $data)
     {
         $data = new Information();
-        $data->content = $review['content'];
-        $data->ticket_reply = $review['ticket_reply'];
-        $data->user_id = $review['user_id'];
-        $data->type_id = $review['type_id'];
+        $data->content = $data['content'];
+//        $data->ticket_reply = $review['ticket_reply'];
+        $data->user_id = $user_id;
+        $data->type_id = $data['type_id'];
 
         $data->save();
         return $data;
@@ -26,17 +26,16 @@ class InformationRepository implements IInformationRepository
 
     public function find($id)
     {
-        return Information::find($id);
+        return Information::where('user_id', $id)->get();
     }
     public function update($id,array $data)
     {
-        $result = Information::find($id)->update([
+        return Information::where('user_id', $id)->update([
             'content' => $data['content'],
-            'ticket_reply' => $data['ticket_reply'],
+//            'ticket_reply' => $data['ticket_reply'],
             'user_id' => $data['user_id'],
             'type_id' => $data['type_id'],
         ]);
-        return $result;
     }
     public function delete($id)
     {

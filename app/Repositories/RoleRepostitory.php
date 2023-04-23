@@ -45,11 +45,11 @@ class RoleRepostitory implements ITypeRepository
 
     public function trashed()
     {
-        Role::onlyTrashed()->get();
+        return Role::onlyTrashed()->get();
     }
 
     public function restore($id)
     {
-        Role::onlyTrashed()->where('id', $id)->restore();
+        return Role::onlyTrashed()->where('id', $id)->restore();
     }
 }

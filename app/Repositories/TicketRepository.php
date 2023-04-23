@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Constant;
 use App\Interfaces\ITicketRepository;
 use App\Models\Ticket;
 
@@ -7,9 +8,9 @@ use App\Models\Ticket;
 class TicketRepository implements ITicketRepository
 {
 
-    public function all()
+    public function all($action)
     {
-        return Ticket::orderBy('id','DESC')->paginate(8);
+        return Ticket::where('ticket_id', $action)->orderBy('id','DESC')->paginate(8);
     }
 
     public function create(array $type)
@@ -28,13 +29,10 @@ class TicketRepository implements ITicketRepository
         return Ticket::find($id)->get();
     }
 
-    public function update($id, array $data)
+    public function reply($id)
     {
-        $result = Ticket::find($id)->update([
-            'content' => $data['content'],
-            'image' => $data['image'],
-            'ticket_id' => $data['ticket_id'],
-            'user_id' => $data['user_id'],
+        return Ticket::find($id)->update([
+            'status' => Constant::TICKET_REPLIED,
         ]);
     }
 
@@ -42,18 +40,12 @@ class TicketRepository implements ITicketRepository
     {
         return Ticket::find($id)->delete();
     }
-
-    public function storage($id)
-    {
-        // TODO: Implement storage() method.
-    }
-
-    public function trashed()
-    {
-        return Ticket::onlyTrashed()->get();
-    }
     public function restore($id)
     {
         return Ticket::onlyTrashed()->where('id', $id)->restore();
+    }
+    public function replied()
+    {
+        return Ticket::where('status',Constant::TICKET_REPLIED)->get();
     }
 }
