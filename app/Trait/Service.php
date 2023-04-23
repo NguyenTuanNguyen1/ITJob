@@ -4,10 +4,12 @@ namespace App\Trait;
 
 use App\Constant;
 use App\Models\InformationType;
+use App\Models\Role;
 use App\Models\Skill;
 use App\Models\TicketType;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 trait Service
@@ -25,43 +27,76 @@ trait Service
         }
     }
 
-    public function checkExist(Request $request, $action)
+    public function checkExist($data, $action)
     {
         switch ($action){
             case Constant::CHECK_EMAIL_EXIST;
-                $emailExists = User::where('email',$request->email)->count();
-                if ($emailExists > 0) {
-                    return redirect()->back()->with("Error","Tài khoản Gmail đã tồn tại!");
-                }
-                break;
+                $emailExists = User::where('email',$data['email'])->count();
+                if ($emailExists > 0) return true;
+                return false;
 
             case Constant::CHECK_USERNAME:
-                $userExists = User::where('username',$request->username)->count();
-                if ($userExists >0) {
-                    return redirect()->back()->with("Error","Tài khoản người dùng đã tồn tại!");
-                }
-                break;
-
-            case Constant::CHECK_INFORMATION_TYPE:
-                $informationTypeExists = InformationType::where('content',$request->content)->count();
-                if ($informationTypeExists > 0) {
-                    return redirect()->back()->with("Error","Nội dung đã tồn tại!");
-                }
-                break;
-
-            case Constant::CHECK_TICKET_TYPE:
-                $ticketTypeExists = TicketType::where('content',$request->content)->count();
-                if ($ticketTypeExists > 0) {
-                    return redirect()->back()->with("Error","Nội dung đã tồn tại!");
-                }
-                break;
+                $userExists = User::where('username',$data['username'])->count();
+                if ($userExists > 0) return true;
+                return false;
 
             case Constant::CHECK_SKILL:
-                $skillExists = Skill::where('content',$request->content)->count();
-                if ($skillExists > 0) {
-                    return redirect()->back()->with("Error","Nội dung đã tồn tại!");
-                }
-                break;
+                $skillExists = Skill::where('content',$data['content'])->count();
+                if ($skillExists > 0) return true;
+                return false;
+
+            case Constant::CHECK_PHONE_EXIST:
+                $phoneExists = User::where('phone',$data['phone'])->count();
+                if ($phoneExists > 0) return true;
+                return false;
+
+            case Constant::TYPE_INFORMATION:
+                $informationTypeExist = InformationType::where('content',$data['content'])->count();
+                if ($informationTypeExist > 0) return true;
+                return false;
+
+            case Constant::TYPE_TICKET:
+                $ticketTypeExists = TicketType::where('content',$data['content'])->count();
+                if ($ticketTypeExists > 0) return true;
+                return false;
+
+            case Constant::TYPE_ROLE:
+                $roleExist = Role::where('content',$data['content'])->count();
+                if ($roleExist > 0) return true;
+                return false;
         }
+    }
+
+    public function sendMailUser($user, $mailable)
+    {
+        if (self::isValidMail($user['email']))
+        {
+            Mail::to($user['email'])->send($mailable);
+        }
+    }
+
+    function isValidMail($email)
+    {
+        if (!strpos($email, '@')) {
+            return false;
+        }
+
+        list($user, $domain) = explode('@', $email);
+
+        if (!checkdnsrr($domain)) {
+            return false;
+        }
+
+        $email_dummies =  array(
+            'example.com',
+            'example.org',
+            'example.net'
+        );
+        foreach ($email_dummies as $email_dummy) {
+            if (str_contains($email, $email_dummy)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
