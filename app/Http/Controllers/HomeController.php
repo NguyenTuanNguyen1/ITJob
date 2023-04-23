@@ -10,7 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return View('user.home');
+//        dd(123);
+        return view('user/home');
     }
 
     public function login()
