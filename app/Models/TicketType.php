@@ -21,4 +21,9 @@ class TicketType extends Model
     protected $fillable = [
         'content',
     ];
+
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class,'ticket_id');
+    }
 }

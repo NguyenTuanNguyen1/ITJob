@@ -24,4 +24,14 @@ class Review extends Model
         'form_user_id',
         'to_user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getNameReview()
+    {
+        return $this->user->username();
+    }
 }

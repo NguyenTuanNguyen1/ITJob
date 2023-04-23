@@ -16,7 +16,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
-    protected $table = 'users';
+    protected $table = 'user';
     protected $fillable = [
         'name',
         'username',
@@ -34,9 +34,22 @@ class User extends Authenticatable
         'remember_token',//Dùng để ghi nhớ đăng nhập
         'token',//Dùng để xác nhận lại mật khẩu
         'role_id',
-        'company_id'
     ];
 
+    public function post()
+    {
+        return $this->hasMany(Post::class,'user_id');
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class,'user_id');
+    }
+
+//    public function mail($condition, $attributes)
+//    {
+//        return $this->hasMany(Mail::class,'user_id');
+//    }
     // public function getPasswordAttribute(){
     //     return $this->password;
     // }

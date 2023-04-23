@@ -21,4 +21,11 @@ class Skill extends Model
     protected $fillable = [
         'content'
     ];
+
+    public function post()
+    {
+        return $this->hasOne(Post::class,'skill_id');
+    }
+
+
 }

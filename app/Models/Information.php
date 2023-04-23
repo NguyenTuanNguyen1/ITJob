@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @method static find($id)
  * @method static orderBy(string $string, string $string1)
+ * @method static where(string $string, $id)
  */
 class Information extends Model
 {
@@ -18,8 +19,18 @@ class Information extends Model
     protected $table = 'information';
     protected $fillable = [
         'content',
-        'ticket_reply',
+//        'ticket_reply',
         'user_id',
         'type_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getNameInformation()
+    {
+        return $this->user->username;
+    }
 }

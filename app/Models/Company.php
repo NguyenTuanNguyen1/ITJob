@@ -28,4 +28,14 @@ class Company extends Model
         'business_license',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getName()
+    {
+        return $this->user->username;
+    }
 }

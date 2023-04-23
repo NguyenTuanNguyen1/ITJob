@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method static orderBy(string $string, string $string1)
+ * @method static where(string $string, $action)
+ * @method static find($id)
  */
 
 //Contact and TicketType
@@ -25,4 +27,15 @@ class Ticket extends Model
         'ticket_id',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getNameTicket()
+    {
+        return $this->user->username;
+    }
+
 }

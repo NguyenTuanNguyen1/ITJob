@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @method static orderBy(string $string, string $string1)
  * @method static find($id)
+ * @method static where(string $string, mixed $content)
  */
 class Role extends Model
 {
@@ -21,4 +22,9 @@ class Role extends Model
     protected $fillable = [
         'content',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'user_id');
+    }
 }

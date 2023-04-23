@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Validation\Rules\In;
+use PHPUnit\Event\Telemetry\Info;
 
 /**
  * @method static orderBy(string $string, string $string1)
@@ -22,4 +24,9 @@ class InformationType extends Model
     protected $fillable = [
         'content',
     ];
+
+    public function information()
+    {
+        return $this->hasMany(Information::class,'type_id');
+    }
 }
