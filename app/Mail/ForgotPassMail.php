@@ -3,12 +3,16 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * @property $name
+ * @property $id
+ */
 class ForgotPassMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -18,9 +22,14 @@ class ForgotPassMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct
+    (
+        $name,
+        $id
+    )
     {
-        //
+        $this->name = $name;
+        $this->id = $id;
     }
 
     /**
@@ -31,7 +40,7 @@ class ForgotPassMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Forgot Pass Mail',
+            subject: 'Quên mật khẩu',
         );
     }
 
@@ -43,17 +52,11 @@ class ForgotPassMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'user.home',
+            with: [
+                'username' => $this->name,
+                'id' => $this->id
+            ]
         );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
     }
 }

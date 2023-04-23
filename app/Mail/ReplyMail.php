@@ -10,49 +10,43 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * @property $username
- * @property $user_id
+ * @property $data
  */
-class RegisterMail extends Mailable
+class ReplyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
     public function __construct
     (
-        $username,
-        $user_id
+        $data
     )
     {
-        $this->username = $username;
-        $this->user_id = $user_id;
+        $this->data = $data;
     }
 
     /**
      * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
+    public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Đăng ký tài khoản thành công',
+            subject: 'Phản hồi thư',
         );
     }
 
     /**
      * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content()
+    public function content(): Content
     {
         return new Content(
             view: 'view.name',
+            with: [
+                'data' => $this->data
+            ]
         );
     }
 }
