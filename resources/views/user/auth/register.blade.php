@@ -87,8 +87,8 @@ body {
                     @if(session('Error'))
                     <p style="color:red">{{session('Error')}}</p>
                     @endif
-                    <div class="clear"></div>
                     <input type="hidden" name="role_id" value="2">
+                    <div class="clear"></div>
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
                     </div>
@@ -164,6 +164,46 @@ body {
     </div>
     <!--//footer-->
 </body>
+<script>
+    $(document).ready(() => {
+        $("#contact").validate({
+            rule: {
+                content: "required"
+            },
+            messages: {
+                content: "Vui lòng nhập nội dung"
+            },
+            errorElement: "p",
+            errorPlacement: function (error, element) {
+                var placement = $(element).data("error");
+                if (placement) {
+                    $(placement).append(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+        });
+
+        $("#type").validate({
+            rule: {
+                content: "required"
+            },
+            messages: {
+                content: "Vui lòng nhập nội dung"
+            },
+            errorElement: "p",
+            errorPlacement: function (error, element) {
+                var placement = $(element).data("error");
+                if (placement) {
+                    $(placement).append(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+        });
+    })
+</script>
+
 <script>
 function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
