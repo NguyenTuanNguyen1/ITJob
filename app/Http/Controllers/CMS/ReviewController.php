@@ -42,10 +42,16 @@ class ReviewController extends Controller
 
         $review = $this->review_repo->create($input);
         if (empty($review)) {
-            return redirect()->back()->with('Error', 'Lỗi tạo bài viết');
+            return response()->json([
+                'result' => false,
+                'message' => 'Tạo bài viết thất bại'
+            ]);
         }
         toast('Đã tạo thành công', 'success');
-        return redirect()->route('home');
+        return response()->json([
+            'result' => true,
+            'message' => 'Tạo bài viết thành công'
+        ]);
     }
 
     public function update(Request $request)
@@ -53,7 +59,10 @@ class ReviewController extends Controller
         $input = $request->all();
         $this->review_repo->update($input['id'], $input);
         toast('Chỉnh sửa thành công', 'success');
-        return redirect()->route('home');
+        return response()->json([
+            'result' => true,
+            'message' => 'Chỉnh sửa bài viết thành công'
+        ]);
     }
 
     public function trashed()
@@ -70,14 +79,22 @@ class ReviewController extends Controller
         $review = $this->review_repo->delete($input['id']);
         if (empty($review)) {
             toast('Đã xoá thành công', 'success');
-            return redirect()->route('home');
+            return response()->json([
+                'result' => true,
+                'message' => 'Đã xoá bài viết thành công'
+            ]);
         }
-        return redirect()->back()->with('Error', 'Lỗi xoá bài viết');
+        return response()->json([
+            'result' => false,
+            'message' => 'Xoá bài viết thất bại'
+        ]);
     }
 
-    public function restore($id)
+    public function restore(Request $request)
     {
-        $review = $this->review_repo->restore($id);
+        $input = $request->all();
+
+        $review = $this->review_repo->restore($input['id']);
         return response()->json([
             'result' => true,
             'data' => $review

@@ -12,26 +12,19 @@ class UserRepository implements IUserRepository
         return User::orderBy('id', 'DESC')->paginate(8);
     }
 
-    public function create(array $user)
+    public function create(array $data)
     {
-        $data = new User();
-        $data->name = $user['name'];
-        $data->username = $user['username'];
-        $data->email = $user['email'];
-        $data->phone = $user['phone'];
-        $data->address = $user['address'];
-        $data->img_avatar = 'avatar.jpg';
-        $data->position = null;
-        $data->major = null;
-        $data->description = null;
-        $data->status = null;
-        $data->start = null;
-        $data->password = null;
-        $data->provider = null;
-        $data->remember_token = null;
-        $data->token = null;
-        $data->save();
-        return $data;
+        $user = new User();
+        $user->name = $data['name'];
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->address = $data['address'];
+        $user->img_avatar = 'avatar.jpg';
+        $user->role_id = $data['role_id'];
+        $user->password = $data['password'];
+        $user->save();
+        return User::where('email',$data['email'])->first();
     }
     public function find($id)
     {
@@ -75,10 +68,5 @@ class UserRepository implements IUserRepository
     public function restore($id)
     {
         return User::onlyTrashed()->where('id', $id)->restore();
-    }
-
-    public function findEmail($email)
-    {
-        // TODO: Implement findEmail() method.
     }
 }

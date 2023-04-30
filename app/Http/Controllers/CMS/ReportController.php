@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CMS;
 
 use App\Constant;
+use App\Http\Controllers\Controller;
 use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
@@ -41,19 +42,13 @@ class ReportController extends Controller
         $input['type_id'] = Constant::TICKET_REPORT;
         $report = $this->ticket_repo->create($input);
         if (empty($report)) {
-            return redirect()->back()->with('Error', 'Lỗi tạo bài viết');
+            return response()->json([
+                'result' => false,
+            ]);
         }
         toast('Đã tạo thành công', 'success');
-        return redirect()->route('home');
-    }
-
-    public function update(Request $request)
-    {
-        $input = $request->all();
-        $this->ticket_repo->update($input['id'], $input);
-        toast('Chỉnh sửa thành công', 'success');
         return response()->json([
-            'result' => true
+            'result' => true,
         ]);
     }
 

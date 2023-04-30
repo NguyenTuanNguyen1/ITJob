@@ -18,7 +18,6 @@ class LoginController extends Controller
     public function handleLogin(LoginRequest $request)
     {
         $input = $request->all();
-
         $user = [
             'username' => $input['username'],
             'password' => $input['password'],
@@ -40,7 +39,7 @@ class LoginController extends Controller
         if (Auth::attempt($user, $input['remember_token']))
         {
             toast('Đăng nhập thành công', 'success');
-            return redirect()->route('home123');
+            return redirect()->route('home');
         }
         elseif (Auth::attempt($company, $input['remember_token']))
         {
@@ -50,7 +49,7 @@ class LoginController extends Controller
         elseif (Auth::attempt($admin, $input['remember_token']))
         {
             toast('Đăng nhập thành công', 'success');
-            return redirect()->route('homeAdmin');
+            return redirect()->route('home');
         }
         else {
             return redirect()->back()->with('Error', 'Đăng nhập thất bại');

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CMS;
 
 use App\Constant;
+use App\Http\Controllers\Controller;
 use App\Interfaces\ITypeRepository;
 use App\Repositories\InformationTypeRepository;
 use App\Repositories\RoleRepostitory;
@@ -55,21 +56,28 @@ class TypeController extends Controller
             $this->checkExist($input,Constant::TYPE_ROLE)
         )
         {
-            return redirect()->back()->with('Error','Nội dung đã tồn tại');
+            return response()->json([
+                'result' => false,
+                'message' => 'Nội dung đã tồn tại'
+            ]);
         }
 
         switch ($input['type'])
         {
             case Constant::TYPE_ROLE:
                 $this->role_repo->create($input);
-                return redirect()->route('home');
+                break;
             case Constant::TYPE_INFORMATION:
                 $this->infomationType_repo->create($input);
-                return redirect()->route('home');
+                break;
             case Constant::TYPE_TICKET:
                 $this->ticketType_repo->create($input);
-                return redirect()->route('home');
+                break;
         }
+        return response()->json([
+            'result' => true,
+            'message' => 'Đã tạo thành công'
+        ]);
     }
 
     public function update(Request $request)
@@ -82,21 +90,28 @@ class TypeController extends Controller
             $this->checkExist($input,Constant::TYPE_ROLE)
         )
         {
-            return redirect()->back()->with('Error','Nội dung đã tồn tại');
+            return response()->json([
+                'result' => false,
+                'message' => 'Nội dung đã tồn tại'
+            ]);
         }
 
         switch ($input['type'])
         {
             case Constant::TYPE_ROLE:
                 $this->role_repo->update($input['id'],$input);
-                return redirect()->route('home');
+                break;
             case Constant::TYPE_INFORMATION:
                 $this->infomationType_repo->update($input['id'], $input);
-                return redirect()->route('home');
+                break;
             case Constant::TYPE_TICKET:
                 $this->ticketType_repo->update($input['id'], $input);
-                return redirect()->route('home');
+                break;
         }
+        return response()->json([
+            'result' => true,
+            'message' => 'Đã chỉnh sửa thành công'
+        ]);
     }
 
     public function delete(Request $request)
@@ -106,29 +121,20 @@ class TypeController extends Controller
         switch ($input['type'])
         {
             case Constant::TYPE_ROLE:
-                $role = $this->role_repo->delete($input['id']);
-                if (empty($role)) {
-                    toast('Đã xoá thành công', 'success');
-                    return redirect()->route('home');
-                }
-                return redirect()->route('home');
-
+                $this->role_repo->delete($input['id']);
+                break;
             case Constant::TYPE_INFORMATION:
-                $information = $this->infomationType_repo->delete($input['id']);
-                if (empty($information)) {
-                    toast('Đã xoá thành công', 'success');
-                    return redirect()->route('home');
-                }
-                return redirect()->route('home');
+                $this->infomationType_repo->delete($input['id']);
+                break;
 
             case Constant::TYPE_TICKET:
-                $ticket = $this->ticketType_repo->delete($input['id']);
-                if (empty($ticket)) {
-                    toast('Đã xoá thành công', 'success');
-                    return redirect()->route('home');
-                }
-                return redirect()->route('home');
+                $this->ticketType_repo->delete($input['id']);
+                break;
         }
+        return response()->json([
+            'result' => true,
+            'message' => 'Đã xoá thành công'
+        ]);
     }
 
     public function trashed()
@@ -167,11 +173,11 @@ class TypeController extends Controller
 
             case Constant::TYPE_TICKET:
                 $ticket = $this->ticketType_repo->restore($input['id']);
-                if (!empty($ticket)) {
-                    toast('Đã xoá thành công', 'success');
-                    return redirect()->route('home');
-                }
-                return redirect()->route('home');
+                break;
         }
+        return response()->json([
+            'result' => true,
+            'message' => 'Đã khôi phục thành công'
+        ]);
     }
 }

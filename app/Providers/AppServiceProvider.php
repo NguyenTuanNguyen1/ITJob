@@ -42,7 +42,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ITypeRepository::class, InformationTypeRepository::class);
         $this->app->bind(ITypeRepository::class, RoleRepostitory::class);
         $this->app->bind(ITypeRepository::class, TicketTypeRepository::class);
-        $this->app->bind(ITypeRepository::class, SkillRepository::class);
         $this->app->bind(IUserRepository::class, UserRepository::class);
     }
 

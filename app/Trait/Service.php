@@ -30,24 +30,9 @@ trait Service
     public function checkExist($data, $action)
     {
         switch ($action){
-            case Constant::CHECK_EMAIL_EXIST;
-                $emailExists = User::where('email',$data['email'])->count();
-                if ($emailExists > 0) return true;
-                return false;
-
-            case Constant::CHECK_USERNAME:
-                $userExists = User::where('username',$data['username'])->count();
-                if ($userExists > 0) return true;
-                return false;
-
             case Constant::CHECK_SKILL:
                 $skillExists = Skill::where('content',$data['content'])->count();
                 if ($skillExists > 0) return true;
-                return false;
-
-            case Constant::CHECK_PHONE_EXIST:
-                $phoneExists = User::where('phone',$data['phone'])->count();
-                if ($phoneExists > 0) return true;
                 return false;
 
             case Constant::TYPE_INFORMATION:

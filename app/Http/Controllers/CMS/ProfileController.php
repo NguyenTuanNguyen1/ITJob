@@ -30,6 +30,17 @@ class ProfileController extends Controller
         $this->company_repo = $companyRepository;
         $this->information_repo = $informationRepository;
     }
+
+    public function profile($id, Request $request)
+    {
+        $user = $this->user_repo->find($id);
+        $company = $this->company_repo->find($id);
+        $information = $this->information_repo->find($id);
+        return view('test')->with('user', $user)
+                                ->with('company', $company)
+                                ->with('information', $information);
+    }
+
     public function handleUpdate(Request $request)
     {
         try {

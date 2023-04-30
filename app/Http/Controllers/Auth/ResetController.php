@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordRequest;
 use App\Interfaces\IUserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,7 @@ class ResetController extends Controller
 
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(PasswordRequest $request)
     {
         $input = $request->all();
         $profile = $this->user_repo->find($input['id']);

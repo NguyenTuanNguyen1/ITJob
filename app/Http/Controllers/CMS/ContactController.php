@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CMS;
 
 use App\Constant;
+use App\Http\Controllers\Controller;
 use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
@@ -45,19 +46,15 @@ class ContactController extends Controller
         $input['type_id'] = Constant::TICKET_CONTACT;
         $contact = $this->ticket_repo->create($input);
         if (empty($contact)) {
-            return redirect()->back()->with('Error', 'Lỗi tạo bài viết');
+            return response()->json([
+                'result' => false,
+            ]);
         }
         toast('Đã tạo thành công', 'success');
-        return redirect()->route('home');
+        return response()->json([
+            'result' => true,
+        ]);
     }
-
-//    public function update(Request $request)
-//    {
-//        $input = $request->all();
-//        $this->ticket_repo->update($input['id'], $input);
-////        toast('Chỉnh sửa thành công', 'success');
-//        return redirect()->route('home');
-//    }
 
     public function delete(Request $request)
     {
@@ -65,18 +62,22 @@ class ContactController extends Controller
         $contact = $this->ticket_repo->delete($input['id']);
         if (empty($contact)) {
             toast('Đã xoá thành công', 'success');
-            return redirect()->route('home');
+            return response()->json([
+                'result' => true,
+            ]);
         }
-        return redirect()->back()->with('Error', 'Lỗi xoá bài viết');
-    }
-
-    public function trashed()
-    {
-        $contact = $this->ticket_repo->trashed();
         return response()->json([
-            'data' => $contact
+            'result' => false,
         ]);
     }
+
+//    public function trashed()
+//    {
+//        $contact = $this->ticket_repo->trashed();
+//        return response()->json([
+//            'data' => $contact
+//        ]);
+//    }
 
     public function reply(Request $request)
     {

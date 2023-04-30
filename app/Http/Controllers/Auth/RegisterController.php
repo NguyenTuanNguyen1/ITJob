@@ -43,26 +43,26 @@ class RegisterController extends Controller
     public function handleRegister(RegisterRequest $request)
     {
         $input = $request->all();
-
+//        dd($input);
         $input['password'] = Hash::make($input['password']);
-        $user = $this->user_repo->create($input);
-        $this->infor_repo->create($user['id'], (array)null);
-        $this->sendMailUser($user, new RegisterMail($input['name']));
+        $getUser = $this->user_repo->create($input);
+        $this->infor_repo->create($getUser['id'], (array)null);
+//        $this->sendMailUser($user, new RegisterMail($input['name']));
         switch ($input['role_id'])
         {
             case Constant::ROLE_CANDIDATE:
-                Auth::login($user);
+                Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
                 return redirect()->route('home');
 
             case Constant::ROLE_COMPANY:
-                $this->company_repo->create($user['id'],(array)null);
-                Auth::login($user);
+                $this->company_repo->create($getUser['id'],(array)null);
+                Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
                 return redirect()->route('home1');
 
             default:
-                Auth::login($user);
+                Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
                 return redirect()->route('home2');
         }

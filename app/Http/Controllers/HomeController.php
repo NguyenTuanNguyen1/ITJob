@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-//        dd(123);
-        return view('user/home');
+        return view('layout.index');
     }
 
     public function login()
