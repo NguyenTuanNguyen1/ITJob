@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,8 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'username' => 'required | unique:user',
             'email' => 'required | unique:user | email',
             'phone' => 'required | unique:user',
-            'password' => 'required | min:8',
-            'password_confirmation' => 'required | same:password',
             'address' => 'required',
         ];
     }
@@ -36,18 +33,12 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name.required' => 'Vui lòng nhập tên hiển thị',
-            'username.required' => 'Vui lòng nhập tên đăng nhập',
-            'username.unique' => 'Tên đăng nhập đã được sử dụng',
             'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Vui lòng đúng định dạng @',
             'email.unique' => 'Email đã được sử dụng',
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'phone.unique' => 'Số điện thoại đã được sử dụng',
             'address.required' => 'Vui lòng nhập địa chỉ',
-            'password.required' => 'Vui lòng nhập mật khẩu',
-            'password.min'    => 'Vui lòng nhập mật khẩu có ít nhất 8 ký tự',
-            'password_confirmation.same' => 'Xác nhận sai mật khẩu',
-            'password_confirmation.required' => 'Vui lòng xác nhận mật khẩu',
         ];
     }
 }
