@@ -38,31 +38,49 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['image'] = $this->uploadImage($request);
 
-        $review = $this->review_repo->create($input);
-        if (empty($review)) {
+        try {
+            $input['image'] = $this->uploadImage($request);
+
+            $review = $this->review_repo->create($input);
+            if (empty($review)) {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Tạo bài viết thất bại'
+                ]);
+            }
+            toast('Đã tạo thành công', 'success');
+            return response()->json([
+                'result' => true,
+                'message' => 'Tạo bài viết thành công'
+            ]);
+        }catch (\Exception $e)
+        {
             return response()->json([
                 'result' => false,
-                'message' => 'Tạo bài viết thất bại'
+                'message' => $e->getMessage()
             ]);
         }
-        toast('Đã tạo thành công', 'success');
-        return response()->json([
-            'result' => true,
-            'message' => 'Tạo bài viết thành công'
-        ]);
     }
 
     public function update(Request $request)
     {
         $input = $request->all();
-        $this->review_repo->update($input['id'], $input);
-        toast('Chỉnh sửa thành công', 'success');
-        return response()->json([
-            'result' => true,
-            'message' => 'Chỉnh sửa bài viết thành công'
-        ]);
+
+        try {
+            $this->review_repo->update($input['id'], $input);
+            toast('Chỉnh sửa thành công', 'success');
+            return response()->json([
+                'result' => true,
+                'message' => 'Chỉnh sửa bài viết thành công'
+            ]);
+        }catch (\Exception $e)
+        {
+            return response()->json([
+                'result' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
     public function trashed()
@@ -76,28 +94,45 @@ class ReviewController extends Controller
     public function delete(Request $request)
     {
         $input = $request->all();
-        $review = $this->review_repo->delete($input['id']);
-        if (empty($review)) {
-            toast('Đã xoá thành công', 'success');
+
+        try {
+            $review = $this->review_repo->delete($input['id']);
+            if (empty($review)) {
+                toast('Đã xoá thành công', 'success');
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Đã xoá bài viết thành công'
+                ]);
+            }
             return response()->json([
-                'result' => true,
-                'message' => 'Đã xoá bài viết thành công'
+                'result' => false,
+                'message' => 'Xoá bài viết thất bại'
+            ]);
+        }catch (\Exception $e)
+        {
+            return response()->json([
+                'result' => false,
+                'message' => $e->getMessage()
             ]);
         }
-        return response()->json([
-            'result' => false,
-            'message' => 'Xoá bài viết thất bại'
-        ]);
     }
 
     public function restore(Request $request)
     {
         $input = $request->all();
 
-        $review = $this->review_repo->restore($input['id']);
-        return response()->json([
-            'result' => true,
-            'data' => $review
-        ]);
+        try {
+            $review = $this->review_repo->restore($input['id']);
+            return response()->json([
+                'result' => true,
+                'data' => $review
+            ]);
+        }catch (\Exception $e)
+        {
+            return response()->json([
+                'result' => false,
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 }

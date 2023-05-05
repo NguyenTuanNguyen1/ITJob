@@ -43,7 +43,6 @@ class RegisterController extends Controller
     public function handleRegister(RegisterRequest $request)
     {
         $input = $request->all();
-//        dd($input);
         $input['password'] = Hash::make($input['password']);
         $getUser = $this->user_repo->create($input);
         $this->infor_repo->create($getUser['id'], (array)null);

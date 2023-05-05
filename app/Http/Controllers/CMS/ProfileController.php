@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS;
 
 use App\Constant;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateRequest;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IUserRepository;
@@ -41,23 +42,10 @@ class ProfileController extends Controller
                                 ->with('information', $information);
     }
 
-    public function handleUpdate(Request $request)
+    public function handleUpdate(UpdateRequest $request)
     {
         try {
             $input = $request->all();
-
-            if ($this->checkExist($input, Constant::CHECK_USERNAME))
-            {
-                return redirect()->back()->with('Error','Tên đăng nhập đã tồn tại');
-            }
-            if ($this->checkExist($input,Constant::CHECK_EMAIL_EXIST))
-            {
-                return redirect()->back()->with('Error','Email đã tồn tại');
-            }
-            if($this->checkExist($input,Constant::CHECK_PHONE_EXIST))
-            {
-                return redirect()->back()->with('Error','Số điện thoại đã tồn tại');
-            }
 
             DB::beginTransaction();
 
@@ -66,22 +54,18 @@ class ProfileController extends Controller
 
             $this->user_repo->update($input['id'], $input);
             $this->information_repo->update($input['id'], $input);
+            DB::commit();
 
-            switch ($input['role_id']) {
-                case Constant::ROLE_CANDIDATE:
-                    return redirect()->route('home');
+            return response()->json([
+                'result' => true
+            ]);
 
-                case Constant::ROLE_COMPANY:
-                    $this->company_repo->update($input['id'], $input);
-                    DB::commit();
-                    return redirect()->route('home');
-
-                default:
-                    return redirect()->route('home123');
-            }
         } catch (\Exception $e) {
             DB::rollBack();
-            throw new \Exception($e->getMessage());
+            return response()->json([
+                'result' => false,
+                'message'=> $e->getMessage()
+            ]);
         }
     }
 }

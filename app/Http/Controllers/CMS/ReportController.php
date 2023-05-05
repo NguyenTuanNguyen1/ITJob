@@ -39,31 +39,48 @@ class ReportController extends Controller
     {
         $input = $request->all();
 
-        $input['type_id'] = Constant::TICKET_REPORT;
-        $report = $this->ticket_repo->create($input);
-        if (empty($report)) {
+        try {
+            $input['type_id'] = Constant::TICKET_REPORT;
+            $report = $this->ticket_repo->create($input);
+            if (empty($report)) {
+                return response()->json([
+                    'result' => false,
+                ]);
+            }
+            toast('Đã tạo thành công', 'success');
+            return response()->json([
+                'result' => true,
+            ]);
+        }catch (\Exception $e)
+        {
             return response()->json([
                 'result' => false,
+                'message' => $e->getMessage()
             ]);
         }
-        toast('Đã tạo thành công', 'success');
-        return response()->json([
-            'result' => true,
-        ]);
     }
 
     public function delete(Request $request)
     {
         $input = $request->all();
-        $report = $this->ticket_repo->delete($input['id']);
-        if (empty($report)) {
+
+        try {
+            $report = $this->ticket_repo->delete($input['id']);
+            if (empty($report)) {
+                return response()->json([
+                    'result' => true
+                ]);
+            }
             return response()->json([
-                'result' => true
+                'result' => false
+            ]);
+        }catch (\Exception $e)
+        {
+            return response()->json([
+                'result' => false,
+                'message' => $e->getMessage()
             ]);
         }
-        return response()->json([
-            'result' => false
-        ]);
     }
 
     public function reply(Request $request)

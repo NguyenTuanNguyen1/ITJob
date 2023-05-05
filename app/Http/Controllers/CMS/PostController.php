@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
 use App\Trait\Service;
 use Illuminate\Http\Request;
@@ -10,16 +11,19 @@ use Illuminate\Support\Facades\Mail;
 
 /**
  * @property IPostRepository $post_repo
+ * @property IInformationRepository $infor_repo
  */
 class PostController extends Controller
 {
     use Service;
     public function __construct
     (
-        IPostRepository $postRepository
+        IPostRepository $postRepository,
+        IInformationRepository $informationRepository
     )
     {
         $this->post_repo = $postRepository;
+        $this->infor_repo = $informationRepository;
     }
 
     public function index()
@@ -37,7 +41,6 @@ class PostController extends Controller
     {
         $input = $request->all();
 
-//        $input['image'] = $this->uploadImage($request);
         $post = $this->post_repo->create($input);
         if(empty($post))
         {

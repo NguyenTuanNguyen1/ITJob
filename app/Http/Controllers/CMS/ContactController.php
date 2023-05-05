@@ -43,32 +43,49 @@ class ContactController extends Controller
     {
         $input = $request->all();
 
-        $input['type_id'] = Constant::TICKET_CONTACT;
-        $contact = $this->ticket_repo->create($input);
-        if (empty($contact)) {
+        try {
+            $input['type_id'] = Constant::TICKET_CONTACT;
+            $contact = $this->ticket_repo->create($input);
+            if (empty($contact)) {
+                return response()->json([
+                    'result' => false,
+                ]);
+            }
+            toast('Đã tạo thành công', 'success');
+            return response()->json([
+                'result' => true,
+            ]);
+        }catch (\Exception $e)
+        {
             return response()->json([
                 'result' => false,
+                'message' => $e->getMessage()
             ]);
         }
-        toast('Đã tạo thành công', 'success');
-        return response()->json([
-            'result' => true,
-        ]);
     }
 
     public function delete(Request $request)
     {
         $input = $request->all();
-        $contact = $this->ticket_repo->delete($input['id']);
-        if (empty($contact)) {
-            toast('Đã xoá thành công', 'success');
+
+        try {
+            $contact = $this->ticket_repo->delete($input['id']);
+            if (empty($contact)) {
+                toast('Đã xoá thành công', 'success');
+                return response()->json([
+                    'result' => true,
+                ]);
+            }
             return response()->json([
-                'result' => true,
+                'result' => false,
+            ]);
+        }catch (\Exception $e)
+        {
+            return response()->json([
+                'result' => false,
+                'message' => $e->getMessage()
             ]);
         }
-        return response()->json([
-            'result' => false,
-        ]);
     }
 
 //    public function trashed()
