@@ -15,13 +15,6 @@ class CompanyRepository implements ICompanyRepository
     public function create($user_id, array $company)
     {
         $data = new Company();
-        $data->type = null;
-        $data->staff = null;
-        $data->headquarters = null;
-        $data->taxcode = null;
-        $data->website = null;
-        $data->token = null;
-        $data->business_license = null;
         $data->user_id = $user_id;
         $data->save();
         return $data;

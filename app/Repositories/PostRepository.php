@@ -25,7 +25,6 @@ class PostRepository implements IPostRepository
         $data->level = $post['level'];
         $data->major = $post['major'];
         $data->status = 1;
-        $data->approved_user_id = null;
         $data->skill_id = $post['skill_id'];
         $data->user_id = $post['user_id'];
         $data->save();
@@ -38,7 +37,7 @@ class PostRepository implements IPostRepository
     }
     public function update($id,array $data)
     {
-        $result = Post::find($id)->update([
+        return Post::find($id)->update([
             'title' => $data['title'],
             'requirements' => $data['requirements'],
             'description' => $data['description'],
@@ -53,7 +52,6 @@ class PostRepository implements IPostRepository
             'skill_id' => $data['skill_id'],
             'user_id' => $data['user_id']
         ]);
-        return $result;
     }
     public function delete($id)
     {
