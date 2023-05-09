@@ -10,7 +10,6 @@ use App\Repositories\RoleRepostitory;
 use App\Repositories\TicketTypeRepository;
 use App\Trait\Service;
 use Illuminate\Http\Request;
-use mysql_xdevapi\Exception;
 
 /**
  * @property ITypeRepository $type_repo
@@ -190,7 +189,6 @@ class TypeController extends Controller
             case Constant::TYPE_ROLE:
                 $role = $this->role_repo->restore($input['id']);
                 if (!empty($role)) {
-                    toast('Đã khôi phục thành công', 'success');
                     return redirect()->route('home');
                 }
                 return redirect()->route('home');
@@ -198,7 +196,6 @@ class TypeController extends Controller
             case Constant::TYPE_INFORMATION:
                 $information = $this->infomationType_repo->restore($input['id']);
                 if (!empty($information)) {
-                    toast('Đã xoá thành công', 'success');
                     return redirect()->route('home');
                 }
                 return redirect()->route('home');

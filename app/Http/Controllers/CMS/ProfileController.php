@@ -49,7 +49,6 @@ class ProfileController extends Controller
 
             DB::beginTransaction();
 
-            $this->checkExist($input['email'], Constant::CHECK_EMAIL_EXIST);
             $input['image'] = $this->uploadImage($request);
 
             $this->user_repo->update($input['id'], $input);

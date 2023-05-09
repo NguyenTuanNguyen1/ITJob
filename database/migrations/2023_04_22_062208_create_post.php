@@ -25,13 +25,11 @@ return new class extends Migration
             $table->integer('status')->nullable()->default(0);
 
             $table->unsignedBigInteger('approved_user_id')->nullable();
-            $table->unsignedBigInteger('skill_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('skill_id')->references('id')->on('skill')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }

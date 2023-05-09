@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @method static orderBy(string $string, string $string1)
  * @method static find($id)
+ * @method static where(string $string, $array)
+ * @method static join()
  */
 class Post extends Model
 {
@@ -30,7 +32,6 @@ class Post extends Model
         'major',
         'status',
         'approved_user_id',
-        'skill_id',
         'user_id',
     ];
 

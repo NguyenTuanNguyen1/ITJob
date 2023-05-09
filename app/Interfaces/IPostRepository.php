@@ -12,4 +12,6 @@ interface IPostRepository
     public function storage($id);
     public function trashed();
     public function restore($id);
+    public function StatisticalPost($action, $from, $to);
+    public function getPostByMajor($action, $major, $from, $to);
 }

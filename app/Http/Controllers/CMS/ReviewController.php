@@ -49,7 +49,6 @@ class ReviewController extends Controller
                     'message' => 'Tạo bài viết thất bại'
                 ]);
             }
-            toast('Đã tạo thành công', 'success');
             return response()->json([
                 'result' => true,
                 'message' => 'Tạo bài viết thành công'
@@ -98,7 +97,6 @@ class ReviewController extends Controller
         try {
             $review = $this->review_repo->delete($input['id']);
             if (empty($review)) {
-                toast('Đã xoá thành công', 'success');
                 return response()->json([
                     'result' => true,
                     'message' => 'Đã xoá bài viết thành công'

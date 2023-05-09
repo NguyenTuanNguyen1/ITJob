@@ -3,6 +3,7 @@
 namespace App\Trait;
 
 use App\Constant;
+use App\Interfaces\IUserRepository;
 use App\Models\InformationType;
 use App\Models\Role;
 use App\Models\Skill;
@@ -14,6 +15,14 @@ use Illuminate\Support\Str;
 
 trait Service
 {
+    public function __construct
+    (
+        IUserRepository $userRepository,
+    )
+    {
+        $this->user_repo = $userRepository;
+    }
+
     public function uploadImage(Request $request)
     {
         $data['image'] = $request->image;
@@ -30,11 +39,6 @@ trait Service
     public function checkExist($data, $action)
     {
         switch ($action){
-            case Constant::CHECK_SKILL:
-                $skillExists = Skill::where('content',$data['content'])->count();
-                if ($skillExists > 0) return true;
-                return false;
-
             case Constant::TYPE_INFORMATION:
                 $informationTypeExist = InformationType::where('content',$data['content'])->count();
                 if ($informationTypeExist > 0) return true;
@@ -57,6 +61,18 @@ trait Service
         if (self::isValidMail($user['email']))
         {
             Mail::to($user['email'])->send($mailable);
+        }
+    }
+
+    public function sendMailByRole($role, $mailable)
+    {
+        $users = $this->user_repo->getUserByRole($role);
+        foreach ($users as $user)
+        {
+            if (self::isValidMail($user->email))
+            {
+                Mail::to($user->email)->send($mailable);
+            }
         }
     }
 

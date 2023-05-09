@@ -20,6 +20,7 @@ class TicketRepository implements ITicketRepository
         $data->image = $type['image'];
         $data->ticket_id = $type['ticket_id'];
         $data->user_id = $type['user_id'];
+        $data->post_id = $type['post_id'];
         $data->save();
         return $data;
     }

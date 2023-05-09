@@ -11,21 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket', function (Blueprint $table) {
+        Schema::create('applied', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content')->nullable();
-            $table->string('image')->nullable();
-            $table->integer('status')->nullable()->default(0);
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('post_id')->nullable();
-            $table->unsignedBigInteger('type_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
-            $table->foreign('type_id')->references('id')->on('ticket_type')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
         });
     }
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket');
+        Schema::dropIfExists('applied');
     }
 };
