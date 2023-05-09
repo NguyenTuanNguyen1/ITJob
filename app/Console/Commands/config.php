@@ -18,7 +18,7 @@ class config extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Config env';
 
     /**
      * Execute the console command.

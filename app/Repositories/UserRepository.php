@@ -1,8 +1,10 @@
 <?php
 namespace App\Repositories;
 
+use App\Constant;
 use App\Interfaces\IUserRepository;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository implements IUserRepository
 {
@@ -68,5 +70,10 @@ class UserRepository implements IUserRepository
     public function restore($id)
     {
         return User::onlyTrashed()->where('id', $id)->restore();
+    }
+
+    public function getUserByRole($role)
+    {
+        return User::where('role', $role)->get;
     }
 }
