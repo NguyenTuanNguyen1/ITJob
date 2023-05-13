@@ -4,6 +4,8 @@ namespace App\Http\Controllers\CMS;
 
 use App\Constant;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequest;
+use App\Interfaces\IAdminRepository;
 use App\Interfaces\ITypeRepository;
 use App\Repositories\InformationTypeRepository;
 use App\Repositories\RoleRepostitory;
@@ -16,6 +18,7 @@ use Illuminate\Http\Request;
  * @property TicketTypeRepository $ticketType_repo
  * @property InformationTypeRepository $infomationType_repo
  * @property RoleRepostitory $role_repo
+ * @property IAdminRepository $admin_repo
  */
 class TypeController extends Controller
 {
@@ -26,15 +29,17 @@ class TypeController extends Controller
         ITypeRepository $typeRepository,
         TicketTypeRepository $ticketTypeRepository,
         InformationTypeRepository $informationTypeRepository,
-        RoleRepostitory $roleRepostitory
+        RoleRepostitory $roleRepostitory,
+        IAdminRepository $adminRepository
     ) {
         $this->type_repo = $typeRepository;
         $this->ticketType_repo = $ticketTypeRepository;
         $this->infomationType_repo = $informationTypeRepository;
         $this->role_repo = $roleRepostitory;
+        $this->admin_repo = $adminRepository;
     }
 
-    public function index()
+    public function index(AdminRequest $request)
     {
         $allRole = $this->role_repo->all();
         $informationType = $this->type_repo->all();
@@ -46,10 +51,13 @@ class TypeController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
         $input = $request->all();
-
+        if (!$this->admin_repo->checkAdmin($input['user_id']))
+        {
+            abort(401);
+        }
         if (
             $this->checkExist($input, Constant::TYPE_INFORMATION) ||
             $this->checkExist($input, Constant::TYPE_TICKET) ||
@@ -93,7 +101,7 @@ class TypeController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(AdminRequest $request)
     {
         $input = $request->all();
 
@@ -132,7 +140,7 @@ class TypeController extends Controller
         }
     }
 
-    public function delete(Request $request)
+    public function delete(AdminRequest $request)
     {
         $input = $request->all();
 
@@ -161,7 +169,7 @@ class TypeController extends Controller
         }
     }
 
-    public function trashed()
+    public function trashed(AdminRequest $request)
     {
         try {
             $allRole = $this->role_repo->trashed();
@@ -181,7 +189,7 @@ class TypeController extends Controller
         }
     }
 
-    public function restore(Request $request)
+    public function restore(AdminRequest $request)
     {
         $input = $request->all();
 

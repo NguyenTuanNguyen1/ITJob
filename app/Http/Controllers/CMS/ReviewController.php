@@ -43,6 +43,7 @@ class ReviewController extends Controller
             $input['image'] = $this->uploadImage($request);
 
             $review = $this->review_repo->create($input);
+            $this->ActivityLog(  "Bạn đã bình luận bài viết " . $review['id'] , $input['user_id']);
             if (empty($review)) {
                 return response()->json([
                     'result' => false,
@@ -68,6 +69,7 @@ class ReviewController extends Controller
 
         try {
             $this->review_repo->update($input['id'], $input);
+            $this->ActivityLog(  "Bạn đã chỉnh sửa bình luận của mình tại " . $input['id'] , $input['user_id']);
             toast('Chỉnh sửa thành công', 'success');
             return response()->json([
                 'result' => true,

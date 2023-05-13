@@ -40,7 +40,7 @@ Route::prefix('type')->group(function (){
     Route::get('/type-update',[TypeController::class,'update'])->name('type.update');
     Route::post('/type-delete',[ReviewController::class,'delete'])->name('type.delete');
     Route::get('/type-trashed',[TypeController::class,'trashed'])->name('type.trashed');
-    Route::get('/type-restore',[TypeController::class,'restore'])->name('type.trashed');
+    Route::get('/type-restore',[TypeController::class,'restore'])->name('type.restore');
 });
 
 //Contact
@@ -50,7 +50,7 @@ Route::prefix('contact')->group(function () {
     Route::post('/contact-create',[ContactController::class,'store'])->name('contact.create');
     Route::get('/contact-delete',[ContactController::class,'delete'])->name('contact.delete');
     Route::get('/contact-reply',[ContactController::class,'reply'])->name('contact.reply');
-    Route::get('/list-contact-replied',[ContactController::class,'replied'])->name('report.replied');
+    Route::get('/list-contact-replied',[ContactController::class,'replied'])->name('contact.replied');
 //    Route::post('/contact-restore',[ContactController::class,'restore'])->name('contact.restore');
 });
 

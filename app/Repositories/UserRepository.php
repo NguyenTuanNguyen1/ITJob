@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Constant;
 use App\Interfaces\IUserRepository;
+use App\Models\Applied;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,8 +73,26 @@ class UserRepository implements IUserRepository
         return User::onlyTrashed()->where('id', $id)->restore();
     }
 
+    public function getMajorUser($role)
+    {
+        return User::whereNotNull('major')
+            ->where('role_id', $role)
+            ->get();
+    }
+
     public function getUserByRole($role)
     {
-        return User::where('role', $role)->get;
+        return User::where('role_id', $role)->get();
+    }
+
+    public function getUserByCondition($condition, $value)
+    {
+        return User::where($condition, $value)->get();
+    }
+
+    public function getUserApplied($post_id)
+    {
+        return Applied::where('post_id', $post_id)
+            ->get();
     }
 }

@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Constant;
 use App\Interfaces\IPostRepository;
+use App\Models\Applied;
 use App\Models\Company;
 use App\Models\Post;
 
@@ -10,7 +11,7 @@ class PostRepository implements IPostRepository
 {
     public function all()
     {
-        return Post::orderBy('id','DESC')->paginate(8);
+        return Post::orderBy('id','DESC')->where('status', Constant::STATUS_APPROVED_POST)->paginate(8);
     }
 
     public function create(array $post)
@@ -71,18 +72,17 @@ class PostRepository implements IPostRepository
         Company::onlyTrashed()->where('id', $id)->restore();
     }
 
-    public function StatisticalPost($action, $from, $to)
+    public function getMajorByPost($action, $major, $from, $to)
     {
-        return Post::where('status', $action)
-                    ->where('created', '>=', $from)
-                    ->where('created', '<=', $to)->get();
+        return Post::where('major', $major)
+            ->where('created_at', '>=', $from)
+            ->where('created_at', '<=', $to)
+            ->where('status', $action)
+            ->get();
     }
 
-    public function getPostByMajor($action, $major, $from, $to)
+    public function getPostByCondition($condition)
     {
-        return Post::where('status', $action)
-            ->where('created', '>=', $from)
-            ->where('major', $major)
-            ->where('created', '<=', $to)->get();
+
     }
 }

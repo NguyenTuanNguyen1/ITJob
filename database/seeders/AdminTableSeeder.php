@@ -23,7 +23,8 @@ class AdminTableSeeder extends Seeder
             'username' => 'job',
             'phone' => fake()->unique()->phoneNumber(),
             'role_id' => Constant::ROLE_ADMIN,
-            'email' => fake()->unique()->email(),
+//            'email' => fake()->unique()->email(),
+            'email' => 'kensu8434@gmail.com',
             'password' => Hash::make('12345678'),
             'created_at' => Carbon::now()
         ]);

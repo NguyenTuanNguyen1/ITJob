@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS;
 
 use App\Constant;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequest;
 use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
@@ -101,7 +102,7 @@ class ContactController extends Controller
 //        ]);
 //    }
 
-    public function reply(Request $request)
+    public function reply(AdminRequest $request)
     {
         $input = $request->all();
 

@@ -46,14 +46,4 @@ class DeleteUserMail extends Mailable
             view: 'view.name',
         );
     }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
-    }
 }
