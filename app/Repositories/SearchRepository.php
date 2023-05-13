@@ -5,7 +5,6 @@ use App\Interfaces\ISearchRepository;
 use App\Models\InformationType;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 class SearchRepository implements ISearchRepository
 {
@@ -29,5 +28,17 @@ class SearchRepository implements ISearchRepository
                     ->orderBy('id','DESC')
                     ->whereNotNull('status')
                     ->paginate(8);
+    }
+
+    public function searchUserByRole($role)
+    {
+        return User::where('role_id', $role)->get();
+    }
+
+    public function StatisticalPost($action, $from, $to)
+    {
+        return Post::where('status', $action)
+            ->where('created_at', '>=', $from)
+            ->where('created_at', '<=', $to)->count();
     }
 }

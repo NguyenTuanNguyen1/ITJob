@@ -27,6 +27,7 @@ class config extends Command
     {
         $this->call('view:clear');
         $this->call('view:cache');
+        $this->call('route:cache');
         $this->call('route:clear');
         $this->call('optimize:clear');
         $this->call('config:cache');

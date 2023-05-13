@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Constant;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -19,13 +20,13 @@ class CompanyTableSeeder extends Seeder
     {
         for ($i = 3; $i <= 7; $i++) {
             DB::table('user')->insert([
-                'name' => $this->faker->name,
-                'username' => $this->faker->name,
-                'phone' => $this->faker->phoneNumber,
-                'email' => $this->faker->email,
-                'img_avatar' => 'avatar.jpg',
-                'password' => Hash::make('12345678'),
+                'name' => fake()->name,
+                'username' => fake()->name,
+                'phone' => fake()->phoneNumber,
                 'role_id' => Constant::ROLE_COMPANY,
+                'email' =>fake()->email,
+                'password' => Hash::make('12345678'),
+                'created_at' => Carbon::now()
             ]);
 
             DB::table('information')->insert([

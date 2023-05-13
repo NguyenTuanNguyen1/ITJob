@@ -7,9 +7,7 @@ use App\Interfaces\IUserRepository;
 use App\Mail\ForgotPassMail;
 use App\Trait\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 /**
  * @property IUserRepository $user_repo
@@ -21,8 +19,7 @@ class ForgotController extends Controller
     public function __construct
     (
         IUserRepository $userRepository
-    )
-    {
+    ) {
         $this->user_repo = $userRepository;
     }
 
@@ -41,9 +38,8 @@ class ForgotController extends Controller
     {
         $user = null;
         //Kiểm tra token
-        if($user['token'] == $token)
-        {
-            return view('ResetPass',compact('user'));
+        if ($user['token'] == $token) {
+            return view('ResetPass', compact('user'));
         }
         abort(403, 'Lỗi không thấy trang');
     }
@@ -53,9 +49,8 @@ class ForgotController extends Controller
         $user = null;
         //Cập nhật mật khẩu mới
         $user['password'] = Hash::make($request->password);
-        if($user)
-        {
-            toast('Cập nhật mật khẩu thành công','success');
+        if ($user) {
+            toast('Cập nhật mật khẩu thành công', 'success');
         }
 
 //        Auth::login($user);

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Constant;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,22 +18,22 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 7; $i <= 17; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             DB::table('user')->insert([
-                'name' => $this->faker->name,
-                'username' => $this->faker->name,
-                'phone' => $this->faker->phoneNumber,
+                'name' => fake()->name,
+                'username' => fake()->name,
+                'phone' => fake()->phoneNumber,
                 'role_id' => Constant::ROLE_CANDIDATE,
-                'email' => $this->faker->email,
+                'email' =>fake()->email,
                 'password' => Hash::make('12345678'),
-                'created_at' => $this->faker->time('d-m-Y')
+                'created_at' => Carbon::now()
             ]);
 
-            DB::table('information')->insert([
-                'content' => $this->faker->text,
-                'user_id' => $i,
-                'type_id' => $this->faker->phoneNumber,
-            ]);
+//            DB::table('information')->insert([
+//                'content' => $this->faker->text,
+//                'user_id' => $i+1,
+//                'type_id' => $this->faker->phoneNumber,
+//            ]);
         }
     }
 }

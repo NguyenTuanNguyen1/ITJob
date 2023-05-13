@@ -18,20 +18,37 @@ class PostTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i < 8; $i++) {
+        for ($i = 1; $i < 3; $i++) {
             DB::table('post')->insert([
-                'title' => $this->faker->title,
-                'requirements' => $this->faker->text,
-                'description' => $this->faker->text,
-                'benefit' => $this->faker->text,
-                'quantity' => $this->faker->text,
-                'position' => $this->faker->name,
-                'workplace' => $this->faker->address(),
-                'level' => $this->faker->text,
-                'major' => $this->faker->name,
+                'title' => fake()->title,
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => fake()->text,
+                'workplace' => fake()->address,
+                'level' => fake()->text,
+                'major' => 'IT',
                 'status' => 1,
-                'user_id' => rand(3,5),
-                'created_at' => $this->faker->time('d-m-Y')
+                'user_id' => rand(3,7),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+        }
+
+        for ($i = 3; $i < 6; $i++) {
+            DB::table('post')->insert([
+                'title' => fake()->title,
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => fake()->text,
+                'workplace' => fake()->address,
+                'level' => fake()->text,
+                'major' => 'HR',
+                'status' => 1,
+                'user_id' => rand(3,7),
+                'created_at' => Carbon::now()->subWeek()
             ]);
         }
     }

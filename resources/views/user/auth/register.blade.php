@@ -13,11 +13,75 @@
     }
     </script>
     @include('layout.page-css')
+    {{--Register--}}
+    <link rel="stylesheet" href="{{ url('Register/css/style.css') }}" type="text/css" media="all" />
 </head>
 
 <style>
 body {
     font-family: Arial;
+}
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 50%;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/**
+ * FilePond Custom Styles
+ */
+.filepond--drop-label {
+    color: #4c4e53;
+}
+
+.filepond--label-action {
+    text-decoration-color: #babdc0;
+}
+
+.filepond--panel-root {
+    border-radius: 2em;
+    background-color: #edf0f4;
+    height: 1em;
+}
+
+.filepond--item-panel {
+    background-color: #595e68;
+}
+
+.filepond--drip-blob {
+    background-color: #7f8a9a;
 }
 </style>
 
@@ -164,6 +228,7 @@ body {
     </div>
     <!--//footer-->
 </body>
+@include('layout.page-js')
 <script>
     $(document).ready(() => {
         $("#contact").validate({

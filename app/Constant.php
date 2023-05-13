@@ -14,4 +14,6 @@ class Constant
     public const TYPE_TICKET = 2;
     public const TYPE_ROLE = 3;
     public const TICKET_REPLIED = 2;
+    public const POST_MAJOR = '';
+    public const STATISTICAL_POST = 2;
 }

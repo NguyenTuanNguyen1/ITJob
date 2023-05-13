@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-         $schedule->command('config')->everyMinute();
+        $schedule->command('command:statistical-email')->everyThirtyMinutes();
+//         $schedule->command('command:statistical-email')->weeklyOn(1, '9:00');
     }
 
     /**
