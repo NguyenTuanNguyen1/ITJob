@@ -1125,8 +1125,8 @@ h4 {
 
 .section-hero,
 .section-hero > .container > .row {
-    height: 100vh;
-    min-height: 900px;
+    /* height: 100vh; */
+    min-height: 150px;
 }
 
 .section-hero.inner-page,
