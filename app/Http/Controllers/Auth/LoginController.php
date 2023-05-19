@@ -51,6 +51,8 @@ class LoginController extends Controller
         elseif (Auth::attempt($admin, $input['remember_token']))
         {
             $user = $this->user_repo->getUserByCondition('username', $input['username']);
+             $test = $request->header();
+             dd($test);
             $this->ActivityLog('Bạn đã đăng nhập', $user[0]->id);
             toast('Đăng nhập thành công', 'success');
             return redirect()->route('home');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\CMS;
 
+use App\Constant;
 use App\Http\Controllers\Controller;
+use App\Interfaces\IAdminRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
 use App\Trait\Service;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 /**
  * @property IPostRepository $post_repo
  * @property IInformationRepository $infor_repo
+ * @property IAdminRepository $admin_repo
  */
 class PostController extends Controller
 {
@@ -19,11 +22,13 @@ class PostController extends Controller
     public function __construct
     (
         IPostRepository $postRepository,
-        IInformationRepository $informationRepository
+        IInformationRepository $informationRepository,
+        IAdminRepository $adminRepository
     )
     {
         $this->post_repo = $postRepository;
         $this->infor_repo = $informationRepository;
+        $this->admin_repo = $adminRepository;
     }
 
     public function index()
@@ -41,14 +46,13 @@ class PostController extends Controller
     {
         $input = $request->all();
 
-
         $post = $this->post_repo->create($input);
-        $this->ActivityLog(  "Bạn đã đăng tin tuyển dụng " . $post['id'], $input['user_id']);
+        $this->ActivityLog(  "Bạn đã đăng tin tuyển dụng*" . $post['id'], $input['user_id']);
         if(empty($post))
         {
             return redirect()->back()->with('Error','Lỗi tạo bài viết');
         }
-        toast('Đã tạo thành công', 'success');
+
         return redirect()->route('home');
     }
 
@@ -57,8 +61,8 @@ class PostController extends Controller
         $input = $request->all();
 
         $post = $this->post_repo->update($input['id'], $input);
-        $this->ActivityLog(  "Bạn đã cập nhật tuyển dụng " . $post['id'], $input['user_id']);
-        toast('Đã cập nhật thành công', 'success');
+        $this->ActivityLog(  "Bạn đã cập nhật tin tuyển dụng*" . $post['id'], $input['user_id']);
+
         return response()->json([
             'result' => true
         ]);
@@ -67,6 +71,11 @@ class PostController extends Controller
     public function delete(Request $request)
     {
         $input = $request->all();
+
+        if ($this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
+        {
+            abort(401);
+        }
 
         $post = $this->post_repo->delete($input['id']);
         $this->ActivityLog(  "Bạn đã xoá bài tuyển dụng " , $input['user_id']);
@@ -81,8 +90,15 @@ class PostController extends Controller
         ]);
     }
 
-    public function trashed()
+    public function trashed(Request $request)
     {
+        $input = $request->all();
+
+        if ($this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
+        {
+            abort(401);
+        }
+
         $post = $this->post_repo->trashed();
         return response()->json([
             'data' => $post
@@ -93,8 +109,13 @@ class PostController extends Controller
     {
         $input = $request->all();
 
+        if ($this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
+        {
+            abort(401);
+        }
+
         $this->post_repo->restore($input['id']);
-        $this->ActivityLog(  "Bạn đã khôi phục tuyển dụng " . $input['id'] , $input['user_id']);
+        $this->ActivityLog(  "Bạn đã khôi phục bài viết*" . $input['id'] , $input['user_id']);
         return response()->json([
             'result' => true
         ]);

@@ -39,11 +39,19 @@ class TypeController extends Controller
         $this->admin_repo = $adminRepository;
     }
 
-    public function index(AdminRequest $request)
+    public function index(Request $request)
     {
+        $input = $request->all();
+
+        if (!$this->admin_repo->checkRole(Constant::ROLE_ADMIN, $input['admin_id']))
+        {
+            abort(401);
+        }
+
         $allRole = $this->role_repo->all();
         $informationType = $this->type_repo->all();
         $ticket = $this->ticketType_repo->all();
+
         return response()->json([
             'role' => $allRole,
             'information' => $informationType,

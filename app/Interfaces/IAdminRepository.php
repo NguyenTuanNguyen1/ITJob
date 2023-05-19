@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface IAdminRepository
 {
-    public function checkAdmin($id);
+    public function checkRole($role, $id);
 }

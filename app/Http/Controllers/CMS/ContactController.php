@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CMS;
 use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Interfaces\IAdminRepository;
 use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
@@ -12,16 +13,19 @@ use Illuminate\Http\Request;
 
 /**
  * @property ITicketRepository $ticket_repo
+ * @property IAdminRepository $admin_repo
  */
 class ContactController extends Controller
 {
     use Service;
     public function __construct
     (
-        ITicketRepository $ticketRepository
+        ITicketRepository $ticketRepository,
+        IAdminRepository $adminRepository
     )
     {
         $this->ticket_repo = $ticketRepository;
+        $this->admin_repo = $adminRepository;
     }
 
     public function index()
@@ -75,6 +79,11 @@ class ContactController extends Controller
     {
         $input = $request->all();
 
+        if (!$this->admin_repo->checkRole(Constant::ROLE_ADMIN, $input['admin_id']))
+        {
+            abort(401);
+        }
+
         try {
             $contact = $this->ticket_repo->delete($input['id']);
             if (empty($contact)) {
@@ -102,7 +111,7 @@ class ContactController extends Controller
 //        ]);
 //    }
 
-    public function reply(AdminRequest $request)
+    public function reply(Request $request)
     {
         $input = $request->all();
 

@@ -64,8 +64,8 @@ class StatisticalEmail extends Command
         $data_user = [];
         foreach ($users as $user) {
             $data_user[] = [
-                'post' => $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, $user->major, $from, $to),
-                'user' => $user
+                'user' => $user,
+                'post' => $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, $user->major, $from, $to)
             ];
         }
 
@@ -77,7 +77,7 @@ class StatisticalEmail extends Command
         $data_company = [];
         foreach ($company_posts as $post) {
             $data_company[] = [
-                'allCompany' => $post,
+                'allPost' => $post,
                 'user_applied' => $this->user_repo->getUserApplied($post->id)
             ];
         }
@@ -93,11 +93,11 @@ class StatisticalEmail extends Command
         foreach ($list_applied as $applied) {
             for ($i = 0; $i < count($applied['user_applied']); $i++) {
                 $get_user[] = $this->user_repo->find($applied['user_applied'][$i]->user_id);
-                $get_company = $this->user_repo->find($applied['allCompany']->user_id);
+                $get_company = $this->user_repo->find($applied['allPost']->user_id);
 
             }
         }
-        $this->sendMailUser($get_company, new WeeklyMailCompany($get_user, $applied['allCompany']));
+        $this->sendMailUser($get_company, new WeeklyMailCompany($get_user, $applied['allPost']));
         $this->sendMailByRole(Constant::ROLE_ADMIN,new StatisticalMail($post_not_approved, $post_approved, $from, $to));
     }
 }

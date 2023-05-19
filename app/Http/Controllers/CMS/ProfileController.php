@@ -34,7 +34,6 @@ class ProfileController extends Controller
 
     public function profile($id, Request $request)
     {
-        dd('theel');
         $user = $this->user_repo->find($id);
         $company = $this->company_repo->find($id);
         $information = $this->information_repo->find($id);
@@ -54,6 +53,7 @@ class ProfileController extends Controller
 
             $this->user_repo->update($input['id'], $input);
             $this->information_repo->update($input['id'], $input);
+            $this->ActivityLog(  "Bạn đã cập nhật thông tin cá nhân", $input['user_id']);
             DB::commit();
 
             return response()->json([

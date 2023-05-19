@@ -43,7 +43,7 @@ class ReviewController extends Controller
             $input['image'] = $this->uploadImage($request);
 
             $review = $this->review_repo->create($input);
-            $this->ActivityLog(  "Bạn đã bình luận bài viết " . $review['id'] , $input['user_id']);
+            $this->ActivityLog(  "Bạn đã đăng bài nhận xét " . $review['id'] , $input['user_id']);
             if (empty($review)) {
                 return response()->json([
                     'result' => false,
@@ -69,7 +69,7 @@ class ReviewController extends Controller
 
         try {
             $this->review_repo->update($input['id'], $input);
-            $this->ActivityLog(  "Bạn đã chỉnh sửa bình luận của mình tại " . $input['id'] , $input['user_id']);
+            $this->ActivityLog(  "Bạn đã chỉnh sửa nhận xét của mình tại " . $input['id'] , $input['user_id']);
             toast('Chỉnh sửa thành công', 'success');
             return response()->json([
                 'result' => true,
@@ -98,6 +98,8 @@ class ReviewController extends Controller
 
         try {
             $review = $this->review_repo->delete($input['id']);
+            $this->ActivityLog('Bạn đã xoá bài nhận xét', $input['user_id']);
+
             if (empty($review)) {
                 return response()->json([
                     'result' => true,
@@ -123,6 +125,9 @@ class ReviewController extends Controller
 
         try {
             $review = $this->review_repo->restore($input['id']);
+
+            $this->ActivityLog('Bạn đã khôi phục bài nhận xét*' . $input['id'], $input['user_id']);
+
             return response()->json([
                 'result' => true,
                 'data' => $review

@@ -8,9 +8,9 @@ use App\Models\User;
 
 class AdminRepository implements IAdminRepository
 {
-    public function checkAdmin($id)
+    public function checkRole($role, $id)
     {
-        $admin = User::where('id', $id)->where('role_id', Constant::ROLE_ADMIN)->get();
+        $admin = User::where('id', $id)->where('role_id', $role)->get();
         if (empty($admin))
         {
             return false;
