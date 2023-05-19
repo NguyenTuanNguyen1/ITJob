@@ -33,21 +33,21 @@
                 <div class="icon-w3">
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
-                @error('username')
+            </div> 
+             @error('username')
                 <div style="color:red;">{{ $message }}</div>
                 <br>
                 @enderror
-            </div>
             <div class="form-sub-w3">
                 <input type="password" name="password" placeholder="Mật khẩu"/>
                 <div class="icon-w3">
                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                 </div>
-                @error('password')
+            </div>
+               @error('password')
                 <div style="color:red;">{{ $message }}</div>
                 <br>
                 @enderror
-            </div>
             <label class="anim">
                 <input type="checkbox" name="remember_token" class="checkbox">
                 <span>Nhớ mật khẩu</span>
@@ -62,9 +62,13 @@
             </div>
         </form>
 
-        <button>
-            <a id="register">dang ki</a>
+        <form action="{{route('test-mail')}}">
+             <button type="submit"> Mail
+                
+            
         </button>
+        </form>
+       
 
         <div class="icon-flat-form">
             <a href="/login-facebook/Facebook"><i class="fab fa-facebook-square"></i></a>

@@ -19,6 +19,12 @@
 body {
     font-family: Arial;
 }
+.login-now{
+    color:white;
+}
+.login-now a{
+    color:#00c6d7;
+}
 </style>
 
 <body>
@@ -89,6 +95,9 @@ body {
                     @endif
                     <input type="hidden" name="role_id" value="2">
                     <div class="clear"></div>
+                    <div class="login-now" >
+                        <p>Bạn đã có tài khoản <a href="#">đăng nhập ngay</a></p>
+                    </div>
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
                     </div>
@@ -143,6 +152,9 @@ body {
                         <p style="color:red">{{session('Error')}}</p>
                     @endif
                     <div class="clear"></div>
+                    <div class="login-now" >
+                        <p>Bạn đã có tài khoản <a href="#">đăng nhập ngay</a></p>
+                    </div>
                     <input type="hidden" name="role_id" value="3">
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
