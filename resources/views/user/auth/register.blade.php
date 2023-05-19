@@ -13,13 +13,17 @@
     }
     </script>
     @include('layout.page-css')
-    {{--Register--}}
-    <link rel="stylesheet" href="{{ url('Register/css/style.css') }}" type="text/css" media="all" />
 </head>
 
 <style>
 body {
     font-family: Arial;
+}
+.login-now{
+    color:white;
+}
+.login-now a{
+    color:#00c6d7;
 }
 /* Style the tab */
 .tab {
@@ -153,6 +157,9 @@ body {
                     @endif
                     <input type="hidden" name="role_id" value="2">
                     <div class="clear"></div>
+                    <div class="login-now" >
+                        <p>Bạn đã có tài khoản <a href="#">đăng nhập ngay</a></p>
+                    </div>
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
                     </div>
@@ -207,6 +214,9 @@ body {
                         <p style="color:red">{{session('Error')}}</p>
                     @endif
                     <div class="clear"></div>
+                    <div class="login-now" >
+                        <p>Bạn đã có tài khoản <a href="#">đăng nhập ngay</a></p>
+                    </div>
                     <input type="hidden" name="role_id" value="3">
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
@@ -228,7 +238,6 @@ body {
     </div>
     <!--//footer-->
 </body>
-@include('layout.page-js')
 <script>
     $(document).ready(() => {
         $("#contact").validate({

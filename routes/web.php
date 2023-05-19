@@ -58,4 +58,5 @@ Route::get('/callback-facebook/{provider}',[HomeController::class,'callback_Face
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
-Route::get('123',[HomeController::class,'test']);
+Route::get('123demo',[HomeController::class,'test']);
+Route::get('123',[HomeController::class,'mail'])->name('test-mail');
