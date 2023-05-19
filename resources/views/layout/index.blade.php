@@ -64,8 +64,8 @@
 <!-- HOME -->
 
 <section class="home-section section-hero overlay bg-image" id="home-section">
-    <!-- style="background-image: url('images/hero_1.jpg');" -->
-    <div class="container">
+</section>
+<div class="container" style="padding-top:10px">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
 
@@ -113,128 +113,52 @@
                             </div>
                             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                                 <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                                    <h2>Senior Art Director</h2>
                                     <strong>{{ $post->title }}</strong>
                                 </div>
-                                <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                <div class="job-listing-location custom-width w-25 mb-3 mb-sm-0">
                                     <span class="icon-room"></span> {{ $post->workplace }}
-                                </div>
-                                <div class="job-listing-meta">
-                                    <span class="badge badge-success">{{ $post->major }}</span>
+                                </div>  
+                                <div class="job-listing-meta custom-width w-25">
+                                    <div style="display: flex;justify-content: center">
+                                        <span class="badge badge-success">{{ $post->major }}</span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </li>
                     @endforeach
-                        <div>
-                            {{$posts->links('vendor\pagination\bootstrap-4')}}
-                        </div>
-{{--                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">--}}
-{{--                        <a href="job-single.html" data-value=""></a>--}}
-{{--                        <div class="job-listing-logo">--}}
-{{--                            <img src="board-master/images/job_logo_5.jpg"--}}
-{{--                                 alt="Free Website Template by Free-Template.co" class="img-fluid">--}}
-{{--                        </div>--}}
-
-{{--                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">--}}
-{{--                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">--}}
-{{--                                <h2>Product Designer</h2>--}}
-{{--                                <strong>Puma</strong>--}}
-{{--                            </div>--}}
-{{--                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">--}}
-{{--                                <span class="icon-room"></span> San Mateo, CA--}}
-{{--                            </div>--}}
-{{--                            <div class="job-listing-meta">--}}
-{{--                                <span class="badge badge-success">Full Time</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-{{--                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">--}}
-{{--                        <a href="job-single.html" data-value=""></a>--}}
-{{--                        <div class="job-listing-logo">--}}
-{{--                            <img src="board-master/images/job_logo_1.jpg"--}}
-{{--                                 alt="Free Website Template by Free-Template.co" class="img-fluid">--}}
-{{--                        </div>--}}
-
-{{--                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">--}}
-{{--                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">--}}
-{{--                                <h2>Product Designer</h2>--}}
-{{--                                <strong>Adidas</strong>--}}
-{{--                            </div>--}}
-{{--                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">--}}
-{{--                                <span class="icon-room"></span> New York, New York--}}
-{{--                            </div>--}}
-{{--                            <div class="job-listing-meta">--}}
-{{--                                <span class="badge badge-danger">Part Time</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                    </li>--}}
-{{--                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">--}}
-{{--                        <a href="job-single.html" data-value=""></a>--}}
-{{--                        <div class="job-listing-logo">--}}
-{{--                            <img src="board-master/images/job_logo_1.jpg"--}}
-{{--                                 alt="Free Website Template by Free-Template.co" class="img-fluid">--}}
-{{--                        </div>--}}
-
-{{--                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">--}}
-{{--                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">--}}
-{{--                                <h2>Product Designer</h2>--}}
-{{--                                <strong>Adidas</strong>--}}
-{{--                            </div>--}}
-{{--                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">--}}
-{{--                                <span class="icon-room"></span> New York, New York--}}
-{{--                            </div>--}}
-{{--                            <div class="job-listing-meta">--}}
-{{--                                <span class="badge badge-danger">Part Time</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                    </li>--}}
                 </ul>
             </div>
 
         </div>
     </div>
-
-    <!-- <a href="#next" class="scroll-button smoothscroll">
-        <span class=" icon-keyboard_arrow_down"></span>
-    </a> -->
-</section>
-<section class="site-section py-4">
+<section class="site-section py-4" style="background-color:white;">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-12 text-center mt-4 mb-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-7">
-                        <h2 class="section-title mb-2">Company We've Helped</h2>
-                        <p class="lead">Porro error reiciendis commodi beatae omnis similique voluptate rerum ipsam fugit mollitia ipsum facilis expedita tempora suscipit iste</p>
-                    </div>
-                </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_mailchimp.svg" alt="Image" class="img-fluid-m logo-1">
             </div>
             <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_mailchimp.svg" alt="Image" class="img-fluid logo-1">
+                <img src="board-master/images/logo_paypal.svg" alt="Image" class="img-fluid-m logo-2">
             </div>
             <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_paypal.svg" alt="Image" class="img-fluid logo-2">
+                <img src="board-master/images/logo_stripe.svg" alt="Image" class="img-fluid-m logo-3">
             </div>
             <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_stripe.svg" alt="Image" class="img-fluid logo-3">
-            </div>
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_visa.svg" alt="Image" class="img-fluid logo-4">
+                <img src="board-master/images/logo_visa.svg" alt="Image" class="img-fluid-m logo-4">
             </div>
 
             <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_apple.svg" alt="Image" class="img-fluid logo-5">
+                <img src="board-master/images/logo_apple.svg" alt="Image" class="img-fluid-m logo-5">
             </div>
             <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_tinder.svg" alt="Image" class="img-fluid logo-6">
+                <img src="board-master/images/logo_tinder.svg" alt="Image" class="img-fluid-m logo-6">
             </div>
             <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_sony.svg" alt="Image" class="img-fluid logo-7">
+                <img src="board-master/images/logo_sony.svg" alt="Image" class="img-fluid-m logo-7">
             </div>
             <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_airbnb.svg" alt="Image" class="img-fluid logo-8">
+                <img src="board-master/images/logo_airbnb.svg" alt="Image" class="img-fluid-m logo-8">
             </div>
         </div>
     </div>
