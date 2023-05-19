@@ -48,9 +48,9 @@
                     <div class="ml-auto">
                         <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
                                 class="mr-2 icon-add"></span>Đăng việc</a>
-                        <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                        <a href="{{ Route('user.login') }}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                                 class="mr-2 icon-lock_outline"></span>Đăng nhập</a>
-                        <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                        <a href="{{ Route('user.register') }}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                                 class="mr-2 icon-contacts"></span>Đăng kí</a>
                     </div>
                     <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
