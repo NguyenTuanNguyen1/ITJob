@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>JobBoard &mdash; Website Template by Colorlib</title>
+    <title>Trang chủ</title>
     @include('layout.page-css')
 </head>
 <!-- NAVBAR -->
@@ -68,14 +68,6 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
-                <!-- <div class="mb-5 text-center ">
-                    <h1 class="text-black font-weight-bold ">The Easiest Way To Get Your Dream Job</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur
-                        perferendis.</p>
-                </div> -->
-                <div class="text-fix">
-                    <p>The Easiest Way To Get Your Dream Job</p>
-                </div>
 
                 <form method="post" class="search-jobs-form">
                     <div class="row mb-5">
@@ -84,7 +76,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
-                                data-live-search="true" title="Select Region">
+                                    data-live-search="true" title="Select Region">
                                 <option>Anywhere</option>
                                 <option>San Francisco</option>
                                 <option>Palo Alto</option>
@@ -98,8 +90,9 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
-                                data-live-search="true" title="Select Job Type">
+                                    data-live-search="true" title="Select Job Type">
                                 <option>Part Time</option>
+                                <option>Full Time</option>
                                 <option>Full Time</option>
                             </select>
                         </div>
@@ -109,18 +102,91 @@
                             </button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 popular-keywords">
-                            <h3>Trending Keywords:</h3>
-                            <ul class="keywords list-unstyled m-0 p-0">
-                                <li><a href="#" class="">UI Designer</a></li>
-                                <li><a href="#" class="">Python</a></li>
-                                <li><a href="#" class="">Developer</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </form>
+                <ul class="job-listings mb-2">
+                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                        <a href="job-single.html" data-value=""></a>
+                        <div class="job-listing-logo">
+                            <img src="board-master/images/job_logo_4.jpg"
+                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
+                        </div>
+                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                <h2>Senior Art Director</h2>
+                                <strong>Remote Mobile Games Developer (Unity, Cocos)</strong>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                <span class="icon-room"></span> Anywhere
+                            </div>
+                            <div class="job-listing-meta">
+                                <span class="badge badge-success">Full Time</span>
+                            </div>
+                        </div>
+                    </li>
 
+                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                        <a href="job-single.html" data-value=""></a>
+                        <div class="job-listing-logo">
+                            <img src="board-master/images/job_logo_5.jpg"
+                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
+                        </div>
+
+                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                <h2>Product Designer</h2>
+                                <strong>Puma</strong>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                <span class="icon-room"></span> San Mateo, CA
+                            </div>
+                            <div class="job-listing-meta">
+                                <span class="badge badge-success">Full Time</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                        <a href="job-single.html" data-value=""></a>
+                        <div class="job-listing-logo">
+                            <img src="board-master/images/job_logo_1.jpg"
+                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
+                        </div>
+
+                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                <h2>Product Designer</h2>
+                                <strong>Adidas</strong>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                <span class="icon-room"></span> New York, New York
+                            </div>
+                            <div class="job-listing-meta">
+                                <span class="badge badge-danger">Part Time</span>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                        <a href="job-single.html" data-value=""></a>
+                        <div class="job-listing-logo">
+                            <img src="board-master/images/job_logo_1.jpg"
+                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
+                        </div>
+
+                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                <h2>Product Designer</h2>
+                                <strong>Adidas</strong>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                <span class="icon-room"></span> New York, New York
+                            </div>
+                            <div class="job-listing-meta">
+                                <span class="badge badge-danger">Part Time</span>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
             </div>
 
         </div>
@@ -129,12 +195,50 @@
     <!-- <a href="#next" class="scroll-button smoothscroll">
         <span class=" icon-keyboard_arrow_down"></span>
     </a> -->
+</section>
+<section class="site-section py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 text-center mt-4 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <h2 class="section-title mb-2">Company We've Helped</h2>
+                        <p class="lead">Porro error reiciendis commodi beatae omnis similique voluptate rerum ipsam fugit mollitia ipsum facilis expedita tempora suscipit iste</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_mailchimp.svg" alt="Image" class="img-fluid logo-1">
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_paypal.svg" alt="Image" class="img-fluid logo-2">
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_stripe.svg" alt="Image" class="img-fluid logo-3">
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_visa.svg" alt="Image" class="img-fluid logo-4">
+            </div>
 
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_apple.svg" alt="Image" class="img-fluid logo-5">
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_tinder.svg" alt="Image" class="img-fluid logo-6">
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_sony.svg" alt="Image" class="img-fluid logo-7">
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center">
+                <img src="board-master/images/logo_airbnb.svg" alt="Image" class="img-fluid logo-8">
+            </div>
+        </div>
+    </div>
 </section>
 
 <body>
-    @yield('content')
-    <!-- <div id="btnTop">
+@yield('content')
+<!-- <div id="btnTop">
         <a href="#top">^</a>
     </div> --><a id="button"></a>
 </body>
@@ -193,10 +297,10 @@
                 <p class="copyright"><small>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>
-                        document.write(new Date().getFullYear());
+                            document.write(new Date().getFullYear());
                         </script>
                         All rights reserved | This template is made with <i class="icon-heart text-danger"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                                                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </small></p>
             </div>

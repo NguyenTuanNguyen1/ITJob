@@ -33,7 +33,7 @@
                 <div class="icon-w3">
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
-            </div> 
+            </div>
              @error('username')
                 <div style="color:red;">{{ $message }}</div>
                 <br>
@@ -49,7 +49,7 @@
                 <br>
                 @enderror
             <label class="anim">
-                <input type="checkbox" name="remember_token" class="checkbox">
+                <input type="checkbox" name="remember_token" checked="checked" class="checkbox">
                 <span>Nhớ mật khẩu</span>
                 <a href="{{ route('send.forgot.mail') }}">Quên mật khẩu</a>
             </label>
@@ -64,11 +64,11 @@
 
         <form action="{{route('test-mail')}}">
              <button type="submit"> Mail2
-                
-            
+
+
         </button>
         </form>
-       
+
 
         <div class="icon-flat-form">
             <a href="/login-facebook/Facebook"><i class="fab fa-facebook-square"></i></a>
