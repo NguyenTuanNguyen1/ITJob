@@ -104,88 +104,92 @@
                     </div>
                 </form>
                 <ul class="job-listings mb-2">
-                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                        <a href="job-single.html" data-value=""></a>
-                        <div class="job-listing-logo">
-                            <img src="board-master/images/job_logo_4.jpg"
-                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
+                    @foreach($posts as $post)
+                        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                            <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post->id }}" data-value=""></a>
+                            <div class="job-listing-logo">
+                                <img src="board-master/images/job_logo_4.jpg"
+                                     alt="Free Website Template by Free-Template.co" class="img-fluid">
+                            </div>
+                            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                    <h2>Senior Art Director</h2>
+                                    <strong>{{ $post->title }}</strong>
+                                </div>
+                                <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                    <span class="icon-room"></span> {{ $post->workplace }}
+                                </div>
+                                <div class="job-listing-meta">
+                                    <span class="badge badge-success">{{ $post->major }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                        <div>
+                            {{$posts->links('vendor\pagination\bootstrap-4')}}
                         </div>
-                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                                <h2>Senior Art Director</h2>
-                                <strong>Remote Mobile Games Developer (Unity, Cocos)</strong>
-                            </div>
-                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                                <span class="icon-room"></span> Anywhere
-                            </div>
-                            <div class="job-listing-meta">
-                                <span class="badge badge-success">Full Time</span>
-                            </div>
-                        </div>
-                    </li>
+{{--                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">--}}
+{{--                        <a href="job-single.html" data-value=""></a>--}}
+{{--                        <div class="job-listing-logo">--}}
+{{--                            <img src="board-master/images/job_logo_5.jpg"--}}
+{{--                                 alt="Free Website Template by Free-Template.co" class="img-fluid">--}}
+{{--                        </div>--}}
 
-                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                        <a href="job-single.html" data-value=""></a>
-                        <div class="job-listing-logo">
-                            <img src="board-master/images/job_logo_5.jpg"
-                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
-                        </div>
+{{--                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">--}}
+{{--                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">--}}
+{{--                                <h2>Product Designer</h2>--}}
+{{--                                <strong>Puma</strong>--}}
+{{--                            </div>--}}
+{{--                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">--}}
+{{--                                <span class="icon-room"></span> San Mateo, CA--}}
+{{--                            </div>--}}
+{{--                            <div class="job-listing-meta">--}}
+{{--                                <span class="badge badge-success">Full Time</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
+{{--                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">--}}
+{{--                        <a href="job-single.html" data-value=""></a>--}}
+{{--                        <div class="job-listing-logo">--}}
+{{--                            <img src="board-master/images/job_logo_1.jpg"--}}
+{{--                                 alt="Free Website Template by Free-Template.co" class="img-fluid">--}}
+{{--                        </div>--}}
 
-                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                                <h2>Product Designer</h2>
-                                <strong>Puma</strong>
-                            </div>
-                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                                <span class="icon-room"></span> San Mateo, CA
-                            </div>
-                            <div class="job-listing-meta">
-                                <span class="badge badge-success">Full Time</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                        <a href="job-single.html" data-value=""></a>
-                        <div class="job-listing-logo">
-                            <img src="board-master/images/job_logo_1.jpg"
-                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
-                        </div>
+{{--                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">--}}
+{{--                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">--}}
+{{--                                <h2>Product Designer</h2>--}}
+{{--                                <strong>Adidas</strong>--}}
+{{--                            </div>--}}
+{{--                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">--}}
+{{--                                <span class="icon-room"></span> New York, New York--}}
+{{--                            </div>--}}
+{{--                            <div class="job-listing-meta">--}}
+{{--                                <span class="badge badge-danger">Part Time</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                                <h2>Product Designer</h2>
-                                <strong>Adidas</strong>
-                            </div>
-                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                                <span class="icon-room"></span> New York, New York
-                            </div>
-                            <div class="job-listing-meta">
-                                <span class="badge badge-danger">Part Time</span>
-                            </div>
-                        </div>
+{{--                    </li>--}}
+{{--                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">--}}
+{{--                        <a href="job-single.html" data-value=""></a>--}}
+{{--                        <div class="job-listing-logo">--}}
+{{--                            <img src="board-master/images/job_logo_1.jpg"--}}
+{{--                                 alt="Free Website Template by Free-Template.co" class="img-fluid">--}}
+{{--                        </div>--}}
 
-                    </li>
-                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                        <a href="job-single.html" data-value=""></a>
-                        <div class="job-listing-logo">
-                            <img src="board-master/images/job_logo_1.jpg"
-                                 alt="Free Website Template by Free-Template.co" class="img-fluid">
-                        </div>
+{{--                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">--}}
+{{--                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">--}}
+{{--                                <h2>Product Designer</h2>--}}
+{{--                                <strong>Adidas</strong>--}}
+{{--                            </div>--}}
+{{--                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">--}}
+{{--                                <span class="icon-room"></span> New York, New York--}}
+{{--                            </div>--}}
+{{--                            <div class="job-listing-meta">--}}
+{{--                                <span class="badge badge-danger">Part Time</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                                <h2>Product Designer</h2>
-                                <strong>Adidas</strong>
-                            </div>
-                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                                <span class="icon-room"></span> New York, New York
-                            </div>
-                            <div class="job-listing-meta">
-                                <span class="badge badge-danger">Part Time</span>
-                            </div>
-                        </div>
-
-                    </li>
+{{--                    </li>--}}
                 </ul>
             </div>
 

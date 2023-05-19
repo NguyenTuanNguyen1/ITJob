@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Interfaces\IPostRepository;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -8,9 +9,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
 {
+    public function __construct
+    (
+        IPostRepository $postRepository
+    )
+    {
+        $this->post_repo = $postRepository;
+    }
+
     public function index()
     {
-        return view('layout.index');
+        $posts = $this->post_repo->all();
+        return view('layout.index')->with('posts', $posts);
     }
 
     public function login()

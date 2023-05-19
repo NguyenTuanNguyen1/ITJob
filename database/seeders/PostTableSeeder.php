@@ -30,26 +30,26 @@ class PostTableSeeder extends Seeder
                 'level' => fake()->text,
                 'major' => 'IT',
                 'status' => 1,
-                'user_id' => rand(3,7),
+                'user_id' => 1,
                 'created_at' => Carbon::now()->subWeek()
             ]);
         }
 
-        for ($i = 3; $i < 6; $i++) {
-            DB::table('post')->insert([
-                'title' => fake()->title,
-                'requirements' => fake()->text,
-                'description' => fake()->text,
-                'benefit' => fake()->text,
-                'quantity' => rand(3,5),
-                'position' => fake()->text,
-                'workplace' => fake()->address,
-                'level' => fake()->text,
-                'major' => 'HR',
-                'status' => 1,
-                'user_id' => rand(3,7),
-                'created_at' => Carbon::now()->subWeek()
-            ]);
-        }
+//        for ($i = 3; $i < 6; $i++) {
+//            DB::table('post')->insert([
+//                'title' => fake()->title,
+//                'requirements' => fake()->text,
+//                'description' => fake()->text,
+//                'benefit' => fake()->text,
+//                'quantity' => rand(3,5),
+//                'position' => fake()->text,
+//                'workplace' => fake()->address,
+//                'level' => fake()->text,
+//                'major' => 'HR',
+//                'status' => 1,
+//                'user_id' => rand(3,7),
+//                'created_at' => Carbon::now()->subWeek()
+//            ]);
+//        }
     }
 }
