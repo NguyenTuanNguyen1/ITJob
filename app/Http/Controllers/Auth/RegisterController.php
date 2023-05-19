@@ -8,12 +8,9 @@ use App\Http\Requests\RegisterRequest;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IUserRepository;
-use App\Mail\RegisterMail;
 use App\Trait\Service;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
 
 /**
  * @property IUserRepository $user_repo
@@ -46,16 +43,16 @@ class RegisterController extends Controller
         $input['password'] = Hash::make($input['password']);
         $getUser = $this->user_repo->create($input);
         $this->infor_repo->create($getUser['id'], (array)null);
+        $this->ActivityLog('Bạn đã đăng ký thành công tài khoản', $getUser['id']);
 //        $this->sendMailUser($user, new RegisterMail($input['name']));
-        switch ($input['role_id'])
-        {
+        switch ($input['role_id']) {
             case Constant::ROLE_CANDIDATE:
                 Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
                 return redirect()->route('home');
 
             case Constant::ROLE_COMPANY:
-                $this->company_repo->create($getUser['id'],(array)null);
+                $this->company_repo->create($getUser['id'], (array)null);
                 Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
                 return redirect()->route('home1');

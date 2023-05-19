@@ -10,4 +10,8 @@ interface IUserRepository
     public function delete($id);
     public function trashed();
     public function restore($id);
+    public function getMajorUser($role);
+    public function getUserByRole($role);
+    public function getUserByCondition($condition, $value);
+    public function getUserApplied($user_id);
 }

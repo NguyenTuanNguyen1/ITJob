@@ -24,8 +24,10 @@ class Ticket extends Model
     protected $fillable = [
         'content',
         'image',
-        'ticket_id',
-        'user_id'
+        'status',
+        'user_id',
+        'type_id',
+        'post_id'
     ];
 
     public function user()

@@ -18,7 +18,7 @@ class config extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Config env';
 
     /**
      * Execute the console command.
@@ -27,6 +27,7 @@ class config extends Command
     {
         $this->call('view:clear');
         $this->call('view:cache');
+        $this->call('route:cache');
         $this->call('route:clear');
         $this->call('optimize:clear');
         $this->call('config:cache');

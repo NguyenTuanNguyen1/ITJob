@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Trait\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    use Service;
     public function index()
     {
         return view('user.auth.login');
@@ -48,6 +50,8 @@ class LoginController extends Controller
         }
         elseif (Auth::attempt($admin, $input['remember_token']))
         {
+            $user = $this->user_repo->getUserByCondition('username', $input['username']);
+            $this->ActivityLog('Bạn đã đăng nhập', $user[0]->id);
             toast('Đăng nhập thành công', 'success');
             return redirect()->route('home');
         }

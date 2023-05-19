@@ -29,7 +29,7 @@ Route::prefix('user')->group(function () {
     Route::get('/user-reset-password',[ResetController::class,'index'])->name('password.view');
     Route::post('/update-password',[ResetController::class,'updatePassword'])->name('password.update');
 
-    Route::post('/user-profile/{id}',[ProfileController::class,'profile'])->name('user.profile');
+    Route::get('/user-profile/{id}',[ProfileController::class,'profile'])->name('user.profile');
     Route::post('/user-update',[ProfileController::class,'handleUpdate'])->name('handle.update');
 });
 

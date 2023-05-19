@@ -43,13 +43,13 @@ class ReviewController extends Controller
             $input['image'] = $this->uploadImage($request);
 
             $review = $this->review_repo->create($input);
+            $this->ActivityLog(  "Bạn đã bình luận bài viết " . $review['id'] , $input['user_id']);
             if (empty($review)) {
                 return response()->json([
                     'result' => false,
                     'message' => 'Tạo bài viết thất bại'
                 ]);
             }
-            toast('Đã tạo thành công', 'success');
             return response()->json([
                 'result' => true,
                 'message' => 'Tạo bài viết thành công'
@@ -69,6 +69,7 @@ class ReviewController extends Controller
 
         try {
             $this->review_repo->update($input['id'], $input);
+            $this->ActivityLog(  "Bạn đã chỉnh sửa bình luận của mình tại " . $input['id'] , $input['user_id']);
             toast('Chỉnh sửa thành công', 'success');
             return response()->json([
                 'result' => true,
@@ -98,7 +99,6 @@ class ReviewController extends Controller
         try {
             $review = $this->review_repo->delete($input['id']);
             if (empty($review)) {
-                toast('Đã xoá thành công', 'success');
                 return response()->json([
                     'result' => true,
                     'message' => 'Đã xoá bài viết thành công'

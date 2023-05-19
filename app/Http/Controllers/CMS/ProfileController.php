@@ -34,6 +34,7 @@ class ProfileController extends Controller
 
     public function profile($id, Request $request)
     {
+        dd('theel');
         $user = $this->user_repo->find($id);
         $company = $this->company_repo->find($id);
         $information = $this->information_repo->find($id);
@@ -49,7 +50,6 @@ class ProfileController extends Controller
 
             DB::beginTransaction();
 
-            $this->checkExist($input['email'], Constant::CHECK_EMAIL_EXIST);
             $input['image'] = $this->uploadImage($request);
 
             $this->user_repo->update($input['id'], $input);

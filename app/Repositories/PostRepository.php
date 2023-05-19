@@ -1,7 +1,9 @@
 <?php
 namespace App\Repositories;
 
+use App\Constant;
 use App\Interfaces\IPostRepository;
+use App\Models\Applied;
 use App\Models\Company;
 use App\Models\Post;
 
@@ -9,7 +11,7 @@ class PostRepository implements IPostRepository
 {
     public function all()
     {
-        return Post::orderBy('id','DESC')->paginate(8);
+        return Post::orderBy('id','DESC')->where('status', Constant::STATUS_APPROVED_POST)->paginate(8);
     }
 
     public function create(array $post)
@@ -24,8 +26,6 @@ class PostRepository implements IPostRepository
         $data->workplace = $post['workplace'];
         $data->level = $post['level'];
         $data->major = $post['major'];
-        $data->status = 1;
-        $data->skill_id = $post['skill_id'];
         $data->user_id = $post['user_id'];
         $data->save();
         return $data;
@@ -49,7 +49,6 @@ class PostRepository implements IPostRepository
             'major' => $data['major'],
             'status' => $data['status'],
             'approved_user_id' => $data['approved_user_id'],
-            'skill_id' => $data['skill_id'],
             'user_id' => $data['user_id']
         ]);
     }
@@ -71,5 +70,19 @@ class PostRepository implements IPostRepository
     public function restore($id)
     {
         Company::onlyTrashed()->where('id', $id)->restore();
+    }
+
+    public function getMajorByPost($action, $major, $from, $to)
+    {
+        return Post::where('major', $major)
+            ->where('created_at', '>=', $from)
+            ->where('created_at', '<=', $to)
+            ->where('status', $action)
+            ->get();
+    }
+
+    public function getPostByCondition($condition)
+    {
+
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS;
 
 use App\Constant;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequest;
 use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
@@ -34,6 +35,13 @@ class ContactController extends Controller
     public function show($id)
     {
         $contact = $this->ticket_repo->find($id);
+        if (empty($contact))
+        {
+            return response()->json([
+                'result' => false,
+                'message' => 'Không tìm thấy'
+            ]);
+        }
         return response()->json([
             'data' => $contact
         ]);
@@ -51,7 +59,6 @@ class ContactController extends Controller
                     'result' => false,
                 ]);
             }
-            toast('Đã tạo thành công', 'success');
             return response()->json([
                 'result' => true,
             ]);
@@ -71,7 +78,6 @@ class ContactController extends Controller
         try {
             $contact = $this->ticket_repo->delete($input['id']);
             if (empty($contact)) {
-                toast('Đã xoá thành công', 'success');
                 return response()->json([
                     'result' => true,
                 ]);
@@ -96,7 +102,7 @@ class ContactController extends Controller
 //        ]);
 //    }
 
-    public function reply(Request $request)
+    public function reply(AdminRequest $request)
     {
         $input = $request->all();
 

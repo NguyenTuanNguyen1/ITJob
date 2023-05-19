@@ -41,7 +41,9 @@ class PostController extends Controller
     {
         $input = $request->all();
 
+
         $post = $this->post_repo->create($input);
+        $this->ActivityLog(  "Bạn đã đăng tin tuyển dụng " . $post['id'], $input['user_id']);
         if(empty($post))
         {
             return redirect()->back()->with('Error','Lỗi tạo bài viết');
@@ -54,7 +56,8 @@ class PostController extends Controller
     {
         $input = $request->all();
 
-        $this->post_repo->update($input['id'], $input);
+        $post = $this->post_repo->update($input['id'], $input);
+        $this->ActivityLog(  "Bạn đã cập nhật tuyển dụng " . $post['id'], $input['user_id']);
         toast('Đã cập nhật thành công', 'success');
         return response()->json([
             'result' => true
@@ -66,6 +69,7 @@ class PostController extends Controller
         $input = $request->all();
 
         $post = $this->post_repo->delete($input['id']);
+        $this->ActivityLog(  "Bạn đã xoá bài tuyển dụng " , $input['user_id']);
         if (empty($post))
         {
             return response()->json([
@@ -90,6 +94,7 @@ class PostController extends Controller
         $input = $request->all();
 
         $this->post_repo->restore($input['id']);
+        $this->ActivityLog(  "Bạn đã khôi phục tuyển dụng " . $input['id'] , $input['user_id']);
         return response()->json([
             'result' => true
         ]);

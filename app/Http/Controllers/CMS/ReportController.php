@@ -47,7 +47,6 @@ class ReportController extends Controller
                     'result' => false,
                 ]);
             }
-            toast('Đã tạo thành công', 'success');
             return response()->json([
                 'result' => true,
             ]);

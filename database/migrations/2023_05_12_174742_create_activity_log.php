@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skill', function (Blueprint $table) {
+        Schema::create('activity_log', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content')->nullable()->unique();
+            $table->text('content')->nullable();
+
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skill');
+        Schema::dropIfExists('activity_log');
     }
 };
