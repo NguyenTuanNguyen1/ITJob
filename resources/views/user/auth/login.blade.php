@@ -13,8 +13,8 @@
             window.scrollTo(0, 1);
         }
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{{ url('Login/css/lg-res.css') }}" type="text/css" media="all" />
+    @include('layout.page-css')
+
 </head>
 
 <body>
@@ -33,7 +33,7 @@
                 <div class="icon-w3">
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
-            </div>
+            </div> 
              @error('username')
                 <div style="color:red;">{{ $message }}</div>
                 <br>
@@ -49,7 +49,7 @@
                 <br>
                 @enderror
             <label class="anim">
-                <input type="checkbox" name="remember_token" checked="checked" class="checkbox">
+                <input type="checkbox" name="remember_token" class="checkbox">
                 <span>Nhớ mật khẩu</span>
                 <a href="{{ route('send.forgot.mail') }}">Quên mật khẩu</a>
             </label>
@@ -63,12 +63,12 @@
         </form>
 
         <form action="{{route('test-mail')}}">
-             <button type="submit"> Mail2
-
-
+             <button type="submit"> Mail
+                
+            
         </button>
         </form>
-
+       
 
         <div class="icon-flat-form">
             <a href="/login-facebook/Facebook"><i class="fab fa-facebook-square"></i></a>
@@ -80,4 +80,185 @@
 
 </div>
 </body>
+@include('layout.page-js')
+<script>
+    $(document).ready(() => {
+
+        $('#register').on('click', () => {
+            window.location.replace('http://itjob.vn/user/user-register')
+        });
+
+        $('#login').on('click', () => {
+            window.location.replace('http://itjob.vn/user/user-login')
+        })
+
+        // $('#home').on('click', () => {
+        //     window.location.replace('http://itjob.vn')
+        // })
+
+        //Review
+        function load_data_review() {
+            $.get('http://itjob.vn/api/review/list-review', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+
+        //Review
+        function load_data_type() {
+            $.get('http://itjob.vn/api/type/list-type', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+
+        //Contact
+        function load_data_contact() {
+            $.get('http://itjob.vn/api/contact/list-contact', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+
+        //Report
+        function load_data_report() {
+            $.get('http://itjob.vn/api/report/list-report', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+
+        function load_data_trashed_review(){
+            $.get('http://itjob.vn/api/review/review-trashed', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+
+        function load_data_trashed_type(){
+            $.get('http://itjob.vn/api/type/type-trashed', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+
+        function load_data_contact_replied(){
+            $.get('http://itjob.vn/api/contact/list-contact-replied', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+
+        function load_data_report_replied(){
+            $.get('http://itjob.vn/api/report/list-report-replied', (res) => {
+                if (res.data !== '') {
+                    let category = res.data;
+                    let _li = '';
+                    category.forEach(function (item) {
+                        {{--_li += '<tr>';--}}
+                        {{--_li += '<th scope="row" >' + item.title + '</th>';--}}
+                        {{--_li += '<th scope="row">' + item.content + '</th>';--}}
+                        {{--_li +=--}}
+                        {{--    '<th scope="col"> <img width="50%" height="60px" src = "{{ url('anh/')}}/' + item.image + '"> </th>';--}}
+                        {{--_li += '<th> <button id="edit" data-id=" ' + item.id + ' "> Sửa </button>';--}}
+                        {{--_li += '<button id="delete" data-id=" ' + item.id + ' " > Xoá </button> </th>';--}}
+                        {{--_li += '</tr>';--}}
+                    });
+                    $('#list-post').html(_li);
+                }
+            });
+        }
+    });
+</script>
 </html>
