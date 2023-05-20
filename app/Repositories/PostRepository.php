@@ -20,6 +20,8 @@ class PostRepository implements IPostRepository
         $post->requirements = $data['requirements'];
         $post->description = $data['description'];
         $post->benefit = $data['benefit'];
+        $post->experience = $data['experience'];
+        $post->working = $data['working'];
         $post->quantity = $data['quantity'];
         $post->position = $data['position'];
         $post->workplace = $data['workplace'];
@@ -44,7 +46,8 @@ class PostRepository implements IPostRepository
             'quantity' => $data['quantity'],
             'position' => $data['position'],
             'workplace' => $data['workplace'],
-            'level' => $data['level'],
+            'experience' => $data['experience'],
+            'working' => $data['working'],
             'major' => $data['major'],
             'status' => $data['status'],
             'approved_user_id' => $data['approved_user_id'],

@@ -47,9 +47,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="job-description">Kinh nghiệm</label><br>
+                            <input type="text" name="experience">
+                        </div>
+
+                        <div class="form-group">
                             <label for="job-type">Hình thức làm việc</label>
                             <select class="selectpicker border rounded" id="job-type" data-style="btn-black"
-                                    data-width="100%" data-live-search="true" title="Select Job Type" name="position">
+                                    data-width="100%" data-live-search="true" title="Select Job Type" name="working">
                                 <option>Part Time</option>
                                 <option>Full Time</option>
                                 <option>Remote</option>

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->text('position')->nullable();
             $table->text('workplace')->nullable();
-            $table->text('level')->nullable();
+            $table->text('working')->nullable();
+            $table->text('experience')->nullable();
             $table->text('major')->nullable();
             $table->integer('status')->nullable()->default(0);
 
