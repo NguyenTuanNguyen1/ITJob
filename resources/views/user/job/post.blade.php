@@ -85,7 +85,7 @@
                         <div class="form-group">
                             <label for="job-region">Cấp bậc</label>
                             <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
-                                    data-width="100%" data-live-search="true" title="Select Region" name="level">
+                                    data-width="100%" data-live-search="true" title="Select Region" name="position">
                                 <option>Anywhere</option>
                                 <option>San Francisco</option>
                                 <option>Palo Alto</option>
