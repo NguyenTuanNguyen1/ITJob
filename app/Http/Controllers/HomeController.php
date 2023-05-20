@@ -38,6 +38,11 @@ class HomeController extends Controller
         return View('user.job.post');
     }
 
+    public function test2()
+    {
+        return View('layout.layout');
+    }
+
     public function redirect_Google($provider)
     {
         return Socialite::driver($provider)->redirect();

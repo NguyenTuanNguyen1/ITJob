@@ -40,8 +40,13 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function getUserByMajor()
+    public function getNameAttribute()
     {
-        return $this->hasOne(User::class,'major');
+        return $this->user->username;
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->user->img_avatar;
     }
 }

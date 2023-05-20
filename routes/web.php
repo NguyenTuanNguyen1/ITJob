@@ -31,6 +31,8 @@ Route::prefix('user')->group(function () {
 
     Route::get('/user-profile/{id}',[ProfileController::class,'profile'])->name('user.profile');
     Route::post('/user-update',[ProfileController::class,'handleUpdate'])->name('handle.update');
+
+    Route::post('/applied-post',[UserController::class,'applied'])->name('user.applied.post');
 });
 
 
@@ -59,4 +61,5 @@ Route::get('/callback-facebook/{provider}',[HomeController::class,'callback_Face
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 Route::get('123demo',[HomeController::class,'test']);
+Route::get('12345',[HomeController::class,'test2']);
 Route::get('123',[HomeController::class,'mail'])->name('test-mail');

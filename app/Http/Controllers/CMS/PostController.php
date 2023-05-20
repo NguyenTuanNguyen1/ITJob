@@ -8,6 +8,7 @@ use App\Interfaces\IAdminRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
 use App\Trait\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -38,13 +39,23 @@ class PostController extends Controller
 
     public function show($id)
     {
+        $from = Carbon::now()->startOfWeek()->subWeek()->toDateString();
+        $to = Carbon::now()->endOfWeek()->subWeek()->toDateString();
+
         $post = $this->post_repo->find($id);
-        return view('home')->with('post', $post);
+        $post_majors = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, $post->major, $from, $to);
+        return view('user.job.detail')
+            ->with('post', $post)
+            ->with('post_majors', $post_majors);
     }
 
     public function store(Request $request)
     {
         $input = $request->all();
+        if (!$this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
+        {
+            abort(401);
+        }
 
         $post = $this->post_repo->create($input);
         $this->ActivityLog(  "Bạn đã đăng tin tuyển dụng*" . $post['id'], $input['user_id']);

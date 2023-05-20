@@ -5,6 +5,7 @@ namespace App\Trait;
 use App\Constant;
 use App\Interfaces\IUserRepository;
 use App\Models\Activity;
+use App\Models\Applied;
 use App\Models\InformationType;
 use App\Models\Role;
 use App\Models\Skill;
@@ -129,6 +130,14 @@ trait Service
         return Activity::insert([
             'content' => Carbon::now()->format('d-m-Y H:i') . ' : ' . $message,
             'user_id' => $user_id
+        ]);
+    }
+
+    public function appliedPost($user_id, $post_id)
+    {
+        return Applied::insert([
+            'user_id' => $user_id,
+            'post_id' => $post_id
         ]);
     }
 }

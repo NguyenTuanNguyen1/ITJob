@@ -1,262 +1,111 @@
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>JobBoard &mdash; Website Template by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    
-    <link rel="stylesheet" href="board-master/css/bootstrap-select.min.css">
-    @include('layout.page-css')
-    <!-- MAIN CSS -->
-
-  </head>
-  <body id="top">
-
-  <!-- <div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div> -->
-    
-
-<div class="site-wrap">
-
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div> <!-- .site-mobile-menu -->
-    
-
-    <!-- NAVBAR -->
-    <header class="site-navbar mt-3"  id="top">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="site-logo col-6"><a href="">ItJob</a></div>
-            <nav class="mx-auto site-navigation">
-                <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-                    <li><a href="" class="nav-link active">Trang chủ</a></li>
-                    <!-- <li><a href="">About</a></li> -->
-                    <li class="has-children">
-                        <a href="">Job Listings</a>
-                        <ul class="dropdown">
-                            <li><a href="">Việc theo dõi</a></li>
-                            <li><a href="">Đăng công việc</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children">
-                        <a href="">Pages</a>
-                        <ul class="dropdown">
-                            <li><a href="">Services</a></li>
-                            <li><a href="">Service Single</a></li>
-                            <li><a href="">Blog Single</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-single.html">Portfolio Single</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="faq.html">Frequently Ask Questions</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Ticket</a></li>
-                    <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a Job</a></li>
-                    <li class="d-lg-none"><a href="login.html">Log In</a></li> -->
-                </ul>
-            </nav>
-
-            <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
-                <div class="ml-auto">
-                    <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class=" icon-line-newspaper"></span></a>
-                    <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class=" icon-line-chat"></span></a>
-                    <!-- <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class=" icon-line-profile-male"></span>Nguyen</a> -->
-                    <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="#" role="button"
-                        data-toggle="dropdown" aria-expanded="false">
-                        <span class=" icon-line-profile-male"></span> Name
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+@extends('layout.layout')
+@section('content')
+    <section class="section-hero overlay inner-page" style="padding-bottom: 1em;padding-top: 3em;" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="custom-breadcrumbs">
+                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="#">Job</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Post a Job</strong></span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
-
-    <!-- HOME -->
-    <section class="section-hero overlay inner-page" style="padding-bottom: 1em;padding-top: 3em;" id="home-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7">
-            <div class="custom-breadcrumbs">
-              <a href="#">Home</a> <span class="mx-2 slash">/</span>
-              <a href="#">Job</a> <span class="mx-2 slash">/</span>
-              <span class="text-white"><strong>Post a Job</strong></span>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
     <section class="site-section" style="background-color:white">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-lg-12">
-            <form class="p-4 p-md-5 border rounded" method="post">
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" placeholder="you@yourdomain.com">
-              </div>
-              <div class="form-group">
-                <label for="job-title">Job Title</label>
-                <input type="text" class="form-control" id="job-title" placeholder="Product Designer">
-              </div>
-              <div class="form-group">
-                <label for="job-location">Location</label>
-                <input type="text" class="form-control" id="job-location" placeholder="e.g. New York">
-              </div>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <form class="p-4 p-md-5 border rounded" action="{{ route('post.create') }}" method="post">
+                        @csrf
 
-              <div class="form-group">
-                <label for="job-region">Job Region</label>
-                <select class="selectpicker border rounded" id="job-region" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
-                      <option>Anywhere</option>
-                      <option>San Francisco</option>
-                      <option>Palo Alto</option>
-                      <option>New York</option>
-                      <option>Manhattan</option>
-                      <option>Ontario</option>
-                      <option>Toronto</option>
-                      <option>Kansas</option>
-                      <option>Mountain View</option>
-                    </select>
-              </div>
+                        <div class="form-group">
+                            <label for="job-description">Tiêu đề</label><br>
+                            <textarea name="title" rows="3" cols="112"></textarea>
+                        </div>
 
-              <div class="form-group">
-                <label for="job-type">Job Type</label>
-                <select class="selectpicker border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
-                  <option>Part Time</option>
-                  <option>Full Time</option>
-                </select>
-              </div>
+                        <div class="form-group">
+                            <label for="job-description">Mô tả</label>
+                            <textarea name="description" id="description"></textarea>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="job-description">Quyền lợi</label>
+                            <textarea name="benefit" id="benefit"></textarea>
 
-              <div class="form-group">
-                <label for="job-description">Job Description</label>
-                <div class="editor" id="editor-1">
-                  <p>Write Job Description!</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-description">Địa điểm làm việc</label><br>
+                            <input type="text" name="workplace" cols="112">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-description">Số lượng</label><br>
+                            <input type="number" name="quantity">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-type">Hình thức làm việc</label>
+                            <select class="selectpicker border rounded" id="job-type" data-style="btn-black"
+                                    data-width="100%" data-live-search="true" title="Select Job Type" name="position">
+                                <option>Part Time</option>
+                                <option>Full Time</option>
+                                <option>Remote</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-description">Yêu cầu</label>
+                            <textarea name="requirements" id="requirements"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-region">Chuyên ngành</label>
+                            <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
+                                    data-width="100%" data-live-search="true" title="Select Region" name="major">
+                                <option>Anywhere</option>
+                                <option>San Francisco</option>
+                                <option>Palo Alto</option>
+                                <option>New York</option>
+                                <option>Manhattan</option>
+                                <option>Ontario</option>
+                                <option>Toronto</option>
+                                <option>Kansas</option>
+                                <option>Mountain View</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-region">Cấp bậc</label>
+                            <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
+                                    data-width="100%" data-live-search="true" title="Select Region" name="level">
+                                <option>Anywhere</option>
+                                <option>San Francisco</option>
+                                <option>Palo Alto</option>
+                                <option>New York</option>
+                                <option>Manhattan</option>
+                                <option>Ontario</option>
+                                <option>Toronto</option>
+                                <option>Kansas</option>
+                                <option>Mountain View</option>
+                            </select>
+                        </div>
+
+                        <input type="text" name="user_id" value=" {{ Auth::user()->id }}">
+
+                        <button type="submit" class="btn btn-primary btn-md">Tạo bài viết</button>
+                    </form>
                 </div>
-              </div>
-            </form>
-          </div>
-
-         
-        </div>
-        <div class="row align-items-center mb-5">
-          
-          <div class="col-lg-4 ml-auto">
-            <div class="row">
-              <!-- <div class="col-6">
-                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
-              </div> -->
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-primary btn-md">Save Job</a>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.0.1/ckeditor.js"></script>
+<script>
 
-    
-    
-    <footer class="site-footer">
-
-      <!-- <a href="#top" class="smoothscroll scroll-top">
-        <span class="icon-keyboard_arrow_up"></span>
-      </a>
- -->
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Search Trending</h3>
-            <ul class="list-unstyled">
-              <li><a href="#">Web Design</a></li>
-              <li><a href="#">Graphic Design</a></li>
-              <li><a href="#">Web Developers</a></li>
-              <li><a href="#">Python</a></li>
-              <li><a href="#">HTML5</a></li>
-              <li><a href="#">CSS3</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Company</h3>
-            <ul class="list-unstyled">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Career</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Resources</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Support</h3>
-            <ul class="list-unstyled">
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Privacy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Contact Us</h3>
-            <div class="footer-social">
-              <a href="#"><span class="icon-facebook"></span></a>
-              <a href="#"><span class="icon-twitter"></span></a>
-              <a href="#"><span class="icon-instagram"></span></a>
-              <a href="#"><span class="icon-linkedin"></span></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="row text-center">
-          <div class="col-12">
-            <p class="copyright"><small>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small></p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  
-  </div>
-
-    <!-- SCRIPTS -->
-    <script src="board-master/js/jquery.min.js"></script>
-    <script src="board-master/js/bootstrap.bundle.min.js"></script>
-    <script src="board-master/js/isotope.pkgd.min.js"></script>
-    <script src="board-master/js/stickyfill.min.js"></script>
-    <script src="board-master/js/jquery.fancybox.min.js"></script>
-    <script src="board-master/js/jquery.easing.1.3.js"></script>
-    
-    <script src="board-master/js/jquery.waypoints.min.js"></script>
-    <script src="board-master/js/jquery.animateNumber.min.js"></script>
-    <script src="board-master/js/owl.carousel.min.js"></script>
-    <script src="board-master/js/quill.min.js"></script>
-    
-    
-    <script src="board-master/js/bootstrap-select.min.js"></script>
-    
-    <script src="board-master/js/custom.js"></script>
-   
-  </body>
-
-</html>
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('benefit');
+    CKEDITOR.replace('requirements');
+</script>
+@endsection

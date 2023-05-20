@@ -3,7 +3,6 @@ namespace App\Repositories;
 
 use App\Constant;
 use App\Interfaces\IPostRepository;
-use App\Models\Applied;
 use App\Models\Company;
 use App\Models\Post;
 
@@ -14,21 +13,21 @@ class PostRepository implements IPostRepository
         return Post::orderBy('id','DESC')->where('status', Constant::STATUS_APPROVED_POST)->paginate(8);
     }
 
-    public function create(array $post)
+    public function create(array $data)
     {
-        $data = new Post();
-        $data->title = $post['title'];
-        $data->requirements = $post['requirements'];
-        $data->description = $post['description'];
-        $data->benefit = $post['benefit'];
-        $data->quantity = $post['quantity'];
-        $data->position = $post['position'];
-        $data->workplace = $post['workplace'];
-        $data->level = $post['level'];
-        $data->major = $post['major'];
-        $data->user_id = $post['user_id'];
-        $data->save();
-        return $data;
+        $post = new Post();
+        $post->title = $data['title'];
+        $post->requirements = $data['requirements'];
+        $post->description = $data['description'];
+        $post->benefit = $data['benefit'];
+        $post->quantity = $data['quantity'];
+        $post->position = $data['position'];
+        $post->workplace = $data['workplace'];
+        $post->level = $data['level'];
+        $post->major = $data['major'];
+        $post->user_id = $data['user_id'];
+        $post->save();
+        return Post::where('title', $data['title'])->first();
     }
 
     public function find($id)
