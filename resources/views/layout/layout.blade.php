@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>JobBoard &mdash; Website Template by Colorlib</title>
+    <title>FINDING JOB</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{--    <link rel="stylesheet" href="board-master/css/bootstrap-select.min.css">--}}
@@ -14,7 +14,7 @@
     <header class="site-navbar mt-3" id="top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="site-logo col-6"><a href="">ItJob</a></div>
+                <div class="site-logo col-6"><a href="{{ Route('home') }}">FINDING JOB</a></div>
                 <nav class="mx-auto site-navigation">
                     <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
                         <li><a href="" class="nav-link active">Trang chủ</a></li>
@@ -41,26 +41,46 @@
                         </li>
                     </ul>
                 </nav>
-
-                <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
-                    <div class="ml-auto">
-                        <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class=" icon-line-newspaper"></span></a>
-                        <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class=" icon-line-chat"></span></a>
-                        <!-- <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class=" icon-line-profile-male"></span>Nguyen</a> -->
-                        <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="#" role="button"
-                           data-toggle="dropdown" aria-expanded="false">
-                            <span class=" icon-line-profile-male"></span> {{ Auth::user()->username }}
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                @if(Auth::check())
+                    <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+                        <div class="ml-auto">
+                            <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                    class=" icon-line-newspaper"></span></a>
+                            <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                    class=" icon-line-chat"></span></a>
+                            <!-- <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                    class=" icon-line-profile-male"></span>Nguyen</a> -->
+                            <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="#" role="button"
+                               data-toggle="dropdown" aria-expanded="false">
+                                <span class=" icon-line-profile-male"></span> {{ Auth::user()->username }}
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+                        <div class="ml-auto">
+                        <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="{{ Route('user.login') }}" role="button"
+                               data-toggle="dropdown" aria-expanded="false">
+                                <span class=" icon-line-profile-male"></span>Đăng nhập
+                            </a>
+                            <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="{{ Route('user.register') }}" role="button"
+                               data-toggle="dropdown" aria-expanded="false">
+                                <span class=" icon-line-profile-male"></span>Đăng ký
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
             </div>
         </div>
     </header>

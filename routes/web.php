@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\BackendController;
 use App\Http\Controllers\CMS\ContactController;
 use App\Http\Controllers\CMS\PostController;
 use App\Http\Controllers\CMS\ProfileController;
@@ -45,6 +46,12 @@ Route::prefix('post')->group(function () {
     Route::get('/post-delete',[PostController::class,'delete'])->name('post.delete');
     Route::get('/post-trashed',[PostController::class,'trashed'])->name('post.trashed');
     Route::post('/post-restore',[PostController::class,'restore'])->name('post.restore');
+});
+
+//Search
+Route::prefix('search')->group(function () {
+    Route::post('/123',[BackendController::class,'searchFilter'])->name('search.filter');
+    Route::get('/th',[BackendController::class,'searchAjax'])->name('search.ajax');
 });
 
 

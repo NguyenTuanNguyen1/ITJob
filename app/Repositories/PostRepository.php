@@ -25,8 +25,8 @@ class PostRepository implements IPostRepository
         $post->quantity = $data['quantity'];
         $post->position = $data['position'];
         $post->workplace = $data['workplace'];
-        $post->level = $data['level'];
         $post->major = $data['major'];
+        $post->image = $data['image'];
         $post->user_id = $data['user_id'];
         $post->save();
         return Post::where('title', $data['title'])->first();
@@ -49,6 +49,7 @@ class PostRepository implements IPostRepository
             'experience' => $data['experience'],
             'working' => $data['working'],
             'major' => $data['major'],
+            'image' => $data['image'],
             'status' => $data['status'],
             'approved_user_id' => $data['approved_user_id'],
             'user_id' => $data['user_id']

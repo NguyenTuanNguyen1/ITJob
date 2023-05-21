@@ -32,6 +32,7 @@ class Post extends Model
         'working',
         'major',
         'status',
+        'image',
         'approved_user_id',
         'user_id',
     ];
@@ -49,5 +50,15 @@ class Post extends Model
     public function getImageAttribute()
     {
         return $this->user->img_avatar;
+    }
+
+    public function scopeSearch($query)
+    {
+        if (request('key'))
+        {
+            $key = request('key');
+            $query = $query->where('title', 'like', '%' . $key . '%');
+        }
+        return $query;
     }
 }

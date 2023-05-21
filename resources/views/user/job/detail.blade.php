@@ -19,11 +19,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1 class="text-white font-weight-bold">Product Designer</h1>
                     <div class="custom-breadcrumbs">
-                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="{{ Route('home')}}">Home</a> <span class="mx-2 slash">/</span>
                         <a href="#">Job</a> <span class="mx-2 slash">/</span>
-                        <span class="text-white"><strong>Product Designer</strong></span>
+                        <span class="text-white"><strong>{{$post->title}}</strong></span>
                     </div>
                 </div>
             </div>
@@ -40,7 +39,7 @@
                             <img src="{{ url('Images/')}}/{{ $post->getImageAttribute()}}" width="100" height="100">
                         </div>
                         <div>
-                            <h2>Product Designer </h2>
+                            <h2>{{ $post->title }} </h2>
                             <div>
                                 <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span> {{ $post->getNameAttribute() }}</span>
                                 <span class="m-2"><span class="icon-room mr-2"></span>{{ $post->workplace }}</span>
@@ -62,51 +61,34 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="mb-5">
-                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
-                                class="icon-align-left mr-3"></span>Mô tả công việc</h3>
-                        <p> {{ $post->title }}</p>
+                    <div id="detail-post">
                     </div>
-                    <div class="mb-5">
-                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
-                                class="icon-rocket mr-3"></span>Lợi ích</h3>
-                        <ul class="list-unstyled m-0 p-0">
-                            {{ $post->benefit }}
-                        </ul>
-                    </div>
-
-                    <div class="mb-5">
-                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-book mr-3"></span>Yêu
-                            cầu công việc</h3>
-                        {{ $post->requirements }}
-                    </div>
-
-                    {{--            <div class="mb-5">--}}
-                    {{--              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-turned_in mr-3"></span>Other Benifits</h3>--}}
-                    {{--              <ul class="list-unstyled m-0 p-0">--}}
-                    {{--                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Necessitatibus quibusdam facilis</span></li>--}}
-                    {{--                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Velit unde aliquam et voluptas reiciendis non sapiente labore</span></li>--}}
-                    {{--                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Commodi quae ipsum quas est itaque</span></li>--}}
-                    {{--                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span></li>--}}
-                    {{--                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Deleniti asperiores blanditiis nihil quia officiis dolor</span></li>--}}
-                    {{--              </ul>--}}
-                    {{--            </div>--}}
-
-                    <div class="row mb-5">
-                        <div class="col-6">
-                            <form action="{{ Route('user.applied.post') }}" method="post">
-                                @csrf
-                                <input value="{{ Auth::user()->id }}" name="user_id" type="hidden">
-                                <input value="{{ $post->id }}" name="post_id" type="hidden">
-                                <button type="submit" class="btn btn-block btn-primary btn-md" id="applied">Ứng tuyển
-                                    ngay
-                                </button>
-                            </form>
+                    @if(Auth::check())
+                        <div class="row mb-5">
+                            <div class="col-6">
+                                <form action="{{ Route('user.applied.post') }}" method="post">
+                                    @csrf
+                                    <input value="{{ Auth::user()->id }}" name="user_id" type="hidden">
+                                    <input value="{{ $post->id }}" name="post_id" type="hidden">
+                                    <button type="submit" class="btn btn-block btn-primary btn-md" id="applied">Ứng
+                                        tuyển
+                                        ngay
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-
+                    @else
+                        <div class="row mb-5">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-block btn-primary btn-md" id="applied">
+                                    <a href="{{ Route('user.login') }}" style="color: white">Đăng nhập</a>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-4">
                     <div class="bg-light p-3 border rounded mb-4">
@@ -117,24 +99,10 @@
                             <li class="mb-2"><strong class="text-black">Số lượng :</strong> {{ $post->quantity }}</li>
                             <li class="mb-2"><strong class="text-black">Chuyên ngành:</strong> {{ $post->major }}
                             </li>
-                            <li class="mb-2"><strong class="text-black">Cấp bậc:</strong> {{ $post->level }}</li>
-                            {{--                <li class="mb-2"><strong class="text-black">Job Location:</strong> New ork City</li>--}}
-                            {{--                <li class="mb-2"><strong class="text-black">Salary:</strong> $60k - $100k</li>--}}
-                            {{--                <li class="mb-2"><strong class="text-black">Gender:</strong>ny</li>--}}
-                            {{--                  <li class="mb-2"><strong class="text-black">Application Deadline:</strong> April 28, 2019</li> A--}}
+                            <li class="mb-2"><strong class="text-black">Kinh nghiệm:</strong> {{ $post->experience }}
+                            </li>
                         </ul>
                     </div>
-
-                    {{--            <div class="bg-light p-3 border rounded">--}}
-                    {{--              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>--}}
-                    {{--              <div class="px-3">--}}
-                    {{--                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>--}}
-                    {{--                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>--}}
-                    {{--                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>--}}
-                    {{--                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>--}}
-                    {{--              </div>--}}
-                    {{--            </div>--}}
-
                 </div>
             </div>
         </div>
@@ -143,7 +111,7 @@
     <div class="container" style="padding-top:10px">
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-                <h2 class="section-title mb-2">22,392 Related Jobs</h2>
+                <h2 class="section-title mb-2">Những công việc có thể bạn quan tâm</h2>
             </div>
         </div>
 
@@ -178,4 +146,29 @@
         </div>
     </div>
     @include('layout.page-js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(() => {
+            let _li = '';
+            $.get('http://itjob.vn/post/post-detail/{{$post->id}}', (res) => {
+                var data = res.post;
+
+                console.log(data.requirements)
+                _li += '<div class="mb-5">';
+                _li += '<h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Mô tả công việc</h3>';
+                _li += data.description;
+                _li += '</div>';
+                _li += '<div class="mb-5">';
+                _li += '<h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Lợi ích</h3>';
+                _li += ' ' + data.benefit + ' </span>';
+                _li += '</div>';
+                _li += '<div class="mb-5">';
+                _li += '<h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Yêu cầu</h3>';
+                _li += ' ' + data.requirements + ' </span>';
+                _li += '</div>';
+                $('#detail-post').html(_li).first();
+            });
+        });
+    </script>
 @endsection

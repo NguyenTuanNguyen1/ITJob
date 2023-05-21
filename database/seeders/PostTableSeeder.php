@@ -27,8 +27,8 @@ class PostTableSeeder extends Seeder
                 'quantity' => rand(3,5),
                 'position' => fake()->text,
                 'workplace' => fake()->address,
-                'level' => fake()->text,
-                'major' => 'IT',
+                'experience' => '1 năm',
+                'major' => 'IT/Công nghệ phần mềm',
                 'status' => 1,
                 'user_id' => 1,
                 'created_at' => Carbon::now()->subWeek()

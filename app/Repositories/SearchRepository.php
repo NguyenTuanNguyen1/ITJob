@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Constant;
 use App\Interfaces\ISearchRepository;
 use App\Models\InformationType;
 use App\Models\Post;
@@ -20,13 +21,11 @@ class SearchRepository implements ISearchRepository
 
     public function searchFilter(array $data)
     {
-        return Post::where('major', $data['major'])
+        return Post::where('status', Constant::STATUS_APPROVED_POST)
                     ->orWhere('position', $data['position'])
-                    ->orWhere('workplace', $data['workplace'])
-                    ->orWhere('level', $data['level'])
+                    ->orWhere('working', $data['working'])
                     ->orWhere('major', $data['major'])
                     ->orderBy('id','DESC')
-                    ->whereNotNull('status')
                     ->paginate(8);
     }
 

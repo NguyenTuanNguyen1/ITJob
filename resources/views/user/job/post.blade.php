@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="custom-breadcrumbs">
-                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="{{ Route('home') }}">Trang chủ</a> <span class="mx-2 slash">/</span>
                         <a href="#">Job</a> <span class="mx-2 slash">/</span>
                         <span class="text-white"><strong>Post a Job</strong></span>
                     </div>
@@ -55,9 +55,10 @@
                             <label for="job-type">Hình thức làm việc</label>
                             <select class="selectpicker border rounded" id="job-type" data-style="btn-black"
                                     data-width="100%" data-live-search="true" title="Select Job Type" name="working">
-                                <option>Part Time</option>
-                                <option>Full Time</option>
-                                <option>Remote</option>
+                                <option>Bán thời gian</option>
+                                <option>Toàn thời gian</option>
+                                <option>Thực tập</option>
+                                <option>Làm từ xa</option>
                             </select>
                         </div>
 
@@ -70,15 +71,15 @@
                             <label for="job-region">Chuyên ngành</label>
                             <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
                                     data-width="100%" data-live-search="true" title="Select Region" name="major">
-                                <option>Anywhere</option>
-                                <option>San Francisco</option>
-                                <option>Palo Alto</option>
-                                <option>New York</option>
-                                <option>Manhattan</option>
-                                <option>Ontario</option>
-                                <option>Toronto</option>
-                                <option>Kansas</option>
-                                <option>Mountain View</option>
+                                <option>IT/ Công nghệ phần mềm</option>
+                                <option>Kế toán</option>
+                                <option>Makerting</option>
+                                <option>Chế tạo máy</option>
+                                <option>Điện/ Điện tử</option>
+                                <option>Báo chí/ Truyền hình</option>
+                                <option>Bất động sản</option>
+                                <option>Công nghệ Ô tô</option>
+                                <option>Cơ khí</option>
                             </select>
                         </div>
 
@@ -86,19 +87,18 @@
                             <label for="job-region">Cấp bậc</label>
                             <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
                                     data-width="100%" data-live-search="true" title="Select Region" name="position">
-                                <option>Anywhere</option>
-                                <option>San Francisco</option>
-                                <option>Palo Alto</option>
-                                <option>New York</option>
-                                <option>Manhattan</option>
-                                <option>Ontario</option>
-                                <option>Toronto</option>
-                                <option>Kansas</option>
-                                <option>Mountain View</option>
+                                <option>Thực tập sinh</option>
+                                <option>Nhân viên</option>
+                                <option>Phó phòng</option>
+                                <option>Trưởng phòng</option>
+                                <option>Trợ lý</option>
+                                <option>Thư ký</option>
+                                <option>Giám Đốc</option>
+                                <option>Quản lý</option>
                             </select>
                         </div>
-
-                        <input type="text" name="user_id" value=" {{ Auth::user()->id }}">
+                        <input type="hidden" name="image" value="{{ Auth::user()->img_avatar }}">
+                        <input type="hidden" name="user_id" value=" {{ Auth::user()->id }}">
 
                         <button type="submit" class="btn btn-primary btn-md">Tạo bài viết</button>
                     </form>
@@ -108,7 +108,6 @@
     </section>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.0.1/ckeditor.js"></script>
 <script>
-
     CKEDITOR.replace('description');
     CKEDITOR.replace('benefit');
     CKEDITOR.replace('requirements');
