@@ -1,6 +1,7 @@
 @extends('layout.layout')
 @section('index')
-    <div class="container" style="padding-top:10px">
+<section class="home-section section-hero overlay bg-image"  id="home-section">
+    <div class="container" style="padding-top:8%">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
 
@@ -97,4 +98,7 @@
             </div>
         </div>
     </section>
+</section>
+
+    
 @endsection
