@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function test()
     {
-        return View('user.job.post');
+        return View('layout.index-login');
     }
 
     public function test2()

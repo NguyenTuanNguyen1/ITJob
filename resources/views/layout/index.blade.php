@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @section('index')
-    <section class="home-section section-hero overlay bg-image" id="home-section">
+    <!-- <section class="home-section section-hero overlay bg-image" id="home-section"></section> -->
         <div class="container" style="padding-top:8%">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-12">
@@ -37,7 +37,7 @@
                                     <option>Cơ khí</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-2 mb-4 mb-lg-0">
                                 <select class="selectpicker" data-style="btn-white btn-lg" data-width="30%"
                                         data-live-search="true" title="Select Job Type" name="working">
                                     <option>Bán thời gian</option>
@@ -46,7 +46,7 @@
                                     <option>Làm từ xa</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-2 mb-4 mb-lg-0">
                                 <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
                                         data-live-search="true" title="Select Job Type" name="position">
                                     <option>Thực tập sinh</option>
@@ -59,7 +59,7 @@
                                     <option>Quản lý</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-2 mb-4 mb-lg-0">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search">
                                     <span class="icon-search icon mr-2"></span>Tìm kiếm
                                 </button>
@@ -96,38 +96,6 @@
                 </div>
             </div>
         </div>
-        <section class="site-section py-4" style="background-color:white;">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_mailchimp.svg" alt="Image" class="img-fluid-m logo-1">
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_paypal.svg" alt="Image" class="img-fluid-m logo-2">
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_stripe.svg" alt="Image" class="img-fluid-m logo-3">
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_visa.svg" alt="Image" class="img-fluid-m logo-4">
-                    </div>
-
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_apple.svg" alt="Image" class="img-fluid-m logo-5">
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_tinder.svg" alt="Image" class="img-fluid-m logo-6">
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_sony.svg" alt="Image" class="img-fluid-m logo-7">
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6 text-center">
-                        <img src="board-master/images/logo_airbnb.svg" alt="Image" class="img-fluid-m logo-8">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>
     @include('layout.page-js')
     <script>
         // $("search-ajax-result").hide();
