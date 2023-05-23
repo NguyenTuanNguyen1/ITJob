@@ -99,7 +99,9 @@
                             <li class="mb-2"><strong class="text-black">Số lượng :</strong> {{ $post->quantity }}</li>
                             <li class="mb-2"><strong class="text-black">Chuyên ngành:</strong> {{ $post->major }}
                             </li>
+                            <li class="mb-2"><strong class="text-black">Cấp bậc:</strong> {{ $post->position }}
                             <li class="mb-2"><strong class="text-black">Kinh nghiệm:</strong> {{ $post->experience }}
+                            <li class="mb-2"><strong class="text-black">Hình thức làm việc:</strong> {{ $post->working }}
                             </li>
                         </ul>
                     </div>
@@ -148,7 +150,6 @@
     @include('layout.page-js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-
         $(document).ready(() => {
             let _li = '';
             $.get('http://itjob.vn/post/post-detail/{{$post->id}}', (res) => {

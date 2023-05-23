@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CMS;
 
-use App\Constant;
+use App\Events\Chat;
+use App\Http\Controllers\Controller;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IUserRepository;
+use App\Models\Message;
 use App\Repositories\BackendRepository;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,7 @@ use Illuminate\Http\Request;
  * @property IUserRepository $user_repo
  * @property BackendRepository $back_repo
  */
-class HomeController extends Controller
+class ChatController extends Controller
 {
     public function __construct
     (
@@ -32,30 +34,13 @@ class HomeController extends Controller
 
     public function index()
     {
-        $posts = $this->post_repo->all();
-        $companys = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
-        return view('layout.index')->with('posts', $posts)
-            ->with('companys', $companys);
+        return view('messenger.layout');
     }
 
-    public function login()
+    public function messenger($from_user_name, Request $request)
     {
-        return view('user.auth.login');
-    }
+        $messages = $this->back_repo->getMessage($from_user_name, 19);
 
-    public function register()
-    {
-        return view('user.auth.register');
-    }
-
-    public function test2()
-    {
-        return view('chat2');
-    }
-
-    public function test($from_user_id, Request $request)
-    {
-        $messages = $this->back_repo->getMessage($from_user_id, 19);
         if ($request->ajax())
         {
             return response()->json([
@@ -63,8 +48,18 @@ class HomeController extends Controller
                 'to_user' => 19
             ]);
         }
-        return view('messenger')->with('messages', $messages);
+        return view('messenger.chat')->with('messages', $messages);
     }
 
+    public function chat(Request $request)
+    {
+        $input = $request->all();
+        event(new Chat('', $input['message']));
 
+        return Message::create([
+            'message' => $input['message'],
+            'from_user_id' => 1,
+            'to_user_id' => 19
+        ]);
+    }
 }

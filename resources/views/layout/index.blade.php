@@ -71,7 +71,7 @@
                             <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                                 <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post->id }}" data-value=""></a>
                                 <div class="job-listing-logo">
-                                    <img src="board-master/images/job_logo_4.jpg"
+                                    <img src="{{ url('Images/')}}/{{ $post->image }}"
                                          alt="Free Website Template by Free-Template.co" class="img-fluid">
                                 </div>
                                 <div
@@ -96,12 +96,26 @@
                 </div>
             </div>
         </div>
+
+    <form action="{{ Route('post.major') }}" method="get">
+        <div class="col-md-3">
+            <div class="top-category--item">
+{{--                <div class="top-category__image"><a href="{{ Route('post.major') }}" target="_blank">--}}
+{{--                        <img src="/v4/image/welcome/top-categories/kinh-doanh-ban-hang.png?v=2" alt="Kinh doanh / Bán hàng"></a>--}}
+{{--                </div>--}}
+                <input name="major" value="IT/Công nghệ phần mềm">
+                <h4 class="top-category__name">
+                    <button type="submit">123</button>
+                </h4>
+                <p class="top-category__caption">10.612 việc làm</p></div>
+        </div>
+
+    </form>
     @include('layout.page-js')
     <script>
         // $("search-ajax-result").hide();
 
         $(".input-search").keyup(function () {
-
             var text = $(this).val();
             console.log(text)
             {{--var url = 'http://127.0.0.1:8000/Images/'--}}

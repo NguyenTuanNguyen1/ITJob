@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\authorize;
+use App\Http\Middleware\Cors;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -54,6 +55,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
+        'cors' => Cors::class,
         'authorize' => \App\Http\Middleware\Authorize::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

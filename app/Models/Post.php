@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static find($id)
  * @method static where(string $string, $array)
  * @method static join()
+ * @method static search()
  */
 class Post extends Model
 {

@@ -21,14 +21,14 @@
 {{--update-profile--}}
 <link rel="stylesheet" href="{{ url('board-master/css/update-in4.css') }}">
 
-<link rel="stylesheet" href="board-master/css/custom-bs.css">
-<link rel="stylesheet" href="board-master/css/jquery.fancybox.min.css">
+<link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
+<link rel="stylesheet" href="{{ url('board-master/css/jquery.fancybox.min.css') }}">
 <!-- <link rel="stylesheet" href="board-master/css/bootstrap-select.min.css"> -->
-<link rel="stylesheet" href="board-master/fonts/icomoon/style.css">
-<link rel="stylesheet" href="board-master/fonts/line-icons/style.css">
-<link rel="stylesheet" href="board-master/css/owl.carousel.min.css">
-<link rel="stylesheet" href="board-master/css/animate.min.css">
-<link rel="stylesheet" href="board-master/css/quill.snow.css">
+<link rel="stylesheet" href="{{ url('board-master/fonts/icomoon/style.css') }}">
+<link rel="stylesheet" href="{{ url('board-master/fonts/line-icons/style.css') }}">
+<link rel="stylesheet" href="{{ url('board-master/css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ url('board-master/css/animate.min.css') }}">
+<link rel="stylesheet" href="{{ url('board-master/css/quill.snow.css') }}">
 
 
 

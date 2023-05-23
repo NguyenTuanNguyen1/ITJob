@@ -29,22 +29,22 @@ class CompanyTableSeeder extends Seeder
                 'created_at' => Carbon::now()
             ]);
 
-            DB::table('information')->insert([
-                'content' => $this->faker->text,
-                'user_id' => $i,
-                'type_id' => $this->faker->phoneNumber,
-            ]);
-
-            DB::table('company_information')->insert([
-                'type' => $this->faker->title,
-                'staff' => rand(1,100),
-                'headquarters' => $this->faker->title,
-                'taxcode' => 'ABWINC20',
-                'description' => $this->faker->text,
-                'website' => 'https://www.facebook.com/',
-                'user_id' => $i,
-                'created_at' => $this->faker->time('d-m-Y')
-            ]);
+//            DB::table('information')->insert([
+//                'content' => $this->faker->text,
+//                'user_id' => $i,
+//                'type_id' => $this->faker->phoneNumber,
+//            ]);
+//
+//            DB::table('company_information')->insert([
+//                'type' => $this->faker->title,
+//                'staff' => rand(1,100),
+//                'headquarters' => $this->faker->title,
+//                'taxcode' => 'ABWINC20',
+//                'description' => $this->faker->text,
+//                'website' => 'https://www.facebook.com/',
+//                'user_id' => $i,
+//                'created_at' => $this->faker->time('d-m-Y')
+//            ]);
         }
     }
 }

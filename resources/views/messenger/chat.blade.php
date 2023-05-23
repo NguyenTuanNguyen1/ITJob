@@ -353,6 +353,7 @@
             var data = res.message;
             var auth = {{Auth::user()->id}}
             data.forEach(function (item) {
+                console.log(data)
                 if(item.from_user_id == auth)
                 {
                     _li += '<li class="clearfix">';
@@ -382,7 +383,7 @@
             "from_user_id": {{ Auth::user()->id }},
             "to_user_id": 19,
             "message": $("#message-value").val(),
-            "_token": "{{ csrf_token() }}"
+            "_token": "{{ csrf_token() }}",
         }
         $.ajax({
             url: "{{ Route('sent.message') }}",

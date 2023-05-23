@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constant;
 use App\Interfaces\IAdminRepository;
+use App\Interfaces\IBackendRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IReviewRepository;
@@ -11,7 +12,10 @@ use App\Interfaces\ISearchRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
 use App\Models\Post;
+use App\Models\User;
 use App\Repositories\RoleRepostitory;
+use App\Trait\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -23,9 +27,11 @@ use Illuminate\Http\Request;
  * @property IReviewRepository $review_repo
  * @property RoleRepostitory $role_repo
  * @property ISearchRepository $search_repo
+ * @property IBackendRepository $back_repo
  */
 class BackendController extends Controller
 {
+    use Service;
     public function __construct
     (
         IUserRepository $userRepository,
@@ -36,6 +42,7 @@ class BackendController extends Controller
         IReviewRepository $reviewRepository,
         RoleRepostitory $roleRepostitory,
         ISearchRepository $searchRepository,
+        IBackendRepository $backendRepository
     )
     {
         $this->post_repo = $postRepository;
@@ -46,6 +53,7 @@ class BackendController extends Controller
         $this->review_repo = $reviewRepository;
         $this->role_repo = $roleRepostitory;
         $this->search_repo = $searchRepository;
+        $this->back_repo = $backendRepository;
     }
 
     public function getAllPost()
@@ -62,14 +70,41 @@ class BackendController extends Controller
     public function searchFilter(Request $request)
     {
         $input = $request->all();
-        $result = $this->search_repo->searchFilter($input);
-
-        dd($result);
+        $posts = $this->search_repo->searchFilter($input)->toArray();
+        $result = array_filter($posts['data'], function ($value){
+            return $value['status'] == Constant::STATUS_APPROVED_POST;
+        });
+        $test = collect($result);
+        return view('user.job.search_result')->with('posts', $test);
     }
 
     public function searchAjax()
     {
         $data = Post::search()->get();
+
+        return response()->json([
+            'message' => 'Đã tìm thấy ' . $data->count() . ' kết quả',
+            'data' => $data,
+        ]);
+    }
+
+    public function getPostByMajor(Request $request)
+    {
+        $input = $request->all();
+        $posts = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, $input['major'],Carbon::now()->subMonth(),Carbon::now());
+        if ($request->ajax())
+        {
+            return response()->json([
+                'posts' => $posts
+            ]);
+        }
+
+        return view('user.job.post_major')->with('posts', $posts);
+    }
+
+    public function searchAjaxName(Request $request)
+    {
+        $data = User::search()->get();
 
         return response()->json([
             'message' => 'Đã tìm thấy ' . $data->count() . ' kết quả',
