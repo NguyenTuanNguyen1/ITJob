@@ -6,13 +6,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\BackendController;
-use App\Http\Controllers\CMS\ContactController;
+use App\Http\Controllers\CMS\ChatController;
+use App\Http\Controllers\CMS\OAuthController;
 use App\Http\Controllers\CMS\PostController;
 use App\Http\Controllers\CMS\ProfileController;
-use App\Http\Controllers\CMS\ReportController;
-use App\Http\Controllers\CMS\ReviewController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CMS\TypeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,25 +46,36 @@ Route::prefix('post')->group(function () {
     Route::post('/post-restore',[PostController::class,'restore'])->name('post.restore');
 });
 
-//Search
+//Backend
 Route::prefix('search')->group(function () {
-    Route::post('/123',[BackendController::class,'searchFilter'])->name('search.filter');
-    Route::get('/th',[BackendController::class,'searchAjax'])->name('search.ajax');
+    Route::post('/',[BackendController::class,'searchFilter'])->name('search.filter');
+    Route::get('/',[BackendController::class,'searchAjax'])->name('search.ajax');
+    Route::get('/get-post-by-major',[BackendController::class,'getPostByMajor'])->name('post.major');
+    Route::get('/messenger/name',[BackendController::class,'searchAjaxName'])->name('search.name');
+});
+
+//Chat
+Route::middleware('cors')->group(function (){
+    Route::prefix('messenger')->group(function () {
+        Route::get('/index',[ChatController::class,'index'])->name('index.message');
+        Route::get('/{from_user_name}',[ChatController::class,'messenger'])->name('show.message');
+        Route::post('/sent_message',[ChatController::class,'chat'])->name('sent.message');
+    });
 });
 
 
-Route::get('/login-google/{provider}',[HomeController::class,'redirect_Google'])->name('LoginGoogle');
-Route::get('/callback/{provider}',[HomeController::class,'callback_Google'])->name('Callback');
+Route::get('/login-google/{provider}',[OAuthController::class,'redirect_Google'])->name('login.google');
+Route::get('/callback/{provider}',[OAuthController::class,'callback_Google'])->name('callback.google');
+
+Route::get('/login-linkedin/{provider}',[OAuthController::class,'redirect_Linkedin'])->name('login.linkedin');
+Route::get('/callback/{provider}',[OAuthController::class,'callback_Linkedin'])->name('callback.linkedin');
 
 Route::get('/chinh-sach-quyen-rieng-tu', function(){
     return '<h1> Chính sách quyền riêng tư </h1>';
 });
-Route::get('/login-facebook/{provider}',[HomeController::class,'redirect_Facebook'])->name('LoginFacebook');
-Route::get('/callback-facebook/{provider}',[HomeController::class,'callback_Facebook'])->name('CallbackFacebook');
 
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
-Route::get('123demo',[HomeController::class,'test']);
-Route::get('12345',[HomeController::class,'test2']);
+
 Route::get('123',[HomeController::class,'mail'])->name('test-mail');

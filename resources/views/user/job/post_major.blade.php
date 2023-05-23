@@ -116,6 +116,7 @@
         // $("search-ajax-result").hide();
 
         $(".input-search").keyup(function () {
+
             var text = $(this).val();
             console.log(text)
             {{--var url = 'http://127.0.0.1:8000/Images/'--}}

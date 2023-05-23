@@ -140,4 +140,14 @@ trait Service
             'post_id' => $post_id
         ]);
     }
+
+    function createUser($getInfo, $provider)
+    {
+        return User::create([
+            'username' => $getInfo->name,
+            'email' => $getInfo->email,
+            'provider' => $provider,
+            'provider_id' => $getInfo->id
+        ]);
+    }
 }

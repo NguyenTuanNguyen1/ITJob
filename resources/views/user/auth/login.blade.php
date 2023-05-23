@@ -69,9 +69,8 @@
         </button>
         </form>
 
-
         <div class="icon-flat-form">
-            <a href="/login-facebook/Facebook"><i class="fab fa-facebook-square"></i></a>
+            <a href="/login-linkedin/Linkedin"><i class="fab fa-linkedin-square"></i></a>
             <a href="/login-google/Google" style="margin-top: 1px;margin-left: 15px;"><i
                     class="fab fa-google-plus-square" style="color: #ea3434;"></i></a>
         </div>

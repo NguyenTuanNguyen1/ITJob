@@ -42,16 +42,26 @@ class User extends Authenticatable
         return $this->hasMany(Post::class,'user_id');
     }
 
-    public function company()
-    {
-        return $this->hasOne(Company::class,'user_id');
-    }
+//    public function company()
+//    {
+//        return $this->hasOne(Company::class,'user_id');
+//    }
 
 //    public function mail($condition, $attributes)
 //    {
 //        return $this->hasMany(Mail::class,'user_id');
 //    }
-    // public function getPasswordAttribute(){
-    //     return $this->password;
-    // }
+//     public function getPasswordAttribute(){
+//         return $this->password;
+//     }
+
+    public function scopeSearch($query)
+    {
+        if (request('key'))
+        {
+            $key = request('key');
+            $query = $query->where('name', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
 }

@@ -46,11 +46,11 @@
                 <div class="ml-auto">
                     <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                             class=" icon-line-newspaper"></span></a>
-                    <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                    <a href="{{ Route('show.message',['from_user_name' => Auth::user()->id ]) }}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                             class=" icon-line-chat"></span></a>
-                    <!-- <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                    class=" icon-line-profile-male"></span>Nguyen</a> -->
-                    <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="#" role="button"
+                    <a href="{{ Route('index.message') }}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                            class=" icon-line-chat"></span></a>
+                    <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="" role="button"
                         data-toggle="dropdown" aria-expanded="false">
                         <span class=" icon-line-profile-male"></span>
                         {{ Auth::user()->username }}
@@ -58,7 +58,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
 </header>
 
 <!-- <section>
-        
+
     </section> -->
 
 <!-- HOME -->
@@ -209,7 +209,7 @@
         </div>
     </div>
 </footer>
-<script src="board-master/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url('board-master/js/bootstrap.bundle.min.js') }}"></script>
 @include('layout.page-js')
 
 </html>

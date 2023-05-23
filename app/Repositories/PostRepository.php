@@ -81,7 +81,8 @@ class PostRepository implements IPostRepository
             ->where('created_at', '>=', $from)
             ->where('created_at', '<=', $to)
             ->where('status', $action)
-            ->get();
+            ->orderBy('id','DESC')
+            ->paginate(8);
     }
 
     public function getPostByCondition($condition)

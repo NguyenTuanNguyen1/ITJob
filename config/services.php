@@ -31,4 +31,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => '499019326539-fsisln8v7tsqkte2nffghek5unhe4r1r.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://itjob.vn/callback/Google',
+    ],
+
+    'linkedin' => [
+        'client_id' => '86s9lvjl6tjksw',
+        'client_secret' => 'HHRrdbI5aVL7XLxH',
+        'redirect' => 'http://itjob.vn/callback/linkedin',
+    ],
+
 ];

@@ -24,7 +24,18 @@ class AdminTableSeeder extends Seeder
             'phone' => fake()->unique()->phoneNumber(),
             'role_id' => Constant::ROLE_ADMIN,
 //            'email' => fake()->unique()->email(),
-            'email' => 'kensu8434@gmail.com',
+            'email' => 'thinh.tranlequang@.com',
+            'password' => Hash::make('12345678'),
+            'created_at' => Carbon::now()
+        ]);
+
+        DB::table('user')->insert([
+            'name' => fake()->name(),
+            'username' => 'job2',
+            'phone' => fake()->unique()->phoneNumber(),
+            'role_id' => Constant::ROLE_ADMIN,
+//            'email' => fake()->unique()->email(),
+            'email' => 'thinh.tranlequang@ncc.asia',
             'password' => Hash::make('12345678'),
             'created_at' => Carbon::now()
         ]);
