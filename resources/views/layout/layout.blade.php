@@ -42,7 +42,7 @@
             </nav>
 
             @if(Auth::check())
-            <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+            <div class="right-cta-menu text-right d-flex aligin-items-center col-6 d-none d-xl-block">
                 <div class="ml-auto">
                     <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                             class=" icon-line-newspaper"></span></a>
@@ -92,34 +92,49 @@
 @yield('content')
 
 <section class="site-section py-4" style="background-color:white;">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_mailchimp.svg" alt="Image" class="img-fluid-m logo-1">
-            </div>
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_paypal.svg" alt="Image" class="img-fluid-m logo-2">
-            </div>
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_stripe.svg" alt="Image" class="img-fluid-m logo-3">
-            </div>
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_visa.svg" alt="Image" class="img-fluid-m logo-4">
-            </div>
+    <p style="color: black;font-size: 30px;font-weight: bold;">Top ngành nghề nổi bật</p>
+    <div class="top-job">
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+            <p>Kế toán/Kiểm toán</p>
+            <p>123 việc làm</p>
+        </button>
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/tu-van.jpg" alt="">
+            <p>Tư vấn</p>
+            <p>123 việc làm</p>
+        </button>
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/van-tai-kho-van.jpg" alt="">
+            <p>Vận tải/Kho vận</p>
+            <p>123 việc làm</p>
+        </button>
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/marketing-truyen-thong-quang-cao.jpg" alt="">
+            <p>Marketing</p>
+            <p>123 việc làm</p>
+        </button>
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/kinh-doanh-ban-hang.jpg" alt="">
+            <p>Kinh doanh bán hàng</p>
+            <p>123 việc làm</p>
+        </button>
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/it-phan-mem.jpg" alt="">
+            <p>It phần mềm</p>
+            <p>123 việc làm</p>
+        </button>
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/hanh-chinh-van-phong.jpg" alt="">
+            <p>Hành chính văn phòng</p>
+            <p>123 việc làm</p>
+        </button>
+        <button class="SL-job">
+            <img class="img-job" src="board-master/images/giao-duc-dao-tao.jpg" alt="">
+            <p>Job</p>
+            <p>123 việc làm</p>
+        </button>
 
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_apple.svg" alt="Image" class="img-fluid-m logo-5">
-            </div>
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_tinder.svg" alt="Image" class="img-fluid-m logo-6">
-            </div>
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_sony.svg" alt="Image" class="img-fluid-m logo-7">
-            </div>
-            <div class="col-6 col-lg-3 col-md-6 text-center">
-                <img src="board-master/images/logo_airbnb.svg" alt="Image" class="img-fluid-m logo-8">
-            </div>
-        </div>
     </div>
 </section>
 

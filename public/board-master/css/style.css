@@ -966,7 +966,8 @@ h4 {
 }
 .job-listings .badge {
     color: #fff;
-    padding: 4px 10px;
+    padding: 10px 10px;
+    font-size: 15px;
 }
 @media (max-width: 991.98px) {
     .job-listings .custom-width {
@@ -2238,3 +2239,29 @@ html {
     opacity: 1;
     visibility: visible;
   }
+.top-job{
+text-align: center;
+flex-wrap: wrap;
+display: flex;
+justify-content: center;
+}
+.SL-job{
+background-color:#f3f5f7;
+max-width: 20%;
+width: 20%;
+margin: 10px;
+border-radius: 10px;
+border: none;
+}
+.SL-job:hover{
+    background-color: white;
+    border: 1px solid rgb(65, 212, 20);
+}
+.SL-job p{
+    font-size: 15px;
+    margin-bottom:0rem
+}
+.img-job{
+width: 25%;
+margin-top: 10px;
+}

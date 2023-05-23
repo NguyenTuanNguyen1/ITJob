@@ -141,7 +141,8 @@
     @yield('content')
     <!-- <div id="btnTop">
         <a href="#top">^</a>
-    </div> --><a id="button"></a>
+    </div> -->
+    <!-- <a id="button"></a> -->
 </body>
 
 <footer class="site-footer">
