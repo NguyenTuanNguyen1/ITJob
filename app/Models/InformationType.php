@@ -27,6 +27,6 @@ class InformationType extends Model
 
     public function information()
     {
-        return $this->hasMany(Information::class,'type_id');
+        return $this->belongsTo(Information::class,'id');
     }
 }

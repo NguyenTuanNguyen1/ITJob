@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRequest;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IUserRepository;
+use App\Models\Information;
 use App\Trait\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,9 +38,17 @@ class ProfileController extends Controller
         $user = $this->user_repo->find($id);
         $company = $this->company_repo->find($id);
         $information = $this->information_repo->find($id);
-        return view('test')->with('user', $user)
-                                ->with('company', $company)
-                                ->with('information', $information);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'information' => $information,
+            ]);
+        }
+
+        return view('user.personal.profile')
+            ->with('user', $user)
+            ->with('company', $company)
+            ->with('information', $information);
     }
 
     public function handleUpdate(UpdateRequest $request)

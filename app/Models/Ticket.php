@@ -22,6 +22,9 @@ class Ticket extends Model
 
     protected $table = 'ticket';
     protected $fillable = [
+        'username',
+        'subject',
+        'email',
         'content',
         'image',
         'status',
@@ -40,4 +43,8 @@ class Ticket extends Model
         return $this->user->username;
     }
 
+//    public function getNameTicket()
+//    {
+//        return $this->user->username;
+//    }
 }

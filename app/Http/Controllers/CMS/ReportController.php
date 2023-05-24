@@ -52,8 +52,6 @@ class ReportController extends Controller
 
             $report = $this->ticket_repo->create($input);
 
-            $this->ActivityLog(  "Bạn đã báo cáo bài viết*" . $report['id'], $input['user_id']);
-
             if (empty($report)) {
                 return response()->json([
                     'result' => false,

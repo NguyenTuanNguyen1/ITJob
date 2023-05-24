@@ -12,7 +12,7 @@
             <div class="site-logo col-6"><a href="">ItJob</a></div>
             <nav class="mx-auto site-navigation">
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-                    <li><a href="" class="nav-link active">Trang chủ</a></li>
+                    <li><a href="{{ Route('home') }}" class="nav-link active">Trang chủ</a></li>
                     <!-- <li><a href="">About</a></li> -->
                     <li class="has-children">
                         <a href="">Job Listings</a>
@@ -46,7 +46,7 @@
                         {{ Auth::user()->username }}
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="{{ Route('user.profile',['id' => Auth::user()->id]) }}">Thông tin cá nhân</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>
                     </div>

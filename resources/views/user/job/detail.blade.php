@@ -2,6 +2,8 @@
 @section('content')
     @include('sweetalert::alert')
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/css/jquery.fancybox.min.css') }}">
@@ -49,15 +51,45 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="#" class="btn btn-block btn-light btn-md"><span
-                                    class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
+                    @if(Auth::check() && Auth::user()->id != $post->user_id)
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
+                                   aria-expanded="false"><span
+                                        class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Báo cáo bài viết</a>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <a href="#" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                    @elseif(Auth::check() && Auth::user()->id == $post->user_id)
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
+                                   aria-expanded="false"><span
+                                        class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
+                                <div class="dropdown-menu">
+                                    <button type="submit" class="dropdown-item" id="btn-delete-post" value="{{ $post->id }}">Xoá bài viết
+                                    </button>
+                                    <button type="submit" class="dropdown-item" data-toggle="modal"
+                                            data-target="#edit-post-modal">Chỉnh sửa bài viết
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <a href="#" class="btn btn-block btn-primary btn-md">Chỉnh sửa bài viết</a>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-6">
+                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -100,7 +132,8 @@
                             </li>
                             <li class="mb-2"><strong class="text-black">Cấp bậc:</strong> {{ $post->position }}
                             <li class="mb-2"><strong class="text-black">Kinh nghiệm:</strong> {{ $post->experience }}
-                            <li class="mb-2"><strong class="text-black">Hình thức làm việc:</strong> {{ $post->working }}
+                            <li class="mb-2"><strong class="text-black">Hình thức làm
+                                    việc:</strong> {{ $post->working }}
                             </li>
                         </ul>
                     </div>
@@ -108,6 +141,8 @@
             </div>
         </div>
     </section>
+
+    @include('modal.post.edit')
 
     <div class="container" style="padding-top:10px">
         <div class="row mb-5 justify-content-center">
@@ -147,7 +182,9 @@
         </div>
     </div>
     @include('layout.page-js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
     <script>
         $(document).ready(() => {
             let _li = '';
@@ -169,5 +206,48 @@
                 $('#detail-post').html(_li).first();
             });
         });
+
+        $('#edit-post-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+
+        })
+
+        $('#btn-delete-post').on("click", function (e) {
+            e.preventDefault();
+            var data = {
+                'id': $('#btn-delete-post').val(),
+                'user_id': {{ Auth::user()->id }}
+            }
+
+            Swal.fire({
+                title: 'Bạn có chắc chắn muốn xoá không?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ Route('post.delete') }}",
+                        type: 'GET',
+                        data: data,
+                        success: function (res) {
+                        }
+                    })
+                    Swal.fire(
+                        'Đã xoá thành công!',
+                    )
+                    window.location.replace('{{ Route('home') }}');
+                }
+            })
+        })
     </script>
 @endsection

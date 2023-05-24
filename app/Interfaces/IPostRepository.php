@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 interface IPostRepository
 {
-    public function all();
+    public function all($action);
     public function create(array $data);
     public function find($id);
     public function update($id,array $data);

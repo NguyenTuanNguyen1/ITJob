@@ -32,8 +32,21 @@ class PostController extends Controller
         $this->admin_repo = $adminRepository;
     }
 
-    public function index()
+    public function all(Request $request)
     {
+        $post_approved = $this->post_repo->all(Constant::STATUS_APPROVED_POST);
+        $post_not_approved = $this->post_repo->all(Constant::STATUS_NOT_APPROVED_POST);
+
+        if ($request->ajax())
+        {
+            return  response()->json([
+                'message_approved' => 'Có tất cả ' . count($post_approved) . ' bài viết được phê duyệt',
+                'message_not_approved' => 'Có tất cả ' . count($post_not_approved) . ' bài viết chưa được phê duyệt',
+                'approved' => $post_approved,
+                'not_approved' => $post_not_approved
+            ]);
+        }
+
         return view('user.job.post');
     }
 
@@ -66,7 +79,6 @@ class PostController extends Controller
         }
 
         $post = $this->post_repo->create($input);
-        $this->ActivityLog(  "Bạn đã đăng tin tuyển dụng*" . $post['id'], $input['user_id']);
         if(empty($post))
         {
             return redirect()->back()->with('Error','Lỗi tạo bài viết');
@@ -78,20 +90,16 @@ class PostController extends Controller
     public function update(Request $request)
     {
         $input = $request->all();
-
-        $post = $this->post_repo->update($input['id'], $input);
-        $this->ActivityLog(  "Bạn đã cập nhật tin tuyển dụng*" . $post['id'], $input['user_id']);
-
-        return response()->json([
-            'result' => true
-        ]);
+        $this->post_repo->update($input['id'], $input);
+        alert('Cập nhật thành công', null, 'success');
+        return redirect()->route('post.detail', $input['id']);
     }
 
     public function delete(Request $request)
     {
         $input = $request->all();
 
-        if ($this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
+        if (!$this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
         {
             abort(401);
         }

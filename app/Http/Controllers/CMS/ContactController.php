@@ -5,11 +5,13 @@ namespace App\Http\Controllers\CMS;
 use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\ContactRequest;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property ITicketRepository $ticket_repo
@@ -51,28 +53,21 @@ class ContactController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
         $input = $request->all();
 
-        try {
-            $input['type_id'] = Constant::TICKET_CONTACT;
-            $contact = $this->ticket_repo->create($input);
-            if (empty($contact)) {
-                return response()->json([
-                    'result' => false,
-                ]);
-            }
-            return response()->json([
-                'result' => true,
-            ]);
-        }catch (\Exception $e)
-        {
-            return response()->json([
-                'result' => false,
-                'message' => $e->getMessage()
-            ]);
+        $input['type_id'] = Constant::TICKET_CONTACT;
+        $input['image'] = $input['post_id']  = null;
+        $input['user_id'] = is_null(Auth::user()->id) ?: Auth::user()->id;
+
+        $contact = $this->ticket_repo->create($input);
+        if (empty($contact)) {
+            toast('Bạn đã gửi tin nhắn thất bại', 'error');
+            return redirect()->route('contact.index');
         }
+        toast('Bạn đã gửi tin nhắn thành công', 'success');
+        return redirect()->route('contact.index');
     }
 
     public function delete(Request $request)

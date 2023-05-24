@@ -33,4 +33,9 @@ class Information extends Model
     {
         return $this->user->username;
     }
+
+    public function type()
+    {
+        return $this->belongsTo(InformationType::class);
+    }
 }

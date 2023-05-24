@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('ticket', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content')->nullable();
+            $table->text('username')->nullable();
+            $table->text('subject')->nullable();
+            $table->text('email')->nullable();
+            $table->text('content')->nullable();
             $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
 

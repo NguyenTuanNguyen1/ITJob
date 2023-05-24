@@ -26,7 +26,7 @@ class InformationRepository implements IInformationRepository
 
     public function find($id)
     {
-        return Information::where('user_id', $id)->get();
+        return Information::with('type')->where('user_id', $id)->get();
     }
     public function update($id,array $data)
     {

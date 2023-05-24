@@ -38,7 +38,7 @@ Route::prefix('user')->group(function () {
 
 //Post
 Route::prefix('post')->group(function () {
-    Route::get('/list-post',[PostController::class,'index'])->name('post.all');
+    Route::get('/list-post',[PostController::class,'all'])->name('post.all');
     Route::get('/post-detail/{id}',[PostController::class,'show'])->name('post.detail');
     Route::post('/post-create',[PostController::class,'store'])->name('post.create');
     Route::post('/post-update',[PostController::class,'update'])->name('post.update');
@@ -87,7 +87,10 @@ Route::get('/chinh-sach-quyen-rieng-tu', function(){
 
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/post-create',[HomeController::class,'post'])->name('post.index');
 Route::get('/contact-index',[HomeController::class,'contact'])->name('contact.index');
+
+Route::get('/test',[HomeController::class,'test'])->name('test');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::get('123',[HomeController::class,'mail'])->name('test-mail');

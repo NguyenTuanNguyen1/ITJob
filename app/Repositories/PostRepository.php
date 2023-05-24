@@ -8,9 +8,9 @@ use App\Models\Post;
 
 class PostRepository implements IPostRepository
 {
-    public function all()
+    public function all($action)
     {
-        return Post::orderBy('id','DESC')->where('status', Constant::STATUS_APPROVED_POST)->paginate(8);
+        return Post::orderBy('id','DESC')->where('status', $action)->paginate(8);
     }
 
     public function create(array $data)

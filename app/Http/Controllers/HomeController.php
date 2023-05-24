@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $posts = $this->post_repo->all();
+        $posts = $this->post_repo->all(Constant::STATUS_APPROVED_POST);
         $companys = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
         $post_major = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, '',Carbon::now()->subMonth(),Carbon::now());
         return view('layout.index')
@@ -54,5 +54,15 @@ class HomeController extends Controller
     public function contact()
     {
         return view('layout.contact');
+    }
+
+    public function post()
+    {
+        return view('user.job.post');
+    }
+
+    public function test()
+    {
+        return view('user.job.update-infor');
     }
 }
