@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="custom-breadcrumbs">
-                        <a href="{{ Route('home')}}">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="{{ Route('home')}}">Trang chủ</a> <span class="mx-2 slash">/</span>
                         <a href="#">Job</a> <span class="mx-2 slash">/</span>
                         <span class="text-white"><strong>{{$post->title}}</strong></span>
                     </div>
@@ -28,7 +28,6 @@
             </div>
         </div>
     </section>
-
 
     <section class="site-section">
         <div class="container">
@@ -150,12 +149,10 @@
     @include('layout.page-js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-
         $(document).ready(() => {
             let _li = '';
             $.get('http://itjob.vn/post/post-detail/{{$post->id}}', (res) => {
                 var data = res.post;
-
                 console.log(data.requirements)
                 _li += '<div class="mb-5">';
                 _li += '<h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Mô tả công việc</h3>';

@@ -7,6 +7,7 @@ use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IUserRepository;
 use App\Repositories\BackendRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -34,7 +35,9 @@ class HomeController extends Controller
     {
         $posts = $this->post_repo->all();
         $companys = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
-        return view('layout.index')->with('posts', $posts)
+        $post_major = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, '',Carbon::now()->subMonth(),Carbon::now());
+        return view('layout.index')
+            ->with('posts', $posts)
             ->with('companys', $companys);
     }
 
@@ -48,23 +51,8 @@ class HomeController extends Controller
         return view('user.auth.register');
     }
 
-    public function test2()
+    public function contact()
     {
-        return view('chat2');
+        return view('layout.contact');
     }
-
-    public function test($from_user_id, Request $request)
-    {
-        $messages = $this->back_repo->getMessage($from_user_id, 19);
-        if ($request->ajax())
-        {
-            return response()->json([
-                'message' => $messages,
-                'to_user' => 19
-            ]);
-        }
-        return view('messenger')->with('messages', $messages);
-    }
-
-
 }

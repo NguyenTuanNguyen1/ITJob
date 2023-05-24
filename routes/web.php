@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ResetController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\CMS\ChatController;
+use App\Http\Controllers\CMS\ContactController;
 use App\Http\Controllers\CMS\OAuthController;
 use App\Http\Controllers\CMS\PostController;
 use App\Http\Controllers\CMS\ProfileController;
@@ -63,6 +64,16 @@ Route::middleware('cors')->group(function (){
     });
 });
 
+//Contact
+Route::prefix('contact')->group(function () {
+    Route::get('/list-contact',[ContactController::class,'index'])->name('contact.all');
+    Route::get('/contact-detail/{id}',[ContactController::class,'show'])->name('contact.detail');
+    Route::post('/contact-create',[ContactController::class,'store'])->name('contact.create');
+    Route::get('/contact-delete',[ContactController::class,'delete'])->name('contact.delete');
+    Route::get('/contact-reply',[ContactController::class,'reply'])->name('contact.reply');
+    Route::get('/list-contact-replied',[ContactController::class,'replied'])->name('contact.replied');
+//    Route::post('/contact-restore',[ContactController::class,'restore'])->name('contact.restore');
+});
 
 Route::get('/login-google/{provider}',[OAuthController::class,'redirect_Google'])->name('login.google');
 Route::get('/callback/{provider}',[OAuthController::class,'callback_Google'])->name('callback.google');
@@ -76,6 +87,7 @@ Route::get('/chinh-sach-quyen-rieng-tu', function(){
 
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/contact-index',[HomeController::class,'contact'])->name('contact.index');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::get('123',[HomeController::class,'mail'])->name('test-mail');

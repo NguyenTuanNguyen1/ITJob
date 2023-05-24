@@ -77,11 +77,11 @@ class PostRepository implements IPostRepository
 
     public function getMajorByPost($action, $major, $from, $to)
     {
-        return Post::where('major', $major)
+        return Post::where('status', $action)
+            ->where('major', $major)
             ->where('created_at', '>=', $from)
             ->where('created_at', '<=', $to)
-            ->where('status', $action)
-            ->orderBy('id','DESC')
+            ->orderBy('id', 'DESC')
             ->paginate(8);
     }
 

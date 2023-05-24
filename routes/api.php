@@ -43,17 +43,6 @@ Route::prefix('type')->group(function (){
     Route::get('/type-restore',[TypeController::class,'restore'])->name('type.restore');
 });
 
-//Contact
-Route::prefix('contact')->group(function () {
-    Route::get('/list-contact',[ContactController::class,'index'])->name('contact.all');
-    Route::get('/contact-detail/{id}',[ContactController::class,'show'])->name('contact.detail');
-    Route::post('/contact-create',[ContactController::class,'store'])->name('contact.create');
-    Route::get('/contact-delete',[ContactController::class,'delete'])->name('contact.delete');
-    Route::get('/contact-reply',[ContactController::class,'reply'])->name('contact.reply');
-    Route::get('/list-contact-replied',[ContactController::class,'replied'])->name('contact.replied');
-//    Route::post('/contact-restore',[ContactController::class,'restore'])->name('contact.restore');
-});
-
 //Report
 Route::prefix('report')->group(function () {
     Route::get('/list-report',[ReportController::class,'index'])->name('report.all');

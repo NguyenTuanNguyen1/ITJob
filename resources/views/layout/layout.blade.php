@@ -22,17 +22,7 @@
                         </ul>
                     </li>
                     <li class="has-children">
-                        <a href="">Pages</a>
-                        <ul class="dropdown">
-                            <li><a href="">Services</a></li>
-                            <li><a href="">Service Single</a></li>
-                            <li><a href="">Blog Single</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-single.html">Portfolio Single</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="faq.html">Frequently Ask Questions</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                        </ul>
+                        <a href="{{ Route('contact.index') }}">Liên hệ</a>
                     </li>
                     <!-- <li><a href="blog.html">Blog</a></li>
                     <li><a href="contact.html">Ticket</a></li>
@@ -83,76 +73,15 @@
     </div>
 </header>
 
-<!-- <section>
-
-    </section> -->
-
-<!-- HOME -->
-@yield('index')
-@yield('content')
-
-<section class="site-section py-4" style="background-color:white;">
-    <p style="color: black;font-size: 30px;font-weight: bold;">Top ngành nghề nổi bật</p>
-    <div class="top-job">
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
-            <p>Kế toán/Kiểm toán</p>
-            <p>123 việc làm</p>
-        </button>
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/tu-van.jpg" alt="">
-            <p>Tư vấn</p>
-            <p>123 việc làm</p>
-        </button>
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/van-tai-kho-van.jpg" alt="">
-            <p>Vận tải/Kho vận</p>
-            <p>123 việc làm</p>
-        </button>
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/marketing-truyen-thong-quang-cao.jpg" alt="">
-            <p>Marketing</p>
-            <p>123 việc làm</p>
-        </button>
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/kinh-doanh-ban-hang.jpg" alt="">
-            <p>Kinh doanh bán hàng</p>
-            <p>123 việc làm</p>
-        </button>
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/it-phan-mem.jpg" alt="">
-            <p>It phần mềm</p>
-            <p>123 việc làm</p>
-        </button>
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/hanh-chinh-van-phong.jpg" alt="">
-            <p>Hành chính văn phòng</p>
-            <p>123 việc làm</p>
-        </button>
-        <button class="SL-job">
-            <img class="img-job" src="board-master/images/giao-duc-dao-tao.jpg" alt="">
-            <p>Job</p>
-            <p>123 việc làm</p>
-        </button>
-
-    </div>
-</section>
-
 <body>
     @yield('content')
+    @yield('index')
     <!-- <div id="btnTop">
         <a href="#top">^</a>
     </div> --><a id="button"></a>
 </body>
 
 <footer class="site-footer">
-    <!-- <a id="back-to-top" href="#" class="btn btn-danger btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a> -->
-    <!-- <a href="#top" class="smoothscroll scroll-top">
-        <span class="icon-keyboard_arrow_up"></span>
-    </a> -->
-    <!-- <div id="btnTop">
-        <a href="#top">^</a>
-    </div> -->
     <div class="container">
         <div class="row mb-5">
             <div class="col-6 col-md-3 mb-4 mb-md-0">
