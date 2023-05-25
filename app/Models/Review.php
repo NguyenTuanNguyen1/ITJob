@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @method static orderBy(string $string, string $string1)
  * @method static find($id)
+ * @method static where(string $string, $to_user_id)
  */
 class Review extends Model
 {
@@ -21,17 +22,17 @@ class Review extends Model
     protected $fillable = [
         'content',
         'image',
-        'form_user_id',
+        'from_user_id',
         'to_user_id',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function getNameReview()
-    {
-        return $this->user->username();
-    }
+//    public function from_user_id()
+//    {
+//        return $this->belongsTo(User::class);
+//    }
+//
+//    public function getNameReview()
+//    {
+//        return $this->user->username;
+//    }
 }

@@ -22,8 +22,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required | unique:user | email',
+            'username' => 'required| unique:user',
+            'email' => 'required | email | unique:user',
             'phone' => 'required | unique:user',
             'address' => 'required',
         ];
@@ -32,7 +32,8 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Vui lòng nhập tên hiển thị',
+            'username.required' => 'Vui lòng nhập tên hiển thị',
+            'username.unique' => 'Tên đăng nhập đã được sử dụng',
             'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Vui lòng đúng định dạng @',
             'email.unique' => 'Email đã được sử dụng',

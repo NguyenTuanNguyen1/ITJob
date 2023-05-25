@@ -11,6 +11,7 @@ use App\Http\Controllers\CMS\ContactController;
 use App\Http\Controllers\CMS\OAuthController;
 use App\Http\Controllers\CMS\PostController;
 use App\Http\Controllers\CMS\ProfileController;
+use App\Http\Controllers\CMS\ReviewController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,9 @@ Route::prefix('user')->group(function () {
     Route::post('/update-password',[ResetController::class,'updatePassword'])->name('password.update');
 
     Route::get('/user-profile/{id}',[ProfileController::class,'profile'])->name('user.profile');
-    Route::post('/user-update',[ProfileController::class,'handleUpdate'])->name('handle.update');
+    Route::post('/user-update',[ProfileController::class,'handleUpdate'])->name('user.update');
+    Route::post('/user-update-basic',[ProfileController::class,'handleUpdateBasic'])->name('user.update.basic');
+    Route::post('/user-update-information',[ProfileController::class,'handleUpdateInfor'])->name('user.update.information');
 
     Route::post('/applied-post',[UserController::class,'applied'])->name('user.applied.post');
 });
@@ -73,6 +76,17 @@ Route::prefix('contact')->group(function () {
     Route::get('/contact-reply',[ContactController::class,'reply'])->name('contact.reply');
     Route::get('/list-contact-replied',[ContactController::class,'replied'])->name('contact.replied');
 //    Route::post('/contact-restore',[ContactController::class,'restore'])->name('contact.restore');
+});
+
+//Review
+Route::prefix('review')->group(function (){
+    Route::get('/list-review',[ReviewController::class,'index'])->name('review.view');
+    Route::post('/review-create',[ReviewController::class,'store'])->name('review.create');
+    Route::post('/review-update',[ReviewController::class,'update'])->name('review.update');
+    Route::get('/review-detail/{id}',[ReviewController::class,'show'])->name('review.show');
+    Route::get('/review-trashed',[ReviewController::class,'trashed'])->name('review.trashed');
+    Route::post('/review-delete',[ReviewController::class,'delete'])->name('review.delete');
+    Route::post('/review-restore',[ReviewController::class,'restore'])->name('review.restore');
 });
 
 Route::get('/login-google/{provider}',[OAuthController::class,'redirect_Google'])->name('login.google');

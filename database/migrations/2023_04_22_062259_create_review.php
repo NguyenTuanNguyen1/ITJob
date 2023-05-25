@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('review', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('content')->nullable();
-            $table->string('image')->nullable();
 
             $table->unsignedBigInteger('from_user_id')->nullable();
-            $table->unsignedBigInteger('to_type_id')->nullable();
+            $table->unsignedBigInteger('to_user_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

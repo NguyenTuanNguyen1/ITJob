@@ -11,4 +11,5 @@ interface IReviewRepository
     public function storage($id);
     public function trashed();
     public function restore($id);
+    public function getReviewByUser($to_user_id);
 }

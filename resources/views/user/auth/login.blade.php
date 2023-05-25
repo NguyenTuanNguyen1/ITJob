@@ -34,20 +34,20 @@
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
             </div>
-             @error('username')
-                <div style="color:red;">{{ $message }}</div>
-                <br>
-                @enderror
+            @error('username')
+            <div style="color:red;">{{ $message }}</div>
+            <br>
+            @enderror
             <div class="form-sub-w3">
                 <input type="password" name="password" placeholder="Mật khẩu"/>
                 <div class="icon-w3">
                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                 </div>
             </div>
-               @error('password')
-                <div style="color:red;">{{ $message }}</div>
-                <br>
-                @enderror
+            @error('password')
+            <div style="color:red;">{{ $message }}</div>
+            <br>
+            @enderror
             <label class="anim">
                 <input type="checkbox" name="remember_token" class="checkbox" checked="checked">
                 <span>Nhớ mật khẩu</span>
@@ -63,10 +63,10 @@
         </form>
 
         <form action="{{route('test-mail')}}">
-             <button type="submit"> Mail
+            <button type="submit"> Mail
 
 
-        </button>
+            </button>
         </form>
 
         <div class="icon-flat-form">
@@ -179,7 +179,7 @@
             });
         }
 
-        function load_data_trashed_review(){
+        function load_data_trashed_review() {
             $.get('http://itjob.vn/api/review/review-trashed', (res) => {
                 if (res.data !== '') {
                     let category = res.data;
@@ -199,7 +199,7 @@
             });
         }
 
-        function load_data_trashed_type(){
+        function load_data_trashed_type() {
             $.get('http://itjob.vn/api/type/type-trashed', (res) => {
                 if (res.data !== '') {
                     let category = res.data;
@@ -219,7 +219,7 @@
             });
         }
 
-        function load_data_contact_replied(){
+        function load_data_contact_replied() {
             $.get('http://itjob.vn/api/contact/list-contact-replied', (res) => {
                 if (res.data !== '') {
                     let category = res.data;
@@ -239,7 +239,7 @@
             });
         }
 
-        function load_data_report_replied(){
+        function load_data_report_replied() {
             $.get('http://itjob.vn/api/report/list-report-replied', (res) => {
                 if (res.data !== '') {
                     let category = res.data;

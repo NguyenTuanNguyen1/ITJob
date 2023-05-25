@@ -14,14 +14,14 @@ class InformationRepository implements IInformationRepository
 
     public function create($user_id, array $data)
     {
-        $data = new Information();
-        $data->content = $data['content'];
+        $infor = new Information();
+        $infor->content = $data['content'];
 //        $data->ticket_reply = $review['ticket_reply'];
-        $data->user_id = $user_id;
-        $data->type_id = $data['type_id'];
+        $infor->user_id = $user_id;
+        $infor->type_id = $data['type_id'];
 
-        $data->save();
-        return $data;
+        $infor->save();
+        return $infor;
     }
 
     public function find($id)
@@ -33,7 +33,6 @@ class InformationRepository implements IInformationRepository
         return Information::where('user_id', $id)->update([
             'content' => $data['content'],
 //            'ticket_reply' => $data['ticket_reply'],
-            'user_id' => $data['user_id'],
             'type_id' => $data['type_id'],
         ]);
     }

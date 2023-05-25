@@ -36,26 +36,23 @@ class UserRepository implements IUserRepository
 
     public function update($id,array $data)
     {
-        $result = User::find($id)->update([
-            'name' => $data['name'],
+        return User::find($id)->update([
             'username' => $data['username'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'address' => $data['address'],
-            'img_avatar' => $data['img_avatar'],
             'position' => $data['position'],
             'major' => $data['major'],
             'description' => $data['description'],
-            'status' => $data['status'],
-            'start' => $data['start'],
-//            'password' => $data['password'],
-            'provider' => $data['provider'],
-            'remember_token' => $data['remember_token'],
-            'token' => $data['token'],
-            'role_id' => $data['role_id'],
-            'company_id' => $data['company_id'],
         ]);
-        return $result;
+    }
+
+    public function updateAvatarAndName($id, array $data)
+    {
+        return User::find($id)->update([
+            'name' => $data['name'],
+            'img_avatar' => $data['img_avatar'],
+        ]);
     }
 
     public function delete($id)

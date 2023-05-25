@@ -22,16 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Review
-Route::prefix('review')->group(function (){
-    Route::get('/list-review',[ReviewController::class,'index'])->name('review.view');
-    Route::post('/review-create',[ReviewController::class,'store'])->name('review.create');
-    Route::post('/review-update',[ReviewController::class,'update'])->name('review.update');
-    Route::get('/review-detail/{id}',[ReviewController::class,'show'])->name('review.show');
-    Route::get('/review-trashed',[ReviewController::class,'trashed'])->name('review.trashed');
-    Route::post('/review-delete',[ReviewController::class,'delete'])->name('review.delete');
-    Route::post('/review-restore',[ReviewController::class,'restore'])->name('review.restore');
-});
+
 
 //Type
 Route::prefix('type')->group(function (){

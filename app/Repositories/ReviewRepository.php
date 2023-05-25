@@ -16,8 +16,7 @@ class ReviewRepository implements IReviewRepository
     {
         $data = new Review();
         $data->content = $review['content'];
-        $data->image = $review['image'];
-        $data->form_user_id = $review['form_user_id'];
+        $data->from_user_id = $review['from_user_id'];
         $data->to_user_id = $review['to_user_id'];
         $data->save();
         return $data;
@@ -55,5 +54,10 @@ class ReviewRepository implements IReviewRepository
     public function restore($id)
     {
         return Review::onlyTrashed()->where('id', $id)->restore();
+    }
+
+    public function getReviewByUser($to_user_id)
+    {
+        return Review::where('to_user_id', $to_user_id)->get();
     }
 }

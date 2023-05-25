@@ -25,5 +25,11 @@ class InformationTypeTableSeeder extends Seeder
                 'content' => $content
             ]);
         }
+
+        // DB::table('information')->insert([
+        //     'content' => fake()->text(),
+        //     'user_id' => 1,
+        //     'type_id' => rand(1,4),
+        // ]);
     }
 }

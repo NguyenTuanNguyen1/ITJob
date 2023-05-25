@@ -10,248 +10,240 @@
 </head>
 
 <body>
+@include('sweetalert::alert')
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-square  mt-5" style="border-radius: 10px;" src="http://surl.li/hgybd"
-                     width="200px" height="200px"><span class="font-weight-bold">Amelly</span><span
-                    class="text-black-50">amelly12@bbb.com</span><span>
-                    </span>
-            </div>
+            <form action="{{ Route('user.update.basic') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-square  mt-5" style="border-radius: 10px;"
+                         src="{{ url('Images/')}}/{{ Auth::user()->img_avatar }}"
+                         width="200px" height="200px">
+                    <input type="text" name="name" value="{{ Auth::user()->name }}" required>
+                    <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                    <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </div>
+            </form>
         </div>
         <div class="col-md-9 border-right">
             <div class="tab1">
                 <button class="tablinks" onclick="openCity(event, 'London')">Thông tin cá nhân</button>
-                <button class="tablinks" onclick="openCity(event, 'Paris')">Bình luận đánh giá</button>
-                <button class="tablinks" onclick="openCity(event, 'Tokyo')">Đổi mật khẩu</button>
                 <button class="tablinks" onclick="openCity(event, 'France')">Thông tin thêm</button>
+                <button class="tablinks" onclick="openCity(event, 'Paris')">Bình luận đánh giá</button>
             </div>
+
             <div id="London" class="tabcontent">
                 <div class="p-3 py-5" style="color: black;">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <p class="text-right" style="font-size:30px">Profile Settings</p>
+                        <p class="text-right" style="font-size:30px">Chỉnh sửa thông tin cá nhân</p>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Name</label><input type="text"
-                                                                                       class="form-control" placeholder="first name" value=""></div>
-                        <div class="col-md-6"><label class="labels">Surname</label><input type="text"
-                                                                                          class="form-control" value="" placeholder="surname"></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">PhoneNumber</label><input type="text"
-                                                                                               class="form-control" placeholder="enter phone number" value=""></div>
-                        <div class="col-md-12"><label class="labels">Address</label><input type="text"
-                                                                                           class="form-control" placeholder="enter address" value=""></div>
-                        <div class="col-md-12"><label class="labels">Email ID</label><input type="text"
-                                                                                            class="form-control" placeholder="enter email id" value=""></div>
-                        <div class="col-md-12"><label class="labels">Education</label><input type="text"
-                                                                                             class="form-control" placeholder="education" value=""></div>
-                        <div class="col-md-12"><label class="labels">Education</label><input type="text"
-                                                                                             class="form-control" placeholder="education" value=""></div>
-                        <div class="col-md-12">
-                            <!-- <label class="labels">Education</label><input type="text"
-                            class="form-control" placeholder="education" value=""> -->
-                            <label class="labels" for="job-region">Chuyên ngành</label>
-                            <select class="selectpicker1 border rounded" id="job-region" data-style="btn-black"
-                                    data-width="100%" data-live-search="true" title="Select Region" name="major">
-                                <option>IT/ Công nghệ phần mềm</option>
-                                <option>Kế toán</option>
-                                <option>Makerting</option>
-                                <option>Chế tạo máy</option>
-                                <option>Điện/ Điện tử</option>
-                                <option>Báo chí/ Truyền hình</option>
-                                <option>Bất động sản</option>
-                                <option>Công nghệ Ô tô</option>
-                                <option>Cơ khí</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <!-- <label class="labels">Education</label><input type="text"
-                            class="form-control" placeholder="education" value=""> -->
-                            <label class="labels" for="job-region">Chuyên ngành</label>
-                            <select class="selectpicker1 border rounded" id="job-region" data-style="btn-black"
-                                    data-width="100%" data-live-search="true" title="Select Region" name="major">
-                                <option>IT/ Công nghệ phần mềm</option>
-                                <option>Kế toán</option>
-                                <option>Makerting</option>
-                                <option>Chế tạo máy</option>
-                                <option>Điện/ Điện tử</option>
-                                <option>Báo chí/ Truyền hình</option>
-                                <option>Bất động sản</option>
-                                <option>Công nghệ Ô tô</option>
-                                <option>Cơ khí</option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6"><label class="labels">Country</label><input type="text"
-                                                                                          class="form-control" placeholder="country" value=""></div>
-                        <div class="col-md-6"><label class="labels">State/Region</label><input type="text"
-                                                                                               class="form-control" value="" placeholder="state"></div>
-                    </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save
-                            Profile</button></div>
-                </div>
-            </div>
-
-            <div id="Paris" class="tabcontent">
-                <section class="content-item" id="comments">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <form>
-                                    <h3 class="pull-left">New Comment</h3>
-                                    <button type="submit" class="btn btn-normal pull-right">Submit</button>
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-sm-3 col-lg-2 hidden-xs">
-                                                <img class="img-responsive"
-                                                     src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                            </div>
-                                            <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                                    <textarea class="form-control" id="message"
-                                                              placeholder="Your message" required=""></textarea>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-
-                                <h3>4 Comments</h3>
-
-                                <!-- COMMENT 1 - START -->
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img class="media-object"
-                                                                       src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">John Doe</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                        </p>
-                                        <ul class="list-unstyled list-inline media-detail pull-left"
-                                            style="display: flex;">
-                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                                        </ul>
-                                        <ul class="list-unstyled list-inline media-detail pull-right">
-                                            <li class=""><a href="">Like</a></li>
-
-                                        </ul>
+                    <form action="{{ Route('user.update') }}" method="post">
+                        @csrf
+                        <div id="profile">
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tên đăng nhập</label>
+                                        <input type="text" class="form-control" name="username"
+                                               value="{{ $user->username }}">
                                     </div>
+                                    @error('username')
+                                    <div style="color:red;">{{ $message }}</div>
+                                    <br>
+                                    @enderror
                                 </div>
-                                <!-- COMMENT 1 - END -->
-
-                                <!-- COMMENT 2 - START -->
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img class="media-object"
-                                                                       src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""></a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">John Doe</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                        </p>
-                                        <ul class="list-unstyled list-inline media-detail pull-left"
-                                            style="display: flex;">
-                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                                        </ul>
-                                        <ul class="list-unstyled list-inline media-detail pull-right">
-                                            <li class=""><a href="">Like</a></li>
-
-                                        </ul>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số điện thoại</label>
+                                        <input type="text" class="form-control" name="phone" value="{{ $user->phone }}">
                                     </div>
+                                    @error('phone')
+                                    <div style="color:red;">{{ $message }}</div>
+                                    <br>
+                                    @enderror
                                 </div>
-                                <!-- COMMENT 2 - END -->
-
-                                <!-- COMMENT 3 - START -->
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img class="media-object"
-                                                                       src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">John Doe</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                        </p>
-                                        <ul class="list-unstyled list-inline media-detail pull-left"
-                                            style="display: flex;">
-                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                                        </ul>
-                                        <ul class="list-unstyled list-inline media-detail pull-right">
-                                            <li class=""><a href="">Like</a></li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- COMMENT 3 - END -->
-
-                                <!-- COMMENT 4 - START -->
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img class="media-object"
-                                                                       src="https://bootdey.com/img/Content/avatar/avatar4.png" alt=""></a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">John Doe</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                            dolor sit amet,
-                                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit.
-                                        </p>
-                                        <ul class="list-unstyled list-inline media-detail pull-left"
-                                            style="display: flex;">
-                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                                        </ul>
-                                        <ul class="list-unstyled list-inline media-detail pull-right">
-                                            <li class=""><a href="">Like</a></li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- COMMENT 4 - END -->
-
                             </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" name="email" value="{{ $user->email }}">
+                                    @error('email')
+                                    <div style="color:red;">{{ $message }}</div>
+                                    <br>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label for="job-region">Chuyên ngành</label><br>
+                                    <select class="selectpicker border rounded" style="width: 40%; padding: 10px;"
+                                            id="job-region" data-style="btn-black"
+                                            data-width="100%" data-live-search="true" title="Select Region"
+                                            name="major">
+                                        <option>IT/ Công nghệ phần mềm</option>
+                                        <option>Kế toán</option>
+                                        <option>Makerting</option>
+                                        <option>Chế tạo máy</option>
+                                        <option>Điện/ Điện tử</option>
+                                        <option>Báo chí/ Truyền hình</option>
+                                        <option>Bất động sản</option>
+                                        <option>Công nghệ Ô tô</option>
+                                        <option>Cơ khí</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label for="job-region">Vị trí</label><br>
+                                    <select class="selectpicker border rounded" style="width: 40%; padding: 10px;"
+                                            id="job-region" data-style="btn-black"
+                                            data-width="100%" data-live-search="true" title="Select Region"
+                                            name="position">
+                                        <option>Thực tập sinh</option>
+                                        <option>Nhân viên</option>
+                                        <option>Phó phòng</option>
+                                        <option>Trưởng phòng</option>
+                                        <option>Trợ lý</option>
+                                        <option>Thư ký</option>
+                                        <option>Giám Đốc</option>
+                                        <option>Quản lý</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Địa chỉ</label>
+                                        <input type="text" class="form-control" name="address"
+                                               value="{{ $user->address }}">
+                                    </div>
+                                </div>
 
-            <div id="Tokyo" class="tabcontent">
-                <p>Đổi mật khẩu</p>
-            </div>
-            <div id="France" class="tabcontent">
-                <p>Thông tin thêm</p>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Mô tả</label>
+                                        <textarea class="form-control textarea"
+                                                  name="description">{{ $user->description }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary profile-button" type="submit">Chỉnh sửa</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
+        <div id="Paris" class="tabcontent">
+            <section class="content-item" id="comments">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form action="{{ Route('review.create') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-normal pull-right">Gửi</button>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-sm-3 col-lg-2 hidden-xs">
+                                            <img class="img-responsive" src="" alt="">
+                                        </div>
+                                        <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                            <textarea class="form-control" name="content" id="message" required></textarea>
+                                        </div>
+                                        <input name="from_user_id" type="hidden" value="{{ Auth::user()->id }}">
+                                        <input name="to_user_id" type="hidden" value="{{ $user->id }}">
+                                        <input name="id" type="hidden" value="{{ Auth::user()->id }}">
+                                    </div>
+                                </fieldset>
+
+                            </form>
+
+                            <h3>{{ $count_review }} bình luận</h3>
+
+                            @foreach($reviews as $review)
+                                <div class="media">
+                                    <a class="pull-left" href="">
+                                        <img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">thinh</h4>
+                                        <p>{{ $review->content }}</p>
+                                        <ul class="list-unstyled list-inline media-detail pull-left"
+                                            style="display: flex;">
+                                            <li><i class="fa fa-calendar"></i>{{ $review->created_at->format('d-m-Y') }}</li>
+{{--                                            <li><i class="fa fa-thumbs-up"></i>13</li>--}}
+                                        </ul>
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <li class=""><a href="">Like</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-md-9 border-right">
+            <div id="France" class="tabcontent">
+                <div class="p-3 py-5" style="color: black;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="text-right" style="font-size:30px">Thông tin thêm</p>
+                    </div>
+                    <div class="row mt-3">
+                        @foreach($information as $infor)
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{ $infor->type->content }}</label>
+                                    <input type="text" class="form-control" name="username"
+                                           value="{{ $infor->content }}">
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <form action="{{ Route('user.update.information') }}" method="post">
+                            @csrf
+                            <select class="selectpicker border rounded" style="width: 40%; padding: 10px;"
+                                    id="job-region" data-style="btn-black"
+                                    data-width="100%" data-live-search="true" title="Select Region" name="type_id">
+                                @foreach($type_infor as $type)
+                                    <option value="{{ $type->id }}">{{ $type->content }}</option>
+                                @endforeach
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="content"
+                                               style="width: 40%; padding: 10px;"
+                                               name="content" required>
+                                    </div>
+                                </div>
+                            </select>
+                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary profile-button"> Cập nhật thông tin
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </div>
-</div>
+
 </body>
 @include('layout.page-js')
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script>
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
@@ -266,6 +258,26 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
+    $(document).ready(() => {
+        $("#content").validate({
+            rule: {
+                content: "required"
+            },
+            messages: {
+                content: "Vui lòng nhập nội dung"
+            },
+            errorElement: "p",
+            errorPlacement: function (error, element) {
+                var placement = $(element).data("error");
+                if (placement) {
+                    $(placement).append(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+        });
+    });
 </script>
 
 </html>

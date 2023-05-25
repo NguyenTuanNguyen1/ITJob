@@ -9,7 +9,7 @@ class InformationTypeRepository implements ITypeRepository
 
     public function all()
     {
-        return InformationType::orderBy('id','DESC')->paginate(8);
+        return InformationType::all();
     }
 
     public function create(array $type)

@@ -13,11 +13,11 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
     use Service;
+
     public function __construct
     (
         IReviewRepository $reviewRepository
-    )
-    {
+    ) {
         $this->review_repo = $reviewRepository;
     }
 
@@ -40,22 +40,22 @@ class ReviewController extends Controller
         $input = $request->all();
 
         try {
-            $input['image'] = $this->uploadImage($request);
-
             $review = $this->review_repo->create($input);
-            $this->ActivityLog(  "Bạn đã đăng bài nhận xét " . $review['id'] , $input['user_id']);
             if (empty($review)) {
                 return response()->json([
                     'result' => false,
                     'message' => 'Tạo bài viết thất bại'
                 ]);
             }
-            return response()->json([
-                'result' => true,
-                'message' => 'Tạo bài viết thành công'
-            ]);
-        }catch (\Exception $e)
-        {
+            if ($request->ajax()) {
+                return response()->json([
+                    'result' => true,
+                    'message' => $request
+                ]);
+            }
+
+            return redirect()->route('user.profile', $input['id']);
+        } catch (\Exception $e) {
             return response()->json([
                 'result' => false,
                 'message' => $e->getMessage()
@@ -69,14 +69,13 @@ class ReviewController extends Controller
 
         try {
             $this->review_repo->update($input['id'], $input);
-            $this->ActivityLog(  "Bạn đã chỉnh sửa nhận xét của mình tại " . $input['id'] , $input['user_id']);
+            $this->ActivityLog("Bạn đã chỉnh sửa nhận xét của mình tại " . $input['id'], $input['user_id']);
             toast('Chỉnh sửa thành công', 'success');
             return response()->json([
                 'result' => true,
                 'message' => 'Chỉnh sửa bài viết thành công'
             ]);
-        }catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return response()->json([
                 'result' => false,
                 'message' => $e->getMessage()
@@ -88,7 +87,7 @@ class ReviewController extends Controller
     {
         $review = $this->review_repo->trashed();
         return response()->json([
-           'data' => $review
+            'data' => $review
         ]);
     }
 
@@ -110,8 +109,7 @@ class ReviewController extends Controller
                 'result' => false,
                 'message' => 'Xoá bài viết thất bại'
             ]);
-        }catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return response()->json([
                 'result' => false,
                 'message' => $e->getMessage()
@@ -132,8 +130,7 @@ class ReviewController extends Controller
                 'result' => true,
                 'data' => $review
             ]);
-        }catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return response()->json([
                 'result' => false,
                 'data' => $e->getMessage()
