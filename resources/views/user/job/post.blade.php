@@ -35,32 +35,11 @@
                             <textarea name="benefit" id="benefit"></textarea>
 
                         </div>
-
-                        <div class="form-group">
-                            <label for="job-description">Địa điểm làm việc</label><br>
-                            <input type="text" name="workplace" cols="112">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="job-description">Số lượng</label><br>
-                            <input type="number" name="quantity">
-                        </div>
-
                         <div class="form-group">
                             <label for="job-description">Kinh nghiệm</label><br>
-                            <input type="text" name="experience">
+                            <textarea name="experience" id="experience"></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label for="job-type">Hình thức làm việc</label>
-                            <select class="selectpicker border rounded" id="job-type" data-style="btn-black"
-                                    data-width="100%" data-live-search="true" title="Select Job Type" name="working">
-                                <option>Bán thời gian</option>
-                                <option>Toàn thời gian</option>
-                                <option>Thực tập</option>
-                                <option>Làm từ xa</option>
-                            </select>
-                        </div>
 
                         <div class="form-group">
                             <label for="job-description">Yêu cầu</label>
@@ -97,6 +76,27 @@
                                 <option>Quản lý</option>
                             </select>
                         </div>
+                        <div class="form-group" style="width:100%">
+                            <label for="job-description">Địa điểm làm việc</label><br>
+                            <input style="width:100%;border: 1px solid #dee2e6;" type="text" name="workplace" cols="112">
+                        </div>
+                        <div class="item-1">
+                            <div class="form-group">
+                                <label for="job-description">Số lượng</label><br>
+                                <input style="height: 50px;border: 1px solid #dee2e6;" type="number" name="quantity">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-type">Hình thức làm việc</label>
+                                <select class="selectpicker border rounded" id="job-type" data-style="btn-black"
+                                        data-width="100%" data-live-search="true" title="Select Job Type" name="working">
+                                    <option>Bán thời gian</option>
+                                    <option>Toàn thời gian</option>
+                                    <option>Thực tập</option>
+                                    <option>Làm từ xa</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <input type="hidden" name="image" value="{{ Auth::user()->img_avatar }}">
                         <input type="hidden" name="user_id" value=" {{ Auth::user()->id }}">
 
@@ -106,10 +106,12 @@
             </div>
         </div>
     </section>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.0.1/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('description');
-    CKEDITOR.replace('benefit');
-    CKEDITOR.replace('requirements');
-</script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.0.1/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('description');
+        CKEDITOR.replace('benefit');
+        CKEDITOR.replace('requirements');
+        CKEDITOR.replace('experience');
+        experience
+    </script>
 @endsection
