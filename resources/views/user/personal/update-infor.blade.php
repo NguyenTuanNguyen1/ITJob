@@ -145,39 +145,42 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form action="{{ Route('review.create') }}" method="post">
+                            <form action="{{ Route('review.create') }}" method="post" class="content-review">
                                 @csrf
                                 <button type="submit" class="btn btn-normal pull-right">Gửi</button>
-                                <fieldset>
-                                    <div class="row">
-                                        <div class="col-sm-3 col-lg-2 hidden-xs">
-                                            <img class="img-responsive" src="" alt="">
-                                        </div>
-                                        <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                            <textarea class="form-control" name="content" id="message" required></textarea>
-                                        </div>
-                                        <input name="from_user_id" type="hidden" value="{{ Auth::user()->id }}">
-                                        <input name="to_user_id" type="hidden" value="{{ $user->id }}">
-                                        <input name="id" type="hidden" value="{{ Auth::user()->id }}">
+                                <div class="row">
+                                    <div class="col-sm-3 col-lg-2 hidden-xs">
+                                        <img class="img-responsive" src="" alt="">
                                     </div>
-                                </fieldset>
-
+                                    <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                        <textarea class="form-control" name="content" id="content" required></textarea>
+                                    </div>
+                                    <input name="from_user_id" type="hidden" id="from_user_id"
+                                           value="{{ Auth::user()->id }}">
+                                    <input name="to_user_id" type="hidden" id="to_user_id" value="{{ $user->id }}">
+                                    <input name="id" type="hidden" id="id" value="{{ Auth::user()->id }}">
+                                </div>
                             </form>
 
                             <h3>{{ $count_review }} bình luận</h3>
 
+                            <div id="load-reviews">
+
+                            </div>
                             @foreach($reviews as $review)
                                 <div class="media">
                                     <a class="pull-left" href="">
-                                        <img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                        <img class="media-object"
+                                             src="{{ url('Images') }}/{{ $review->from_user->img_avatar }}" alt="">
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading">thinh</h4>
+                                        <h4 class="media-heading">{{ $review->from_user->name }}</h4>
                                         <p>{{ $review->content }}</p>
                                         <ul class="list-unstyled list-inline media-detail pull-left"
                                             style="display: flex;">
-                                            <li><i class="fa fa-calendar"></i>{{ $review->created_at->format('d-m-Y') }}</li>
-{{--                                            <li><i class="fa fa-thumbs-up"></i>13</li>--}}
+                                            <li><i class="fa fa-calendar"></i>{{ $review->created_at->format('d-m-Y') }}
+                                            </li>
+                                            <li><i class="fa fa-thumbs-up"></i>13</li>
                                         </ul>
                                         <ul class="list-unstyled list-inline media-detail pull-right">
                                             <li class=""><a href="">Like</a></li>
@@ -260,7 +263,26 @@
     }
 
     $(document).ready(() => {
-        $("#content").validate({
+        // $("#content").validate({
+        //     rule: {
+        //         content: "required"
+        //     },
+        //     messages: {
+        //         content: "Vui lòng nhập nội dung"
+        //     },
+        //     errorElement: "p",
+        //     errorPlacement: function (error, element) {
+        //         var placement = $(element).data("error");
+        //         if (placement) {
+        //             $(placement).append(error);
+        //         } else {
+        //             error.insertAfter(element);
+        //         }
+        //     },
+        // });
+        load_data()
+
+        $(".content-review").validate({
             rule: {
                 content: "required"
             },
@@ -277,6 +299,50 @@
                 }
             },
         });
+
+        $('.content-review').submit(function (e) {
+            e.preventDefault();
+            var data = {
+                "_token": "{{ csrf_token() }}",
+                "content": $('#content').val(),
+                "from_user_id": $('#from_user_id').val(),
+                "to_user_id": $('#to_user_id').val(),
+                "id": $('#id').val()
+            }
+            $.ajax({
+                url: "{{ Route('review.create') }}",
+                type: 'POST',
+                data: data,
+                success: function (res) {
+                    load_data()
+                }
+            })
+        })
+
+        function load_data() {
+            var _li = '';
+            $.get('http://itjob.vn/user/user-profile/{{Auth::user()->id}}', (res) => {
+                var data = res.reviews;
+                console.log(data)
+                data.forEach(function (item) {
+                    _li += '<div class="media" >'
+                    _li += '<a class="pull-left" href="">';
+                    _li += '<img class="media-object" src="{{ url('Images/') }}/' + item.from_user.img_avatar + '" alt="">';
+                    _li += '</a>';
+                    _li += '<div class="media-body">';
+                    _li += '<h4 class="media-heading">' + item.from_user.name + '</h4>';
+                    _li += '<p>' + item.content + '</p>';
+                    _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
+                    _li += '<li><i class="fa fa-calendar"></i>';
+                    _li += item.created_at;
+                    _li += '</li>';
+                    _li += '</ul>'
+                    _li += '</div>';
+                    _li += '</div>';
+                    $('#load-reviews').html(_li);
+                })
+            });
+        }
     });
 </script>
 

@@ -58,6 +58,6 @@ class ReviewRepository implements IReviewRepository
 
     public function getReviewByUser($to_user_id)
     {
-        return Review::where('to_user_id', $to_user_id)->get();
+        return Review::with('from_user')->where('to_user_id', $to_user_id)->get();
     }
 }
