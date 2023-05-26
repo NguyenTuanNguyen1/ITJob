@@ -18,7 +18,7 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Tổng số người dùng</p>
-                                    <p class="card-title" id="all_post">
+                                    <p class="card-title" id="all_user">
                                     <p>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Quản trị viên</p>
-                                    <p class="card-title" id="count_post_approved">
+                                    <p class="card-title" id="count_user_admin">
                                     <p>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Nhà tuyển dụng</p>
-                                    <p class="card-title" id="count_post_not_approved">
+                                    <p class="card-title" id="count_user_company">
                                     <p>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Ứng cử viên</p>
-                                    <p class="card-title" id="count_post_trashed">
+                                    <p class="card-title" id="count_user_candidate">
                                     <p>
                                 </div>
                             </div>
@@ -211,5 +211,42 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    $(document).ready(function () {
+        load_data()
+        load_count_user_admin()
+        load_count_user_company()
+        load_count_user_candidate()
 
+        function load_data() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                _li += res.all_user;
+                $('#all_user').html(_li);
+            });
+        }
+
+        function load_count_user_admin() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                _li += res.count_user_admin;
+                $('#count_user_admin').html(_li);
+            });
+        }
+
+        function load_count_user_company() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                _li += res.count_user_company;
+                $('#count_user_company').html(_li);
+            });
+        }
+
+        function load_count_user_candidate() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                _li += res.count_user_candidate;
+                $('#count_user_candidate').html(_li);
+            });
+        }
+    });
 </script>

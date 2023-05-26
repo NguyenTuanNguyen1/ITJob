@@ -112,10 +112,21 @@ class DashboardController extends Controller
             abort(401);
         }
 
-        $all_user =$this->user_repo->all();
+        $all_user = $this->user_repo->all();
         $count_user_admin = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_ADMIN);
         $count_user_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
         $count_user_candidate = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_CANDIDATE);
+
+        if ($request->ajax())
+        {
+            return response()->json([
+                'all_user' => count($all_user),
+                'count_user_admin' => count($count_user_admin),
+                'count_user_company' => count($count_user_company),
+                'count_user_candidate' => count($count_user_candidate)
+
+            ]);
+        }
 
         return view('admin.dashboard.account');
     }

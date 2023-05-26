@@ -96,8 +96,8 @@ Route::prefix('dashboard')->group(function (){
     Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
     Route::get('/account',[DashboardController::class,'account'])->name('admin.account');
     Route::get('/contact',[DashboardController::class,'index'])->name('contact.index');
-    Route::get('/report',[DashboardController::class,'index'])->name('admin.index');
-    Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
+    Route::get('/report',[DashboardController::class,'index'])->name('admin.report');
+//    Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
 });
 
 Route::prefix('admin')->group(function (){
@@ -112,7 +112,7 @@ Route::get('/callback/{provider}',[OAuthController::class,'callback_Linkedin'])-
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/post-create',[HomeController::class,'post'])->name('post.index');
-Route::get('/contact-index',[HomeController::class,'contact'])->name('contact.index');
+//Route::get('/contact-index',[HomeController::class,'contact'])->name('contact.index');
 
 
 //
