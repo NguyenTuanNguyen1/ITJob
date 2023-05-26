@@ -14,7 +14,6 @@
         }
     </script>
     @include('layout.page-css')
-
 </head>
 
 <body>
