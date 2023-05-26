@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <label>Tên đăng nhập</label>
                                         <input type="text" class="form-control" name="username"
-                                            value="{{ $user->username }}">
+                                               value="{{ $user->username }}">
                                     </div>
                                     @error('username')
                                     <div style="color:red;">{{ $message }}</div>
@@ -312,6 +312,102 @@ var imgBox = document.getElementById("imgBox");
 var loadFile = function(event) {
     imgBox.style.backgroundImage = "url(" + URL.createObjectURL(event.target.files[0]) + ")";
 }
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    $(document).ready(() => {
+        // $("#content").validate({
+        //     rule: {
+        //         content: "required"
+        //     },
+        //     messages: {
+        //         content: "Vui lòng nhập nội dung"
+        //     },
+        //     errorElement: "p",
+        //     errorPlacement: function (error, element) {
+        //         var placement = $(element).data("error");
+        //         if (placement) {
+        //             $(placement).append(error);
+        //         } else {
+        //             error.insertAfter(element);
+        //         }
+        //     },
+        // });
+        load_data()
+
+        $(".content-review").validate({
+            rule: {
+                content: "required"
+            },
+            messages: {
+                content: "Vui lòng nhập nội dung"
+            },
+            errorElement: "p",
+            errorPlacement: function (error, element) {
+                var placement = $(element).data("error");
+                if (placement) {
+                    $(placement).append(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+        });
+
+        $('.content-review').submit(function (e) {
+            e.preventDefault();
+            var data = {
+                "_token": "{{ csrf_token() }}",
+                "content": $('#content').val(),
+                "from_user_id": $('#from_user_id').val(),
+                "to_user_id": $('#to_user_id').val(),
+                "id": $('#id').val()
+            }
+            $.ajax({
+                url: "{{ Route('review.create') }}",
+                type: 'POST',
+                data: data,
+                success: function (res) {
+                    load_data()
+                }
+            })
+        })
+
+        function load_data() {
+            var _li = '';
+            $.get('http://itjob.vn/user/user-profile/{{Auth::user()->id}}', (res) => {
+                var data = res.reviews;
+                console.log(data)
+                data.forEach(function (item) {
+                    _li += '<div class="media" >'
+                    _li += '<a class="pull-left" href="">';
+                    _li += '<img class="media-object" src="{{ url('Images/') }}/' + item.from_user.img_avatar + '" alt="">';
+                    _li += '</a>';
+                    _li += '<div class="media-body">';
+                    _li += '<h4 class="media-heading">' + item.from_user.name + '</h4>';
+                    _li += '<p>' + item.content + '</p>';
+                    _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
+                    _li += '<li><i class="fa fa-calendar"></i>';
+                    _li += item.created_at;
+                    _li += '</li>';
+                    _li += '</ul>'
+                    _li += '</div>';
+                    _li += '</div>';
+                    $('#load-reviews').html(_li);
+                })
+            });
+        }
+    });
 </script>
 
 </html>

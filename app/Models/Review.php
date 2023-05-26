@@ -31,8 +31,8 @@ class Review extends Model
 //        return $this->belongsTo(User::class);
 //    }
 //
-//    public function getNameReview()
-//    {
-//        return $this->user->username;
-//    }
+    public function from_user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
