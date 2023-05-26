@@ -94,14 +94,15 @@ Route::prefix('review')->group(function (){
 //Dashboard
 Route::prefix('dashboard')->group(function (){
     Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
+    Route::get('/admin/admin-profile/{id}',[DashboardController::class,'profile'])->name('admin.profile');
     Route::get('/account',[DashboardController::class,'account'])->name('admin.account');
     Route::get('/contact',[DashboardController::class,'index'])->name('contact.index');
     Route::get('/report',[DashboardController::class,'index'])->name('admin.report');
-//    Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
 });
 
 Route::prefix('admin')->group(function (){
     Route::post('/approved_post',[AdminController::class,'approved'])->name('admin.approved.post');
+    Route::post('/delete-user',[AdminController::class,'deleteUserByAdmin'])->name('admin.delete.user');
 });
 
 Route::get('/login-google/{provider}',[OAuthController::class,'redirect_Google'])->name('login.google');

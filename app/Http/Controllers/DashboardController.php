@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Constant;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\IBackendRepository;
+use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IReviewRepository;
 use App\Interfaces\ISearchRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
+use App\Repositories\InformationTypeRepository;
 use App\Repositories\RoleRepostitory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,6 +27,8 @@ use Illuminate\Http\Request;
  * @property RoleRepostitory $role_repo
  * @property ISearchRepository $search_repo
  * @property IBackendRepository $back_repo
+ * @property InformationTypeRepository $type_repo
+ * @property ICompanyRepository $company_repo
  */
 
 class DashboardController extends Controller
@@ -40,7 +44,8 @@ class DashboardController extends Controller
         RoleRepostitory $roleRepository,
         ISearchRepository $searchRepository,
         IBackendRepository $backendRepository,
-
+        ICompanyRepository $companyRepository,
+        InformationTypeRepository $typeRepository
     )
     {
         $this->post_repo = $postRepository;
@@ -52,6 +57,8 @@ class DashboardController extends Controller
         $this->role_repo = $roleRepository;
         $this->search_repo = $searchRepository;
         $this->back_repo = $backendRepository;
+        $this->company_repo = $companyRepository;
+        $this->type_repo = $typeRepository;
     }
 
     public function index(Request $request)
@@ -113,21 +120,51 @@ class DashboardController extends Controller
         }
 
         $all_user = $this->user_repo->all();
-        $count_user_admin = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_ADMIN);
-        $count_user_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
-        $count_user_candidate = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_CANDIDATE);
+        $user_admin = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_ADMIN);
+        $user_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
+        $user_candidate = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_CANDIDATE);
 
         if ($request->ajax())
         {
             return response()->json([
                 'all_user' => count($all_user),
-                'count_user_admin' => count($count_user_admin),
-                'count_user_company' => count($count_user_company),
-                'count_user_candidate' => count($count_user_candidate)
-
+                'count_user_admin' => count($user_admin),
+                'count_user_company' => count($user_company),
+                'count_user_candidate' => count($user_candidate),
+                'user_admin' => $user_admin,
+                'user_company' => $user_company,
+                'user_candidate' => $user_candidate
             ]);
         }
 
         return view('admin.dashboard.account');
+    }
+
+    public function profile($id, Request $request)
+    {
+        $user = $this->user_repo->find($id);
+        $company = $this->company_repo->find($id);
+        $information = $this->information_repo->find($id);
+        $type = $this->type_repo->all();
+        $review = $this->review_repo->getReviewByUser($id);
+        if ($request->ajax()) {
+            return response()->json([
+                'information' => $information,
+                'user' => $user,
+                'company' => $company,
+                'reviews' => $review,
+                'count_review' => count($review)
+            ]);
+        }
+
+        return view('user.personal.update-infor')
+            ->with([
+                'user' => $user,
+                'company' => $company,
+                'information' => $information,
+                'type_infor' => $type,
+                'reviews' => $review,
+                'count_review' => count($review)
+            ]);
     }
 }

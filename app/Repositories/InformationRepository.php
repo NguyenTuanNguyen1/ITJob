@@ -15,10 +15,8 @@ class InformationRepository implements IInformationRepository
     public function create($user_id, array $data)
     {
         $infor = new Information();
-        $infor->content = $data['content'];
 //        $data->ticket_reply = $review['ticket_reply'];
         $infor->user_id = $user_id;
-        $infor->type_id = $data['type_id'];
 
         $infor->save();
         return $infor;

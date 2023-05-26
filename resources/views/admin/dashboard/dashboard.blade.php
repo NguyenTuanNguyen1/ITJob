@@ -202,9 +202,7 @@
 <script src="{{ url('profile/js/plugins/chartjs.min.js') }}"></script>
 <!--  Notifications Plugin    -->
 <script src="{{ url('profile/js/plugins/bootstrap-notify.js') }}"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{ url('profile/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
-<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+
 <script src="{{ url('profile/demo/demo.js')  }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -231,7 +229,7 @@
                     _li += '<td>' + item.user.name +'</td>';
                     _li += '<td>' + item.created_at +'</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
                     _li += '<button class="btn btn-outline-danger" type="submit" id="btn-approved" value="' + item.id +'">Phê duyệt</button>';
                     _li += '</td>';
                     _li += '</tr>';
@@ -250,7 +248,7 @@
                     _li += '<td>' + item.created_at +'</td>';
                     _li += '<td>' + item.approved_user.username +'</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
                     _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete" value="' + item.id +'">Xoá bài viết</button>';
                     _li += '</td>';
                     _li += '</tr>';
@@ -270,7 +268,7 @@
                     _li += '<td>' + item.approved_user.name +'</td>';
                     _li += '<td>' + item.delete_user.name +'</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
                     _li += '<button class="btn btn-outline-dark" type="submit" id="btn-restore" value="' + item.id +'">Khôi phục bài viết</button>';
                     _li += '</td>';
                     _li += '</tr>';

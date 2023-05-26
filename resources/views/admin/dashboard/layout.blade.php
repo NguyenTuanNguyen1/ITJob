@@ -34,7 +34,7 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="active ">
-                    <a>
+                    <a href="{{ Route('admin.index',['admin_id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-bank"></i>
                         <p>Dashboard</p>
                     </a>
@@ -97,7 +97,7 @@
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <div class="collapse navbar-collapse justify-content-end" id="navigation" style="justify-content: flex-start!important;">
                     <form>
                         <div class="input-group no-border">
                             <input type="text" value="" class="form-control" placeholder="Tìm kiếm...">
@@ -109,52 +109,36 @@
                         </div>
                     </form>
                 </div>
-{{--                <ul class="navbar-nav">--}}
-{{--                    --}}{{--                        <li class="nav-item">--}}
-{{--                    --}}{{--                            <a class="nav-link btn-magnify" href="javascript:;">--}}
-{{--                    --}}{{--                                <i class="nc-icon nc-layout-11"></i>--}}
-{{--                    --}}{{--                                <p>--}}
-{{--                    --}}{{--                                    <span class="d-lg-none d-md-block">Stats</span>--}}
-{{--                    --}}{{--                                </p>--}}
-{{--                    --}}{{--                            </a>--}}
-{{--                    --}}{{--                        </li>--}}
-{{--                    <li class="nav-item btn-rotate dropdown">--}}
-{{--                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"--}}
-{{--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                            <i class="nc-icon nc-app"></i>--}}
-{{--                        </a>--}}
-{{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">--}}
-{{--                            <a class="dropdown-item" href="{{ Route('user.profile',['id' => Auth::user()->id]) }}">Thông tin cá nhân</a>--}}
-{{--                            <a class="dropdown-item" href="">Đổi mật khẩu</a>--}}
-{{--                            <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
+                {{--                <ul class="navbar-nav">--}}
+                {{--                    --}}{{--                        <li class="nav-item">--}}
+                {{--                    --}}{{--                            <a class="nav-link btn-magnify" href="javascript:;">--}}
+                {{--                    --}}{{--                                <i class="nc-icon nc-layout-11"></i>--}}
+                {{--                    --}}{{--                                <p>--}}
+                {{--                    --}}{{--                                    <span class="d-lg-none d-md-block">Stats</span>--}}
+                {{--                    --}}{{--                                </p>--}}
+                {{--                    --}}{{--                            </a>--}}
+                {{--                    --}}{{--                        </li>--}}
+                {{--                    <li class="nav-item btn-rotate dropdown">--}}
+                {{--                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"--}}
+                {{--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                {{--                            <i class="nc-icon nc-app"></i>--}}
+                {{--                        </a>--}}
+                {{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">--}}
+                {{--                            <a class="dropdown-item" href="{{ Route('user.profile',['id' => Auth::user()->id]) }}">Thông tin cá nhân</a>--}}
+                {{--                            <a class="dropdown-item" href="">Đổi mật khẩu</a>--}}
+                {{--                            <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>--}}
+                {{--                        </div>--}}
+                {{--                    </li>--}}
+                {{--                </ul>--}}
             </div>
         </nav>
         @yield('content')
     </div>
 </div>
-</body>
 
-<script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
-<script src="{{ url('profile/js/core/popper.min.js') }}"></script>
-<script src="{{ url('profile/js/core/bootstrap.min.js') }}"></script>
-<script src="{{ url('profile/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chart JS -->
-<script src="{{ url('profile/js/plugins/chartjs.min.js') }}"></script>
-<!--  Notifications Plugin    -->
-<script src="{{ url('profile/js/plugins/bootstrap-notify.js') }}"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{ url('profile/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
-<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-<script src="{{ url('profile/demo/demo.js')  }}"></script>
 <script>
     $(document).ready(function () {
-        // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-        demo.initChartsPages();
+
     });
 </script>
 </body>

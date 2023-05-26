@@ -45,8 +45,7 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Quản trị viên</p>
-                                    <p class="card-title" id="count_user_admin">
-                                    <p>
+                                    <p class="card-title" id="count_user_admin"></p>
                                 </div>
                             </div>
                         </div>
@@ -72,8 +71,7 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Nhà tuyển dụng</p>
-                                    <p class="card-title" id="count_user_company">
-                                    <p>
+                                    <p class="card-title" id="count_user_company"></p>
                                 </div>
                             </div>
                         </div>
@@ -99,8 +97,7 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Ứng cử viên</p>
-                                    <p class="card-title" id="count_user_candidate">
-                                    <p>
+                                    <p class="card-title" id="count_user_candidate"></p>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +130,8 @@
                                 <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="post-not-approved">
+                                <tbody id="user_admin">
+
                                 </tbody>
                             </table>
                         </div>
@@ -160,7 +158,7 @@
                                 <th>Chuyên ngành</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="post-approved">
+                                <tbody id="user_company">
                                 </tbody>
                             </table>
                         </div>
@@ -186,7 +184,7 @@
                                 <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="post-trashed">
+                                <tbody id="user_candidate">
                                 </tbody>
                             </table>
                         </div>
@@ -204,18 +202,24 @@
 <script src="{{ url('profile/js/plugins/chartjs.min.js') }}"></script>
 <!--  Notifications Plugin    -->
 <script src="{{ url('profile/js/plugins/bootstrap-notify.js') }}"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{ url('profile/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
-<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+
 <script src="{{ url('profile/demo/demo.js')  }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function () {
+        var $tableAdmin = $("#user_admin")
+        var $tableCompany = $("#user_company")
+        var $tableCandidate = $("#user_candidate")
+
+
         load_data()
         load_count_user_admin()
         load_count_user_company()
         load_count_user_candidate()
+        load_user_admin()
+        load_user_company()
+        load_user_candidate()
 
         function load_data() {
             $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
@@ -248,5 +252,193 @@
                 $('#count_user_candidate').html(_li);
             });
         }
+
+        function load_user_admin() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                var data = res.user_admin;
+                data.forEach(function (item) {
+                    _li += '<tr>';
+                    _li += '<td>' + item.name + '</td>';
+                    _li += '<td>' + item.email + '</td>';
+                    _li += '<td>' + item.phone + '</td>';
+                    _li += '<td>' + item.email + '</td>';
+                    _li += '<td class="text-center">';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-admin" value="' + item.id + '">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-admin" value="' + item.id + '">Xoá</button>';
+                    _li += '</td>';
+                    _li += '</tr>';
+                    $('#user_admin').html(_li);
+                })
+            });
+        }
+
+        function load_user_company() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                var data = res.user_company;
+                data.forEach(function (item) {
+                    _li += '<tr>';
+                    _li += '<td>' + item.name + '</td>';
+                    _li += '<td>' + item.email + '</td>';
+                    _li += '<td>' + item.phone + '</td>';
+                    _li += '<td>' + item.address + '</td>';
+                    _li += '<td>' + item.major + '</td>';
+                    _li += '<td class="text-center">';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-company" value="' + item.id + '">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-company" value="' + item.id + '">Xoá</button>';
+                    _li += '</td>';
+                    _li += '</tr>';
+                    $('#user_company').html(_li);
+                })
+            });
+        }
+
+        function load_user_candidate() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                var data = res.user_candidate;
+                data.forEach(function (item) {
+                    _li += '<tr>';
+                    _li += '<td>' + item.name + '</td>';
+                    _li += '<td>' + item.email + '</td>';
+                    _li += '<td>' + item.phone + '</td>';
+                    _li += '<td>' + item.email + '</td>';
+                    _li += '<td class="text-center">';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-candidate" value="' + item.id + '">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-candidate" value="' + item.id + '">Xoá</button>';
+                    _li += '</td>';
+                    _li += '</tr>';
+                    $('#user_candidate').html(_li);
+                })
+            });
+        }
+
+        $tableAdmin.on('click', '#btn-detail-admin', function (e) {
+            e.preventDefault()
+            var user_id = $('#btn-detail-admin').val();
+            window.location.href = 'http://itjob.vn/dashboard/admin/admin-profile/' + user_id;
+        })
+
+        $tableCompany.on('click', '#btn-detail-company', function (e) {
+            e.preventDefault()
+            var user_id = $('#btn-detail-company').val();
+            console.log(user_id)
+            window.location.href = 'http://itjob.vn/dashboard/admin/admin-profile/' + user_id;
+        })
+
+        $tableCandidate.on('click', '#btn-detail-candidate', function (e) {
+            e.preventDefault()
+            var user_id = $('#btn-detail-candidate').val();
+            window.location.href = 'http://itjob.vn/dashboard/admin/admin-profile/' + user_id;
+        })
+
+        $tableAdmin.on('click', '#btn-delete-admin', function (e) {
+            e.preventDefault()
+            var value = {
+                'id': $('#btn-delete-admin').val(),
+                'status': 1,
+                'admin_id': {{ Auth::user()->id }},
+                '_token': '{{ csrf_token() }}'
+            }
+            var obj = $(this);
+            Swal.fire({
+                title: 'Bạn muốn xoá người dùng',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ Route('admin.delete.user') }}',
+                        type: 'POST',
+                        data: value,
+                        success: function (res) {
+                            load_data()
+                            load_count_user_admin()
+                            obj.parents("tr").remove();
+                        }
+                    })
+                    Swal.fire(
+                        'Đã xoá thành công!',
+                    )
+                }
+            })
+        })
+
+        $tableCompany.on('click', '#btn-delete-company', function (e) {
+            e.preventDefault()
+            var value = {
+                'id': $('#btn-delete-company').val(),
+                'status': 1,
+                'admin_id': {{ Auth::user()->id }},
+                '_token': '{{ csrf_token() }}'
+            }
+            var obj = $(this);
+            Swal.fire({
+                title: 'Bạn muốn xoá người dùng',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ Route('admin.delete.user') }}',
+                        type: 'POST',
+                        data: value,
+                        success: function (res) {
+                            load_data();
+                            load_count_user_company();
+                            obj.parents("tr").remove();
+                        }
+                    })
+                    Swal.fire(
+                        'Đã xoá thành công!',
+                    )
+                }
+            })
+        })
+
+        $tableCandidate.on('click', '#btn-delete-candidate', function (e) {
+            e.preventDefault()
+            var value = {
+                'id': $('#btn-delete-candidate').val(),
+                'status': 1,
+                'admin_id': {{ Auth::user()->id }},
+                '_token': '{{ csrf_token() }}'
+            }
+            var obj = $(this);
+            Swal.fire({
+                title: 'Bạn muốn xoá người dùng',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ Route('admin.delete.user') }}',
+                        type: 'POST',
+                        data: value,
+                        success: function (res) {
+                            load_data();
+                            load_count_user_candidate();
+                            obj.parents("tr").remove();
+                        }
+                    })
+                    Swal.fire(
+                        'Đã xoá thành công!',
+                    )
+                }
+            })
+        })
     });
 </script>
