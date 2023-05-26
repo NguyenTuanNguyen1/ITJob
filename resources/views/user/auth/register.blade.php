@@ -26,7 +26,7 @@ body {
     color:#00c6d7;
 }
 </style>
-
+<link rel="stylesheet" href="{{ url('Register/css/lg-res.css') }}" type="text/css" media="all" />
 <body>
     <!--header-->
     <div class="header-w3l">
@@ -44,7 +44,7 @@ body {
                 <button class="tablinks" onclick="openCity(event, 'Paris')">Ứng viên</button>
             </div>
 
-            <div id="London" class="tabcontent">
+            <div id="London" class="tabcontent" style="display:block">
 
                 <form action="{{ route('user.register') }}" method="post">
                     @csrf
