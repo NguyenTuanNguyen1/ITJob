@@ -10,6 +10,7 @@ use App\Interfaces\IPostRepository;
 use App\Interfaces\IUserRepository;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property IAdminRepository $admin_repo
@@ -78,5 +79,13 @@ class AdminController extends Controller
         ]);
     }
 
-
+    public function approved(Request $request)
+    {
+        $input = $request->all();
+        $this->admin_repo->changeStatusPost($input['id'],$input['admin_id'] ,$input['status']);
+        $this->ActivityLog(  "Bạn đã phê duyệt bài viết%". $input['id'], Auth::user()->id);
+        return response()->json([
+            'message' => 'Phê duyệt thành công'
+        ]);
+    }
 }

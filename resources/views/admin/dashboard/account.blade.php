@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Đã phê duyệt</p>
+                                    <p class="card-category">Quản trị viên</p>
                                     <p class="card-title" id="count_post_approved">
                                     <p>
                                 </div>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Chưa phê duyệt</p>
+                                    <p class="card-category">Nhà tuyển dụng</p>
                                     <p class="card-title" id="count_post_not_approved">
                                     <p>
                                 </div>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Bài viết đã xoá</p>
+                                    <p class="card-category">Ứng cử viên</p>
                                     <p class="card-title" id="count_post_trashed">
                                     <p>
                                 </div>
@@ -121,14 +121,16 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Danh sách bài viết chưa phê duyệt</h4>
+                        <h4 class="card-title"> Quản trị viên</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Tên công ty</th>
-                                <th>Ngày đăng</th>
+                                <th>Tên hiển thị</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="post-not-approved">
@@ -145,15 +147,17 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Danh sách bài viết đã phê duyệt </h4>
+                        <h4 class="card-title"> Nhà tuyển dụng </h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên công ty</th>
-                                <th>Ngày đăng</th>
-                                <th>Phê duyệt</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Chuyên ngành</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="post-approved">
@@ -170,16 +174,16 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Danh sách bài viết đã xoá </h4>
+                        <h4 class="card-title"> Ứng cử viên </h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Tên công ty</th>
-                                <th>Ngày xoá</th>
-                                <th>Phê duyệt</th>
-                                <th>Người xoá</th>
+                                <th>Tên hiển thị</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="post-trashed">
@@ -205,3 +209,7 @@
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ url('profile/demo/demo.js')  }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+</script>

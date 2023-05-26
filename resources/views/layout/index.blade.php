@@ -92,7 +92,9 @@
                         </li>
                     @endforeach
                 </ul>
-                {{$posts->links('vendor\pagination\bootstrap-4')}}
+                <div>
+                    {{$posts->links('vendor\pagination\bootstrap-4')}}
+                </div>
             </div>
         </div>
     </div>

@@ -58,7 +58,7 @@ class BackendController extends Controller
 
     public function getAllPost()
     {
-        $posts = $this->post_repo->all();
+        $posts = $this->post_repo->all(Constant::STATUS_APPROVED_POST);
         $admin = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_ADMIN);
         $company = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_COMPANY);
         $candidate = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_CANDIDATE);

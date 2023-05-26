@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\ForgotController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetController;
+use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\CMS\ChatController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\CMS\OAuthController;
 use App\Http\Controllers\CMS\PostController;
 use App\Http\Controllers\CMS\ProfileController;
 use App\Http\Controllers\CMS\ReviewController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -89,22 +91,33 @@ Route::prefix('review')->group(function (){
     Route::post('/review-restore',[ReviewController::class,'restore'])->name('review.restore');
 });
 
+//Dashboard
+Route::prefix('dashboard')->group(function (){
+    Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
+    Route::get('/account',[DashboardController::class,'account'])->name('admin.account');
+    Route::get('/contact',[DashboardController::class,'index'])->name('contact.index');
+    Route::get('/report',[DashboardController::class,'index'])->name('admin.index');
+    Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
+});
+
+Route::prefix('admin')->group(function (){
+    Route::post('/approved_post',[AdminController::class,'approved'])->name('admin.approved.post');
+});
+
 Route::get('/login-google/{provider}',[OAuthController::class,'redirect_Google'])->name('login.google');
 Route::get('/callback/{provider}',[OAuthController::class,'callback_Google'])->name('callback.google');
 
 Route::get('/login-linkedin/{provider}',[OAuthController::class,'redirect_Linkedin'])->name('login.linkedin');
 Route::get('/callback/{provider}',[OAuthController::class,'callback_Linkedin'])->name('callback.linkedin');
 
-Route::get('/chinh-sach-quyen-rieng-tu', function(){
-    return '<h1> Chính sách quyền riêng tư </h1>';
-});
-
-
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/post-create',[HomeController::class,'post'])->name('post.index');
 Route::get('/contact-index',[HomeController::class,'contact'])->name('contact.index');
 
-Route::get('/test',[HomeController::class,'test'])->name('test');
+
+//
+//Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::get('123',[HomeController::class,'mail'])->name('test-mail');
