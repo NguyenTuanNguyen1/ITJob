@@ -101,7 +101,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -112,7 +112,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -122,7 +122,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -132,7 +132,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -142,7 +142,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -152,7 +152,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -162,7 +162,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -172,7 +172,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                     <p>Kế toán/Kiểm toán</p>
                     <p>123 việc làm</p>
@@ -188,7 +188,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
 
                 </button>
@@ -198,7 +198,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                 </button>
             </form>
@@ -206,7 +206,7 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                 </button>
             </form>
@@ -214,59 +214,50 @@
         <div>
             <form action="{{ Route('post.major') }}" method="get">
                 <input name="major" type="hidden" value="Kế toán/Kiểm toán">
-                <button class="SL-job" type="submit">
+                <button class="SL-job1" type="submit" style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
                 </button>
             </form>
         </div>
 </section>
 
-    
+
 @include('layout.page-js')
 <script>
-// $("search-ajax-result").hide();
 
-$(".input-search").keyup(function() {
-    var text = $(this).val();
-    console.log(text) {
-        {
-            --
-            var url = 'http://127.0.0.1:8000/Images/'--
-        }
-    }
+    $(".input-search").keyup(function () {
+        var text = $(this).val();
+        console.log(text)
+        {{--var url = 'http://127.0.0.1:8000/Images/'--}}
 
-    if (text != '') {
-        $.ajax({
-            url: "{{route('search.ajax')}}?key=" + text,
-            type: 'GET',
-            success: function(res) {
-                var html = '';
-                var message = '';
-                if (res.data != '') {
-                    var pro = res.data;
-                    pro.forEach((function(item) {
-                        message = '<h5 class="media-heading">' + res.message + '</h5>';
-                        html += '   <img src="{{ url('
-                        Images / ')}}/' + item.image +
-                            ' " class="media-object" style="width:30px">';
-                        html += '<div class="media-body">';
-                        html += '   <h4 class="media-heading"> <a href="{{env('
-                        APP_DOMAIN ')}}/post/post-detail/' + item.id + ' ">' + item
-                            .title + '</a></h4>';
-                        // html += '       <p>' + item.Catelogies + '</p>';
-                        html += '</div>';
+        if (text != '') {
+            $.ajax({
+                url: "{{route('search.ajax')}}?key=" + text,
+                type: 'GET',
+                success: function (res) {
+                    var html = '';
+                    var message = '';
+                    if (res.data != '') {
+                        var pro = res.data;
+                        pro.forEach((function (item) {
+                            message = '<h5 class="media-heading">' + res.message +'</h5>';
+                            html += '   <img src="{{ url('Images/')}}/' + item.image +' " class="media-object" style="width:30px">';
+                            html += '<div class="media-body">';
+                            html += '   <h4 class="media-heading"> <a href="{{env('APP_DOMAIN')}}/post/post-detail/' + item.id + ' ">' + item.title + '</a></h4>';
+                            // html += '       <p>' + item.Catelogies + '</p>';
+                            html += '</div>';
 
-                    }))
-                    $('.search-ajax-result').html([message, html])
-                } else {
-                    html += '<h4 class="media-heading"> Không tìm thấy</h4>';
-                    $('.search-ajax-result').html(html)
+                        }))
+                        $('.search-ajax-result').html([message,html])
+                    } else {
+                        html += '<h4 class="media-heading"> Không tìm thấy</h4>';
+                        $('.search-ajax-result').html(html)
+                    }
                 }
-            }
-        });
-    } else {
-        $('.search-ajax-result').html('');
-    }
-});
+            });
+        } else {
+            $('.search-ajax-result').html('');
+        }
+    });
 </script>
 @endsection

@@ -2213,7 +2213,7 @@ html {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    transition: background-color .3s, 
+    transition: background-color .3s,
     opacity .5s, visibility .5s;
     opacity: 0;
     visibility: hidden;
@@ -2245,17 +2245,17 @@ flex-wrap: wrap;
 display: flex;
 justify-content: center;
 }
-.SL-job{
+.SL-job1{
 background-color:#f3f5f7;
 margin: 10px;
 border-radius: 10px;
 border: none;
 }
-.SL-job:hover{
+.SL-job1:hover{
     background-color: white;
     border: 1px solid rgb(65, 212, 20);
 }
-.SL-job p{
+.SL-job1 p{
     font-size: 15px;
     margin-bottom:0rem
 }
@@ -2314,81 +2314,50 @@ margin-top: 10px;
 	display:block;
 }
 
-
-#comments {
-    box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.1);
-	background-color:#FFFFFF;
+.comment-form-wrap {
+    clear: both;
 }
 
-#comments form {
-	margin-bottom:30px;
+.comment-list {
+    padding: 0;
+    margin: 0;
+}
+.comment-list .children {
+    padding: 50px 0 0 40px;
+    margin: 0;
+    float: left;
+    width: 100%;
+}
+.comment-list li {
+    padding: 0;
+    margin: 0 0 30px 0;
+    float: left;
+    width: 100%;
+    clear: both;
+    list-style: none;
+}
+.comment-list li .vcard {
+    width: 80px;
+    float: left;
+}
+.comment-list li .vcard img {
+    width: 50px;
+    border-radius: 50%;
+}
+.comment-list li .comment-body {
+    float: right;
+    width: calc(100% - 80px);
+}
+.comment-list li .comment-body h3 {
+    font-size: 20px;
+}
+.comment-list li .comment-body .meta {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: hsl(0, 0%, 80%);
 }
 
-#comments .btn {
-	margin-top:7px;
-}
-
-#comments form fieldset {
-	clear:both;
-}
-
-#comments form textarea {
-	height:100px;
-}
-
-#comments .media {
-	border-top:1px dashed #DDDDDD;
-	padding:20px 0;
-	margin:0;
-}
-
-#comments .media > .pull-left {
-    margin-right:20px;
-}
-
-#comments .media img {
-	max-width:100px;
-}
-
-#comments .media h4 {
-	margin:0 0 10px;
-}
-
-#comments .media h4 span {
-	font-size:14px;
-	float:right;
-	color:#999999;
-}
-
-#comments .media p {
-	margin-bottom:15px;
-	text-align:justify;
-}
-
-#comments .media-detail {
-	margin:0;
-}
-
-#comments .media-detail li {
-	color:#AAAAAA;
-	font-size:12px;
-	padding-right: 10px;
-	font-weight:600;
-}
-
-#comments .media-detail a:hover {
-	text-decoration:underline;
-}
-
-#comments .media-detail li:last-child {
-	padding-right:0;
-}
-
-#comments .media-detail li i {
-	color:#666666;
-	font-size:15px;
-	margin-right:10px;
-}
 .container1{
     background: #222;
     color: #fff;
@@ -2396,7 +2365,7 @@ margin-top: 10px;
     background-size: cover;
     background-position: center;
     width: 200px;
-    height: 200px; 
+    height: 200px;
     margin: auto;
 }
 #file{
