@@ -15,7 +15,7 @@
                     <li><a href="{{ Route('home') }}" class="nav-link active">Trang chủ</a></li>
                     <!-- <li><a href="">About</a></li> -->
                     <li class="has-children">
-                        <a href="">Job Listings</a>
+                        <a href="">Danh sách công việc</a>
                         <ul class="dropdown">
                             <li><a href="">Việc theo dõi</a></li>
                             <li><a href="">Đăng công việc</a></li>

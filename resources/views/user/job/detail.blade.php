@@ -32,7 +32,7 @@
     </section>
 
     <section class="site-section">
-        <div class="container">
+        <div class="container" style="background-color: white;padding: 10px;border-radius: 10px;">
             <div class="row align-items-center mb-5">
                 <div class="col-lg-8 mb-4 mb-lg-0">
                     <div class="d-flex align-items-center">
@@ -40,7 +40,7 @@
                             <img src="{{ url('Images/')}}/{{ $post->getImageAttribute()}}" width="100" height="100">
                         </div>
                         <div>
-                            <h2>{{ $post->title }} </h2>
+                            <h2 style="color:black;">{{ $post->title }} </h2>
                             <div>
                                 <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span> {{ $post->getNameAttribute() }}</span>
                                 <span class="m-2"><span class="icon-room mr-2"></span>{{ $post->workplace }}</span>
@@ -56,7 +56,7 @@
                             <div class="col-6">
                                 <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
                                    aria-expanded="false"><span
-                                        class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
+                                        class="icon-th-large mr-2 text-danger"></span>Save Job</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Báo cáo bài viết</a>
                                 </div>
@@ -69,9 +69,9 @@
                     @elseif(Auth::check() && Auth::user()->id == $post->user_id)
                         <div class="row">
                             <div class="col-6">
-                                <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
-                                   aria-expanded="false"><span
-                                        class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
+                                <a class="btn btn-block btn-success btn-md " role="button" data-toggle="dropdown"
+                                   aria-expanded="false" style="color:white"><span
+                                        class="icon-th-large mr-2 text-danger"></span>Chức năng</a>
                                 <div class="dropdown-menu">
                                     <button type="submit" class="dropdown-item" id="btn-delete-post" value="{{ $post->id }}">Xoá bài viết
                                     </button>
@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="col-6">
-                                <a href="#" class="btn btn-block btn-primary btn-md">Chỉnh sửa bài viết</a>
+                                <a href="#" class="btn btn-block btn-primary btn-md"><span class="icon-plus text-danger"></span> Lưu công việc</a>
                             </div>
                         </div>
                     @else
@@ -155,7 +155,7 @@
             <div class="col-md-12">
                 <ul class="job-listings mb-5">
                     @foreach($post_majors as $post_major)
-                        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                        <li class="job-listing d-block d-sm-flex pb-3 pt-3 pb-sm-3 align-items-center">
                             <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post_major->id }}" data-value=""></a>
                             <div class="job-listing-logo">
                                 <img src="{{ url('Images/')}}/{{ $post_major->getImageAttribute()}}"
