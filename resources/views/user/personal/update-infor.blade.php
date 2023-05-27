@@ -7,152 +7,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @include('layout.page-css')
+
 </head>
 <style>
     .content-item {
-        padding:30px 0;
-        background-color:#FFFFFF;
+        padding: 30px 0;
+        background-color: #FFFFFF;
     }
 
     .content-item.grey {
-        background-color:#F0F0F0;
-        padding:50px 0;
-        height:100%;
+        background-color: #F0F0F0;
+        padding: 50px 0;
+        height: 100%;
     }
 
     .content-item h2 {
-        font-weight:700;
-        font-size:35px;
-        line-height:45px;
-        text-transform:uppercase;
-        margin:20px 0;
+        font-weight: 700;
+        font-size: 35px;
+        line-height: 45px;
+        text-transform: uppercase;
+        margin: 20px 0;
     }
 
     .content-item h3 {
-        font-weight:400;
-        font-size:20px;
-        color:#555555;
-        margin:10px 0 15px;
-        padding:0;
+        font-weight: 400;
+        font-size: 20px;
+        color: #555555;
+        margin: 10px 0 15px;
+        padding: 0;
     }
 
     .content-headline {
-        height:1px;
-        text-align:center;
-        margin:20px 0 70px;
+        height: 1px;
+        text-align: center;
+        margin: 20px 0 70px;
     }
 
     .content-headline h2 {
-        background-color:#FFFFFF;
-        display:inline-block;
-        margin:-20px auto 0;
-        padding:0 20px;
+        background-color: #FFFFFF;
+        display: inline-block;
+        margin: -20px auto 0;
+        padding: 0 20px;
     }
 
     .grey .content-headline h2 {
-        background-color:#F0F0F0;
+        background-color: #F0F0F0;
     }
 
     .content-headline h3 {
-        font-size:14px;
-        color:#AAAAAA;
-        display:block;
+        font-size: 14px;
+        color: #AAAAAA;
+        display: block;
     }
 
 
     #comments {
-        box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.1);
-        background-color:#FFFFFF;
+        box-shadow: 0 -1px 6px 1px rgba(0, 0, 0, 0.1);
+        background-color: #FFFFFF;
     }
 
     #comments form {
-        margin-bottom:30px;
+        margin-bottom: 30px;
     }
 
     #comments .btn {
-        margin-top:7px;
+        margin-top: 7px;
     }
 
     #comments form fieldset {
-        clear:both;
+        clear: both;
     }
 
     #comments form textarea {
-        height:100px;
+        height: 100px;
     }
 
     #comments .media {
-        border-top:1px dashed #DDDDDD;
-        padding:20px 0;
-        margin:0;
+        border-top: 1px dashed #DDDDDD;
+        padding: 20px 0;
+        margin: 0;
     }
 
     #comments .media > .pull-left {
-        margin-right:20px;
+        margin-right: 20px;
     }
 
     #comments .media img {
-        max-width:100px;
+        max-width: 100px;
     }
 
     #comments .media h4 {
-        margin:0 0 10px;
+        margin: 0 0 10px;
     }
 
     #comments .media h4 span {
-        font-size:14px;
-        float:right;
-        color:#999999;
+        font-size: 14px;
+        float: right;
+        color: #999999;
     }
 
     #comments .media p {
-        margin-bottom:15px;
-        text-align:justify;
+        margin-bottom: 15px;
+        text-align: justify;
     }
 
     #comments .media-detail {
-        margin:0;
+        margin: 0;
     }
 
     #comments .media-detail li {
-        color:#AAAAAA;
-        font-size:12px;
+        color: #AAAAAA;
+        font-size: 12px;
         padding-right: 10px;
-        font-weight:600;
+        font-weight: 600;
     }
 
     #comments .media-detail a:hover {
-        text-decoration:underline;
+        text-decoration: underline;
     }
 
     #comments .media-detail li:last-child {
-        padding-right:0;
+        padding-right: 0;
     }
 
     #comments .media-detail li i {
-        color:#666666;
-        font-size:15px;
-        margin-right:10px;
+        color: #666666;
+        font-size: 15px;
+        margin-right: 10px;
     }
 </style>
 <body>
+@include('sweetalert::alert')
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <div class="container1" id="imgBox">
-                    <input type="file" name="image" id="file" onchange="loadFile(event)">
-                    <label for="file">
-                        <img src="http://127.0.0.1:8000/board-master/images/upload.png" class="upload-icon">
-                    </label>
-                </div>
-                <div class="d-flex align-items-center text-center p-1 py-3">
-                    <input type="text" name="name" value="Quang Thịnh Trần Lê" id=""
-                           style="border-radius:5px;margin-right:4px">
-                    <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                </div>
+                <form action="{{ Route('user.update.basic') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="container1" id="imgBox">
+                        <label for="file">
+                            <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px"
+                                 height="200px">
+                        </label>
+                        <input type="file" name="img_avatar" id="file" onchange="loadFile(event)">
+                    </div>
+                    <div class="d-flex align-items-center text-center p-1 py-3">
+                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                        <input type="text" name="name" value="{{ $user->name }}" id=""
+                               style="border-radius:5px;margin-right:4px">
+                        <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-md-9 border-right">
@@ -256,29 +263,58 @@
                 </div>
 
                 <div id="Paris" class="tabcontent">
-                    <div class="row mt-3" id="load-information">
-                    </div>
-                    <div class="row mt-3 d-block">
+                    <div class="row" id="load-information">
                         <div class="col-md-12">
-                            <label for="job-region">Thông tin thêm</label><br>
-                            <form method="post" id="add-infor">
-                                <div style="display:flex;justify-content: space-between">
-                                    <select class="selectpicker border rounded" style="width: 50%; padding: 5px"
-                                            id="information_type"
-                                            data-style="btn-black" data-width="100%" data-live-search="true"
-                                            title="Select Region">
-                                        <input style="margin-left: 30px" type="text" id="content-information"
-                                               class="form-control" name="content" value="" required>
-                                    </select>
-                                </div>
-                                <div class="mt-3 text-center">
-                                    <button class="btn btn-primary profile-button" type="submit">Lưu thông tin
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                            @foreach($type_infor as $type)
+                                <form action="{{ Route('user.update.information') }}" method="post">
+                                    @csrf
+                                    <div class="d-flex" style="justify-content:space-between;">
+                                        <label class="mt-4">{{ $type->content }}</label>
+                                        <div>
+                                            <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-2 mt-4"
+                                                    id="btn-infor"><i class="fa fa-edit"></i></button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
+                                    <input type="hidden" class="form-control" name="type_id" value="{{ $type->id }}">
 
+                                    @if($information->isNotEmpty())
+                                        @foreach($information as $infor)
+                                            @if($infor->type_id == $type->id)
+                                                <input type="text" class="form-control" name="content"
+                                                       value="{{ $infor->content }}">
+                                            @else
+                                                <input type="text" class="form-control" name="content"
+                                                       value="">
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <input type="text" class="form-control" name="content" value="">
+                                    @endif
+                                </form>
+                            @endforeach
+                        </div>
                     </div>
+                    {{--                    <div class="row mt-3 d-block">--}}
+                    {{--                        <div class="col-md-12">--}}
+                    {{--                            <label for="job-region">Thông tin thêm</label><br>--}}
+                    {{--                            <form method="post" id="add-infor">--}}
+                    {{--                                <div style="display:flex;justify-content: space-between">--}}
+                    {{--                                    <select class="selectpicker border rounded" style="width: 50%; padding: 5px"--}}
+                    {{--                                            id="information_type"--}}
+                    {{--                                            data-style="btn-black" data-width="100%" data-live-search="true"--}}
+                    {{--                                            title="Select Region">--}}
+                    {{--                                        <input style="margin-left: 30px" type="text" id="content-information"--}}
+                    {{--                                               class="form-control" name="content" value="" required>--}}
+                    {{--                                    </select>--}}
+                    {{--                                </div>--}}
+                    {{--                                <div class="mt-3 text-center">--}}
+                    {{--                                    <button class="btn btn-primary profile-button" type="submit">Lưu thông tin--}}
+                    {{--                                    </button>--}}
+                    {{--                                </div>--}}
+                    {{--                            </form>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
                 </div>
 
@@ -301,7 +337,8 @@
                                                          alt="">
                                                 </div>
                                                 <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                                    <textarea class="form-control" id="message" placeholder="Bình luận tại đây" required=""></textarea>
+                                                    <textarea class="form-control" id="message"
+                                                              placeholder="Bình luận tại đây" required=""></textarea>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -396,10 +433,7 @@
     }
 
     $(document).ready(() => {
-        load_information()
-        load_information_type()
         load_review()
-
 
 
         $("#content-information").validate({
@@ -420,73 +454,32 @@
             },
         });
 
-        {{--$(".content-review").validate({--}}
-        {{--    rule: {--}}
-        {{--        content: "required"--}}
-        {{--    },--}}
-        {{--    messages: {--}}
-        {{--        content: "Vui lòng nhập nội dung"--}}
-        {{--    },--}}
-        {{--    errorElement: "p",--}}
-        {{--    errorPlacement: function (error, element) {--}}
-        {{--        var placement = $(element).data("error");--}}
-        {{--        if (placement) {--}}
-        {{--            $(placement).append(error);--}}
-        {{--        } else {--}}
-        {{--            error.insertAfter(element);--}}
-        {{--        }--}}
-        {{--    },--}}
-        {{--});--}}
-
-        {{--$('.content-review').submit(function (e) {--}}
-        {{--    e.preventDefault();--}}
-        {{--    var data = {--}}
-        {{--        "_token": "{{ csrf_token() }}",--}}
-        {{--        "content": $('#content').val(),--}}
-        {{--        "from_user_id": $('#from_user_id').val(),--}}
-        {{--        "to_user_id": $('#to_user_id').val(),--}}
-        {{--        "id": $('#id').val()--}}
-        {{--    }--}}
-        {{--    $.ajax({--}}
-        {{--        url: "{{ Route('review.create') }}",--}}
-        {{--        type: 'POST',--}}
-        {{--        data: data,--}}
-        {{--        success: function (res) {--}}
-        {{--            load_data()--}}
-        {{--        }--}}
-        {{--    })--}}
-        {{--})--}}
-
         function load_information() {
             var _li = '';
+            var _ht = '';
             $.get('http://itjob.vn/user/user-profile/{{Auth::user()->id}}', (res) => {
-                var data = res.information;
+                var data = res.type_infor;
+                var type = res.information;
+                console.log(type);
                 data.forEach(function (item) {
                     _li += '<div class="col-md-12 m-3">'
                     _li += '    <div class="d-flex m-0" style="justify-content:space-between;">';
-                    _li += '        <label>' + item.type.content + '</label>';
+                    _li += '        <label>' + item.content + '</label>';
                     _li += '            <div>';
                     _li += '                <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-3" id="btn-infor"> <i class="fa fa-edit"></i></button>';
-                    _li += '                <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-3" id="btn-infor"> <i class="fa fa-edit"></i></button>';
+                    _li += '                <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-3" id="btn-infor"> <i class="fas fa-trash-alt"></i></button>';
                     _li += '            </div>';
                     _li += '    </div>';
-                    _li += '<input type="text" class="form-control" name="content" value="' + item.content + '">';
+                    _li += '<input type="text" class="form-control" name="content" value="">';
                     _li += '</div>';
                     $('#load-information').html(_li);
                 })
             });
         }
 
-        function load_information_type() {
-            var _li = '';
-            $.get('http://itjob.vn/user/user-profile/{{Auth::user()->id}}', (res) => {
-                var data = res.type_infor;
-                data.forEach(function (item) {
-                    _li += '<option value="'+ item.id +'">' + item.content +'</option>'
-                    $('#information_type').html(_li);
-                })
-            });
-        }
+        $('#delete-information').click(function (res) {
+            alert('hello');
+        })
 
         $('#add-infor').submit(function (e) {
             e.preventDefault();
@@ -532,10 +525,10 @@
                     _li += '<div class="media">';
                     _li += '<a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>';
                     _li += '<div class="media-body">';
-                    _li += '<h4 class="media-heading">' + item.from_user_id +'</h4>';
-                    _li += '<p>'+ item.content +'</p>';
+                    _li += '<h4 class="media-heading">' + item.from_user_id + '</h4>';
+                    _li += '<p>' + item.content + '</p>';
                     _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
-                    _li += '<li><i class="fa fa-calendar"></i>'+ item.created_at +'</li>'
+                    _li += '<li><i class="fa fa-calendar"></i>' + item.created_at + '</li>'
                     _li += '</ul>';
                     _li += '</div>'
                     _li += '</div>'

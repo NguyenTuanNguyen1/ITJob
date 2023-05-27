@@ -14,10 +14,11 @@ class InformationTypeTableSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            'Giải thưởng & Danh hiệu',
             'Trình độ ngoại ngữ',
-            'Chứng chỉ quốc tế',
+            'Chứng chỉ',
             'Kĩ năng mềm',
-            'Khác'
+            'Dự án cá nhân'
         ];
         foreach ($data as $content)
         {

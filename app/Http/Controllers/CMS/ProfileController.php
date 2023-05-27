@@ -13,6 +13,7 @@ use App\Interfaces\IUserRepository;
 use App\Repositories\InformationTypeRepository;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -84,7 +85,6 @@ class ProfileController extends Controller
                 'profile' => $profile
             ]);
         }
-        alert('Chỉnh sửa tài khoản thành công', null, 'success');
         return redirect()->route('user.profile', $input['id']);
     }
 
@@ -92,7 +92,7 @@ class ProfileController extends Controller
     {
         $input = $request->all();
 
-        $input['img_avatar'] = $this->uploadImage($input['img_avatar']);
+        $input['img_avatar'] = $this->uploadImageAvatar($request);
         $this->user_repo->updateAvatarAndName($input['id'], $input);
 
         alert('Chỉnh sửa tài khoản thành công', null, 'success');
