@@ -35,17 +35,29 @@ class Post extends Model
         'status',
         'image',
         'approved_user_id',
+        'approved_date',
+        'delete_user_id',
         'user_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function approved_user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function delete_user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function getNameAttribute()
     {
-        return $this->user->username;
+        return $this->user->name;
     }
 
     public function getImageAttribute()

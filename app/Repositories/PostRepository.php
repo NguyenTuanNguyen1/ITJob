@@ -5,12 +5,18 @@ use App\Constant;
 use App\Interfaces\IPostRepository;
 use App\Models\Company;
 use App\Models\Post;
+use Carbon\Carbon;
 
 class PostRepository implements IPostRepository
 {
-    public function all($action)
+    public function getPost($action)
     {
-        return Post::orderBy('id','DESC')->where('status', $action)->paginate(8);
+        return Post::with('approved_user')->orderBy('id','DESC')->where('status', $action)->paginate(8);
+    }
+
+    public function all()
+    {
+        return Post::all();
     }
 
     public function create(array $data)
@@ -67,12 +73,12 @@ class PostRepository implements IPostRepository
 
     public function trashed()
     {
-        Company::onlyTrashed()->get();
+        return Post::onlyTrashed()->with(['approved_user','delete_user'])->get();
     }
 
     public function restore($id)
     {
-        Company::onlyTrashed()->where('id', $id)->restore();
+        return Post::onlyTrashed()->where('id', $id)->restore();
     }
 
     public function getMajorByPost($action, $major, $from, $to)
@@ -85,8 +91,16 @@ class PostRepository implements IPostRepository
             ->paginate(8);
     }
 
-    public function getPostByCondition($condition)
+    public function getPostByCondition($condition, $action)
     {
+        return Post::where($condition, $action)->get();
+    }
 
+    public function getPostApprovedLastWeek($action, $from)
+    {
+        return Post::with('user')->with('approved_user')->where('status', $action)
+            ->where('approved_date', '>=', $from)
+            ->where('approved_date', '<=', Carbon::now())
+            ->get();
     }
 }

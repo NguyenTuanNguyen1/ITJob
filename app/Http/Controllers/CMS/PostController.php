@@ -10,6 +10,7 @@ use App\Interfaces\IPostRepository;
 use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -104,16 +105,11 @@ class PostController extends Controller
             abort(401);
         }
 
-        $post = $this->post_repo->delete($input['id']);
+        $this->post_repo->delete($input['id']);
         $this->ActivityLog(  "Bạn đã xoá bài tuyển dụng " , $input['user_id']);
-        if (empty($post))
-        {
-            return response()->json([
-                'result' => true
-            ]);
-        }
+
         return response()->json([
-            'result' => false
+            'result' => true
         ]);
     }
 
@@ -136,13 +132,13 @@ class PostController extends Controller
     {
         $input = $request->all();
 
-        if ($this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
+        if (!$this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
         {
             abort(401);
         }
 
         $this->post_repo->restore($input['id']);
-        $this->ActivityLog(  "Bạn đã khôi phục bài viết*" . $input['id'] , $input['user_id']);
+        $this->ActivityLog(  "Bạn đã khôi phục bài viết*" . $input['id'] , Auth::user()->id);
         return response()->json([
             'result' => true
         ]);

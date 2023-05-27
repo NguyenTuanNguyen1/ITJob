@@ -3,12 +3,14 @@
 namespace Database\Seeders;
 
 use App\Constant;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AdminTableSeeder extends Seeder
 {
@@ -18,14 +20,15 @@ class AdminTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $user = new User();
         DB::table('user')->insert([
             'name' => fake()->name(),
             'username' => 'job',
             'phone' => fake()->unique()->phoneNumber(),
             'role_id' => Constant::ROLE_ADMIN,
-//            'email' => fake()->unique()->email(),
             'email' => 'thinh.tranlequang@.com',
             'password' => Hash::make('12345678'),
+            'remember_token' => Str::random(60),
             'created_at' => Carbon::now()
         ]);
 
@@ -36,6 +39,7 @@ class AdminTableSeeder extends Seeder
             'role_id' => Constant::ROLE_ADMIN,
 //            'email' => fake()->unique()->email(),
             'email' => 'thinh.tranlequang@ncc.asia',
+            'remember_token' => Str::random(60),
             'password' => Hash::make('12345678'),
             'created_at' => Carbon::now()
         ]);

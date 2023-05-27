@@ -8,8 +8,10 @@ use App\Http\Requests\AdminRequest;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IUserRepository;
+use App\Mail\NotificationDeleteUser;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property IAdminRepository $admin_repo
@@ -64,19 +66,22 @@ class AdminController extends Controller
         }
 
         $user = $this->user_repo->find($input['id']);
+        $this->sendMailUser($user['email'],new NotificationDeleteUser());
+        $this->ActivityLog(  "Bạn đã xoá người dùng%" . $user['username'] . '*' . $user['id'] , $input['admin_id']);
+        $this->user_repo->delete($input['id']);
 
-        $this->ActivityLog(  "Bạn đã xoá người dùng%" . $user['username'] . '*' . $user['id'] , $input['user_id']);
-        $user = $this->user_repo->delete($input['id']);
-        if (empty($user))
-        {
-            return response()->json([
-                'result' => true
-            ]);
-        }
         return response()->json([
-            'result' => false
+            'result' => true
         ]);
     }
 
-
+    public function approved(Request $request)
+    {
+        $input = $request->all();
+        $this->admin_repo->changeStatusPost($input['id'],$input['admin_id'] ,$input['status']);
+        $this->ActivityLog(  "Bạn đã phê duyệt bài viết%". $input['id'], Auth::user()->id);
+        return response()->json([
+            'message' => 'Phê duyệt thành công'
+        ]);
+    }
 }

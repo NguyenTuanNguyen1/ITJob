@@ -1,11 +1,10 @@
 <?php
 namespace App\Repositories;
 
-use App\Constant;
 use App\Interfaces\IUserRepository;
 use App\Models\Applied;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class UserRepository implements IUserRepository
 {
@@ -26,6 +25,7 @@ class UserRepository implements IUserRepository
         $user->img_avatar = 'avatar.jpg';
         $user->role_id = $data['role_id'];
         $user->password = $data['password'];
+        $user->setRememberToken(Str::random(60));
         $user->save();
         return User::where('email',$data['email'])->first();
     }

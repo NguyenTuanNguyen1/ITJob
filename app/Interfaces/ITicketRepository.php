@@ -10,4 +10,5 @@ interface ITicketRepository
     public function delete($id);
     public function restore($id);
     public function replied();
+    public function getTicketCondition($condition, $value);
 }

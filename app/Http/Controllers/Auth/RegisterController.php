@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IUserRepository;
+use App\Models\User;
 use App\Trait\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

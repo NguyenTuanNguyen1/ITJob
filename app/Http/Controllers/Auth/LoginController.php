@@ -40,20 +40,17 @@ class LoginController extends Controller
 
         if (Auth::attempt($user, $input['remember_token']))
         {
-            toast('Đăng nhập thành công', 'success');
             return redirect()->route('home');
         }
         elseif (Auth::attempt($company, $input['remember_token']))
         {
-            toast('Đăng nhập thành công', 'success');
             return redirect()->route('home');
         }
         elseif (Auth::attempt($admin, $input['remember_token']))
         {
             $user = $this->user_repo->getUserByCondition('username', $input['username']);
             $this->ActivityLog('Bạn đã đăng nhập', $user[0]->id);
-            toast('Đăng nhập thành công', 'success');
-            return redirect()->route('home');
+            return redirect()->route('admin.index',['admin_id' => $user[0]->id]);
         }
         else {
             return redirect()->back()->with('Error', 'Đăng nhập thất bại');

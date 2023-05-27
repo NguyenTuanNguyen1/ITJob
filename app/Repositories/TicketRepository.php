@@ -52,4 +52,9 @@ class TicketRepository implements ITicketRepository
     {
         return Ticket::where('status',Constant::TICKET_REPLIED)->get();
     }
+
+    public function getTicketCondition($condition, $value)
+    {
+        return Ticket::where($condition, $value)->get();
+    }
 }
