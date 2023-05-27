@@ -55,6 +55,7 @@ class ProfileController extends Controller
                 'user' => $user,
                 'company' => $company,
                 'reviews' => $review,
+                'type_infor' => $type,
                 'count_review' => count($review)
             ]);
         }
