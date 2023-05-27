@@ -36,6 +36,7 @@ Route::prefix('user')->group(function () {
     Route::post('/user-update',[ProfileController::class,'handleUpdate'])->name('user.update');
     Route::post('/user-update-basic',[ProfileController::class,'handleUpdateBasic'])->name('user.update.basic');
     Route::post('/user-update-information',[ProfileController::class,'handleUpdateInfor'])->name('user.update.information');
+    Route::post('/user-delete-information',[ProfileController::class,'handleDeleteInfor'])->name('user.delete.information');
 
     Route::post('/applied-post',[UserController::class,'applied'])->name('user.applied.post');
 });

@@ -28,11 +28,22 @@ trait Service
     public function uploadImage(Request $request)
     {
         $data['image'] = $request->image;
-//        dd($data['image']);
         $nameImage = Str::random(6);
         if ($request->has("image") != null) {
             $fileName = "{$nameImage}.jpg";
             $request->file('image')->storeAs('image_avatar', $fileName, 'public');
+            $data['image'] = "$fileName";
+            return $data['image'];
+        }
+    }
+
+    public function uploadImageAvatar(Request $request)
+    {
+        $data['image'] = $request->img_avatar;
+        $nameImage = Str::random(6);
+        if ($request->has("img_avatar") != null) {
+            $fileName = "{$nameImage}.jpg";
+            $request->file('img_avatar')->storeAs('image_avatar', $fileName, 'public');
             $data['image'] = "$fileName";
             return $data['image'];
         }

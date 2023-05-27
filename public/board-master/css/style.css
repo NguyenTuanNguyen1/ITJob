@@ -2213,7 +2213,7 @@ html {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    transition: background-color .3s, 
+    transition: background-color .3s,
     opacity .5s, visibility .5s;
     opacity: 0;
     visibility: hidden;
@@ -2245,23 +2245,153 @@ flex-wrap: wrap;
 display: flex;
 justify-content: center;
 }
-.SL-job{
+.SL-job1{
 background-color:#f3f5f7;
-max-width: 20%;
-width: 20%;
 margin: 10px;
 border-radius: 10px;
 border: none;
 }
-.SL-job:hover{
+.SL-job1:hover{
     background-color: white;
     border: 1px solid rgb(65, 212, 20);
 }
-.SL-job p{
+.SL-job1 p{
     font-size: 15px;
     margin-bottom:0rem
 }
 .img-job{
 width: 25%;
 margin-top: 10px;
+}
+/* comment */
+.content-item {
+    padding:30px 0;
+	background-color:#FFFFFF;
+}
+
+.content-item.grey {
+	background-color:#F0F0F0;
+	padding:50px 0;
+	height:100%;
+}
+
+.content-item h2 {
+	font-weight:700;
+	font-size:35px;
+	line-height:45px;
+	text-transform:uppercase;
+	margin:20px 0;
+}
+
+.content-item h3 {
+	font-weight:400;
+	font-size:20px;
+	color:#555555;
+	margin:10px 0 15px;
+	padding:0;
+}
+
+.content-headline {
+	height:1px;
+	text-align:center;
+	margin:20px 0 70px;
+}
+
+.content-headline h2 {
+	background-color:#FFFFFF;
+	display:inline-block;
+	margin:-20px auto 0;
+	padding:0 20px;
+}
+
+.grey .content-headline h2 {
+	background-color:#F0F0F0;
+}
+
+.content-headline h3 {
+	font-size:14px;
+	color:#AAAAAA;
+	display:block;
+}
+
+.comment-form-wrap {
+    clear: both;
+}
+
+.comment-list {
+    padding: 0;
+    margin: 0;
+}
+.comment-list .children {
+    padding: 50px 0 0 40px;
+    margin: 0;
+    float: left;
+    width: 100%;
+}
+.comment-list li {
+    padding: 0;
+    margin: 0 0 30px 0;
+    float: left;
+    width: 100%;
+    clear: both;
+    list-style: none;
+}
+.comment-list li .vcard {
+    width: 80px;
+    float: left;
+}
+.comment-list li .vcard img {
+    width: 50px;
+    border-radius: 50%;
+}
+.comment-list li .comment-body {
+    float: right;
+    width: calc(100% - 80px);
+}
+.comment-list li .comment-body h3 {
+    font-size: 20px;
+}
+.comment-list li .comment-body .meta {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: hsl(0, 0%, 80%);
+}
+
+.container1{
+    background: #222;
+    color: #fff;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+#file{
+    display: none   ;
+}
+.upload-icon{
+    width: 36px;
+    transform: translateX(-50%);
+    cursor: pointer;
+    margin-top: 120px;
+    margin-left: 40px;
+}
+.inputpass{
+    display: flex;
+    width: 100% !important;
+    height: 40px !important;
+    text-align: left !important;
+    background-color:white   !important;
+    border: solid 1px !important;
+    border-radius: 5px!important;
+    font-size: 15px !important;
+    letter-spacing: 1.5px;
+    color: black !important;
+    outline: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
+    box-shadow: none !important;
+    font-family: 'Open Sans', sans-serif;
 }

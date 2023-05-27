@@ -16,7 +16,7 @@
 {{--Home--}}
 <link rel="stylesheet" href="{{ url('board-master/css/style.css') }}">
 
-<link href="{{ url('information-candidate/information-candidate.css') }}" rel="stylesheet">
+<!-- <link href="{{ url('information-candidate/information-candidate.css') }}" rel="stylesheet"> -->
 
 {{--update-profile--}}
 <link rel="stylesheet" href="{{ url('board-master/css/update-in4.css') }}">
