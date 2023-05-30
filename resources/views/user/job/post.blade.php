@@ -58,7 +58,6 @@
                                 <option>Báo chí/ Truyền hình</option>
                                 <option>Bất động sản</option>
                                 <option>Công nghệ Ô tô</option>
-                                <option>Cơ khí</option>
                             </select>
                         </div>
 

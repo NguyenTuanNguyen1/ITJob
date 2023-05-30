@@ -14,7 +14,7 @@ class LoginController extends Controller
     use Service;
     public function index()
     {
-        return view('user.auth.login');
+        return view('auth.login');
     }
 
     public function handleLogin(LoginRequest $request)

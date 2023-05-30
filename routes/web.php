@@ -29,7 +29,6 @@ Route::prefix('user')->group(function () {
     Route::get('/send-mail-forgot-email',[ForgotController::class,'sendMailForgot'])->name('send.forgot.mail');
     Route::post('/forgot-password',[ForgotController::class,'handleForgot'])->name('handle.forgot');
 
-    Route::get('/user-reset-password',[ResetController::class,'index'])->name('password.view');
     Route::post('/update-password',[ResetController::class,'updatePassword'])->name('password.update');
 
     Route::get('/user-profile/{id}',[ProfileController::class,'profile'])->name('user.profile');
@@ -41,6 +40,11 @@ Route::prefix('user')->group(function () {
     Route::post('/applied-post',[UserController::class,'applied'])->name('user.applied.post');
 });
 
+//Profile
+Route::prefix('profile')->group(function () {
+    Route::get('profile/{id}', [ProfileController::class,'userCompany'])->name('profile.user');
+
+});
 
 //Post
 Route::prefix('post')->group(function () {
@@ -51,6 +55,7 @@ Route::prefix('post')->group(function () {
     Route::get('/post-delete',[PostController::class,'delete'])->name('post.delete');
     Route::get('/post-trashed',[PostController::class,'trashed'])->name('post.trashed');
     Route::post('/post-restore',[PostController::class,'restore'])->name('post.restore');
+    Route::get('/post-outstanding',[PostController::class,'outstanding'])->name('post.outstanding');
 });
 
 //Backend
@@ -72,13 +77,13 @@ Route::middleware('cors')->group(function (){
 
 //Contact
 Route::prefix('contact')->group(function () {
+    Route::get('',[ContactController::class,'view'])->name('contact.index');
     Route::get('/list-contact',[ContactController::class,'index'])->name('contact.all');
     Route::get('/contact-detail/{id}',[ContactController::class,'show'])->name('contact.detail');
     Route::post('/contact-create',[ContactController::class,'store'])->name('contact.create');
     Route::get('/contact-delete',[ContactController::class,'delete'])->name('contact.delete');
     Route::get('/contact-reply',[ContactController::class,'reply'])->name('contact.reply');
     Route::get('/list-contact-replied',[ContactController::class,'replied'])->name('contact.replied');
-//    Route::post('/contact-restore',[ContactController::class,'restore'])->name('contact.restore');
 });
 
 //Review
@@ -97,8 +102,8 @@ Route::prefix('dashboard')->group(function (){
     Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
     Route::get('/admin/admin-profile/{id}',[DashboardController::class,'profile'])->name('admin.profile');
     Route::get('/account',[DashboardController::class,'account'])->name('admin.account');
-    Route::get('/contact',[DashboardController::class,'index'])->name('contact.index');
-    Route::get('/report',[DashboardController::class,'index'])->name('admin.report');
+    Route::get('/contact',[DashboardController::class,'contact'])->name('admin.contact');
+    Route::get('/report',[DashboardController::class,'report'])->name('admin.report');
 });
 
 Route::prefix('admin')->group(function (){
@@ -114,7 +119,6 @@ Route::get('/callback/{provider}',[OAuthController::class,'callback_Linkedin'])-
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/post-create',[HomeController::class,'post'])->name('post.index');
-//Route::get('/contact-index',[HomeController::class,'contact'])->name('contact.index');
 
 
 //

@@ -18,22 +18,24 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 7; $i <= 10; $i++) {
             DB::table('user')->insert([
                 'name' => fake()->name,
                 'username' => fake()->name,
                 'phone' => fake()->phoneNumber,
                 'role_id' => Constant::ROLE_CANDIDATE,
+                'major' => Constant::MAJOR_MANUFACTURING,
+                'position' => 'Nhân viên',
                 'email' =>fake()->email,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
 
-//            DB::table('information')->insert([
-//                'content' => $this->faker->text,
-//                'user_id' => $i+1,
-//                'type_id' => $this->faker->phoneNumber,
-//            ]);
+            DB::table('information')->insert([
+                'content' => fake()->text,
+                'user_id' => $i,
+                'type_id' => rand(1,5),
+            ]);
         }
     }
 }

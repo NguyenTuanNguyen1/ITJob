@@ -28,29 +28,124 @@ class PostTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'workplace' => fake()->address,
                 'experience' => '1 năm',
-                'working' => 'Bán thời gian',
-                'major' => 'IT/Công nghệ phần mềm',
+                'working' => Constant::FULL_TIME,
+                'major' => Constant::MAJOR_IT,
                 'status' => 1,
-                'user_id' => 1,
+                'user_id' => rand(1,6),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+
+            DB::table('post')->insert([
+                'title' => fake()->title,
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => 'Nhân viên',
+                'workplace' => fake()->address,
+                'experience' => '1 năm',
+                'working' => Constant::PART_TIME,
+                'major' => Constant::MAJOR_NEWSPAPERS,
+                'status' => 1,
+                'user_id' => rand(1,6),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+
+            DB::table('post')->insert([
+                'title' => fake()->title,
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => 'Nhân viên',
+                'workplace' => fake()->address,
+                'experience' => '1 năm',
+                'working' => Constant::PART_TIME,
+                'major' => Constant::MAJOR_ELECTRONICS,
+                'status' => 1,
+                'user_id' => rand(1,6),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+
+            DB::table('post')->insert([
+                'title' => fake()->title,
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => 'Nhân viên',
+                'workplace' => fake()->address,
+                'experience' => '1 năm',
+                'working' => Constant::FULL_TIME,
+                'major' => Constant::MAJOR_CAR_TECHNOLOGY,
+                'status' => 1,
+                'user_id' => rand(1,6),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+
+            DB::table('post')->insert([
+                'title' => fake()->realText(100),
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => 'Nhân viên',
+                'workplace' => fake()->address,
+                'experience' => '1 năm',
+                'working' => Constant::FULL_TIME,
+                'major' => Constant::MAJOR_MANUFACTURING,
+                'status' => 1,
+                'user_id' => rand(1,6),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+
+            DB::table('post')->insert([
+                'title' => fake()->realText(100),
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => 'Nhân viên',
+                'workplace' => fake()->address,
+                'experience' => '1 năm',
+                'working' => Constant::FULL_TIME,
+                'major' => Constant::MAJOR_MARKETING,
+                'status' => 1,
+                'user_id' => rand(1,6),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+
+            DB::table('post')->insert([
+                'title' => fake()->realText(100),
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => 'Nhân viên',
+                'workplace' => fake()->address,
+                'experience' => '1 năm',
+                'working' => Constant::PART_TIME,
+                'major' => Constant::MAJOR_ACCOUNTANT,
+                'status' => 1,
+                'user_id' => rand(1,6),
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+
+            DB::table('post')->insert([
+                'title' => fake()->title,
+                'requirements' => fake()->text,
+                'description' => fake()->text,
+                'benefit' => fake()->text,
+                'quantity' => rand(3,5),
+                'position' => 'Nhân viên',
+                'workplace' => fake()->address,
+                'experience' => '1 năm',
+                'working' => Constant::PART_TIME,
+                'major' => Constant::MAJOR_REAL_ESTATE,
+                'status' => 1,
+                'user_id' => rand(1,6),
                 'created_at' => Carbon::now()->subWeek()
             ]);
         }
-
-//        for ($i = 3; $i < 6; $i++) {
-//            DB::table('post')->insert([
-//                'title' => fake()->title,
-//                'requirements' => fake()->text,
-//                'description' => fake()->text,
-//                'benefit' => fake()->text,
-//                'quantity' => rand(3,5),
-//                'position' => fake()->text,
-//                'workplace' => fake()->address,
-//                'level' => fake()->text,
-//                'major' => 'HR',
-//                'status' => 1,
-//                'user_id' => rand(3,7),
-//                'created_at' => Carbon::now()->subWeek()
-//            ]);
-//        }
     }
 }

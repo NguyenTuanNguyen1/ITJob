@@ -30,6 +30,11 @@ class ContactController extends Controller
         $this->admin_repo = $adminRepository;
     }
 
+    public function view()
+    {
+        return view('layout.contact');
+    }
+
     public function index()
     {
         $contact = $this->ticket_repo->all(Constant::TICKET_CONTACT);
@@ -97,14 +102,6 @@ class ContactController extends Controller
             ]);
         }
     }
-
-//    public function trashed()
-//    {
-//        $contact = $this->ticket_repo->trashed();
-//        return response()->json([
-//            'data' => $contact
-//        ]);
-//    }
 
     public function reply(Request $request)
     {
