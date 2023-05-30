@@ -65,7 +65,7 @@ class DashboardController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole('role_id', $input['admin_id']))
+        if (!$this->admin_repo->checkRole('role_id', $input['role_id']))
         {
             abort(401);
         }
@@ -157,7 +157,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('user.personal.update-infor')
+        return view('user.update-infor')
             ->with([
                 'user' => $user,
                 'company' => $company,

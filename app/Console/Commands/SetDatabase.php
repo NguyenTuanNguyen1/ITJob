@@ -30,5 +30,8 @@ class SetDatabase extends Command
         Artisan::call('db:seed --class=RoleTableSeeder');
         Artisan::call('db:seed --class=InformationTypeTableSeeder');
         Artisan::call('db:seed --class=AdminTableSeeder');
+        Artisan::call('db:seed --class=CompanyTableSeeder');
+        Artisan::call('db:seed --class=UserTableSeeder');
+        Artisan::call('db:seed --class=PostTableSeeder');
     }
 }

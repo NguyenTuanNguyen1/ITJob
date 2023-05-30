@@ -22,11 +22,6 @@ class ResetController extends Controller
         $this->user_repo = $userRepository;
     }
 
-    public function index()
-    {
-
-    }
-
     public function updatePassword(PasswordRequest $request)
     {
         $input = $request->all();
@@ -40,10 +35,9 @@ class ResetController extends Controller
                 $profile['password'] = Hash::make($input['password']);
                 $profile->save();
 
-                toast('Cập nhật mật khẩu thành công','success');
-                return redirect()->route('profile');
+                alert('Thông báo','Cập nhật mật khẩu thành công','success');
+                return redirect()->route('user.profile',['id' => $input['id']]);
             }
-            //dd(Hash::check($request->password_old,$profile->password));
             else {
                 return redirect()->back()->with("Error","Xác nhận mật khẩu không chính xác");
             }

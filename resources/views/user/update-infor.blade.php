@@ -231,7 +231,6 @@
                                     <option>Báo chí/ Truyền hình</option>
                                     <option>Bất động sản</option>
                                     <option>Công nghệ Ô tô</option>
-                                    <option>Cơ khí</option>
                                 </select>
                             </div>
                         </div>
@@ -281,41 +280,18 @@
                                     @if($information->isNotEmpty())
                                         @foreach($information as $infor)
                                             @if($infor->type_id == $type->id)
-                                                <input type="text" class="form-control" name="content"
-                                                       value="{{ $infor->content }}">
+                                                <textarea type="text" class="form-control" name="content" rows="3">{{ $infor->content }}</textarea>
                                             @else
-                                                <input type="text" class="form-control" name="content"
-                                                       value="">
+                                                <textarea type="text" class="form-control" name="content" rows="3"></textarea>
                                             @endif
                                         @endforeach
                                     @else
-                                        <input type="text" class="form-control" name="content" value="">
+                                        <textarea type="text" class="form-control" name="content" data-value=""></textarea>
                                     @endif
                                 </form>
                             @endforeach
                         </div>
                     </div>
-                    {{--                    <div class="row mt-3 d-block">--}}
-                    {{--                        <div class="col-md-12">--}}
-                    {{--                            <label for="job-region">Thông tin thêm</label><br>--}}
-                    {{--                            <form method="post" id="add-infor">--}}
-                    {{--                                <div style="display:flex;justify-content: space-between">--}}
-                    {{--                                    <select class="selectpicker border rounded" style="width: 50%; padding: 5px"--}}
-                    {{--                                            id="information_type"--}}
-                    {{--                                            data-style="btn-black" data-width="100%" data-live-search="true"--}}
-                    {{--                                            title="Select Region">--}}
-                    {{--                                        <input style="margin-left: 30px" type="text" id="content-information"--}}
-                    {{--                                               class="form-control" name="content" value="" required>--}}
-                    {{--                                    </select>--}}
-                    {{--                                </div>--}}
-                    {{--                                <div class="mt-3 text-center">--}}
-                    {{--                                    <button class="btn btn-primary profile-button" type="submit">Lưu thông tin--}}
-                    {{--                                    </button>--}}
-                    {{--                                </div>--}}
-                    {{--                            </form>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-
                 </div>
 
                 <div id="Tokyo" class="tabcontent">
@@ -327,23 +303,26 @@
                                     <div id="load_review">
                                     </div>
                                     <hr>
-                                    <form id="create-review">
-                                        <h3 class="pull-left">Bình luận mới</h3>
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-sm-3 col-lg-2 hidden-xs">
-                                                    <img class="img-responsive"
-                                                         src="{{ url('Images/') }}/{{ Auth::user()->img_avatar }}"
-                                                         alt="">
-                                                </div>
-                                                <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                    @if(Auth::user()->id == $user->id)
+                                    @else
+                                        <form id="create-review">
+                                            <h3 class="pull-left">Bình luận mới</h3>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-sm-3 col-lg-2 hidden-xs">
+                                                        <img class="img-responsive"
+                                                             src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-sm-9 col-lg-10">
                                                     <textarea class="form-control" id="message"
                                                               placeholder="Bình luận tại đây" required=""></textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </fieldset>
-                                        <button type="submit" class="btn btn-success pull-right">Đăng</button>
-                                    </form>
+                                            </fieldset>
+                                            <button type="submit" class="btn btn-success pull-right">Đăng</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -352,38 +331,42 @@
                 <div>
                     <div id="France" class="tabcontent">
                         <div class="col mt-3">
-                            <form action="" method="post">
+                            <form action="{{ Route('password.update') }}" method="post">
+                                @csrf
                                 <div class="col-md-6" style="margin-left:25%">
                                     <label>Nhập mật khẩu hiện tại</label>
-                                    <input type="password" class="inputpass" name="email" value="">
-                                    @error('email')
+                                    <input type="password" class="inputpass" name="password_old" value="">
+                                    @error('password_old')
                                     <div style="color:red;">{{ $message }}</div>
                                     <br>
                                     @enderror
                                 </div>
                                 <div class="col-md-6" style="margin-left:25%">
                                     <label>Nhập mật khẩu mới</label>
-                                    <input type="password" class="inputpass" name="email" value="">
-                                    @error('email')
+                                    <input type="password" class="inputpass" name="password" value="">
+                                    @error('password')
                                     <div style="color:red;">{{ $message }}</div>
                                     <br>
                                     @enderror
                                 </div>
                                 <div class="col-md-6" style="margin-left:25%">
                                     <label>Nhập lại mật khẩu mới</label>
-                                    <input type="password" class="inputpass" name="email" value="">
-                                    @error('email')
+                                    <input type="password" class="inputpass" name="password_confirmation" value="">
+                                    @error('password_confirmation')
                                     <div style="color:red;">{{ $message }}</div>
                                     <br>
                                     @enderror
                                 </div>
+                                <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                                 <div class="mt-2 text-center">
                                     <button class="btn btn-primary profile-button"
-                                            type="button">Xác nhận
+                                            type="submit">Xác nhận
                                     </button>
+                                    @if(session('Error'))
+                                        <p style="color:red">{{session('Error')}}</p>
+                                    @endif
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

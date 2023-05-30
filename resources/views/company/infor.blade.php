@@ -142,24 +142,10 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <form action="{{ Route('user.update.basic') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="container1" id="imgBox">
-                        <label for="file">
-                            <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px"
-                                 height="200px">
-                        </label>
-                        <input type="file" name="img_avatar" id="file" onchange="loadFile(event)">
-                    </div>
-                    <div class="d-flex align-items-center text-center p-1 py-3">
-                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                        <input type="text" name="name" value="{{ $user->name }}" id=""
-                               style="border-radius:5px;margin-right:4px">
-                        <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </div>
-                </form>
+                <img src="{{ url('image_avatar/') }}/{{ $user->img_avatar }}" width="200px" height="200px">
+                <div class="d-flex align-items-center text-center p-1 py-3">
+                    <label>{{ $user->name }}</label>
+                </div>
             </div>
         </div>
         <div class="col-md-9 border-right">
@@ -168,154 +154,62 @@
                     <button class="tablinks" onclick="openCity(event, 'London')">Thông tin cá nhân</button>
                     <button class="tablinks" onclick="openCity(event, 'Paris')">Thông tin thêm</button>
                     <button class="tablinks" onclick="openCity(event, 'Tokyo')">Bình luận đánh giá</button>
-                    <button class="tablinks" onclick="openCity(event, 'France')">Đổi mật khẩu</button>
                 </div>
 
                 <div id="London" class="tabcontent" style="display:block">
-                    <form action="{{ Route('user.update') }}" method="post">
-                        @csrf
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tên đăng nhập</label>
-                                    <input type="text" class="form-control" name="username"
-                                           value="{{ $user->username }}">
-                                </div>
-                                @error('username')
-                                <div style="color:red;">{{ $message }}</div>
-                                <br>
-                                @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Số điện thoại</label>
-                                    <input type="text" class="form-control" name="phone" value="{{ $user->phone }}">
-                                </div>
-                                @error('phone')
-                                <div style="color:red;">{{ $message }}</div>
-                                <br>
-                                @enderror
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tên đăng nhập</label><br>
+                                <label style="font-weight: 900;">{{ $user->username }}</label>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name="email" value="{{ $user->email }}">
-                                @error('email')
-                                <div style="color:red;">{{ $message }}</div>
-                                <br>
-                                @enderror
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Số điện thoại</label><br>
+                                <label style="font-weight: 900;">{{ $user->phone }}</label>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label>Địa chỉ</label>
-                                <input type="text" class="form-control" name="address" value="{{ $user->address }}">
-                                @error('address')
-                                <div style="color:red;">{{ $message }}</div>
-                                <br>
-                                @enderror
-                            </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label>Email</label><br>
+                            <label style="font-weight: 900;">{{ $user->email }}</label>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label for="job-region">Chuyên ngành</label><br>
-                                <select class="selectpicker border rounded" style=" padding: 10px;" id="job-region"
-                                        data-style="btn-black" data-width="100%" data-live-search="true"
-                                        title="Select Region" name="major">
-                                    <option>IT/ Công nghệ phần mềm</option>
-                                    <option>Kế toán</option>
-                                    <option>Makerting</option>
-                                    <option>Chế tạo máy</option>
-                                    <option>Điện/ Điện tử</option>
-                                    <option>Báo chí/ Truyền hình</option>
-                                    <option>Bất động sản</option>
-                                    <option>Công nghệ Ô tô</option>
-                                    <option>Cơ khí</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label>Địa chỉ</label><br>
+                            <label style="font-weight: 900;">{{ $user->address }}</label>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label for="job-region">Vị trí</label><br>
-                                <select class="selectpicker border rounded" style="padding: 10px;" id="job-region"
-                                        data-style="btn-black" data-width="100%" data-live-search="true"
-                                        title="Select Region" name="position">
-                                    <option>Thực tập sinh</option>
-                                    <option>Nhân viên</option>
-                                    <option>Phó phòng</option>
-                                    <option>Trưởng phòng</option>
-                                    <option>Trợ lý</option>
-                                    <option>Thư ký</option>
-                                    <option>Giám Đốc</option>
-                                    <option>Quản lý</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="job-region">Chuyên ngành</label><br>
+                            <label style="font-weight: 900;">{{ $user->major }}</label>
                         </div>
-
-                        <div class="mt-5 text-center">
-                            <button class="btn btn-primary profile-button"
-                                    type="submit">Lưu
-                                thông tin
-                            </button>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="job-region">Vị trí</label><br>
+                            <label style="font-weight: 900;">{{ $user->position }}</label>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <div id="Paris" class="tabcontent">
                     <div class="row" id="load-information">
                         <div class="col-md-12">
                             @foreach($type_infor as $type)
-                                <form action="{{ Route('user.update.information') }}" method="post">
-                                    @csrf
-                                    <div class="d-flex" style="justify-content:space-between;">
-                                        <label class="mt-4">{{ $type->content }}</label>
-                                        <div>
-                                            <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-2 mt-4"
-                                                    id="btn-infor"><i class="fa fa-edit"></i></button>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
-                                    <input type="hidden" class="form-control" name="type_id" value="{{ $type->id }}">
-
-                                    @if($information->isNotEmpty())
-                                        @foreach($information as $infor)
-                                            @if($infor->type_id == $type->id)
-                                                <input type="text" class="form-control" name="content"
-                                                       value="{{ $infor->content }}">
-                                            @else
-                                                <input type="text" class="form-control" name="content"
-                                                       value="">
-                                            @endif
-                                        @endforeach
-                                    @else
-                                        <input type="text" class="form-control" name="content" value="">
-                                    @endif
-                                </form>
+                                <div class="d-flex" style="justify-content:space-between;">
+                                    <label class="mt-4">{{ $type->content }}</label><br>
+                                </div>
+                                @foreach($information as $infor)
+                                    <label style="font-weight: 900;">{{ $infor->content }}</label>
+                                @endforeach
                             @endforeach
                         </div>
                     </div>
-                    {{--                    <div class="row mt-3 d-block">--}}
-                    {{--                        <div class="col-md-12">--}}
-                    {{--                            <label for="job-region">Thông tin thêm</label><br>--}}
-                    {{--                            <form method="post" id="add-infor">--}}
-                    {{--                                <div style="display:flex;justify-content: space-between">--}}
-                    {{--                                    <select class="selectpicker border rounded" style="width: 50%; padding: 5px"--}}
-                    {{--                                            id="information_type"--}}
-                    {{--                                            data-style="btn-black" data-width="100%" data-live-search="true"--}}
-                    {{--                                            title="Select Region">--}}
-                    {{--                                        <input style="margin-left: 30px" type="text" id="content-information"--}}
-                    {{--                                               class="form-control" name="content" value="" required>--}}
-                    {{--                                    </select>--}}
-                    {{--                                </div>--}}
-                    {{--                                <div class="mt-3 text-center">--}}
-                    {{--                                    <button class="btn btn-primary profile-button" type="submit">Lưu thông tin--}}
-                    {{--                                    </button>--}}
-                    {{--                                </div>--}}
-                    {{--                            </form>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-
                 </div>
 
                 <div id="Tokyo" class="tabcontent">
@@ -327,65 +221,30 @@
                                     <div id="load_review">
                                     </div>
                                     <hr>
-                                    <form id="create-review">
-                                        <h3 class="pull-left">Bình luận mới</h3>
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-sm-3 col-lg-2 hidden-xs">
-                                                    <img class="img-responsive"
-                                                         src="{{ url('Images/') }}/{{ Auth::user()->img_avatar }}"
-                                                         alt="">
-                                                </div>
-                                                <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                    @if(Auth::user()->id == $user->id)
+                                    @else
+                                        <form id="create-review">
+                                            <h3 class="pull-left">Bình luận mới</h3>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-sm-3 col-lg-2 hidden-xs">
+                                                        <img class="img-responsive"
+                                                             src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-sm-9 col-lg-10">
                                                     <textarea class="form-control" id="message"
                                                               placeholder="Bình luận tại đây" required=""></textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </fieldset>
-                                        <button type="submit" class="btn btn-success pull-right">Đăng</button>
-                                    </form>
+                                            </fieldset>
+                                            <button type="submit" class="btn btn-success pull-right">Đăng</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </section>
-                </div>
-                <div>
-                    <div id="France" class="tabcontent">
-                        <div class="col mt-3">
-                            <form action="" method="post">
-                                <div class="col-md-6" style="margin-left:25%">
-                                    <label>Nhập mật khẩu hiện tại</label>
-                                    <input type="password" class="inputpass" name="email" value="">
-                                    @error('email')
-                                    <div style="color:red;">{{ $message }}</div>
-                                    <br>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6" style="margin-left:25%">
-                                    <label>Nhập mật khẩu mới</label>
-                                    <input type="password" class="inputpass" name="email" value="">
-                                    @error('email')
-                                    <div style="color:red;">{{ $message }}</div>
-                                    <br>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6" style="margin-left:25%">
-                                    <label>Nhập lại mật khẩu mới</label>
-                                    <input type="password" class="inputpass" name="email" value="">
-                                    @error('email')
-                                    <div style="color:red;">{{ $message }}</div>
-                                    <br>
-                                    @enderror
-                                </div>
-                                <div class="mt-2 text-center">
-                                    <button class="btn btn-primary profile-button"
-                                            type="button">Xác nhận
-                                    </button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -435,70 +294,6 @@
     $(document).ready(() => {
         load_review()
 
-
-        $("#content-information").validate({
-            rule: {
-                content: "required"
-            },
-            messages: {
-                content: "Vui lòng nhập nội dung"
-            },
-            errorElement: "p",
-            errorPlacement: function (error, element) {
-                var placement = $(element).data("error");
-                if (placement) {
-                    $(placement).append(error);
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-        });
-
-        function load_information() {
-            var _li = '';
-            var _ht = '';
-            $.get('http://itjob.vn/user/user-profile/{{Auth::user()->id}}', (res) => {
-                var data = res.type_infor;
-                var type = res.information;
-                console.log(type);
-                data.forEach(function (item) {
-                    _li += '<div class="col-md-12 m-3">'
-                    _li += '    <div class="d-flex m-0" style="justify-content:space-between;">';
-                    _li += '        <label>' + item.content + '</label>';
-                    _li += '            <div>';
-                    _li += '                <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-3" id="btn-infor"> <i class="fa fa-edit"></i></button>';
-                    _li += '                <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-3" id="btn-infor"> <i class="fas fa-trash-alt"></i></button>';
-                    _li += '            </div>';
-                    _li += '    </div>';
-                    _li += '<input type="text" class="form-control" name="content" value="">';
-                    _li += '</div>';
-                    $('#load-information').html(_li);
-                })
-            });
-        }
-
-        $('#delete-information').click(function (res) {
-            alert('hello');
-        })
-
-        $('#add-infor').submit(function (e) {
-            e.preventDefault();
-            var value = {
-                "id": {{ Auth::user()->id }},
-                "content": $("#content-information").val(),
-                "type_id": $("#information_type option:selected").val(),
-                "_token": "{{ csrf_token() }}",
-            }
-            $.ajax({
-                url: '{{ Route('user.update.information') }}',
-                type: 'POST',
-                data: value,
-                success: function (res) {
-                    load_information()
-                }
-            })
-        })
-
         $('#create-review').submit(function (e) {
             e.preventDefault();
             var value = {
@@ -519,7 +314,7 @@
 
         function load_review() {
             var _li = '';
-            $.get('http://itjob.vn/user/user-profile/{{Auth::user()->id}}', (res) => {
+            $.get('http://itjob.vn/profile/profile/{{ $user->id}}', (res) => {
                 var data = res.reviews;
                 data.forEach(function (item) {
                     _li += '<div class="media">';

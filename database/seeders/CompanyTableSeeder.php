@@ -18,33 +18,24 @@ class CompanyTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 3; $i <= 7; $i++) {
+        for ($i = 3; $i <= 6; $i++) {
             DB::table('user')->insert([
                 'name' => fake()->name,
                 'username' => fake()->name,
                 'phone' => fake()->phoneNumber,
+                'major' => Constant::MAJOR_MARKETING,
+                'position' => 'Trưởng phòng',
                 'role_id' => Constant::ROLE_COMPANY,
                 'email' =>fake()->email,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
 
-//            DB::table('information')->insert([
-//                'content' => $this->faker->text,
-//                'user_id' => $i,
-//                'type_id' => $this->faker->phoneNumber,
-//            ]);
-//
-//            DB::table('company_information')->insert([
-//                'type' => $this->faker->title,
-//                'staff' => rand(1,100),
-//                'headquarters' => $this->faker->title,
-//                'taxcode' => 'ABWINC20',
-//                'description' => $this->faker->text,
-//                'website' => 'https://www.facebook.com/',
-//                'user_id' => $i,
-//                'created_at' => $this->faker->time('d-m-Y')
-//            ]);
+            DB::table('information')->insert([
+                'content' => fake()->text,
+                'user_id' => $i,
+                'type_id' => rand(1,5),
+            ]);
         }
     }
 }

@@ -11,18 +11,7 @@
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                                 <input type="text" class="form-control form-control-lg input-search">
                                 <div class="search-ajax-result">
-
                                 </div>
-
-                                {{--                                <div class="media-left">--}}
-                                {{--                                    <img src="board-master/images/job_logo_4.jpg" class="media-object"--}}
-                                {{--                                         style="width:30px">--}}
-                                {{--                                </div>--}}
-                                {{--                                <div class="media-body">--}}
-                                {{--                                    <h4 class="media-heading"><a href="#">Left</a></h4>--}}
-                                {{--                                    <p>Lorem ipsum dolor sit amet</p>--}}
-                                {{--                                </div>--}}
-
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                                 <select class="selectpicker" data-style="btn-white btn-lg" data-width="30%"
@@ -35,7 +24,6 @@
                                     <option>Báo chí/ Truyền hình</option>
                                     <option>Bất động sản</option>
                                     <option>Công nghệ Ô tô</option>
-                                    <option>Cơ khí</option>
                                 </select>
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-2 mb-4 mb-lg-0">
@@ -72,7 +60,7 @@
                             <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                                 <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post['id'] }}" data-value=""></a>
                                 <div class="job-listing-logo">
-                                    <img src="{{ url('Images/')}}/{{ $post['image'] }}"
+                                    <img src="{{ url('image_avatar/')}}/{{ $post['image'] }}"
                                          alt="Free Website Template by Free-Template.co" class="img-fluid">
                                 </div>
                                 <div
@@ -107,20 +95,6 @@
         </section>
     @endif
 
-    <form action="{{ Route('post.major') }}" method="get">
-        <div class="col-md-3">
-            <div class="top-category--item">
-                {{--                <div class="top-category__image"><a href="{{ Route('post.major') }}" target="_blank">--}}
-                {{--                        <img src="/v4/image/welcome/top-categories/kinh-doanh-ban-hang.png?v=2" alt="Kinh doanh / Bán hàng"></a>--}}
-                {{--                </div>--}}
-                <input name="major" value="IT/Công nghệ phần mềm">
-                <h4 class="top-category__name">
-                    <button type="submit">123</button>
-                </h4>
-                <p class="top-category__caption">10.612 việc làm</p></div>
-        </div>
-
-    </form>
     @include('layout.page-js')
     <script>
         // $("search-ajax-result").hide();
