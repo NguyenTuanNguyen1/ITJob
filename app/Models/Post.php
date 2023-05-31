@@ -34,10 +34,9 @@ class Post extends Model
         'major',
         'status',
         'image',
+        'user_id',
         'approved_user_id',
         'approved_date',
-        'delete_user_id',
-        'user_id',
     ];
 
     public function user()
@@ -48,21 +47,6 @@ class Post extends Model
     public function approved_user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function delete_user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function getNameAttribute()
-    {
-        return $this->user->name;
-    }
-
-    public function getImageAttribute()
-    {
-        return $this->user->img_avatar;
     }
 
     public function scopeSearch($query)

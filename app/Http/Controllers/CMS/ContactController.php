@@ -30,12 +30,9 @@ class ContactController extends Controller
         $this->admin_repo = $adminRepository;
     }
 
-    public function index()
+    public function view()
     {
-        $contact = $this->ticket_repo->all(Constant::TICKET_CONTACT);
-        return response()->json([
-            'data' => $contact
-        ]);
+        return view('layout.contact');
     }
 
     public function show($id)
@@ -63,10 +60,10 @@ class ContactController extends Controller
 
         $contact = $this->ticket_repo->create($input);
         if (empty($contact)) {
-            toast('Bạn đã gửi tin nhắn thất bại', 'error');
+            alert('Bạn đã gửi tin nhắn thất bại', null,'error');
             return redirect()->route('contact.index');
         }
-        toast('Bạn đã gửi tin nhắn thành công', 'success');
+        alert('Bạn đã gửi tin nhắn thành công', null,'success');
         return redirect()->route('contact.index');
     }
 
@@ -97,14 +94,6 @@ class ContactController extends Controller
             ]);
         }
     }
-
-//    public function trashed()
-//    {
-//        $contact = $this->ticket_repo->trashed();
-//        return response()->json([
-//            'data' => $contact
-//        ]);
-//    }
 
     public function reply(Request $request)
     {

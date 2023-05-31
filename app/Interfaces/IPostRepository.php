@@ -15,6 +15,5 @@ interface IPostRepository
     public function restore($id);
     public function getMajorByPost($action, $major, $from, $to);
     public function getPostByCondition($condition, $action);
-    public function getPostApprovedLastWeek($action, $from);
-
+    public function getPostApprovedByDateTime($action, $from, $to);
 }

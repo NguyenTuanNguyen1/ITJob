@@ -24,6 +24,7 @@ class PasswordRequest extends FormRequest
         return [
             'password' => 'required | min:8',
             'password_confirmation' => 'required | same:password',
+            'password_old' => 'required | min:8',
         ];
     }
 
@@ -34,6 +35,8 @@ class PasswordRequest extends FormRequest
             'password.min'    => 'Vui lòng nhập mật khẩu có ít nhất 8 ký tự',
             'password_confirmation.same' => 'Xác nhận sai mật khẩu',
             'password_confirmation.required' => 'Vui lòng xác nhận mật khẩu',
+            'password_old.required' => 'Vui lòng nhập mật khẩu',
+            'password_old.min'    => 'Vui lòng nhập mật khẩu có ít nhất 8 ký tự',
         ];
     }
 }

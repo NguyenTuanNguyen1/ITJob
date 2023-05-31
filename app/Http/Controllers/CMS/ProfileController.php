@@ -61,7 +61,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        return view('user.personal.update-infor')
+        return view('user.update-infor')
             ->with([
                 'user' => $user,
                 'company' => $company,
@@ -95,8 +95,14 @@ class ProfileController extends Controller
         $input['img_avatar'] = $this->uploadImageAvatar($request);
         $this->user_repo->updateAvatarAndName($input['id'], $input);
 
+        if ($input['role_id'] == Constant::ROLE_ADMIN)
+        {
+            alert('Chỉnh sửa tài khoản thành công', null, 'success');
+            return redirect()->route('dashboard.profile', $input['id']);
+        }
+
         alert('Chỉnh sửa tài khoản thành công', null, 'success');
-        return redirect()->route('user.profile', $input['id']);
+        return redirect()->route('profile.index', $input['id']);
     }
 
     public function handleUpdateInfor(Request $request)
@@ -113,7 +119,35 @@ class ProfileController extends Controller
                 'infor' => $infor
             ]);
         }
+
+        if ($input['role_id'] == Constant::ROLE_ADMIN)
+        {
+            alert('Cập nhật thông tin thành công', null, 'success');
+            return redirect()->route('dashboard.profile', $input['id']);
+        }
+
         alert('Cập nhật thông tin thành công', null, 'success');
-        return redirect()->route('user.profile', $input['id']);
+        return redirect()->route('profile.index', $input['id']);
+    }
+
+    public function userCompany($id, Request $request)
+    {
+        $user = $this->user_repo->find($id);
+        $information = $this->information_repo->find($id);
+        $type = $this->type_repo->all();
+        $review = $this->review_repo->getReviewByUser($id);
+        if ($request->ajax())
+        {
+            return response()->json([
+                'reviews' => $review,
+            ]);
+        }
+
+        return view('company.infor')->with([
+            'user' => $user,
+            'information' => $information,
+            'type_infor' => $type,
+            'count_review' => count($review)
+        ]);
     }
 }

@@ -25,10 +25,12 @@ class AdminTableSeeder extends Seeder
             'name' => fake()->name(),
             'username' => 'job',
             'phone' => fake()->unique()->phoneNumber(),
+            'address' => fake()->address(),
             'role_id' => Constant::ROLE_ADMIN,
+            'major' => Constant::MAJOR_IT,
+            'position' => 'Giám đốc',
             'email' => 'thinh.tranlequang@.com',
             'password' => Hash::make('12345678'),
-            'remember_token' => Str::random(60),
             'created_at' => Carbon::now()
         ]);
 
@@ -36,12 +38,24 @@ class AdminTableSeeder extends Seeder
             'name' => fake()->name(),
             'username' => 'job2',
             'phone' => fake()->unique()->phoneNumber(),
+            'address' => fake()->address(),
+            'major' => Constant::MAJOR_IT,
+            'position' => 'Giám đốc',
             'role_id' => Constant::ROLE_ADMIN,
-//            'email' => fake()->unique()->email(),
             'email' => 'thinh.tranlequang@ncc.asia',
-            'remember_token' => Str::random(60),
             'password' => Hash::make('12345678'),
             'created_at' => Carbon::now()
+        ]);
+
+        DB::table('information')->insert([
+            'content' => fake()->text,
+            'user_id' => 1,
+            'type_id' => rand(1,5),
+        ]);
+        DB::table('information')->insert([
+            'content' => fake()->text,
+            'user_id' => 2,
+            'type_id' => rand(1,5),
         ]);
     }
 }

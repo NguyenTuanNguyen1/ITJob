@@ -11,7 +11,7 @@ class PostRepository implements IPostRepository
 {
     public function getPost($action)
     {
-        return Post::with('approved_user')->orderBy('id','DESC')->where('status', $action)->paginate(8);
+        return Post::with('user', 'approved_user')->where('status',1)->orderByDesc('id')->paginate(8);
     }
 
     public function all()
@@ -96,11 +96,11 @@ class PostRepository implements IPostRepository
         return Post::where($condition, $action)->get();
     }
 
-    public function getPostApprovedLastWeek($action, $from)
+    public function getPostApprovedByDateTime($action, $from, $to)
     {
         return Post::with('user')->with('approved_user')->where('status', $action)
             ->where('approved_date', '>=', $from)
-            ->where('approved_date', '<=', Carbon::now())
+            ->where('approved_date', '<=', $to)
             ->get();
     }
 }

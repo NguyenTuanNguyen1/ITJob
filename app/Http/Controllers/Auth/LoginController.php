@@ -14,7 +14,7 @@ class LoginController extends Controller
     use Service;
     public function index()
     {
-        return view('user.auth.login');
+        return view('auth.login');
     }
 
     public function handleLogin(LoginRequest $request)
@@ -50,7 +50,7 @@ class LoginController extends Controller
         {
             $user = $this->user_repo->getUserByCondition('username', $input['username']);
             $this->ActivityLog('Bạn đã đăng nhập', $user[0]->id);
-            return redirect()->route('admin.index',['admin_id' => $user[0]->id]);
+            return redirect()->route('dashboard.index',['admin_id' => $user[0]->id]);
         }
         else {
             return redirect()->back()->with('Error', 'Đăng nhập thất bại');

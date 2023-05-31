@@ -34,25 +34,25 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="active ">
-                    <a href="{{ Route('admin.index',['admin_id' => Auth::user()->id]) }}">
+                    <a href="{{ Route('dashboard.index',['admin_id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-bank"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('user.profile',['id' => Auth::user()->id]) }}">
+                    <a href="{{ Route('dashboard.profile',['id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-single-02"></i>
                         <p>Thông tin cá nhân</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('admin.account',['admin_id' => Auth::user()->id]) }}">
+                    <a href="{{ Route('dashboard.account',['admin_id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-tile-56"></i>
                         <p>Tài khoản</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('user.register') }}">
+                    <a href="{{ Route('dashboard.contact',['admin_id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-tile-56"></i>
                         <p>Liên hệ</p>
                     </a>
@@ -109,27 +109,6 @@
                         </div>
                     </form>
                 </div>
-                {{--                <ul class="navbar-nav">--}}
-                {{--                    --}}{{--                        <li class="nav-item">--}}
-                {{--                    --}}{{--                            <a class="nav-link btn-magnify" href="javascript:;">--}}
-                {{--                    --}}{{--                                <i class="nc-icon nc-layout-11"></i>--}}
-                {{--                    --}}{{--                                <p>--}}
-                {{--                    --}}{{--                                    <span class="d-lg-none d-md-block">Stats</span>--}}
-                {{--                    --}}{{--                                </p>--}}
-                {{--                    --}}{{--                            </a>--}}
-                {{--                    --}}{{--                        </li>--}}
-                {{--                    <li class="nav-item btn-rotate dropdown">--}}
-                {{--                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"--}}
-                {{--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                {{--                            <i class="nc-icon nc-app"></i>--}}
-                {{--                        </a>--}}
-                {{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">--}}
-                {{--                            <a class="dropdown-item" href="{{ Route('user.profile',['id' => Auth::user()->id]) }}">Thông tin cá nhân</a>--}}
-                {{--                            <a class="dropdown-item" href="">Đổi mật khẩu</a>--}}
-                {{--                            <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>--}}
-                {{--                        </div>--}}
-                {{--                    </li>--}}
-                {{--                </ul>--}}
             </div>
         </nav>
         @yield('content')

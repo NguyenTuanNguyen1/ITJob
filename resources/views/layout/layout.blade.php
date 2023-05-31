@@ -13,70 +13,71 @@
             <nav class="mx-auto site-navigation">
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
                     <li><a href="{{ Route('home') }}" class="nav-link active">Trang chủ</a></li>
-                    <!-- <li><a href="">About</a></li> -->
-                    <li class="has-children">
-                        <a href="">Danh sách công việc</a>
-                        <ul class="dropdown">
-                            <li><a href="">Việc theo dõi</a></li>
-                            <li><a href="">Đăng công việc</a></li>
-                        </ul>
-                    </li>
                     <li class="has-children">
                         <a href="{{ Route('contact.index') }}">Liên hệ</a>
                     </li>
-                    <!-- <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Ticket</a></li>
-                    <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a Job</a></li>
-                    <li class="d-lg-none"><a href="login.html">Log In</a></li> -->
                 </ul>
             </nav>
 
-            @if(Auth::check())
-            <div class="right-cta-menu text-right d-flex aligin-items-center col-6 d-none d-xl-block">
-                <div class="ml-auto">
-                    <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class=" icon-line-newspaper"></span></a>
-                    <a href="{{ Route('show.message',['from_user_name' => Auth::user()->id ]) }}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class=" icon-line-chat"></span></a>
-                    <a href="{{ Route('index.message') }}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class=" icon-line-chat"></span></a>
-                    <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="" role="button"
-                        data-toggle="dropdown" aria-expanded="false">
-                        <span class=" icon-line-profile-male"></span>
-                        {{ Auth::user()->username }}
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ Route('user.profile',['id' => Auth::user()->id]) }}">Thông tin cá nhân</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>
+            @if(Auth::check() && Auth::user()->role_id == 1)
+                <div class="right-cta-menu text-right d-flex aligin-items-center col-6 d-none d-xl-block">
+                    <div class="ml-auto">
+                        <form action="{{ Route('dashboard.index') }}" method="get">
+                            <button type="submit" class="btn btn-primary text-white">
+                                <input type="hidden" name="admin_id" value="{{ Auth::user()->role_id }}">
+                                <i class="fas fa-home">  Trở về</i>
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </div>
-            <!-- {{ Auth::user()->name }} -->
-            @else
-            <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
-                <div class="ml-auto">
-                    <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
-                            class="mr-2 icon-add"></span>Đăng việc</a>
-                    <a href="{{ Route('user.login') }}"
-                        class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class="mr-2 icon-lock_outline"></span>Đăng nhập</a>
-                    <a href="{{ Route('user.register') }}"
-                        class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                            class="mr-2 icon-contacts"></span>Đăng kí</a>
+            @elseif(Auth::check())
+                <div class="right-cta-menu text-right d-flex aligin-items-center col-6 d-none d-xl-block">
+                    <div class="ml-auto">
+                        <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                class=" icon-line-newspaper"></span></a>
+                        <a href="{{ Route('show.message',['from_user_name' => Auth::user()->id ]) }}"
+                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                class=" icon-line-chat"></span></a>
+                        <a href="{{ Route('index.message') }}"
+                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                class=" icon-line-chat"></span></a>
+                        <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="" role="button"
+                           data-toggle="dropdown" aria-expanded="false">
+                            <span class=" icon-line-profile-male"></span>
+                            {{ Auth::user()->username }}
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ Route('profile.index',['id' => Auth::user()->id]) }}">Thông
+                                tin cá nhân</a>
+                            <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>
+                        </div>
+                    </div>
                 </div>
-                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
-                        class="icon-menu h3 m-0 p-0 mt-2"></span></a>
-            </div>
+            @else
+                <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+                    <div class="ml-auto">
+                        <a href="post-job.html"
+                           class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
+                                class="mr-2 icon-add"></span>Đăng việc</a>
+                        <a href="{{ Route('user.login') }}"
+                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                class="mr-2 icon-lock_outline"></span>Đăng nhập</a>
+                        <a href="{{ Route('user.register') }}"
+                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                                class="mr-2 icon-contacts"></span>Đăng kí</a>
+                    </div>
+                    <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
+                            class="icon-menu h3 m-0 p-0 mt-2"></span></a>
+                </div>
             @endif
         </div>
     </div>
 </header>
 
 <body>
-    @yield('content')
-    @yield('index')
-    <!-- <div id="btnTop">
+@yield('content')
+@yield('index')
+<!-- <div id="btnTop">
         <a href="#top">^</a>
     </div> --><a id="button"></a>
 </body>
@@ -128,10 +129,11 @@
                 <p class="copyright"><small>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>
-                        document.write(new Date().getFullYear());
+                            document.write(new Date().getFullYear());
                         </script>
                         All rights reserved | This template is made with <i class="icon-heart text-danger"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                                                            aria-hidden="true"></i> by <a
+                            href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </small></p>
             </div>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('post_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
+            $table->unsignedBigInteger('reply_user_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -30,6 +31,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->foreign('type_id')->references('id')->on('ticket_type')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
+            $table->foreign('reply_user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

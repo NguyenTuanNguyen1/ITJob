@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Constant;
 use App\Interfaces\ICompanyRepository;
 use App\Models\Company;
+use App\Models\Post;
 
 class CompanyRepository implements ICompanyRepository
 {
@@ -31,6 +33,17 @@ class CompanyRepository implements ICompanyRepository
             'token' => $data['token'],
             'business_license' => $data['business_license'],
         ]);
+    }
+
+    public function getPostOutstanding()
+    {
+        return Post::with('user')
+            ->where('status', Constant::STATUS_APPROVED_POST)
+            ->select('user_id')
+            ->selectRaw('COUNT(*) AS count')
+            ->groupBy('user_id')
+            ->take(4)
+            ->get();
     }
 }
 
