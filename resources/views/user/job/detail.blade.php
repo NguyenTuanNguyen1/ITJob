@@ -158,7 +158,7 @@
                         <li class="job-listing d-block d-sm-flex pb-3 pt-3 pb-sm-3 align-items-center">
                             <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post_major->id }}" data-value=""></a>
                             <div class="job-listing-logo">
-                                <img src="{{ url('Images/')}}/{{ $post_major->getImageAttribute()}}"
+                                <img src="{{ url('image_avatar/')}}/{{ $post_major->user->img_avatar}}"
                                      width="70" height="50" class="img-fluid">
                             </div>
                             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">

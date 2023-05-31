@@ -121,7 +121,7 @@ Route::get('/post-create',[HomeController::class,'post'])->name('post.index');
 
 //
 //Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
-
+Route::get('/test',[HomeController::class,'test'])->name('test');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::get('123',[HomeController::class,'mail'])->name('test-mail');
