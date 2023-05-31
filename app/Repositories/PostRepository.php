@@ -83,7 +83,8 @@ class PostRepository implements IPostRepository
 
     public function getMajorByPost($action, $major, $from, $to)
     {
-        return Post::where('status', $action)
+        return Post::with('user')
+            ->where('status', $action)
             ->where('major', $major)
             ->where('created_at', '>=', $from)
             ->where('created_at', '<=', $to)

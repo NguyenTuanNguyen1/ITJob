@@ -79,4 +79,9 @@ class HomeController extends Controller
     {
         return view('user.job.post');
     }
+
+    public function test()
+    {
+        return view('layout.blog');
+    }
 }
