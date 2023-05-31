@@ -82,6 +82,6 @@ class HomeController extends Controller
 
     public function test()
     {
-        return view('layout.blog');
+        return view('layout.not-found');
     }
 }

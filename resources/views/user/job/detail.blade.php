@@ -54,17 +54,16 @@
                     @if(Auth::check() && Auth::user()->id != $post->user_id)
                         <div class="row">
                             <div class="col-6">
-                                <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
+                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
+                            </div>
+                            <div class="col-3">
+                                <a class="btn btn-block btn-success btn-md " role="button" data-toggle="dropdown"
                                    aria-expanded="false"><span
-                                        class="icon-th-large mr-2 text-danger"></span>Save Job</a>
+                                        class="icon-th-large  text-danger"></span></a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Báo cáo bài viết</a>
                                 </div>
-                            </div>
-
-                            <div class="col-6">
-                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
-                            </div>
+                            </div>  
                         </div>
                     @elseif(Auth::check() && Auth::user()->id == $post->user_id)
                         <div class="row">
