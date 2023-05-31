@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class AdminRepository implements IAdminRepository
 {
-    public function checkRole($role, $id)
+    public function checkRole($id, $role)
     {
         $admin = User::where('id', $id)->where('role_id', $role)->get();
         if (empty($admin))

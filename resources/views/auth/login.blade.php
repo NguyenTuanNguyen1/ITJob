@@ -63,8 +63,6 @@
 
         <form action="{{route('test-mail')}}">
             <button type="submit"> Mail
-
-
             </button>
         </form>
 

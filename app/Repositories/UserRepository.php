@@ -11,7 +11,7 @@ class UserRepository implements IUserRepository
 
     public function all()
     {
-        return User::orderBy('id', 'DESC')->paginate(8);
+        return User::orderBy('id', 'DESC')->get();
     }
 
     public function create(array $data)

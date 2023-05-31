@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Constant;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -16,24 +17,28 @@ class TicketTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             DB::table('ticket')->insert([
-                'content' => $this->faker->text,
-                'image' => 'image-' . rand(1,30),
-                'user_id' => rand(3,17),
-                'post_id' => rand(1,8),
+                'username' => fake()->name,
+                'subject' => fake()->text,
+                'content' => fake()->text,
+                'email' => fake()->email,
+                'user_id' => rand(1,10),
+                'post_id' => rand(1,16),
                 'type_id' => Constant::TICKET_REPORT,
-                'created_at' => $this->faker->time('d-m-Y')
+                'created_at' => Carbon::now()->subWeek()
             ]);
         }
 
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             DB::table('ticket')->insert([
-                'content' => $this->faker->text,
-                'image' => 'image-' . rand(1,30),
-                'user_id' => rand(3,17),
+                'username' => fake()->name,
+                'subject' => fake()->text,
+                'content' => fake()->text,
+                'email' => fake()->email,
+                'user_id' => rand(1,10),
                 'type_id' => Constant::TICKET_CONTACT,
-                'created_at' => $this->faker->time('d-m-Y')
+                'created_at' => Carbon::now()->subWeek()
             ]);
         }
     }

@@ -71,7 +71,7 @@
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                             <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post->id }}" data-value=""></a>
                             <div class="job-listing-logo">
-                                <img src="{{ url('image_avatar/')}}/{{ $post->image }}"
+                                <img src="{{ url('image_avatar/')}}/{{ $post->user->img_avatar }}"
                                      alt="Free Website Template by Free-Template.co" class="img-fluid">
                             </div>
                             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('review', function (Blueprint $table) {
-            $table->integer('status')->nullable()->default(0)->after('content');
+        Schema::table('ticket', function (Blueprint $table) {
+            $table->integer('reply_user_id')->nullable()->after('user_id');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('review', function (Blueprint $table) {
+        Schema::table('ticket', function (Blueprint $table) {
             //
         });
     }

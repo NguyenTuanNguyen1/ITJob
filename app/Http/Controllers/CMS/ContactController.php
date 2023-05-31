@@ -35,14 +35,6 @@ class ContactController extends Controller
         return view('layout.contact');
     }
 
-    public function index()
-    {
-        $contact = $this->ticket_repo->all(Constant::TICKET_CONTACT);
-        return response()->json([
-            'data' => $contact
-        ]);
-    }
-
     public function show($id)
     {
         $contact = $this->ticket_repo->find($id);
@@ -68,10 +60,10 @@ class ContactController extends Controller
 
         $contact = $this->ticket_repo->create($input);
         if (empty($contact)) {
-            toast('Bạn đã gửi tin nhắn thất bại', 'error');
+            alert('Bạn đã gửi tin nhắn thất bại', null,'error');
             return redirect()->route('contact.index');
         }
-        toast('Bạn đã gửi tin nhắn thành công', 'success');
+        alert('Bạn đã gửi tin nhắn thành công', null,'success');
         return redirect()->route('contact.index');
     }
 

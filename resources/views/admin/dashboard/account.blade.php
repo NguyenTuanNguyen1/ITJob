@@ -264,7 +264,7 @@
                     _li += '<td>' + item.phone + '</td>';
                     _li += '<td>' + item.email + '</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-admin" value="' + item.id + '">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-admin" value="' + item.id + '">Chi tiết</button>';
                     _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-admin" value="' + item.id + '">Xoá</button>';
                     _li += '</td>';
                     _li += '</tr>';
@@ -285,7 +285,7 @@
                     _li += '<td>' + item.address + '</td>';
                     _li += '<td>' + item.major + '</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-company" value="' + item.id + '">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-company" value="' + item.id + '">Chi tiết</button>';
                     _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-company" value="' + item.id + '">Xoá</button>';
                     _li += '</td>';
                     _li += '</tr>';
@@ -305,7 +305,7 @@
                     _li += '<td>' + item.phone + '</td>';
                     _li += '<td>' + item.email + '</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-candidate" value="' + item.id + '">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-candidate" value="' + item.id + '">Chi tiết</button>';
                     _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-candidate" value="' + item.id + '">Xoá</button>';
                     _li += '</td>';
                     _li += '</tr>';

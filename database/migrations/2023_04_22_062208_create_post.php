@@ -27,7 +27,6 @@ return new class extends Migration
             $table->integer('status')->nullable()->default(0);
 
             $table->unsignedBigInteger('approved_user_id')->nullable();
-            $table->unsignedBigInteger('delete_user_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
 
             $table->timestamps();
@@ -36,7 +35,6 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->foreign('approved_user_id')->references('id')->on('user')->onDelete('cascade');
-            $table->foreign('delete_user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

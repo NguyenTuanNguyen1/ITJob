@@ -142,7 +142,7 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <form action="{{ Route('user.update.basic') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ Route('profile.update.basic') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="container1" id="imgBox">
                         <label for="file">
@@ -152,6 +152,7 @@
                         <input type="file" name="img_avatar" id="file" onchange="loadFile(event)">
                     </div>
                     <div class="d-flex align-items-center text-center p-1 py-3">
+                        <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
                         <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                         <input type="text" name="name" value="{{ $user->name }}" id=""
                                style="border-radius:5px;margin-right:4px">
@@ -172,7 +173,7 @@
                 </div>
 
                 <div id="London" class="tabcontent" style="display:block">
-                    <form action="{{ Route('user.update') }}" method="post">
+                    <form action="{{ Route('profile.update') }}" method="post">
                         @csrf
                         <div class="row mt-3">
                             <div class="col-md-6">
@@ -265,7 +266,7 @@
                     <div class="row" id="load-information">
                         <div class="col-md-12">
                             @foreach($type_infor as $type)
-                                <form action="{{ Route('user.update.information') }}" method="post">
+                                <form action="{{ Route('profile.update.information') }}" method="post">
                                     @csrf
                                     <div class="d-flex" style="justify-content:space-between;">
                                         <label class="mt-4">{{ $type->content }}</label>
@@ -460,10 +461,6 @@
             });
         }
 
-        $('#delete-information').click(function (res) {
-            alert('hello');
-        })
-
         $('#add-infor').submit(function (e) {
             e.preventDefault();
             var value = {
@@ -473,7 +470,7 @@
                 "_token": "{{ csrf_token() }}",
             }
             $.ajax({
-                url: '{{ Route('user.update.information') }}',
+                url: '{{ Route('profile.update.information') }}',
                 type: 'POST',
                 data: value,
                 success: function (res) {

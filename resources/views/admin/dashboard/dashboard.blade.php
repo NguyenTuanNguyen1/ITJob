@@ -29,7 +29,7 @@
                         <hr>
                         <div class="stats">
                             <i class="fa fa-refresh"></i>
-                            Hiện tại
+                            Tuần trước
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Danh sách bài viết đã phê duyệt </h4>
+                        <h4 class="card-title"> Danh sách bài viết trong tuần qua </h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -181,7 +181,6 @@
                                 <th>Tên công ty</th>
                                 <th>Ngày xoá</th>
                                 <th>Phê duyệt</th>
-                                <th>Người xoá</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="post-trashed">
@@ -229,7 +228,7 @@
                     _li += '<td>' + item.user.name +'</td>';
                     _li += '<td>' + item.created_at +'</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Chi tiết</button>';
                     _li += '<button class="btn btn-outline-danger" type="submit" id="btn-approved" value="' + item.id +'">Phê duyệt</button>';
                     _li += '</td>';
                     _li += '</tr>';
@@ -241,14 +240,14 @@
         function load_data() {
             $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
                 var _li ='';
-                var data = res.data.data;
+                var data = res.approved_last_week;
                 data.forEach(function (item) {
                     _li += '<tr>';
                     _li += '<td>' + item.user.name +'</td>';
                     _li += '<td>' + item.created_at +'</td>';
                     _li += '<td>' + item.approved_user.username +'</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Chi tiết</button>';
                     _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete" value="' + item.id +'">Xoá bài viết</button>';
                     _li += '</td>';
                     _li += '</tr>';
@@ -266,9 +265,8 @@
                     _li += '<td>' + item.user.name +'</td>';
                     _li += '<td>' + item.deleted_at +'</td>';
                     _li += '<td>' + item.approved_user.name +'</td>';
-                    _li += '<td>' + item.delete_user.name +'</td>';
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Xem chi tiết</button>';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Chi tiết</button>';
                     _li += '<button class="btn btn-outline-dark" type="submit" id="btn-restore" value="' + item.id +'">Khôi phục bài viết</button>';
                     _li += '</td>';
                     _li += '</tr>';

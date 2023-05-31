@@ -14,6 +14,7 @@ class Constant
     public const TYPE_INFORMATION = 1;
     public const TYPE_TICKET = 2;
     public const TYPE_ROLE = 3;
+    public const TICKET_NOT_REPLY = 0;
     public const TICKET_REPLIED = 2;
     public const MAJOR_IT = 'IT/ Công nghệ phần mềm';
     public const MAJOR_ACCOUNTANT = 'Kế toán';
