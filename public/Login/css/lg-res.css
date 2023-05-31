@@ -46,19 +46,19 @@ body {
     width: 30%;
     margin: 0 auto;
     padding: 4em 2em;
-    background: rgba(255, 255, 255, 0.07);
-    -webkit-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
+    background: white;
+	border-radius: 10px;
+    /* -webkit-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
     -moz-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
-    box-shadow: 0 6px 43px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 43px 0 rgba(0, 0, 0, 0.4); */
 }
 .wthree-form h2 {
-    color: #fff;
+    color:black;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: bold;
     text-align: center;
     margin-bottom: 1.5em;
     letter-spacing: 3px;
-    text-shadow: 3px 3px 4px #000;
 }
 h1 {
     text-align: center;
@@ -103,16 +103,16 @@ form {
     width: 85%;
     padding: 15px 66px 15px 19px;
     text-align: left;
-    background-color: rgba(0, 0, 0, 0.16);
+    background-color: #4c7297;
     border: 0;
     border-left: 2px solid #00c6d7;
     font-size: 15px;
     letter-spacing: 1.5px;
-    color: #fff;
+    color: white;
     outline: 0;
-    -webkit-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
+    /* -webkit-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
     -moz-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
-    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.4); */
     font-family: 'Open Sans', sans-serif;
 }
 .submit-agileits input[type="submit"] {
@@ -122,11 +122,11 @@ form {
     font-size: 17px;
     font-weight: 600;
     padding: 14px 90px;
-    background-color: rgba(0, 0, 0, 0.34);
+    background-color: #4c7297;
     border: 3px solid rgba(255, 255, 255, 0.43);
-    -webkit-box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
+    /* -webkit-box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
     -moz-box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
-    box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
+    box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71); */
     outline: none;
     cursor: pointer;
     font-family: 'Open Sans', sans-serif;
@@ -148,9 +148,10 @@ form {
     margin-top: .5em;
 }
 label.anim span, label.anim a {
-    color: #fff;
+    color: black;
     font-size: 13px;
     display: inline;
+	font-weight: bold;
     letter-spacing: 2px;
     text-transform: capitalize;
 }
@@ -643,12 +644,12 @@ a.fa.fa-google {
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #ddd;
+    background-color: #5da2c0ec;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #ccc;
+    background-color: #4c7297;
 }
 
 /* Style the tab content */

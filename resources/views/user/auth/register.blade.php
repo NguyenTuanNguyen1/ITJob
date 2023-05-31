@@ -44,7 +44,7 @@ body {
                 <button class="tablinks" onclick="openCity(event, 'Paris')">Ứng viên</button>
             </div>
 
-            <div id="London" class="tabcontent" style="display:block">
+            <div id="London" class="tabcontent" style="display:block;">
 
                 <form action="{{ route('user.register') }}" method="post">
                     @csrf
@@ -96,7 +96,7 @@ body {
                     <input type="hidden" name="role_id" value="2">
                     <div class="clear"></div>
                     <div class="login-now" >
-                        <p>Bạn đã có tài khoản <a href="#">đăng nhập ngay</a></p>
+                        <p>Bạn đã có tài khoản <a href="#">Đăng nhập ngay</a></p>
                     </div>
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">

@@ -70,7 +70,7 @@
                 @foreach($posts as $post)
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                     <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post->id }}" data-value=""></a>
-                    <div class="job-listing-logo">
+                    <div class="job-listing-logo" style="padding:10px">
                         <img src="{{ url('Images/')}}/{{ $post->image }}"
                             alt="Free Website Template by Free-Template.co" class="img-fluid">
                     </div>
@@ -182,7 +182,7 @@
     </div>
 </section>
 
-<section class="site-section py-4" style="background-color:white;">
+<section class="site-section py-4" style="background-color:white;margin-top:15px">
     <p style="color: black;font-size: 30px;font-weight: bold;">Top công ty nổi bật</p>
     <div class="top-job">
         <div>
