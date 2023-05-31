@@ -193,7 +193,7 @@
     <section class="site-section py-4" style="background-color:white;">
         <p style="color: black;font-size: 30px;font-weight: bold;">Top công ty nổi bật</p>
         @foreach($company_outstanding as $company)
-            <div class="top-job">
+            <div class="top-job1">
                 <div>
                     <form action="{{ Route('profile.user',['id' => $company->user_id]) }}" method="get">
                         <input type="hidden">
