@@ -6,9 +6,8 @@ interface ITicketRepository
     public function all($action);
     public function create(array $data);
     public function find($id);
-    public function reply($id);
+    public function reply($id, array $data);
     public function delete($id);
-    public function restore($id);
-    public function replied();
-    public function getTicketCondition($condition, $value);
+    public function getTicketNotReply($action, $status);
+    public function getTicketReplyLastWeek($action, $status);
 }

@@ -37,11 +37,11 @@ class CompanyRepository implements ICompanyRepository
 
     public function getPostOutstanding()
     {
-        return Post::where('status', Constant::STATUS_APPROVED_POST)
+        return Post::with('user')
+            ->where('status', Constant::STATUS_APPROVED_POST)
             ->select('user_id')
             ->selectRaw('COUNT(*) AS count')
             ->groupBy('user_id')
-            ->orderByDesc('count')
             ->take(4)
             ->get();
     }

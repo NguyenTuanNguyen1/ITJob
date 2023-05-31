@@ -29,6 +29,7 @@ class Ticket extends Model
         'image',
         'status',
         'user_id',
+        'reply_user_id',
         'type_id',
         'post_id'
     ];
@@ -42,9 +43,4 @@ class Ticket extends Model
     {
         return $this->user->username;
     }
-
-//    public function getNameTicket()
-//    {
-//        return $this->user->username;
-//    }
 }

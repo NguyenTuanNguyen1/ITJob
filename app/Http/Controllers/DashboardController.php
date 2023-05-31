@@ -30,7 +30,6 @@ use Illuminate\Http\Request;
  * @property InformationTypeRepository $type_repo
  * @property ICompanyRepository $company_repo
  */
-
 class DashboardController extends Controller
 {
     public function __construct
@@ -46,8 +45,7 @@ class DashboardController extends Controller
         IBackendRepository $backendRepository,
         ICompanyRepository $companyRepository,
         InformationTypeRepository $typeRepository
-    )
-    {
+    ) {
         $this->post_repo = $postRepository;
         $this->user_repo = $userRepository;
         $this->admin_repo = $adminRepository;
@@ -65,28 +63,27 @@ class DashboardController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole('role_id', $input['role_id']))
+        if (!$this->admin_repo->checkRole($input['admin_id'],Constant::ROLE_ADMIN))
         {
             abort(401);
         }
 
-        $all_post = $this->post_repo->getPost(Constant::STATUS_APPROVED_POST);
+        $all_post = $this->post_repo->all();
         $post_approved = $this->post_repo->getPostByCondition('status', Constant::STATUS_APPROVED_POST);
         $not_post_approved = $this->post_repo->getPostByCondition('status', Constant::STATUS_NOT_APPROVED_POST);
-        $approved_last_week = $this->post_repo->getPostApprovedLastWeek(Constant::STATUS_APPROVED_POST, Carbon::now()->subWeek());
+        $approved_last_week = $this->post_repo->getPostApprovedByDateTime(Constant::STATUS_APPROVED_POST,
+            Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek());
         $post_trashed = $this->post_repo->trashed();
 
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             return response()->json([
                 'all_post' => count($all_post),
                 'count_post_approved' => count($post_approved),
                 'count_not_post_approved' => count($not_post_approved),
-                'approved_last_week' => count($approved_last_week),
+                'approved_last_week' => $approved_last_week,
                 'count_post_trashed' => count($post_trashed),
                 'post_not_approved' => $not_post_approved,
                 'post_trashed' => $post_trashed,
-                'data' => $all_post
             ]);
         }
 
@@ -97,14 +94,14 @@ class DashboardController extends Controller
     {
         $post_approved = $this->post_repo->all(Constant::STATUS_APPROVED_POST);
         $post_not_approved = $this->post_repo->all(Constant::STATUS_NOT_APPROVED_POST);
-        $admin = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_ADMIN);
-        $company = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_COMPANY);
-        $candidate = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_CANDIDATE);
+        $admin = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_ADMIN);
+        $company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
+        $candidate = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_CANDIDATE);
         $role = $this->role_repo->all();
         $information_type = $this->information_repo->all();
         $review = $this->review_repo->all();
-        $report = $this->ticket_repo->getTicketCondition('type_id', Constant::TICKET_REPORT);
-        $contact = $this->ticket_repo->getTicketCondition('type_id', Constant::TICKET_CONTACT);
+//        $report = $this->ticket_repo->getTicketCondition('type_id', Constant::TICKET_REPORT);
+//        $contact = $this->ticket_repo->getTicketCondition('type_id', Constant::TICKET_CONTACT);
 
 
         return view('admin.dashboard.tables');
@@ -114,7 +111,7 @@ class DashboardController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole('role_id', $input['admin_id']))
+        if (!$this->admin_repo->checkRole($input['admin_id'],Constant::ROLE_ADMIN))
         {
             abort(401);
         }
@@ -124,8 +121,7 @@ class DashboardController extends Controller
         $user_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
         $user_candidate = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_CANDIDATE);
 
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             return response()->json([
                 'all_user' => count($all_user),
                 'count_user_admin' => count($user_admin),
@@ -157,7 +153,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('user.update-infor')
+        return view('admin.dashboard.profile')
             ->with([
                 'user' => $user,
                 'company' => $company,
@@ -166,5 +162,43 @@ class DashboardController extends Controller
                 'reviews' => $review,
                 'count_review' => count($review)
             ]);
+    }
+
+    public function contact(Request $request)
+    {
+        $input = $request->all();
+
+        if (!$this->admin_repo->checkRole($input['admin_id'],Constant::ROLE_ADMIN))
+        {
+            abort(401);
+        }
+
+        $contact_not_reply = $this->ticket_repo->getTicketNotReply(Constant::TICKET_CONTACT,Constant::TICKET_NOT_REPLY);
+        $contact_reply = $this->ticket_repo->getTicketReplyLastWeek(Constant::TICKET_CONTACT, Constant::TICKET_REPLIED);
+
+        if ($request->ajax())
+        {
+            return response()->json([
+                'contact_not_reply' => $contact_not_reply,
+                'contact_reply' => $contact_reply
+            ]);
+        }
+
+        return view('admin.dashboard.contact')->with([
+            'count_contact' => count($contact_not_reply) + count($contact_reply),
+            'count_contact_not_reply' => count($contact_not_reply),
+            'count_contact_reply' => count($contact_reply),
+            'contact_not_reply' => $contact_not_reply,
+            'contact_reply' => $contact_reply
+        ]);
+    }
+
+    public function report(Request $request)
+    {
+        $input = $request->all();
+
+        if (!$this->admin_repo->checkRole('role_id', $input['admin_id'])) {
+            abort(401);
+        }
     }
 }

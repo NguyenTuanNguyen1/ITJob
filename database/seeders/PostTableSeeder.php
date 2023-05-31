@@ -32,6 +32,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_IT,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
 
@@ -48,6 +50,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_NEWSPAPERS,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
 
@@ -64,6 +68,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_ELECTRONICS,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
 
@@ -80,6 +86,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_CAR_TECHNOLOGY,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
 
@@ -96,6 +104,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_MANUFACTURING,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
 
@@ -112,6 +122,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_MARKETING,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
 
@@ -128,6 +140,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_ACCOUNTANT,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
 
@@ -144,6 +158,8 @@ class PostTableSeeder extends Seeder
                 'major' => Constant::MAJOR_REAL_ESTATE,
                 'status' => 1,
                 'user_id' => rand(1,6),
+                'approved_user_id' => rand(1,2),
+                'approved_date' => Carbon::now()->subWeek(),
                 'created_at' => Carbon::now()->subWeek()
             ]);
         }

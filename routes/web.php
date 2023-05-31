@@ -31,19 +31,17 @@ Route::prefix('user')->group(function () {
 
     Route::post('/update-password',[ResetController::class,'updatePassword'])->name('password.update');
 
-    Route::get('/user-profile/{id}',[ProfileController::class,'profile'])->name('user.profile');
-    Route::post('/user-update',[ProfileController::class,'handleUpdate'])->name('user.update');
-    Route::post('/user-update-basic',[ProfileController::class,'handleUpdateBasic'])->name('user.update.basic');
-    Route::post('/user-update-information',[ProfileController::class,'handleUpdateInfor'])->name('user.update.information');
-    Route::post('/user-delete-information',[ProfileController::class,'handleDeleteInfor'])->name('user.delete.information');
-
     Route::post('/applied-post',[UserController::class,'applied'])->name('user.applied.post');
 });
 
 //Profile
 Route::prefix('profile')->group(function () {
     Route::get('profile/{id}', [ProfileController::class,'userCompany'])->name('profile.user');
-
+    Route::get('/user-profile/{id}',[ProfileController::class,'profile'])->name('profile.index');
+    Route::post('/user-update',[ProfileController::class,'handleUpdate'])->name('profile.update');
+    Route::post('/user-update-basic',[ProfileController::class,'handleUpdateBasic'])->name('profile.update.basic');
+    Route::post('/user-update-information',[ProfileController::class,'handleUpdateInfor'])->name('profile.update.information');
+    Route::post('/user-delete-information',[ProfileController::class,'handleDeleteInfor'])->name('profile.delete.information');
 });
 
 //Post
@@ -78,7 +76,6 @@ Route::middleware('cors')->group(function (){
 //Contact
 Route::prefix('contact')->group(function () {
     Route::get('',[ContactController::class,'view'])->name('contact.index');
-    Route::get('/list-contact',[ContactController::class,'index'])->name('contact.all');
     Route::get('/contact-detail/{id}',[ContactController::class,'show'])->name('contact.detail');
     Route::post('/contact-create',[ContactController::class,'store'])->name('contact.create');
     Route::get('/contact-delete',[ContactController::class,'delete'])->name('contact.delete');
@@ -99,16 +96,17 @@ Route::prefix('review')->group(function (){
 
 //Dashboard
 Route::prefix('dashboard')->group(function (){
-    Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
-    Route::get('/admin/admin-profile/{id}',[DashboardController::class,'profile'])->name('admin.profile');
-    Route::get('/account',[DashboardController::class,'account'])->name('admin.account');
-    Route::get('/contact',[DashboardController::class,'contact'])->name('admin.contact');
-    Route::get('/report',[DashboardController::class,'report'])->name('admin.report');
+    Route::get('/admin',[DashboardController::class,'index'])->name('dashboard.index');
+    Route::get('/admin/admin-profile/{id}',[DashboardController::class,'profile'])->name('dashboard.profile');
+    Route::get('/account',[DashboardController::class,'account'])->name('dashboard.account');
+    Route::get('/contact',[DashboardController::class,'contact'])->name('dashboard.contact');
+    Route::get('/report',[DashboardController::class,'report'])->name('dashboard.report');
 });
 
 Route::prefix('admin')->group(function (){
     Route::post('/approved_post',[AdminController::class,'approved'])->name('admin.approved.post');
     Route::post('/delete-user',[AdminController::class,'deleteUserByAdmin'])->name('admin.delete.user');
+    Route::post('/replied-contact',[AdminController::class,'repliedContact'])->name('admin.replied.contact');
 });
 
 Route::get('/login-google/{provider}',[OAuthController::class,'redirect_Google'])->name('login.google');

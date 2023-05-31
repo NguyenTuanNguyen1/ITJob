@@ -22,9 +22,9 @@
             @if(Auth::check() && Auth::user()->role_id == 1)
                 <div class="right-cta-menu text-right d-flex aligin-items-center col-6 d-none d-xl-block">
                     <div class="ml-auto">
-                        <form action="{{ Route('admin.index') }}" method="get">
+                        <form action="{{ Route('dashboard.index') }}" method="get">
                             <button type="submit" class="btn btn-primary text-white">
-                                <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
+                                <input type="hidden" name="admin_id" value="{{ Auth::user()->role_id }}">
                                 <i class="fas fa-home">  Trở về</i>
                             </button>
                         </form>
@@ -47,7 +47,7 @@
                             {{ Auth::user()->username }}
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ Route('user.profile',['id' => Auth::user()->id]) }}">Thông
+                            <a class="dropdown-item" href="{{ Route('profile.index',['id' => Auth::user()->id]) }}">Thông
                                 tin cá nhân</a>
                             <a class="dropdown-item" href="{{ Route('logout') }}">Đăng xuất</a>
                         </div>

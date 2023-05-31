@@ -9,16 +9,16 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi:</label>
-                    <label> {{ $reply->user->username }}</label><br>
-                    <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Tiêu đề
-                        :</label><br>
-                    <label>{{ $reply->subject }}</label>
-                </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label" style="font-weight: bold;">Nội
-                        dung:</label><br>
-                    <label>{{ $reply->content }}</label>
+{{--                    <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi:</label>--}}
+{{--                    <label> {{ $reply->user->username }}</label><br>--}}
+{{--                    <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Tiêu đề--}}
+{{--                        :</label><br>--}}
+{{--                    <label>{{ $reply->subject }}</label>--}}
+{{--                </div>--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="message-text" class="col-form-label" style="font-weight: bold;">Nội--}}
+{{--                        dung:</label><br>--}}
+{{--                    <label>{{ $reply->content }}</label>--}}
                 </div>
             </div>
             <div class="modal-footer">

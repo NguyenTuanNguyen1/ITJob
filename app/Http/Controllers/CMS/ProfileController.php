@@ -95,8 +95,14 @@ class ProfileController extends Controller
         $input['img_avatar'] = $this->uploadImageAvatar($request);
         $this->user_repo->updateAvatarAndName($input['id'], $input);
 
+        if ($input['role_id'] == Constant::ROLE_ADMIN)
+        {
+            alert('Chỉnh sửa tài khoản thành công', null, 'success');
+            return redirect()->route('dashboard.profile', $input['id']);
+        }
+
         alert('Chỉnh sửa tài khoản thành công', null, 'success');
-        return redirect()->route('user.profile', $input['id']);
+        return redirect()->route('profile.index', $input['id']);
     }
 
     public function handleUpdateInfor(Request $request)
@@ -113,8 +119,15 @@ class ProfileController extends Controller
                 'infor' => $infor
             ]);
         }
+
+        if ($input['role_id'] == Constant::ROLE_ADMIN)
+        {
+            alert('Cập nhật thông tin thành công', null, 'success');
+            return redirect()->route('dashboard.profile', $input['id']);
+        }
+
         alert('Cập nhật thông tin thành công', null, 'success');
-        return redirect()->route('user.profile', $input['id']);
+        return redirect()->route('profile.index', $input['id']);
     }
 
     public function userCompany($id, Request $request)
