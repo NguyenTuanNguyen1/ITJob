@@ -105,7 +105,7 @@ Route::prefix('review')->group(function (){
 });
 
 //Dashboard
-Route::prefix('dashboard')->group(function (){
+Route::group(['prefix' => 'dashboard','middleware' => 'authorize'],function (){
     Route::get('/admin',[DashboardController::class,'index'])->name('dashboard.index');
     Route::get('/admin/admin-profile/{id}',[DashboardController::class,'profile'])->name('dashboard.profile');
     Route::get('/account',[DashboardController::class,'account'])->name('dashboard.account');
@@ -113,7 +113,8 @@ Route::prefix('dashboard')->group(function (){
     Route::get('/report',[DashboardController::class,'report'])->name('dashboard.report');
 });
 
-Route::prefix('admin')->group(function (){
+//Admin
+Route::group(['prefix' => 'admin','middleware' => 'authorize'],function (){
     Route::post('/approved_post',[AdminController::class,'approved'])->name('admin.approved.post');
     Route::post('/delete-user',[AdminController::class,'deleteUserByAdmin'])->name('admin.delete.user');
     Route::post('/replied-contact',[AdminController::class,'repliedContact'])->name('admin.replied.contact');
@@ -129,10 +130,9 @@ Route::get('/callback/{provider}',[OAuthController::class,'callback_Linkedin'])-
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/post-create',[HomeController::class,'post'])->name('post.index');
 
-
 //
 //Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
 Route::get('/test',[HomeController::class,'test'])->name('test');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
-
+Route::get('/error',[HomeController::class,'notFound'])->name('not.found');
 Route::get('123',[HomeController::class,'mail'])->name('test-mail');

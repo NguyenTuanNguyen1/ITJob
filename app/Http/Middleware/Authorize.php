@@ -6,6 +6,7 @@ use App\Constant;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class Authorize
@@ -19,17 +20,17 @@ class Authorize
     {
         $user = Auth::check();
 
-        if ($user && Auth::user()->role_id() == Constant::ROLE_CANDIDATE)
+        if ($user && Auth::user()->role_id == Constant::ROLE_CANDIDATE)
         {
-            abort(404);
+            return redirect()->route('not.found');
         }
-        elseif ($user && Auth::user()->role_id() == Constant::ROLE_COMPANY)
+        elseif ($user && Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
-            abort(404);
+            return redirect()->route('not.found');
         }
         elseif (!Auth::check())
         {
-            abort(404);
+            return redirect()->route('not.found');
         }
         return $next($request);
     }
