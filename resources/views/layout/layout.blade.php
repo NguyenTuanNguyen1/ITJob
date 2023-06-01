@@ -77,6 +77,7 @@
 <body>
 @yield('content')
 @yield('index')
+@yield('404')
 <!-- <div id="btnTop">
         <a href="#top">^</a>
     </div> --><a id="button"></a>
@@ -96,15 +97,6 @@
                     <li><a href="#">CSS3</a></li>
                 </ul>
             </div>
-            <!-- <div class="col-6 col-md-3 mb-4 mb-md-0">
-                <h3>Company</h3>
-                <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Career</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Resources</a></li>
-                </ul>
-            </div> -->
             <div class="col-6 col-md-3 mb-4 mb-md-0">
                 <h3>Hỗ trợ</h3>
                 <ul class="list-unstyled">

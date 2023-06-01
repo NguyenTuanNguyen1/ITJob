@@ -147,7 +147,7 @@
             </div>
         </div>
     </section>
-    @include('modal.Report.report')
+
     @include('modal.post.edit')
 
     <div class="container" style="padding-top:10px">
@@ -228,7 +228,7 @@
             e.preventDefault();
             var data = {
                 'id': $('#btn-delete-post').val(),
-                'user_id': {{$post->user_id}}
+                'user_id': {{ Auth::user()->id }}
             }
 
             Swal.fire({

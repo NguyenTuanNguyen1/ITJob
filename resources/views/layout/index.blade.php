@@ -1,7 +1,8 @@
 @extends('layout.layout')
 @section('index')
     <!-- <section class="home-section section-hero overlay bg-image" id="home-section"></section> -->
-    <div class="container" style="padding-top:8%">
+    <div class="site-section">
+            <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
                 <form action="{{ Route('search.filter') }}" method="post" class="search-jobs-form">
@@ -95,6 +96,8 @@
             </div>
         </div>
     </div>
+    </div>
+
     <section class="site-section py-4" style="background-color:white;">
         <p style="color: black;font-size: 30px;font-weight: bold;">Top ngành nghề nổi bật</p>
         <div class="top-job">
