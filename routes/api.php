@@ -34,17 +34,6 @@ Route::prefix('type')->group(function (){
     Route::get('/type-restore',[TypeController::class,'restore'])->name('type.restore');
 });
 
-//Report
-Route::prefix('report')->group(function () {
-    Route::get('/list-report',[ReportController::class,'index'])->name('report.all');
-    Route::get('/report-detail/{id}',[ReportController::class,'show'])->name('report.detail');
-    Route::post('/report-create',[ReportController::class,'store'])->name('report.create');
-    Route::get('/report-delete',[ReportController::class,'delete'])->name('report.delete');
-//    Route::get('/contact-trashed',[ReportController::class,'trashed'])->name('contact.trashed');
-    Route::get('/report-reply',[ReportController::class,'reply'])->name('report.reply');
-    Route::get('/list-report-replied',[ReportController::class,'replied'])->name('report.replied');
-});
-
 Route::middleware('admin')->group(function (){
 
 });

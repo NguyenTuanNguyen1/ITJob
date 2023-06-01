@@ -46,17 +46,6 @@
                             </div>
 
                             <div class="row form-group">
-
-                                <div class="col-md-12">
-                                    <label class="text-black" for="subject">Tiêu đề</label>
-                                    <input type="subject" id="subject" name="subject" class="form-control">
-                                    @error('subject')
-                                    <div style="color:red;" >{{ $message }}</div><br>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
                                 <div class="col-md-12">
                                     <label class="text-black" for="message">Nội dung</label>
                                     <textarea name="content" id="message" cols="30" rows="7" class="form-control"

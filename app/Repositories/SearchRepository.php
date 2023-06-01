@@ -21,8 +21,8 @@ class SearchRepository implements ISearchRepository
 
     public function searchFilter(array $data)
     {
-        return Post::
-                    orWhere('position', $data['position'])
+        return Post::with('user')
+                    ->orWhere('position', $data['position'])
                     ->orWhere('working', $data['working'])
                     ->orWhere('major', $data['major'])
                     ->orderBy('id','DESC')

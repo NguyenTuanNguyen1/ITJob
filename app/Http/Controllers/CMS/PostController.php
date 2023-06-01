@@ -61,13 +61,14 @@ class PostController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'post' => $post,
-                'post_majors' => $post_majors
+                'post_majors' => $post_majors,
             ]);
         }
 
         return view('user.job.detail',[
             'post' => $post,
-            'post_majors' => $post_majors
+            'post_majors' => $post_majors,
+            'auth' => is_null(Auth::user()) ? null : Auth::user()->id
         ]);
     }
 

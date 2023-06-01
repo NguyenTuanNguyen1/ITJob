@@ -52,20 +52,8 @@ trait Service
 
     public function uploadMultipleImage(Request $request)
     {
-//        $path = [];
-//        $image = [];
-        /** @var TYPE_NAME $path */
-        /** @var TYPE_NAME $image */
-        $nameImage = Str::random(6);
-        if ($files = $request->file('image')) {
-            foreach ($files as $file) {
-                $fileName = "{$nameImage}.jpg";
-                $path[] = $file->move('image_avatar', $fileName, 'public');
-                //$file->move(public_path('/anh'), end($filename));
+        dd($request);
 
-                $image[] = $fileName;
-            }
-        }
     }
 
     public function checkExist($data, $action)

@@ -145,22 +145,20 @@
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
                                 <th>Nội dung</th>
-                                <th>Người phản hồi</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="contact_replied">
-                                @foreach($contact_reply as $key => $reply)
+                                @foreach($contact_reply as $reply)
                                     <tr>
                                         <td>{{ $reply->username }}</td>
                                         <td>{{ $reply->content }}</td>
-                                        <td>{{ $reply->reply_user_id }}</td>
                                         <td>{{ $reply->created_at->format('d-m-Y') }}</td>
                                         <td>
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-value="123" data-toggle="modal"
-                                                    data-target="#modalDetailContact"
-                                                    id="btn-replied" value="{{ $key }}">Chi tiết {{ $key }}
+                                                    data-target="#modalDetailRepliedContact"
+                                                    id="btn-replied" value="{{ $reply->id }}">Bài phản hồi
                                             </button>
                                         </td>
                                     </tr>
@@ -173,7 +171,7 @@
             </div>
         </div>
     </div>
-    @include('modal.contact.detail-replied')
+    @include('modal.contact.detail-reply')
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
 <script src="{{ url('profile/js/core/popper.min.js') }}"></script>
@@ -190,32 +188,36 @@
     $(document).ready(function () {
 
         $('#contact_replied').on('click', '#btn-replied', function () {
-            var data = $(this).val();
-
-
-            var value = {
-                'admin_id': {{ Auth::user()->id }}
-            }
-            {{--$.ajax({--}}
-            {{--    url: "{{ Route('dashboard.contact') }}",--}}
-            {{--    type: "GET",--}}
-            {{--    data: value,--}}
-            {{--    success: function (data) {--}}
-            {{--        var categogy = data.contact_reply--}}
-            {{--        categogy.forEach(function (item) {--}}
-            {{--            _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi :</label>';--}}
-            {{--            _li += '<label>' + item.user_id + '</label><br>';--}}
-            {{--            _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Tiêu đề :</label><br>';--}}
-            {{--            _li += '<label>' + item.subject + '</label><br>';--}}
-            {{--            _li += '<label for="message-text" class="col-form-label" style="font-weight: bold;">Nội dung:</label><br>';--}}
-            {{--            _li += '<label>' + item.content + '</label><br>';--}}
-            {{--            ;--}}
-            {{--            $('#replied').html(_li);--}}
-            {{--        })--}}
-            {{--    }--}}
-            {{--})--}}
+            var _li = '';
+            var value = { 'id': $(this).val() }
+            $.ajax({
+                url: "{{ Route('contact.replied') }}",
+                type: "GET",
+                data: value,
+                success: function (res) {
+                    console.log(res.data)
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : '+ res.data.username +' </label><br>';
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
+                    _li += '<label>'+ res.data.content +'</label>';
+                    $('#detail-replied').html(_li)
+                }
+            })
         })
 
-        $('#contact_reply').on('click', '#btn-reply', function () {})
+        $('#contact_reply').on('click', '#btn-reply', function () {
+            var _li = '';
+            var value = { 'id': $(this).val() }
+            $.ajax({
+                url: "{{ Route('contact.detail') }}",
+                type: "GET",
+                data: value,
+                success: function (res) {
+                    console.log(res)
+                    _li += '<input type="hidden" name="ticket_id" value="'+ res.data.id +'">';
+                    _li += '<input type="hidden" name="reply_user_id" value="'+ res.data.user_id +'">';
+                    $('#replied_contact').html(_li)
+                }
+            })
+        })
     });
 </script>
