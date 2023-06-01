@@ -23,24 +23,18 @@ class Ticket extends Model
     protected $table = 'ticket';
     protected $fillable = [
         'username',
-        'subject',
         'email',
         'content',
         'image',
         'status',
         'user_id',
-        'reply_user_id',
         'type_id',
-        'post_id'
+        'post_id',
+        'ticket_id'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getNameTicket()
-    {
-        return $this->user->username;
     }
 }

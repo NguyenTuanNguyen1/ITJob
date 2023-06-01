@@ -24,7 +24,6 @@ class ContactRequest extends FormRequest
         return [
             'username' => 'required',
             'email' => 'required | email',
-            'subject' => 'required',
             'content' => 'required'
         ];
     }
@@ -35,7 +34,6 @@ class ContactRequest extends FormRequest
             'username.required' => 'Vui lòng nhập tên',
             'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Vui lòng đúng định dạng @',
-            'subject.required' => 'Vui lòng nhập tiêu đề',
             'content.required' => 'Vui lòng nhập nội dung',
         ];
     }

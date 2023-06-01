@@ -20,7 +20,6 @@ class TicketRepository implements ITicketRepository
     {
         $data = new Ticket();
         $data->username = $type['username'];
-//        $data->subject = $type['subject'];
         $data->email = $type['email'];
         $data->content = $type['content'];
         $data->image = $type['image'];
@@ -31,29 +30,33 @@ class TicketRepository implements ITicketRepository
         return $data;
     }
 
-    public function find($id)
+    public function find($id,$action)
     {
-        return Ticket::find($id)->get();
+        return Ticket::where('id', $id)
+            ->where('status',Constant::TICKET_NOT_REPLY)
+            ->where('type_id', $action)->first();
     }
 
-    public function reply($id, array $data)
+    public function update($id)
     {
-        $ticket = new Ticket();
-
-        return Ticket::find($id)->update([
-            'status' => Constant::TICKET_REPLIED,
-            'reply_user_id' => $data['admin_id']
+        return Ticket::where('id', $id)->update([
+           'status' => Constant::TICKET_REPLIED
         ]);
     }
 
-    public function delete($id)
+    public function reply(array $data)
     {
-        return Ticket::find($id)->delete();
-    }
-
-    public function restore($id)
-    {
-        return Ticket::onlyTrashed()->where('id', $id)->restore();
+        $ticket = new Ticket();
+        $ticket->username = $data['username'];
+        $ticket->content = $data['content'];
+        $ticket->image = $data['image'];
+        $ticket->type_id = $data['type_id'];
+        $ticket->status = Constant::TICKET_REPLIED;
+        $ticket->user_id = $data['user_id'];
+        $ticket->post_id = $data['post_id'];
+        $ticket->ticket_id = $data['ticket_id'];
+        $ticket->save();
+        return $ticket;
     }
 
     public function getTicketNotReply($action, $status)
@@ -73,5 +76,14 @@ class TicketRepository implements ITicketRepository
             ->where('created_at', '>=', Carbon::now()->subWeek()->startOfWeek())
             ->where('created_at', '<=', Carbon::now()->subWeek()->endOfWeek())
             ->get();
+    }
+
+    public function listReplied($id, $action)
+    {
+        return Ticket::with('user')
+            ->where('ticket_id', $id)
+            ->where('status',Constant::TICKET_REPLIED)
+            ->where('type_id', $action)
+            ->first();
     }
 }

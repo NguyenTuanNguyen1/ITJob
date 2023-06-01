@@ -19,9 +19,9 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Tổng số liên hệ</p>
-                                    <p class="card-title" id="count_contact">
-                                    <p>{{ $count_contact }}
+                                    <p class="card-category">Tổng bài báo cáo</p>
+                                    <p class="card-title">
+                                    <p>{{ $count_report }}
                                 </div>
                             </div>
                         </div>
@@ -47,8 +47,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Đã phản hồi</p>
-                                    <p class="card-title" id="count_contact_reply">
-                                    <p>{{ $count_contact_reply }}
+                                    <p class="card-title">
+                                    <p>{{ $count_report_reply }}
                                 </div>
                             </div>
                         </div>
@@ -74,8 +74,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Chưa phản hồi</p>
-                                    <p class="card-title" id="count_contact_not_reply">
-                                    <p>{{ $count_contact_not_reply }}
+                                    <p class="card-title">
+                                    <p>{{ $count_report_not_reply }}
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Danh sách bài liên hệ chưa phản hồi</h4>
+                        <h4 class="card-title"> Danh sách bài báo cáo chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -107,8 +107,8 @@
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="contact_reply">
-                                @foreach($contact_not_reply as $key => $not_reply)
+                                <tbody id="report_reply">
+                                @foreach($report_not_reply as $not_reply)
                                     <tr>
                                         <td>{{ $not_reply->username }}</td>
                                         <td>{{ $not_reply->content }}</td>
@@ -116,7 +116,7 @@
                                         <td>
                                             <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
                                                     data-value="123" data-toggle="modal"
-                                                    data-target="#modalRepliedContact"
+                                                    data-target="#modalReport"
                                                     id="btn-reply" value="{{ $not_reply->id }}">Phản hồi
                                             </button>
                                         </td>
@@ -130,14 +130,14 @@
             </div>
         </div>
     </div>
-    @include('modal.contact.detail-reply')
-    @include('modal.contact.replied')
+    @include('modal.Report.report')
+    @include('modal.Report.detail-report')
     <div class="content" style="margin-top: 5px">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Danh sách bài liên hệ đã phản hồi </h4>
+                        <h4 class="card-title"> Danh sách bài báo cáo đã phản hồi </h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -148,8 +148,8 @@
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="contact_replied">
-                                @foreach($contact_reply as $reply)
+                                <tbody id="report_replied">
+                                @foreach($report_reply as $reply)
                                     <tr>
                                         <td>{{ $reply->username }}</td>
                                         <td>{{ $reply->content }}</td>
@@ -157,7 +157,7 @@
                                         <td>
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-value="123" data-toggle="modal"
-                                                    data-target="#modalDetailRepliedContact"
+                                                    data-target="#modalDetailReport"
                                                     id="btn-replied" value="{{ $reply->id }}">Bài phản hồi
                                             </button>
                                         </td>
@@ -187,15 +187,14 @@
 <script>
     $(document).ready(function () {
 
-        $('#contact_replied').on('click', '#btn-replied', function () {
+        $('#report_replied').on('click', '#btn-replied', function () {
             var _li = '';
             var value = { 'id': $(this).val() }
             $.ajax({
-                url: "{{ Route('contact.replied') }}",
+                url: "{{ Route('report.replied') }}",
                 type: "GET",
                 data: value,
                 success: function (res) {
-                    console.log(res.data)
                     _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : '+ res.data.username +' </label><br>';
                     _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
                     _li += '<label>'+ res.data.content +'</label>';
@@ -204,18 +203,18 @@
             })
         })
 
-        $('#contact_reply').on('click', '#btn-reply', function () {
+        $('#report_reply').on('click', '#btn-reply', function () {
             var _li = '';
             var value = { 'id': $(this).val() }
             $.ajax({
-                url: "{{ Route('contact.detail') }}",
+                url: "{{ Route('report.detail') }}",
                 type: "GET",
                 data: value,
                 success: function (res) {
-                    console.log(res)
                     _li += '<input type="hidden" name="ticket_id" value="'+ res.data.id +'">';
+                    _li += '<input type="hidden" name="post_id" value="'+ res.data.post_id +'">';
                     _li += '<input type="hidden" name="reply_user_id" value="'+ res.data.user_id +'">';
-                    $('#replied_contact').html(_li)
+                    $('#replied_report').html(_li)
                 }
             })
         })

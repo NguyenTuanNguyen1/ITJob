@@ -9,6 +9,7 @@ use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /**
  * @property ITicketRepository $ticket_repo
@@ -34,9 +35,12 @@ class ReportController extends Controller
             'data' => $report
         ]);
     }
-    public function show($id)
+    public function show(Request $request)
     {
-        $report = $this->ticket_repo->find($id);
+        $input = $request->all();
+
+        $report= $this->ticket_repo->find($input['id'], Constant::TICKET_REPORT);
+
         return response()->json([
             'data' => $report
         ]);
@@ -45,28 +49,25 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $image = [];
+        $path = [];
 
-        try {
-            $input['type_id'] = Constant::TICKET_REPORT;
-            $input['image'] = $this->uploadMultipleImage($input['image']);
-
-            $report = $this->ticket_repo->create($input);
-
-            if (empty($report)) {
-                return response()->json([
-                    'result' => false,
-                ]);
+        $nameImage = Str::random(6);
+        if ($files = $request->file('image')) {
+            foreach ($files as $file) {
+                $fileName = "{$nameImage}.jpg";
+                $path[] = $file->move('Images', $fileName, 'public');
+                //$file->move(public_path('/anh'), end($filename));
+                $image[] = $fileName;
             }
-            return response()->json([
-                'result' => true,
-            ]);
-        }catch (\Exception $e)
-        {
-            return response()->json([
-                'result' => false,
-                'message' => $e->getMessage()
-            ]);
         }
+        $input['type_id'] = Constant::TICKET_REPORT;
+        $input['image'] = implode('|', $image);
+
+        $this->ticket_repo->create($input);
+        alert('Đã gửi thành công', null, 'success');
+        return redirect()->route('post.detail', ['id' => $input['post_id']]);
+
     }
 
     public function delete(Request $request)
@@ -115,12 +116,14 @@ class ReportController extends Controller
         $this->sendMailUser($input['email'], new ReplyMail($input['data']));
     }
 
-    public function replied()
+    public function replied(Request $request)
     {
-        $contact = $this->ticket_repo->replied();
+        $input = $request->all();
+
+        $report = $this->ticket_repo->listReplied($input['id'], Constant::TICKET_REPORT);
 
         return response()->json([
-            'data' => $contact
+            'data' => $report
         ]);
     }
 }

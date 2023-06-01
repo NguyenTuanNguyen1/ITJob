@@ -35,16 +35,12 @@ class ContactController extends Controller
         return view('layout.contact');
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $contact = $this->ticket_repo->find($id);
-        if (empty($contact))
-        {
-            return response()->json([
-                'result' => false,
-                'message' => 'Không tìm thấy'
-            ]);
-        }
+        $input = $request->all();
+
+        $contact = $this->ticket_repo->find($input['id'],Constant::TICKET_CONTACT);
+
         return response()->json([
             'data' => $contact
         ]);
@@ -103,9 +99,11 @@ class ContactController extends Controller
         $this->sendMailUser($input['email'], new ReplyMail($input['data']));
     }
 
-    public function replied()
+    public function replied(Request $request)
     {
-        $contact = $this->ticket_repo->replied();
+        $input = $request->all();
+
+        $contact = $this->ticket_repo->listReplied($input['id'], Constant::TICKET_CONTACT);
         return response()->json([
             'data' => $contact
         ]);

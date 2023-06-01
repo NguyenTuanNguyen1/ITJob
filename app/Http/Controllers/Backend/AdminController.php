@@ -97,9 +97,32 @@ class AdminController extends Controller
             abort(401);
         }
 
-        $this->ticket_repo->reply($input['id'], $input);
+        $input['type_id'] = Constant::TICKET_CONTACT;
+        $input['image'] = $input['post_id'] = null;
+
+        $this->ticket_repo->update($input['ticket_id']);
+        $this->ticket_repo->reply($input);
+
         $this->ActivityLog('Bạn đã phản hồi liên hệ của người dùng%' . $input['user_id'], $input['admin_id']);
         alert('Bạn đã phản hồi liên hệ', null, 'success');
         return redirect()->route('dashboard.contact', ['admin_id' => $input['admin_id']]);
+    }
+
+    public function repliedReport(Request $request)
+    {
+        $input = $request->all();
+
+        if (!$this->admin_repo->checkRole($input['admin_id'], Constant::ROLE_ADMIN)) {
+            abort(401);
+        }
+
+        $input['type_id'] = Constant::TICKET_REPORT;
+        $input['image'] = null;
+        $this->ticket_repo->update($input['ticket_id']);
+        $this->ticket_repo->reply($input);
+
+        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng%' . $input['user_id'], $input['admin_id']);
+        alert('Bạn đã phản hồi báo cáo', null, 'success');
+        return redirect()->route('dashboard.report', ['admin_id' => $input['admin_id']]);
     }
 }

@@ -1,8 +1,8 @@
-<div class="modal fade" id="modalRepliedContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{ Route('admin.replied.contact') }}" method="post">
+            <form action="{{ Route('admin.replied.report') }}" method="post">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Phản hồi liên hệ</h5>
@@ -15,8 +15,8 @@
                         <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label>
                     </div>
                     <textarea name="content" cols="60" rows="4"></textarea>
+                    <div id="replied_report"></div>
                 </div>
-                <div id="replied_contact"></div>
                 <input type="hidden" name="username" value="{{ Auth::user()->username }}">
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">

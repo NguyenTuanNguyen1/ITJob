@@ -176,14 +176,6 @@ class DashboardController extends Controller
         $contact_not_reply = $this->ticket_repo->getTicketNotReply(Constant::TICKET_CONTACT,Constant::TICKET_NOT_REPLY);
         $contact_reply = $this->ticket_repo->getTicketReplyLastWeek(Constant::TICKET_CONTACT, Constant::TICKET_REPLIED);
 
-        if ($request->ajax())
-        {
-            return response()->json([
-                'contact_not_reply' => $contact_not_reply,
-                'contact_reply' => $contact_reply
-            ]);
-        }
-
         return view('admin.dashboard.contact')->with([
             'count_contact' => count($contact_not_reply) + count($contact_reply),
             'count_contact_not_reply' => count($contact_not_reply),
@@ -197,8 +189,20 @@ class DashboardController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole('role_id', $input['admin_id'])) {
+        if (!$this->admin_repo->checkRole($input['admin_id'],Constant::ROLE_ADMIN))
+        {
             abort(401);
         }
+
+        $report_not_reply = $this->ticket_repo->getTicketNotReply(Constant::TICKET_REPORT,Constant::TICKET_NOT_REPLY);
+        $report_reply = $this->ticket_repo->getTicketReplyLastWeek(Constant::TICKET_REPORT, Constant::TICKET_REPLIED);
+
+        return view('admin.dashboard.report')->with([
+            'count_report' => count($report_not_reply) + count($report_reply),
+            'count_report_not_reply' => count($report_not_reply),
+            'count_report_reply' => count($report_reply),
+            'report_not_reply' => $report_not_reply,
+            'report_reply' => $report_reply
+        ]);
     }
 }

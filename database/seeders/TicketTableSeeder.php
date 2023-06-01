@@ -20,7 +20,6 @@ class TicketTableSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             DB::table('ticket')->insert([
                 'username' => fake()->name,
-                'subject' => fake()->text,
                 'content' => fake()->text,
                 'email' => fake()->email,
                 'user_id' => rand(1,10),
@@ -33,7 +32,6 @@ class TicketTableSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             DB::table('ticket')->insert([
                 'username' => fake()->name,
-                'subject' => fake()->text,
                 'content' => fake()->text,
                 'email' => fake()->email,
                 'user_id' => rand(1,10),
