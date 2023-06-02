@@ -29,7 +29,6 @@
 {{--                                            class="fa fa-linkedin"></i></btn>--}}
 {{--                                    <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">--}}
 {{--                                        <i class="fa fa-linkedin"></i>--}}
-                                    </button>
                                 </div>
                             </div>
                         </li>

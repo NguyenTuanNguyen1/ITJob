@@ -51,19 +51,9 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    @if(Auth::check() && Auth::user()->id != $post->user_id)
-                        <div class="row">
-                            <div class="col-6">
-                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
-                            </div>
-                            <div class="col-3">
-                                <a class="btn btn-block btn-success btn-md " role="button" data-toggle="dropdown"
-                                   aria-expanded="false"><span
-                                        class="icon-th-large  text-danger"></span></a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Báo cáo bài viết</a>
-                                </div>
-                            </div>  
+                    @if(!Auth::check())
+                        <div class="col-6">
+                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>
                         </div>
                     @elseif(Auth::check() && Auth::user()->id == $post->user_id)
                         <div class="row">
@@ -82,6 +72,23 @@
 
                             <div class="col-6">
                                 <a href="#" class="btn btn-block btn-primary btn-md"><span class="icon-plus text-danger"></span> Lưu công việc</a>
+                            </div>
+                        </div>
+                    @elseif(Auth::check() && Auth::user()->id != $post->user_id)
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
+                                   aria-expanded="false"><span
+                                        class="icon-th-large mr-2 text-danger"></span>Save Job</a>
+                                <div class="dropdown-menu">
+                                    <button type="submit" class="dropdown-item" data-toggle="modal"
+                                            data-target="#modalReport">Báo cáo bài viết
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
                             </div>
                         </div>
                     @else

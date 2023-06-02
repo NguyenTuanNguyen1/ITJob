@@ -5,29 +5,21 @@
             <form action="{{ Route('admin.replied.contact') }}" method="post">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Phản hồi liên hệ</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi:</label>
-{{--                        <label> {{ $not_reply->user->username }}</label><br>--}}
-                        <label> {{ $not_reply->id }}</label><br>
-                        <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Tiêu đề
-                            :</label><br>
-{{--                        <label>{{ $not_reply->subject }}</label>--}}
+                        <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label>
                     </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label" style="font-weight: bold;">Nội
-                            dung:</label><br>
-{{--                        <label>{{ $not_reply->content }}</label>--}}
-                    </div>
+                    <textarea name="content" cols="60" rows="4"></textarea>
                 </div>
+                <div id="replied_contact"></div>
+                <input type="hidden" name="username" value="{{ Auth::user()->username }}">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">
-                <input type="hidden" name="user_id" value="{{ $not_reply->user_id }}">
-                <input type="hidden" name="id" value="{{ $not_reply->id }}">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-primary">Phản hồi</button>

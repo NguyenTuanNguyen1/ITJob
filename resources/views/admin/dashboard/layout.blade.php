@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('user.register') }}">
+                    <a href="{{ Route('dashboard.report',['admin_id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-book-bookmark"></i>
                         <p>Báo cáo</p>
                     </a>

@@ -9,6 +9,7 @@ use App\Interfaces\IUserRepository;
 use App\Repositories\BackendRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /**
  * @property IPostRepository $post_repo
@@ -81,6 +82,11 @@ class HomeController extends Controller
     }
 
     public function test()
+    {
+        return view('layout.not-found');
+    }
+
+    public function notFound()
     {
         return view('layout.not-found');
     }
