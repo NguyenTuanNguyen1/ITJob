@@ -2,8 +2,7 @@
 @section('content')
     @include('sweetalert::alert')
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/css/jquery.fancybox.min.css') }}">
@@ -133,7 +132,7 @@
                         <ul class="list-unstyled pl-3 mb-0">
                             <li class="mb-2"><strong class="text-black">Đăng
                                     ngày</strong> {{ $post->created_at->format('d-m-Y') }}</li>
-                            <li class="mb-2"><strong class="text-black">Số lượng :</strong> {{ $post->quantity }}</li>
+                            <li class="mb-2"> <strong class="text-black" style="color:red">Số lượng :</strong> {{ $post->quantity }}</li>
                             <li class="mb-2"><strong class="text-black">Chuyên ngành:</strong> {{ $post->major }}
                             </li>
                             <li class="mb-2"><strong class="text-black">Cấp bậc:</strong> {{ $post->position }}
@@ -161,11 +160,11 @@
             <div class="col-md-12">
                 <ul class="job-listings mb-5">
                     @foreach($post_majors as $post_major)
-                        <li class="job-listing d-block d-sm-flex pb-3 pt-3 pb-sm-3 align-items-center">
+                        <li class="job-listing d-block d-sm-flex align-items-center">
                             <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post_major->id }}" data-value=""></a>
                             <div class="job-listing-logo">
                                 <img src="{{ url('image_avatar/')}}/{{ $post_major->user->img_avatar}}"
-                                     width="70" height="50" class="img-fluid">
+                                      class="img-fluid pt-2 pr-2 pb-2">
                             </div>
                             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                                 <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">

@@ -103,7 +103,7 @@
                     <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post->id }}" data-value=""></a>
                     <div class="job-listing-logo">
                         <img src="{{ url('image_avatar/')}}/{{ $post->user->img_avatar }}"
-                            alt="Free Website Template by Free-Template.co" class="img-fluid">
+                            alt="Free Website Template by Free-Template.co" class="img-fluid pt-2 pr-2 pb-2">
                     </div>
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
@@ -135,7 +135,7 @@
                 <input name="major" type="hidden" value="IT/ Công nghệ phần mềm">
                 <button class="SL-job1" type="submit"
                     style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+                    <img class="img-job" src="board-master/images/it-phan-mem.jpg" alt="">
                     <p>IT/ Công nghệ phần mềm</p>
                     <p>{{ $count_major_IT }} việc làm</p>
                 </button>
@@ -158,7 +158,7 @@
                 <input name="major" type="hidden" value="Marketing">
                 <button class="SL-job1" type="submit"
                     style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+                    <img class="img-job" src="board-master/images/marketing-truyen-thong-quang-cao.jpg" alt="">
                     <p>Marketing</p>
                     <p>{{ $count_major_marketing }} việc làm</p>
                 </button>
@@ -202,7 +202,7 @@
                 <input name="major" type="hidden" value="Bất động sản">
                 <button class="SL-job1" type="submit"
                     style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+                    <img class="img-job" src="board-master/images/tu-van.jpg" alt="">
                     <p>Bất động sản</p>
                     <p>{{ $count_major_real_estate }} việc làm</p>
                 </button>
@@ -224,19 +224,22 @@
 
 <section class="site-section py-4" style="background-color:white;">
     <p style="color: black;font-size: 30px;font-weight: bold;">Top công ty nổi bật</p>
-    @foreach($company_outstanding as $company)
+    
     <div class="top-job1">
+        @foreach($company_outstanding as $company)
         <div>
             <form action="{{ Route('profile.user',['id' => $company->user_id]) }}" method="get">
                 <input type="hidden">
-                <button class="SL-job1" type="submit"
-                    style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" width="50%" height="20%"
+                <button class="SL-job1 m-3" type="submit"
+                    style="background-color:white;border-radius: 10px;border: none;">
+                    <img class="img-job1" width="200px" height="200px"
                         src="{{ url('image_avatar') }}/{{ $company->user->img_avatar }}" alt="">
                 </button>
             </form>
         </div>
         @endforeach
+    </div>
+    
 </section>
 
 
