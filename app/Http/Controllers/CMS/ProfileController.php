@@ -85,6 +85,12 @@ class ProfileController extends Controller
                 'profile' => $profile
             ]);
         }
+
+        if (Auth::user()->role_id == Constant::ROLE_COMPANY)
+        {
+            return redirect()->route('company.profile', $input['id']);
+        }
+
         return redirect()->route('user.profile', $input['id']);
     }
 
@@ -95,10 +101,14 @@ class ProfileController extends Controller
         $input['img_avatar'] = $this->uploadImageAvatar($request);
         $this->user_repo->updateAvatarAndName($input['id'], $input);
 
-        if ($input['role_id'] == Constant::ROLE_ADMIN)
+        if (Auth::user()->role_id == Constant::ROLE_ADMIN)
         {
             alert('Chỉnh sửa tài khoản thành công', null, 'success');
             return redirect()->route('dashboard.profile', $input['id']);
+        }
+        elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
+        {
+            return redirect()->route('company.profile', $input['id']);
         }
 
         alert('Chỉnh sửa tài khoản thành công', null, 'success');
@@ -120,10 +130,14 @@ class ProfileController extends Controller
             ]);
         }
 
-        if ($input['role_id'] == Constant::ROLE_ADMIN)
+        if (Auth::user()->role_id == Constant::ROLE_ADMIN)
         {
             alert('Cập nhật thông tin thành công', null, 'success');
             return redirect()->route('dashboard.profile', $input['id']);
+        }
+        elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
+        {
+            return redirect()->route('company.profile', $input['id']);
         }
 
         alert('Cập nhật thông tin thành công', null, 'success');
@@ -149,5 +163,35 @@ class ProfileController extends Controller
             'type_infor' => $type,
             'count_review' => count($review)
         ]);
+    }
+
+    public function profileCompany(Request $request)
+    {
+        $user = $this->user_repo->find(Auth::user()->id);
+        $company = $this->company_repo->find(Auth::user()->id);
+        $information = $this->information_repo->find(Auth::user()->id);
+        $type = $this->type_repo->all();
+        $review = $this->review_repo->getReviewByUser(Auth::user()->id);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'information' => $information,
+                'user' => $user,
+                'company' => $company,
+                'reviews' => $review,
+                'type_infor' => $type,
+                'count_review' => count($review)
+            ]);
+        }
+
+        return view('company.profile')
+            ->with([
+                'user' => $user,
+                'company' => $company,
+                'information' => $information,
+                'type_infor' => $type,
+                'reviews' => $review,
+                'count_review' => count($review)
+            ]);
     }
 }

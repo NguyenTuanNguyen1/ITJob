@@ -267,7 +267,7 @@
                     _li += '<td>' + item.approved_user.name +'</td>';
                     _li += '<td class="text-center">';
                     _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-dark" type="submit" id="btn-restore" value="' + item.id +'">Khôi phục bài viết</button>';
+                    _li += '<button class="btn btn-outline-dark" type="submit" id="btn-restore" value="' + item.id +'">Khôi phục</button>';
                     _li += '</td>';
                     _li += '</tr>';
                     $('#post-trashed').html(_li);

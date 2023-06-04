@@ -17,7 +17,7 @@ class InformationTypeTableSeeder extends Seeder
             'Giải thưởng & Danh hiệu',
             'Trình độ ngoại ngữ',
             'Chứng chỉ',
-            'Kĩ năng mềm',
+            'Kĩ năng',
             'Dự án cá nhân'
         ];
         foreach ($data as $content)

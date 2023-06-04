@@ -1,5 +1,5 @@
-@extends('admin.dashboard.layout')
-@section('content')
+@extends('company.layout')
+@section('profile')
     @include('sweetalert::alert')
     <link href="{{ url('profile/demo/demo.css')  }}" rel="stylesheet"/>
     <link href="{{ url('profile/css/paper-dashboard.css?v=2.0.1')  }}" rel="stylesheet"/>
@@ -22,8 +22,7 @@
                             <div class="d-flex align-items-center text-center p-1 py-3">
                                 <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
                                 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                <input type="text" name="name" value="{{ $user->name }}" id=""
-                                       style="border-radius:5px;margin-right:4px">
+                                <input type="text" name="name" value="{{ $user->name }}" id="" style="border-radius:5px;margin-right:4px">
                                 <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -64,7 +63,7 @@
                             </div>
                             <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                             <div class="mt-2 text-center">
-                                <button class="btn btn-warning profile-button"
+                                <button class="btn btn-outline-primary profile-button"
                                         type="submit">Xác nhận
                                 </button>
                                 @if(session('Error'))
@@ -87,7 +86,6 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên đăng nhập</label>
-
                                         <input type="text" name="username" value="{{ $user->username }}">
                                     </div>
                                     @error('username')
@@ -143,26 +141,33 @@
                                     </select>
                                 </div>
                             </div>
+{{--                            <div class="row mt-3">--}}
+{{--                                <div class="col-md-12">--}}
+{{--                                    <label for="job-region">Vị trí</label><br>--}}
+{{--                                    <select class="selectpicker border rounded" style="padding: 10px;" id="job-region"--}}
+{{--                                            data-style="btn-black" data-width="100%" data-live-search="true"--}}
+{{--                                            title="Select Region" name="position">--}}
+{{--                                        <option>Thực tập sinh</option>--}}
+{{--                                        <option>Nhân viên</option>--}}
+{{--                                        <option>Phó phòng</option>--}}
+{{--                                        <option>Trưởng phòng</option>--}}
+{{--                                        <option>Trợ lý</option>--}}
+{{--                                        <option>Thư ký</option>--}}
+{{--                                        <option>Giám Đốc</option>--}}
+{{--                                        <option>Quản lý</option>--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="row mt-3">
                                 <div class="col-md-12">
-                                    <label for="job-region">Vị trí</label><br>
-                                    <select class="selectpicker border rounded" style="padding: 10px;" id="job-region"
-                                            data-style="btn-black" data-width="100%" data-live-search="true"
-                                            title="Select Region" name="position">
-                                        <option>Thực tập sinh</option>
-                                        <option>Nhân viên</option>
-                                        <option>Phó phòng</option>
-                                        <option>Trưởng phòng</option>
-                                        <option>Trợ lý</option>
-                                        <option>Thư ký</option>
-                                        <option>Giám Đốc</option>
-                                        <option>Quản lý</option>
-                                    </select>
+                                    <label for="job-region">Mô tả</label><br>
+                                    <textarea name="description" rows="3" cols="105">{{ Auth::user()->description }}</textarea>
                                 </div>
                             </div>
-
+                            <input type="hidden" name="position" value="{{ null }}">
+                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                             <div class="mt-5 text-center">
-                                <button class="btn btn-warning profile-button"
+                                <button class="btn btn-outline-primary profile-button"
                                         type="submit">Lưu
                                     thông tin
                                 </button>
@@ -172,52 +177,50 @@
                 </div>
             </div>
 
-{{--            <div class="col-md-8">--}}
-{{--                <div class="card card-user">--}}
-{{--                    <div class="card-header">--}}
-{{--                        <h5 class="card-title">Chỉnh sửa thông tin cá nhân</h5>--}}
-{{--                    </div>--}}
-{{--                    <div class="card-body">--}}
-{{--                        <div class="row" id="load-information">--}}
-{{--                            <div class="col-md-12">--}}
-{{--                                @foreach($type_infor as $type)--}}
-{{--                                    <form action="{{ Route('profile.update.information') }}" method="post">--}}
-{{--                                        @csrf--}}
-{{--                                        <div class="d-flex" style="justify-content:space-between;">--}}
-{{--                                            <label class="mt-4">{{ $type->content }}</label>--}}
-{{--                                            <div>--}}
-{{--                                                <button--}}
-{{--                                                    class="btn btn-sm btn-outline-success btn-round btn-icon mb-2 mt-4"--}}
-{{--                                                    id="btn-infor"><i class="fa fa-edit"></i></button>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <input type="hidden" name="role_id" value="{{ $user->role_id }}">--}}
-{{--                                        <input type="hidden" name="id" value="{{ $user->id }}">--}}
-{{--                                        <input type="hidden" name="type_id" value="{{ $type->id }}">--}}
+            <div class="col-md-8">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title">Chỉnh sửa thông tin cá nhân</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="load-information">
+                            <div class="col-md-12">
+                                @foreach($type_infor as $type)
+                                    <form action="{{ Route('profile.update.information') }}" method="post">
+                                        @csrf
+                                        <div class="d-flex" style="justify-content:space-between;">
+                                            <label class="mt-4">{{ $type->content }}</label>
+                                            <div>
+                                                <button
+                                                    class="btn btn-sm btn-outline-success btn-round btn-icon mb-2 mt-4"
+                                                    id="btn-infor"><i class="fa fa-edit"></i></button>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="role_id" value="{{ $user->role_id }}">
+                                        <input type="hidden" name="id" value="{{ $user->id }}">
+                                        <input type="hidden" name="type_id" value="{{ $type->id }}">
 
-{{--                                        @if($information->isNotEmpty())--}}
-{{--                                            @foreach($information as $infor)--}}
-{{--                                                @if($infor->type_id == $type->id)--}}
-{{--                                                    <textarea type="text" class="form-control" name="content"--}}
-{{--                                                              rows="3">{{ $infor->content }}</textarea>--}}
-{{--                                                @else--}}
-{{--                                                    <textarea type="text" class="form-control" name="content"--}}
-{{--                                                              rows="3"></textarea>--}}
-{{--                                                @endif--}}
-{{--                                            @endforeach--}}
-{{--                                        @else--}}
-{{--                                            <textarea type="text" class="form-control" name="content"--}}
-{{--                                                      data-value=""></textarea>--}}
-{{--                                        @endif--}}
-{{--                                    </form>--}}
-{{--                                @endforeach--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                                        @if($information->isNotEmpty())
+                                            @foreach($information as $infor)
+                                                @if($infor->type_id == $type->id)
+                                                    <textarea type="text" class="form-control" name="content"
+                                                              rows="3">{{ $infor->content }}</textarea>
+                                                @else
+                                                    <textarea type="text" class="form-control" name="content"
+                                                              rows="3"></textarea>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <textarea type="text" class="form-control" name="content"
+                                                      data-value=""></textarea>
+                                        @endif
+                                    </form>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    @include('layout.page-js')
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 @endsection

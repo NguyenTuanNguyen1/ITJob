@@ -49,60 +49,62 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    @if(!Auth::check())
-                        <div class="col-6">
-                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>
-                        </div>
-                    @elseif(Auth::check() && Auth::user()->id == $post->user_id)
-                        <div class="row">
-                            <div class="col-6">
-                                <a class="btn btn-block btn-success btn-md " role="button" data-toggle="dropdown"
-                                   aria-expanded="false" style="color:white"><span
-                                        class="icon-th-large mr-2 text-danger"></span>Chức năng</a>
-                                <div class="dropdown-menu">
-                                    <button type="submit" class="dropdown-item" id="btn-delete-post" value="{{ $post->id }}">Xoá bài viết
-                                    </button>
-                                    <button type="submit" class="dropdown-item" data-toggle="modal"
-                                            data-target="#edit-post-modal">Chỉnh sửa bài viết
-                                    </button>
-                                </div>
-                            </div>
+                {{--                <div class="col-lg-4">--}}
+                {{--                    @if(!Auth::check())--}}
+                {{--                        <div class="col-6">--}}
+                {{--                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>--}}
+                {{--                        </div>--}}
+                {{--                    @elseif(Auth::check() && Auth::user()->id == $post->user_id)--}}
+                {{--                        <div class="row">--}}
+                {{--                            <div class="col-6">--}}
+                {{--                                <a class="btn btn-block btn-success btn-md " role="button" data-toggle="dropdown"--}}
+                {{--                                   aria-expanded="false" style="color:white"><span--}}
+                {{--                                        class="icon-th-large mr-2 text-danger"></span>Chức năng</a>--}}
+                {{--                                <div class="dropdown-menu">--}}
+                {{--                                    <button type="submit" class="dropdown-item" id="btn-delete-post" value="{{ $post->id }}">Xoá bài viết--}}
+                {{--                                    </button>--}}
+                {{--                                    <button type="submit" class="dropdown-item" data-toggle="modal"--}}
+                {{--                                            data-target="#edit-post-modal">Chỉnh sửa bài viết--}}
+                {{--                                    </button>--}}
+                {{--                                </div>--}}
+                {{--                            </div>--}}
 
-                            <div class="col-6">
-                                <a href="#" class="btn btn-block btn-primary btn-md"><span class="icon-plus text-danger"></span> Lưu công việc</a>
-                            </div>
-                        </div>
-                    @elseif(Auth::check() && Auth::user()->id != $post->user_id)
-                        <div class="row">
-                            <div class="col-6">
-                                <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
-                                   aria-expanded="false"><span
-                                        class="icon-th-large mr-2 text-danger"></span>Save Job</a>
-                                <div class="dropdown-menu">
-                                    <button type="submit" class="dropdown-item" data-toggle="modal"
-                                            data-target="#modalReport">Báo cáo bài viết
-                                    </button>
-                                </div>
-                            </div>
+                {{--                            <div class="col-6">--}}
+                {{--                                <a href="#" class="btn btn-block btn-primary btn-md"><span class="icon-plus text-danger"></span> Lưu công việc</a>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    @elseif(Auth::check() && Auth::user()->id != $post->user_id)--}}
+                {{--                        <div class="row">--}}
+                {{--                            <div class="col-6">--}}
+                {{--                                <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"--}}
+                {{--                                   aria-expanded="false"><span--}}
+                {{--                                        class="icon-th-large mr-2 text-danger"></span>Save Job</a>--}}
+                {{--                                <div class="dropdown-menu">--}}
+                {{--                                    <button type="submit" class="dropdown-item" data-toggle="modal"--}}
+                {{--                                            data-target="#modalReport">Báo cáo bài viết--}}
+                {{--                                    </button>--}}
+                {{--                                </div>--}}
+                {{--                            </div>--}}
 
-                            <div class="col-6">
-                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
-                            </div>
-                        </div>
-                    @else
-                        <div class="col-6">
-                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>
-                        </div>
-                    @endif
-                </div>
+                {{--                            <div class="col-6">--}}
+                {{--                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    @else--}}
+                {{--                        <div class="col-6">--}}
+                {{--                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>--}}
+                {{--                        </div>--}}
+                {{--                    @endif--}}
+                {{--                </div>--}}
             </div>
 
             <div class="row">
                 <div class="col-lg-8">
                     <div id="detail-post">
                     </div>
-                    @if(Auth::check())
+                    @if(Auth::check() && Auth::user()->role_id == 2 || Auth::user()->role_id == 1 && Auth::user()->id == $post->user_id)
+
+                    @elseif(Auth::check())
                         <div class="row mb-5">
                             <div class="col-6">
                                 <form action="{{ Route('user.applied.post') }}" method="post">

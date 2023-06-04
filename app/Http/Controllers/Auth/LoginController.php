@@ -44,7 +44,7 @@ class LoginController extends Controller
         }
         elseif (Auth::attempt($company, $input['remember_token']))
         {
-            return redirect()->route('home');
+            return redirect()->route('company.index');
         }
         elseif (Auth::attempt($admin, $input['remember_token']))
         {

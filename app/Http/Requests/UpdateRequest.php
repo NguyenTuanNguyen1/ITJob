@@ -22,9 +22,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => 'required| unique:user',
-            'email' => 'required | email | unique:user',
-            'phone' => 'required | unique:user',
+            'username' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
             'address' => 'required',
         ];
     }
@@ -33,12 +33,12 @@ class UpdateRequest extends FormRequest
     {
         return [
             'username.required' => 'Vui lòng nhập tên hiển thị',
-            'username.unique' => 'Tên đăng nhập đã được sử dụng',
+//            'username.unique' => 'Tên đăng nhập đã được sử dụng',
             'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Vui lòng đúng định dạng @',
-            'email.unique' => 'Email đã được sử dụng',
+//            'email.unique' => 'Email đã được sử dụng',
             'phone.required' => 'Vui lòng nhập số điện thoại',
-            'phone.unique' => 'Số điện thoại đã được sử dụng',
+//            'phone.unique' => 'Số điện thoại đã được sử dụng',
             'address.required' => 'Vui lòng nhập địa chỉ',
         ];
     }

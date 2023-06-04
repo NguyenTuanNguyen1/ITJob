@@ -73,7 +73,7 @@ class PostRepository implements IPostRepository
 
     public function trashed()
     {
-        return Post::onlyTrashed()->with(['approved_user','delete_user'])->get();
+        return Post::onlyTrashed()->with('user','approved_user')->get();
     }
 
     public function restore($id)

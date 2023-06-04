@@ -92,4 +92,11 @@ class UserRepository implements IUserRepository
         return Applied::where('post_id', $post_id)
             ->get();
     }
+
+    public function getMajorByUser($major, $role)
+    {
+        return User::where('major', $major)
+            ->where('role_id', $role)
+            ->get();
+    }
 }
