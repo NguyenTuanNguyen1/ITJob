@@ -25,7 +25,18 @@
                         <form action="{{ Route('dashboard.index') }}" method="get">
                             <button type="submit" class="btn btn-primary text-white">
                                 <input type="hidden" name="admin_id" value="{{ Auth::user()->role_id }}">
-                                <i class="fas fa-home">  Trở về</i>
+                                <i class="fas fa-home"> Trở về</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @elseif(Auth::check() && Auth::user()->role_id == 2)
+                <div class="right-cta-menu text-right d-flex aligin-items-center col-6 d-none d-xl-block">
+                    <div class="ml-auto">
+                        <form action="{{ Route('company.index') }}" method="get">
+                            <button type="submit" class="btn btn-primary text-white">
+{{--                                <input type="hidden" name="admin_id" value="{{ Auth::user()->role_id }}">--}}
+                                <i class="fas fa-home"> Trở về</i>
                             </button>
                         </form>
                     </div>
@@ -78,9 +89,6 @@
 @yield('content')
 @yield('index')
 @yield('404')
-<!-- <div id="btnTop">
-        <a href="#top">^</a>
-    </div> --><a id="button"></a>
 </body>
 
 <footer class="site-footer">
@@ -133,6 +141,6 @@
     </div>
 </footer>
 <script src="{{ url('board-master/js/bootstrap.bundle.min.js') }}"></script>
-@include('layout.page-js')
+{{--@include('layout.page-js')--}}
 
 </html>

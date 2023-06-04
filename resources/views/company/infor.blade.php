@@ -217,12 +217,13 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h3>{{ $count_review }} bình luận</h3>
-                                    <div id="load_review">
-                                    </div>
-                                    <hr>
-                                    @if(Auth::user()->id == $user->id)
-                                    @else
+                                    @if(!Auth::check())
+                                        <button type="submit" class="btn btn-success pull-right">Đăng nhập</button>
+                                    @elseif(Auth::user()->id != $user->id)
+                                        <h3>{{ $count_review }} bình luận</h3>
+                                        <div id="load_review">
+                                        </div>
+                                        <hr>
                                         <form id="create-review">
                                             <h3 class="pull-left">Bình luận mới</h3>
                                             <fieldset>
@@ -240,6 +241,8 @@
                                             </fieldset>
                                             <button type="submit" class="btn btn-success pull-right">Đăng</button>
                                         </form>
+                                    @else
+
                                     @endif
                                 </div>
                             </div>
@@ -298,7 +301,7 @@
             e.preventDefault();
             var value = {
                 "content": $("#message").val(),
-                "from_user_id": {{ Auth::user()->id }},
+                {{--"from_user_id": {{ Auth::user()->id }},--}}
                 "to_user_id": {{ $user->id }},
                 "_token": "{{ csrf_token() }}",
             }

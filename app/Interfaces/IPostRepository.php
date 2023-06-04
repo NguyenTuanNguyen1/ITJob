@@ -16,4 +16,5 @@ interface IPostRepository
     public function getMajorByPost($action, $major, $from, $to);
     public function getPostByCondition($condition, $action);
     public function getPostApprovedByDateTime($action, $from, $to);
+//    public function getPostByDateTime($action);
 }

@@ -86,7 +86,7 @@ class PostController extends Controller
             return redirect()->back()->with('Error','Lỗi tạo bài viết');
         }
 
-        return redirect()->route('home');
+        return redirect()->route('company.index');
     }
 
     public function update(Request $request)

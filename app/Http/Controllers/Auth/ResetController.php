@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordRequest;
 use App\Interfaces\IUserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -34,6 +36,16 @@ class ResetController extends Controller
             {
                 $profile['password'] = Hash::make($input['password']);
                 $profile->save();
+
+                if (Auth::user()->role_id == Constant::ROLE_ADMIN)
+                {
+                    alert('Chỉnh sửa tài khoản thành công', null, 'success');
+                    return redirect()->route('dashboard.profile', $input['id']);
+                }
+                elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
+                {
+                    return redirect()->route('company.profile', $input['id']);
+                }
 
                 alert('Thông báo','Cập nhật mật khẩu thành công','success');
                 return redirect()->route('user.profile',['id' => $input['id']]);

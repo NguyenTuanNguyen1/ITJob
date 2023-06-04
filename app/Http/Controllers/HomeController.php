@@ -76,11 +76,6 @@ class HomeController extends Controller
         return view('layout.contact');
     }
 
-    public function post()
-    {
-        return view('user.job.post');
-    }
-
     public function test()
     {
         return view('layout.not-found');
