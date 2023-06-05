@@ -39,6 +39,12 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+{{--                <li class="active ">--}}
+{{--                    <a href="{{ Route('home')}}">--}}
+{{--                        <i class="nc-icon nc-app"></i>--}}
+{{--                        <p>Trang chủ Finding Job</p>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
                 <li>
                     <a href="{{ Route('dashboard.profile',['id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-single-02"></i>
