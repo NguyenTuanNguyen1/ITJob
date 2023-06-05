@@ -11,7 +11,7 @@ class ForgetPassword extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,18 @@ class ForgetPassword extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'password' => 'required | min:8',
+            'password_confirmation' => 'required | same:password',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'password.min'    => 'Vui lòng nhập mật khẩu có ít nhất 8 ký tự',
+            'password_confirmation.same' => 'Xác nhận sai mật khẩu',
+            'password_confirmation.required' => 'Vui lòng xác nhận mật khẩu',
         ];
     }
 }

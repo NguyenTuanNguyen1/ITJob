@@ -14,6 +14,7 @@ use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
 use App\Repositories\InformationTypeRepository;
 use App\Repositories\RoleRepostitory;
+use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,7 @@ use Illuminate\Http\Request;
  */
 class DashboardController extends Controller
 {
+    use Service;
     public function __construct
     (
         IUserRepository $userRepository,
@@ -63,10 +65,10 @@ class DashboardController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole($input['admin_id'],Constant::ROLE_ADMIN))
-        {
-            abort(401);
-        }
+//        if (!$this->admin_repo->checkRole($input['admin_id'],Constant::ROLE_ADMIN))
+//        {
+//            abort(401);
+//        }
 
         $all_post = $this->post_repo->all();
         $post_approved = $this->post_repo->getPostByCondition('status', Constant::STATUS_APPROVED_POST);
@@ -197,6 +199,16 @@ class DashboardController extends Controller
         $report_not_reply = $this->ticket_repo->getTicketNotReply(Constant::TICKET_REPORT,Constant::TICKET_NOT_REPLY);
         $report_reply = $this->ticket_repo->getTicketReplyLastWeek(Constant::TICKET_REPORT, Constant::TICKET_REPLIED);
 
+//        $value = [];
+//        foreach ($report_not_reply as $data)
+//        {
+//            foreach (explode('|', $data->image) as $test)
+//            {
+//                $value[] = $test;
+//            }
+//        }
+//        dd($value);
+
         return view('admin.dashboard.report')->with([
             'count_report' => count($report_not_reply) + count($report_reply),
             'count_report_not_reply' => count($report_not_reply),
@@ -204,5 +216,27 @@ class DashboardController extends Controller
             'report_not_reply' => $report_not_reply,
             'report_reply' => $report_reply
         ]);
+    }
+
+    public function history(Request $request)
+    {
+        $input = $request->all();
+
+        $history = $this->admin_repo->history($input['id']);
+//        $value = [];
+//        foreach ($history as $data)
+//        {
+//            $value[] = explode('%', $data->content);
+////            $value[] = $data->content;
+//        }
+//        dd(isset($input['test']));
+////        list($t, $t1) = explode('%', $t);
+
+        return view('admin.dashboard.history')->with('history', $history);
+    }
+
+    public function register()
+    {
+        return view('admin.dashboard.register');
     }
 }

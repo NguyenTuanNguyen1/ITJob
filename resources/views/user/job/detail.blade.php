@@ -2,8 +2,7 @@
 @section('content')
     @include('sweetalert::alert')
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/css/jquery.fancybox.min.css') }}">
@@ -69,7 +68,9 @@
                             </div>
 
                             <div class="col-6">
-                                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
+                                <button type="submit" class="btn btn-block btn-primary btn-md" id="applied">
+                                    <a href="{{ Route('user.login') }}" style="color: white">Đăng nhập</a>
+                                </button>
                             </div>
                         </div>
                     @else
@@ -110,7 +111,7 @@
     </section>
 
     @include('modal.post.edit')
-
+    @include('modal.Report.report_post')
     <div class="container" style="padding-top:10px">
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">

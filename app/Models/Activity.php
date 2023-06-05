@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Activity extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'activity_log';
     protected $fillable = [
         'content',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

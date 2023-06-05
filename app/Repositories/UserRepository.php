@@ -47,6 +47,14 @@ class UserRepository implements IUserRepository
         ]);
     }
 
+    public function updatePassword($email, $password)
+    {
+        User::where('email', $email)->update([
+            'password' => $password
+        ]);
+        return User::where('email', $email)->first();
+    }
+
     public function updateAvatarAndName($id, array $data)
     {
         return User::find($id)->update([

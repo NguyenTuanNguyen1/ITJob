@@ -70,7 +70,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('user.register') }}">
+                    <a href="{{ Route('dashboard.history',['id' => Auth::user()->id]) }}">
+                        <i class="nc-icon nc-book-bookmark"></i>
+                        <p>Lịch sử</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ Route('dashboard.register.view') }}">
                         <i class="nc-icon nc-badge"></i>
                         <p>Tạo tài khoản</p>
                     </a>

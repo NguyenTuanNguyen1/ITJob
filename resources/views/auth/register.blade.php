@@ -96,7 +96,7 @@ body {
                     <input type="hidden" name="role_id" value="2">
                     <div class="clear"></div>
                     <div class="login-now" >
-                        <p>Bạn đã có tài khoản <a href="#">Đăng nhập ngay</a></p>
+                        <p>Bạn đã có tài khoản <a href="{{ Route('user.login') }}">Đăng nhập ngay</a></p>
                     </div>
                     <div class="submit-agileits">
                         <input type="submit" value="Đăng kí">
@@ -153,7 +153,7 @@ body {
                     @endif
                     <div class="clear"></div>
                     <div class="login-now" >
-                        <p>Bạn đã có tài khoản <a href="#">đăng nhập ngay</a></p>
+                        <p>Bạn đã có tài khoản <a href="{{ Route('user.login') }}">đăng nhập ngay</a></p>
                     </div>
                     <input type="hidden" name="role_id" value="3">
                     <div class="submit-agileits">

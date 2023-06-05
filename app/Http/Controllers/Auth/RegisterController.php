@@ -56,12 +56,11 @@ class RegisterController extends Controller
                 $this->company_repo->create($getUser['id'], (array)null);
                 Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
-                return redirect()->route('home1');
-
+                return redirect()->route('company.index');
             default:
                 Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
-                return redirect()->route('home2');
+                return redirect()->route('dashboard.index');
         }
     }
 }
