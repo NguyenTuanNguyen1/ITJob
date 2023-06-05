@@ -50,7 +50,7 @@
             <label class="anim">
                 <input type="checkbox" name="remember_token" class="checkbox" checked="checked">
                 <span>Nhớ mật khẩu</span>
-                <a href="{{ route('send.forgot.mail') }}">Quên mật khẩu</a>
+                <a href="{{ route('forgot.mail.index') }}">Quên mật khẩu</a>
             </label>
             @if(session('Error'))
                 <p style="color:red">{{session('Error')}}</p>

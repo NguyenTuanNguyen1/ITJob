@@ -104,6 +104,7 @@
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
                                 <th>Nội dung</th>
+                                <th>Ảnh</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
@@ -112,6 +113,7 @@
                                     <tr>
                                         <td>{{ $not_reply->username }}</td>
                                         <td>{{ $not_reply->content }}</td>
+                                        <td></td>
                                         <td>{{ $not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
                                             <button class="btn btn-outline-danger" type="submit" style="margin: 5px"

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ForgetPassword;
+use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\UpdateRequest;
 use App\Interfaces\IUserRepository;
 use App\Mail\ForgotPassMail;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -25,36 +29,29 @@ class ForgotController extends Controller
 
     public function index()
     {
-        return view('user.auth.forgot');
+        return view('auth.forgot');
     }
 
     public function sendMailForgot(Request $request)
     {
         $input = $request->all();
-        $this->sendMailUser($input, new ForgotPassMail(null, null));
+        $this->sendMailUser($input, new ForgotPassMail($input['email']));
+
+        return redirect()->back()->with('success',"Vui lòng kiểm tra Email để thục hiện thay đổi mật khẩu");
     }
 
-    public function getPass($token)
+    public function forgotPassWord($email)
     {
-        $user = null;
-        //Kiểm tra token
-        if ($user['token'] == $token) {
-            return view('ResetPass', compact('user'));
-        }
-        abort(403, 'Lỗi không thấy trang');
+        return view('auth.resetPassword')->with('email', $email);
     }
 
-    public function handleForgot($token, Request $request)
+    public function handleForgot(ForgetPassword $request)
     {
-        $user = null;
-        //Cập nhật mật khẩu mới
-        $user['password'] = Hash::make($request->password);
-        if ($user) {
-            toast('Cập nhật mật khẩu thành công', 'success');
-        }
-
-//        Auth::login($user);
-//        $user->save();
+        $input = $request->all();
+        $password = Hash::make($input['password']);
+        $user = $this->user_repo->updatePassword($input['email'], $password);
+        Auth::login($user);
+        alert('Cập nhật mật khẩu thành công', null, 'success');
         return redirect()->route('home');
     }
 }

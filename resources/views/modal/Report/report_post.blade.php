@@ -2,13 +2,17 @@
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{ Route('admin.replied.report') }}" method="post">
+            <form action="{{ Route('report.create') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Phản hồi liên hệ</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Báo cáo bài viết</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times</span>
                     </button>
+                </div>
+                <div class="imageUpload">
+                    <input name="image[]" type="file" id="imageUploadInput" multiple>
+                    <span class="button" id="imageUploadInputBtn">Chọn Hình</span>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -17,9 +21,10 @@
                     <textarea name="content" cols="60" rows="4"></textarea>
                     <div id="replied_report"></div>
                 </div>
-                <input type="hidden" name="username" value="{{ Auth::user()->username }}">
+                <input type="hidden" name="post_id" value="{{ $post->id }}">
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                <input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="username" value="{{ Auth::user()->username }}">
+                <input type="hidden" name="email" value="{{ Auth::user()->email }}">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-primary">Phản hồi</button>

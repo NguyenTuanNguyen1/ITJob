@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Constant;
 use App\Interfaces\IAdminRepository;
+use App\Models\Activity;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
@@ -26,5 +27,10 @@ class AdminRepository implements IAdminRepository
             'status' => $status,
             'approved_date' => Carbon::now()
         ]);
+    }
+
+    public function history($id)
+    {
+        return Activity::with('user')->where('user_id', $id)->get();
     }
 }

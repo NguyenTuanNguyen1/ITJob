@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\ITicketRepository;

@@ -14,14 +14,24 @@ class InformationRepository implements IInformationRepository
 
     public function create($user_id, array $data)
     {
+        $infor = new Information();
+        $infor->content = null;
+        $infor->user_id = $user_id;
+        $infor->type_id = null;
+        $infor->save();
+        return $infor;
+    }
+
+    public function update($user_id, array $data)
+    {
         $checkExist = Information::where('type_id', $data['type_id'])->count();
-        if ($checkExist > 0)
-        {
+        if ($checkExist > 0) {
             return Information::where('user_id', $user_id)->update([
                 'content' => $data['content'],
                 'type_id' => $data['type_id'],
             ]);
         }
+
         $infor = new Information();
         $infor->content = $data['content'];
         $infor->user_id = $user_id;
@@ -34,10 +44,7 @@ class InformationRepository implements IInformationRepository
     {
         return Information::with('type')->where('user_id', $id)->get();
     }
-    public function update($id,array $data)
-    {
 
-    }
     public function delete($id)
     {
         return Information::find($id)->delete();
