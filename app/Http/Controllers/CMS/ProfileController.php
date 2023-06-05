@@ -120,7 +120,7 @@ class ProfileController extends Controller
         $input = $request->all();
 
         $input['ticket_reply'] = $input['post_id'] = null;
-        $infor = $this->information_repo->create($input['id'], $input);
+        $infor = $this->information_repo->update($input['id'], $input);
 
         $this->ActivityLog("Bạn đã cập nhật thông tin cá nhân", $input['id']);
         if ($request->ajax())

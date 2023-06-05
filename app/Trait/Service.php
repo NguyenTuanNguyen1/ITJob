@@ -126,8 +126,8 @@ trait Service
 
     public function ActivityLog($message, $user_id)
     {
-        return Activity::insert([
-            'content' => Carbon::now()->format('d-m-Y H:i') . ' : ' . $message,
+        return Activity::create([
+            'content' => $message,
             'user_id' => $user_id
         ]);
     }

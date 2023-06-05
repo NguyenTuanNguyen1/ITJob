@@ -28,7 +28,9 @@ Route::prefix('user')->group(function () {
     Route::get('/user-register', [RegisterController::class, 'index'])->name('user.register');
     Route::post('/user-register', [RegisterController::class, 'handleRegister'])->name('handle.register');
 
-    Route::get('/send-mail-forgot-email', [ForgotController::class, 'sendMailForgot'])->name('send.forgot.mail');
+    Route::get('/forgot-password', [ForgotController::class, 'index'])->name('forgot.mail.index');
+    Route::post('/send-mail-forgot-email', [ForgotController::class, 'sendMailForgot'])->name('send.forgot.mail');
+    Route::get('/forgot-password/{email}', [ForgotController::class, 'forgotPassWord'])->name('forgot.password.index');
     Route::post('/forgot-password', [ForgotController::class, 'handleForgot'])->name('handle.forgot');
 
     Route::post('/update-password', [ResetController::class, 'updatePassword'])->name('password.update');
@@ -109,10 +111,12 @@ Route::prefix('review')->group(function () {
 //Dashboard
 Route::group(['prefix' => 'dashboard', 'middleware' => 'authorize'], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/register-admin', [DashboardController::class, 'register'])->name('dashboard.register.view');
     Route::get('/admin/admin-profile/{id}', [DashboardController::class, 'profile'])->name('dashboard.profile');
     Route::get('/account', [DashboardController::class, 'account'])->name('dashboard.account');
     Route::get('/contact', [DashboardController::class, 'contact'])->name('dashboard.contact');
     Route::get('/report', [DashboardController::class, 'report'])->name('dashboard.report');
+    Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
 });
 
 //Admin

@@ -10,8 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * @property $name
- * @property $id
+ * @property $email
  */
 class ForgotPassMail extends Mailable
 {
@@ -24,12 +23,10 @@ class ForgotPassMail extends Mailable
      */
     public function __construct
     (
-        $name,
-        $id
+        $email,
     )
     {
-        $this->name = $name;
-        $this->id = $id;
+        $this->email = $email;
     }
 
     /**
@@ -52,10 +49,9 @@ class ForgotPassMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'user.home',
+            view: 'email.ForgotEmail',
             with: [
-                'username' => $this->name,
-                'id' => $this->id
+                'email' => $this->email,
             ]
         );
     }
