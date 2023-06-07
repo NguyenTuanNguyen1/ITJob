@@ -3,13 +3,14 @@ namespace App\Repositories;
 
 use App\Interfaces\IInformationRepository;
 use App\Models\Information;
+use App\Trait\Service;
 
 class InformationRepository implements IInformationRepository
 {
-
+    use Service;
     public function all()
     {
-        return Information::orderBy('id','DESC')->paginate(5);
+        return Information::with('type')->get();
     }
 
     public function create($user_id, array $data)

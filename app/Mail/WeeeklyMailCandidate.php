@@ -36,6 +36,7 @@ class WeeeklyMailCandidate extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            replyTo: mb_encode_mimeheader(env('MAIL_FROM_ADDRESS')),
             subject: 'CÁC CÔNG VIỆC BẠN KHÔNG THỂ BỎ LỠ TRONG TUẦN QUA'
         );
     }

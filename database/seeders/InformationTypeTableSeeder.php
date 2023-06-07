@@ -18,7 +18,7 @@ class InformationTypeTableSeeder extends Seeder
             'Trình độ ngoại ngữ',
             'Chứng chỉ',
             'Kĩ năng',
-            'Dự án cá nhân'
+            'Dự án'
         ];
         foreach ($data as $content)
         {

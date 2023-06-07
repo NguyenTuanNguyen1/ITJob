@@ -43,10 +43,10 @@ Route::prefix('profile')->group(function () {
     Route::get('profile/{id}', [ProfileController::class, 'userCompany'])->name('profile.user');
     Route::get('/user-profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
     Route::post('/user-update', [ProfileController::class, 'handleUpdate'])->name('profile.update');
-    Route::get('/company-profile', [ProfileController::class, 'profileCompany'])->name('company.profile');
     Route::post('/user-update-basic', [ProfileController::class, 'handleUpdateBasic'])->name('profile.update.basic');
     Route::post('/user-update-information', [ProfileController::class, 'handleUpdateInfor'])->name('profile.update.information');
-    Route::post('/user-delete-information', [ProfileController::class, 'handleDeleteInfor'])->name('profile.delete.information');
+    Route::get('/company-profile', [ProfileController::class, 'profileCompany'])->name('company.profile');
+//    Route::post('/user-delete-information', [ProfileController::class, 'handleDeleteInfor'])->name('profile.delete.information');
 });
 
 //Post
@@ -113,6 +113,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'authorize'], function ()
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/register-admin', [DashboardController::class, 'register'])->name('dashboard.register.view');
     Route::get('/admin/admin-profile/{id}', [DashboardController::class, 'profile'])->name('dashboard.profile');
+    Route::get('/admin/user-profile/{id}', [DashboardController::class, 'profileUser'])->name('dashboard.profile.user');
     Route::get('/account', [DashboardController::class, 'account'])->name('dashboard.account');
     Route::get('/contact', [DashboardController::class, 'contact'])->name('dashboard.contact');
     Route::get('/report', [DashboardController::class, 'report'])->name('dashboard.report');
@@ -123,6 +124,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'authorize'], function ()
 Route::group(['prefix' => 'admin', 'middleware' => 'authorize'], function () {
     Route::post('/approved_post', [AdminController::class, 'approved'])->name('admin.approved.post');
     Route::post('/delete-user', [AdminController::class, 'deleteUserByAdmin'])->name('admin.delete.user');
+    Route::post('/restore-user', [AdminController::class, 'restoreUserByAdmin'])->name('admin.restore.user');
     Route::post('/replied-contact', [AdminController::class, 'repliedContact'])->name('admin.replied.contact');
     Route::post('/replied-report', [AdminController::class, 'repliedReport'])->name('admin.replied.report');
 });
@@ -132,6 +134,7 @@ Route::group(['prefix' => 'company'], function () {
     Route::get('/index', [CompanyController::class, 'index'])->name('company.index');
     Route::get('/candidate', [CompanyController::class, 'candidate'])->name('company.candidate');
     Route::get('/post-create', [CompanyController::class, 'post'])->name('company.post.create');
+    Route::post('/update-profile', [CompanyController::class, 'update'])->name('company.update');
 });
 
 //Social

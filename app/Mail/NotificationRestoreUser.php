@@ -10,12 +10,10 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * @property $post_not_approved
- * @property $post_approved
- * @property $start_date
- * @property $end_date
+ * @property $name
+ * @property $email
  */
-class StatisticalMail extends Mailable
+class NotificationRestoreUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -24,16 +22,12 @@ class StatisticalMail extends Mailable
      */
     public function __construct
     (
-        $post_not_approved,
-        $post_approved,
-        $from,
-        $to
+        $name,
+        $email
     )
     {
-        $this->post_not_approved = $post_not_approved;
-        $this->post_approved = $post_approved;
-        $this->start_date = $from;
-        $this->end_date = $to;
+        $this->name = $name;
+        $this->email = $email;
     }
 
     /**
@@ -43,7 +37,7 @@ class StatisticalMail extends Mailable
     {
         return new Envelope(
             replyTo: mb_encode_mimeheader(env('MAIL_FROM_ADDRESS')),
-            subject: 'THỐNG KÊ NHỮNG BÀI VIẾT TRONG TUẦN QUA',
+            subject: 'THÔNG BÁO KHÔI PHỤC TÀI KHOẢN',
         );
     }
 
@@ -53,13 +47,10 @@ class StatisticalMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.statisticalEmail',
+            view: 'email.notificationRestoreUser',
             with: [
-                'approved' => $this->post_approved,
-                'not_approved' => $this->post_not_approved,
-                'start_date' => $this->start_date,
-                'end_date' => $this->end_date,
-                'sum' => $this->post_approved + $this->post_not_approved
+                'name' => $this->name,
+                'email' => $this->email
             ]
         );
     }

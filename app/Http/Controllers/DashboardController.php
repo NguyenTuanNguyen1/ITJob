@@ -122,6 +122,7 @@ class DashboardController extends Controller
         $user_admin = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_ADMIN);
         $user_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
         $user_candidate = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_CANDIDATE);
+        $user_trashed = $this->user_repo->trashed();
 
         if ($request->ajax()) {
             return response()->json([
@@ -131,7 +132,8 @@ class DashboardController extends Controller
                 'count_user_candidate' => count($user_candidate),
                 'user_admin' => $user_admin,
                 'user_company' => $user_company,
-                'user_candidate' => $user_candidate
+                'user_candidate' => $user_candidate,
+                'user_trashed' => $user_trashed
             ]);
         }
 
@@ -163,6 +165,17 @@ class DashboardController extends Controller
                 'type_infor' => $type,
                 'reviews' => $review,
                 'count_review' => count($review)
+            ]);
+    }
+
+    public function profileUser($id)
+    {
+        $user = $this->user_repo->find($id);
+        $company = $this->company_repo->find($id);
+        return view('admin.infor')
+            ->with([
+                'user' => $user,
+                'company' => $company
             ]);
     }
 

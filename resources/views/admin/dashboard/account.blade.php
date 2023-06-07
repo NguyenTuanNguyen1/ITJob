@@ -193,6 +193,33 @@
             </div>
         </div>
     </div>
+    <div class="content" style="margin-top: 5px">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Những tài khoản bạn đã xoá </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>Tên hiển thị</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th class="text-center">Chức năng</th>
+                                </thead>
+                                <tbody id="user_trashed">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
 <script src="{{ url('profile/js/core/popper.min.js') }}"></script>
@@ -211,7 +238,7 @@
         var $tableAdmin = $("#user_admin")
         var $tableCompany = $("#user_company")
         var $tableCandidate = $("#user_candidate")
-
+        var $tableTrashed = $("#user_trashed")
 
         load_data()
         load_count_user_admin()
@@ -220,6 +247,7 @@
         load_user_admin()
         load_user_company()
         load_user_candidate()
+        load_user_trashed()
 
         function load_data() {
             $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
@@ -314,23 +342,50 @@
             });
         }
 
+        function load_user_trashed() {
+            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
+                var _li = '';
+                var data = res.user_trashed;
+                data.forEach(function (item) {
+                    console.log(item)
+                    _li += '<tr>';
+                    _li += '<td>' + item.name + '</td>';
+                    _li += '<td>' + item.email + '</td>';
+                    _li += '<td>' + item.phone + '</td>';
+                    _li += '<td>' + item.email + '</td>';
+                    _li += '<td class="text-center">';
+                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-trashed" value="' + item.id + '">Chi tiết</button>';
+                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-restore-user" value="' + item.id + '">Khôi phục</button>';
+                    _li += '</td>';
+                    _li += '</tr>';
+                    $('#user_trashed').html(_li);
+                })
+            });
+        }
+
         $tableAdmin.on('click', '#btn-detail-admin', function (e) {
             e.preventDefault()
             var user_id = $('#btn-detail-admin').val();
-            window.location.href = 'http://itjob.vn/dashboard/admin/admin-profile/' + user_id;
+            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
         })
 
         $tableCompany.on('click', '#btn-detail-company', function (e) {
             e.preventDefault()
             var user_id = $('#btn-detail-company').val();
             console.log(user_id)
-            window.location.href = 'http://itjob.vn/dashboard/admin/admin-profile/' + user_id;
+            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
         })
 
         $tableCandidate.on('click', '#btn-detail-candidate', function (e) {
             e.preventDefault()
             var user_id = $('#btn-detail-candidate').val();
-            window.location.href = 'http://itjob.vn/dashboard/admin/admin-profile/' + user_id;
+            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
+        })
+
+        $tableTrashed.on('click', '#btn-detail-trashed', function (e) {
+            e.preventDefault()
+            var user_id = $('#btn-detail-trashed').val();
+            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
         })
 
         $tableAdmin.on('click', '#btn-delete-admin', function (e) {
@@ -359,6 +414,7 @@
                         success: function (res) {
                             load_data()
                             load_count_user_admin()
+                            load_user_trashed()
                             obj.parents("tr").remove();
                         }
                     })
@@ -395,6 +451,7 @@
                         success: function (res) {
                             load_data();
                             load_count_user_company();
+                            load_user_trashed()
                             obj.parents("tr").remove();
                         }
                     })
@@ -431,11 +488,51 @@
                         success: function (res) {
                             load_data();
                             load_count_user_candidate();
+                            load_user_trashed()
                             obj.parents("tr").remove();
                         }
                     })
                     Swal.fire(
                         'Đã xoá thành công!',
+                    )
+                }
+            })
+        })
+
+        $tableTrashed.on('click', '#btn-restore-user', function (e) {
+            e.preventDefault()
+            var value = {
+                'id': $('#btn-restore-user').val(),
+                'admin_id': {{ Auth::user()->id }},
+                '_token': '{{ csrf_token() }}'
+            }
+            var obj = $(this);
+            Swal.fire({
+                title: 'Bạn muốn khôi phục người dùng',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ Route('admin.restore.user') }}',
+                        type: 'POST',
+                        data: value,
+                        success: function (res) {
+                            load_data()
+                            load_count_user_admin()
+                            load_user_trashed()
+                            load_user_admin()
+                            load_user_candidate()
+                            load_user_company()
+                            obj.parents("tr").remove();
+                        }
+                    })
+                    Swal.fire(
+                        'Đã khôi phục thành công!',
                     )
                 }
             })

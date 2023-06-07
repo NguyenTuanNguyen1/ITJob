@@ -37,7 +37,8 @@ class ForgotPassMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Quên mật khẩu',
+            replyTo: mb_encode_mimeheader(env('MAIL_FROM_ADDRESS')),
+            subject: 'Quên mật khẩu'
         );
     }
 

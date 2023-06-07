@@ -22,7 +22,8 @@
                             <div class="d-flex align-items-center text-center p-1 py-3">
                                 <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
                                 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                <input type="text" name="name" value="{{ $user->name }}" id="" style="border-radius:5px;margin-right:4px">
+                                <input type="text" name="name" value="{{ $user->name }}" id=""
+                                       style="border-radius:5px;margin-right:4px">
                                 <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -73,6 +74,54 @@
                         </form>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Chỉnh sửa thông tin công ty</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ Route('company.update') }}" method="post">
+                            @csrf
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số lượng nhân viên</label><br>
+                                        <input type="number" class="form-control" name="staff"
+                                               value="{{ $company->staff }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label>Trụ sở chính</label><br>
+                                    <textarea cols="48" rows="3"
+                                              name="headquarters">{{ $company->headquarters }}</textarea>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Mã số thuế</label><br>
+                                        <input type="text" class="form-control" name="taxcode"
+                                               value="{{ $company->taxcode }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Website</label>
+                                        <input type="text" class="form-control" name="website"
+                                               value="{{ $company->website }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <div class="mt-5 text-center">
+                                <button class="btn btn-outline-primary profile-button"
+                                        type="submit">Lưu thông tin
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="col-md-8">
                 <div class="card card-user">
@@ -85,8 +134,9 @@
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tên đăng nhập</label>
-                                        <input type="text" name="username" value="{{ $user->username }}">
+                                        <label>Tên đăng nhập</label><br>
+                                        <input type="text" class="form-control" name="username"
+                                               value="{{ $user->username }}">
                                     </div>
                                     @error('username')
                                     <div style="color:red;">{{ $message }}</div>
@@ -141,27 +191,27 @@
                                     </select>
                                 </div>
                             </div>
-{{--                            <div class="row mt-3">--}}
-{{--                                <div class="col-md-12">--}}
-{{--                                    <label for="job-region">Vị trí</label><br>--}}
-{{--                                    <select class="selectpicker border rounded" style="padding: 10px;" id="job-region"--}}
-{{--                                            data-style="btn-black" data-width="100%" data-live-search="true"--}}
-{{--                                            title="Select Region" name="position">--}}
-{{--                                        <option>Thực tập sinh</option>--}}
-{{--                                        <option>Nhân viên</option>--}}
-{{--                                        <option>Phó phòng</option>--}}
-{{--                                        <option>Trưởng phòng</option>--}}
-{{--                                        <option>Trợ lý</option>--}}
-{{--                                        <option>Thư ký</option>--}}
-{{--                                        <option>Giám Đốc</option>--}}
-{{--                                        <option>Quản lý</option>--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="row mt-3">--}}
+                            {{--                                <div class="col-md-12">--}}
+                            {{--                                    <label for="job-region">Vị trí</label><br>--}}
+                            {{--                                    <select class="selectpicker border rounded" style="padding: 10px;" id="job-region"--}}
+                            {{--                                            data-style="btn-black" data-width="100%" data-live-search="true"--}}
+                            {{--                                            title="Select Region" name="position">--}}
+                            {{--                                        <option>Thực tập sinh</option>--}}
+                            {{--                                        <option>Nhân viên</option>--}}
+                            {{--                                        <option>Phó phòng</option>--}}
+                            {{--                                        <option>Trưởng phòng</option>--}}
+                            {{--                                        <option>Trợ lý</option>--}}
+                            {{--                                        <option>Thư ký</option>--}}
+                            {{--                                        <option>Giám Đốc</option>--}}
+                            {{--                                        <option>Quản lý</option>--}}
+                            {{--                                    </select>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label for="job-region">Mô tả</label><br>
-                                    <textarea name="description" rows="3" cols="105">{{ Auth::user()->description }}</textarea>
+                                    <textarea name="description" rows="3" cols="105">{{ $user->description }}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="position" value="{{ null }}">
@@ -185,37 +235,29 @@
                     <div class="card-body">
                         <div class="row" id="load-information">
                             <div class="col-md-12">
-                                @foreach($type_infor as $type)
-                                    <form action="{{ Route('profile.update.information') }}" method="post">
-                                        @csrf
-                                        <div class="d-flex" style="justify-content:space-between;">
-                                            <label class="mt-4">{{ $type->content }}</label>
-                                            <div>
-                                                <button
-                                                    class="btn btn-sm btn-outline-success btn-round btn-icon mb-2 mt-4"
-                                                    id="btn-infor"><i class="fa fa-edit"></i></button>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="role_id" value="{{ $user->role_id }}">
-                                        <input type="hidden" name="id" value="{{ $user->id }}">
-                                        <input type="hidden" name="type_id" value="{{ $type->id }}">
-
-                                        @if($information->isNotEmpty())
-                                            @foreach($information as $infor)
-                                                @if($infor->type_id == $type->id)
-                                                    <textarea type="text" class="form-control" name="content"
-                                                              rows="3">{{ $infor->content }}</textarea>
-                                                @else
-                                                    <textarea type="text" class="form-control" name="content"
-                                                              rows="3"></textarea>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <textarea type="text" class="form-control" name="content"
-                                                      data-value=""></textarea>
-                                        @endif
-                                    </form>
+                                @foreach($information as $infor)
+                                    <label style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label><br>
+                                    <label style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label><br>
                                 @endforeach
+
+                                <form action="{{ Route('profile.update.information') }}" method="post">
+                                    @csrf
+                                    <div class="d-flex" style="justify-content:space-between;">
+                                        <select class="selectpicker border rounded" style=" padding: 10px; ; width: 30%; margin-top: 25px;"
+                                                id="job-region"
+                                                data-style="btn-black" data-width="100%" data-live-search="true"
+                                                title="Select Region" name="type_id">
+                                            @foreach($type_infor as $type)
+                                                <option value="{{ $type->id }}">{{ $type->content }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <textarea type="text" class="form-control" name="content" style="margin-top: 15px;"
+                                              rows="3"></textarea>
+                                    <input type="hidden"  name="id" value="{{ $user->id }}">
+                                    <button type="submit" style="margin-top: 15px;" class="btn btn-sm btn-outline-success">Lưu thông tin
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

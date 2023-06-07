@@ -173,7 +173,7 @@ label.anim  a {
     font-weight: 400;
     cursor: pointer;
     position: relative;
-	
+
 }
 input.checkbox {
     background:#fff;
@@ -225,8 +225,8 @@ input.checkbox:checked:after {
 		border-bottom-color: #00c6d7;
 		border-left-color: #00c6d7;
 	}
-} 
-/*-- //checkbox --*/ 
+}
+/*-- //checkbox --*/
 /*--copy-right-starts-here--*/
 .footer p {
     margin: 0 auto;
@@ -261,15 +261,15 @@ input.checkbox:checked:after {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #fff; 
+   color: #fff;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #fff;  
+   color: #fff;
 }
 
-:-ms-input-placeholder {  
-   color: #fff;  
+:-ms-input-placeholder {
+   color: #fff;
 }
 /*--//placeholder-color--*/
 .icon-flat-form{

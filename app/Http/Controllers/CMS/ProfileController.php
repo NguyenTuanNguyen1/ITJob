@@ -118,7 +118,6 @@ class ProfileController extends Controller
     public function handleUpdateInfor(Request $request)
     {
         $input = $request->all();
-
         $input['ticket_reply'] = $input['post_id'] = null;
         $infor = $this->information_repo->update($input['id'], $input);
 
@@ -148,6 +147,7 @@ class ProfileController extends Controller
     {
         $user = $this->user_repo->find($id);
         $information = $this->information_repo->find($id);
+        $company = $this->company_repo->find($id);
         $type = $this->type_repo->all();
         $review = $this->review_repo->getReviewByUser($id);
         if ($request->ajax())
@@ -161,6 +161,7 @@ class ProfileController extends Controller
             'user' => $user,
             'information' => $information,
             'type_infor' => $type,
+            'company' => $company,
             'count_review' => count($review)
         ]);
     }
@@ -191,7 +192,7 @@ class ProfileController extends Controller
                 'information' => $information,
                 'type_infor' => $type,
                 'reviews' => $review,
-                'count_review' => count($review)
+                'count_review' => count($review),
             ]);
     }
 }

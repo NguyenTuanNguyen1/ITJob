@@ -5,6 +5,8 @@ namespace App\Http\Controllers\CMS;
 use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IAdminRepository;
+use App\Interfaces\ICompanyRepository;
+use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IUserRepository;
 use Carbon\Carbon;
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
  * @property IPostRepository $post_repo
  * @property IAdminRepository $admin_repo
  * @property IUserRepository $user_repo
+ * @property ICompanyRepository $company_repo
+ * @property IInformationRepository $infor_repo
  */
 class CompanyController extends Controller
 {
@@ -22,12 +26,16 @@ class CompanyController extends Controller
     (
         IPostRepository $postRepository,
         IAdminRepository $adminRepository,
-        IUserRepository $userRepository
+        IUserRepository $userRepository,
+        ICompanyRepository $companyRepository,
+        IInformationRepository $informationRepository
     )
     {
         $this->post_repo = $postRepository;
         $this->admin_repo = $adminRepository;
         $this->user_repo = $userRepository;
+        $this->company_repo = $companyRepository;
+        $this->infor_repo = $informationRepository;
     }
 
     public function index(Request $request)
@@ -70,25 +78,8 @@ class CompanyController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole(Constant::ROLE_COMPANY, $input['company_id']))
-        {
-            abort(401);
-        }
-
-        try {
-            $this->post_repo->update($input['id'], $input);
-
-            $this->ActivityLog(  "Bạn đã cập nhật thông tin cá nhân", $input['user_id']);
-
-            return response()->json([
-                'result' => true
-            ]);
-        }catch (\Exception $e)
-        {
-            return response()->json([
-                'result' => false,
-                'message' => $e->getMessage()
-            ]);
-        }
+        $this->company_repo->update($input['id'], $input);
+        $information = $this->infor_repo->all();
+        return redirect()->route('company.profile');
     }
 }

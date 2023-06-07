@@ -66,10 +66,24 @@ class AdminController extends Controller
         if (!$this->admin_repo->checkRole($input['admin_id'], Constant::ROLE_ADMIN)) {
             abort(401);
         }
+
         $user = $this->user_repo->find($input['id']);
-//        $this->sendMailUser($user['email'],new NotificationDeleteUser());
+        $this->sendMailUser($user, new NotificationDeleteUser());
         $this->ActivityLog("Bạn đã xoá người dùng%" . $user['username'] . '*' . $user['id'], $input['admin_id']);
         $this->user_repo->delete($input['id']);
+
+        return response()->json([
+            'result' => true
+        ]);
+    }
+
+    public function restoreUserByAdmin(Request $request)
+    {
+        $input = $request->all();
+        $user = $this->user_repo->storage($input['id']);
+        $this->user_repo->restore($user['email']);
+        $this->ActivityLog("Bạn đã khôi phục người dùng%" . $user['username'] . '*' . $user['id'], $input['admin_id']);
+        $this->sendMailUser($user, new NotificationDeleteUser());
 
         return response()->json([
             'result' => true
