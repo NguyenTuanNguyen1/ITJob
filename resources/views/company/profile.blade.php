@@ -5,24 +5,23 @@
     <link href="{{ url('profile/css/paper-dashboard.css?v=2.0.1')  }}" rel="stylesheet"/>
     <link href="{{ url('profile/css/bootstrap.min.css')  }}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <div class="content">
+    <div class="content  m-5">
         <div class="row">
             <div class="col-md-4">
                 <div class="card card-user">
-                    <div class="card-body">
+                    <div class="card-body" style="display:flex;justify-content:space-evenly;">
                         <form action="{{ Route('profile.update.basic') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="container1" id="imgBox">
                                 <label for="file">
-                                    <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px"
-                                         height="200px">
+                                    <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px"height="200px">
                                 </label>
                                 <input type="file" name="img_avatar" id="file" onchange="loadFile(event)">
                             </div>
                             <div class="d-flex align-items-center text-center p-1 py-3">
                                 <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
                                 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                <input type="text" name="name" value="{{ $user->name }}" id="" style="border-radius:5px;margin-right:4px">
+                                <input type="text" name="name" value="{{ $user->name }}" id="" style="border-radius:5px;width:75%">
                                 <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -34,7 +33,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Đổi mật khẩu</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" >
                         <form action="{{ Route('password.update') }}" method="post">
                             @csrf
                             <div class="col-md-6" style="margin-left:25%">
@@ -74,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8" >
                 <div class="card card-user">
                     <div class="card-header">
                         <h5 class="card-title">Chỉnh sửa thông tin cá nhân</h5>
@@ -82,11 +81,11 @@
                     <div class="card-body">
                         <form action="{{ Route('profile.update') }}" method="post">
                             @csrf
-                            <div class="row mt-3">
+                            <div class="row ">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên đăng nhập</label>
-                                        <input type="text" name="username" value="{{ $user->username }}">
+                                        <input type="text"  class="form-control" name="username" value="{{ $user->username }}">
                                     </div>
                                     @error('username')
                                     <div style="color:red;">{{ $message }}</div>
@@ -107,7 +106,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label>Email</label>
-                                    <input type="text" class="form-control" name="email" value="{{ $user->email }}">
+                                    <input type="text" class="form-control " name="email" value="{{ $user->email }}">
                                     @error('email')
                                     <div style="color:red;">{{ $message }}</div>
                                     <br>
@@ -161,7 +160,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label for="job-region">Mô tả</label><br>
-                                    <textarea name="description" rows="3" cols="105">{{ Auth::user()->description }}</textarea>
+                                    <textarea name="description" rows="3" cols="97">{{ Auth::user()->description }}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="position" value="{{ null }}">
@@ -177,7 +176,7 @@
                 </div>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-8" style="margin-left:400px">
                 <div class="card card-user">
                     <div class="card-header">
                         <h5 class="card-title">Chỉnh sửa thông tin cá nhân</h5>

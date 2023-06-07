@@ -43,7 +43,7 @@
                         <form class="app-search-form">
                             <input type="text" placeholder="Search..." name="search"
                                    class="form-control search-input">
-                            <button type="submit" class="btn search-btn btn-primary" value="Search"><i
+                            <button type="submit" class="btn search-btn btn-primary" style="padding:5px;margin:auto;" value="Search"><i
                                     class="fas fa-search"></i></button>
                         </form>
                     </div><!--//app-search-box-->
