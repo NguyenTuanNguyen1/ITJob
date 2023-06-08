@@ -40,7 +40,7 @@ class PostRepository implements IPostRepository
 
     public function find($id)
     {
-        return Post::find($id);
+        return Post::with('user')->find($id);
     }
     public function update($id,array $data)
     {
@@ -69,6 +69,11 @@ class PostRepository implements IPostRepository
     public function storage($id)
     {
         // TODO: Implement storage() method.
+    }
+
+    public function findTrashed($id)
+    {
+        return Post::onlyTrashed()->where('id', $id)->first();
     }
 
     public function trashed()

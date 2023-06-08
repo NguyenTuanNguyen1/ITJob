@@ -37,6 +37,11 @@ class TicketRepository implements ITicketRepository
             ->where('type_id', $action)->first();
     }
 
+    public function delete($id)
+    {
+        return Ticket::find($id)->delete();
+    }
+
     public function update($id)
     {
         return Ticket::where('id', $id)->update([

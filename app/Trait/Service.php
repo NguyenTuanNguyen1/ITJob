@@ -6,9 +6,9 @@ use App\Constant;
 use App\Interfaces\IUserRepository;
 use App\Models\Activity;
 use App\Models\Applied;
+use App\Models\Information;
 use App\Models\InformationType;
 use App\Models\Role;
-use App\Models\Skill;
 use App\Models\TicketType;
 use App\Models\User;
 use Carbon\Carbon;
@@ -148,5 +148,23 @@ trait Service
             'provider' => $provider,
             'provider_id' => $getInfo->id
         ]);
+    }
+
+    public function updateInformation($user_id, array $data)
+    {
+        return Information::where('user_id', $user_id)->update([
+            'content' => $data['content'],
+//                'type_id' => $data['type_id'],
+        ]);
+    }
+
+    public function createInformation($user_id)
+    {
+//        $infor = new Information();
+//        $infor->content = $content;
+//        $infor->user_id = $user_id;
+//        $infor->type_id = $type_id;
+//        $infor->save();
+        return 123;
     }
 }

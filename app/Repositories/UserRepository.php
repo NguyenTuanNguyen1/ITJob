@@ -73,6 +73,11 @@ class UserRepository implements IUserRepository
         return User::onlyTrashed()->get();
     }
 
+    public function storage($id)
+    {
+        return User::onlyTrashed()->where('id', $id)->first();
+    }
+
     public function restore($id)
     {
         return User::onlyTrashed()->where('id', $id)->restore();

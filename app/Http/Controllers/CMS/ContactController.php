@@ -67,36 +67,10 @@ class ContactController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole(Constant::ROLE_ADMIN, $input['admin_id']))
-        {
-            abort(401);
-        }
+        $this->ticket_repo->delete($input['id']);
+        $this->ActivityLog('Bạn đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
 
-        try {
-            $contact = $this->ticket_repo->delete($input['id']);
-            if (empty($contact)) {
-                return response()->json([
-                    'result' => true,
-                ]);
-            }
-            return response()->json([
-                'result' => false,
-            ]);
-        }catch (\Exception $e)
-        {
-            return response()->json([
-                'result' => false,
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
-
-    public function reply(Request $request)
-    {
-        $input = $request->all();
-
-        $this->ticket_repo->reply($input['id']);
-        $this->sendMailUser($input['email'], new ReplyMail($input['data']));
+        return redirect()->route('dashboard.contact');
     }
 
     public function replied(Request $request)

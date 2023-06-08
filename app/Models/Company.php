@@ -18,12 +18,10 @@ class Company extends Model
 
     protected $table = 'company_information';
     protected $fillable = [
-        'type',
         'staff',
         'headquarters',
         'taxcode',
-        'description',
-        'token',
+
         'website',
         'business_license',
         'user_id'

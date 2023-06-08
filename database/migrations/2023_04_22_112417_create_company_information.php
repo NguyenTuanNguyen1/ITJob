@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('company_information', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type')->nullable();
-            $table->string('staff')->nullable();
+            $table->integer('staff')->nullable();
             $table->string('headquarters')->nullable();
             $table->string('taxcode')->nullable()->unique();
-            $table->string('description')->nullable();
-            $table->string('token')->nullable();
             $table->string('website')->nullable();
             $table->string('business_license')->nullable();
 

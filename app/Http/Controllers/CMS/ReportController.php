@@ -9,6 +9,7 @@ use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
@@ -74,46 +75,22 @@ class ReportController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole(Constant::ROLE_ADMIN, $input['admin_id']))
-        {
-            abort(401);
-        }
+        $this->ticket_repo->delete($input['id']);
+        $this->ActivityLog('Bạn đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
 
-        try {
-            $this->ActivityLog('Bạn đã xoá bản báo cáo bài viết*' . $input['id'], $input['admin_id']);
-
-            $report = $this->ticket_repo->delete($input['id']);
-
-            if (empty($report)) {
-                return response()->json([
-                    'result' => true
-                ]);
-            }
-            return response()->json([
-                'result' => false
-            ]);
-        }catch (\Exception $e)
-        {
-            return response()->json([
-                'result' => false,
-                'message' => $e->getMessage()
-            ]);
-        }
+        return redirect()->route('dashboard.report');
     }
 
     public function reply(Request $request)
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole(Constant::ROLE_ADMIN, $input['admin_i']))
-        {
-            abort(401);
-        }
-
         $this->ticket_repo->reply($input['id']);
         $this->ActivityLog('Bạn đã phản hồi bản báo cáo bài viết*', $input['admin_id']);
 
-        $this->sendMailUser($input['email'], new ReplyMail($input['data']));
+        return response()->json([
+            'result' => true
+        ]);
     }
 
     public function replied(Request $request)

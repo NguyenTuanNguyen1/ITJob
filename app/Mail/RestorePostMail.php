@@ -10,9 +10,11 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * @property $data
+ * @property $name
+ * @property $email
+ * @property $post_id
  */
-class ReplyMail extends Mailable
+class RestorePostMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,10 +23,14 @@ class ReplyMail extends Mailable
      */
     public function __construct
     (
-        $data
+        $name,
+        $mail,
+        $post_id
     )
     {
-        $this->data = $data;
+        $this->name = $name;
+        $this->email = $mail;
+        $this->post_id = $post_id;
     }
 
     /**
@@ -33,7 +39,8 @@ class ReplyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Phản hồi thư',
+            replyTo: mb_encode_mimeheader(env('MAIL_FROM_ADDRESS')),
+            subject: 'THÔNG BÁO KHÔI PHỤC BÀI VIẾT',
         );
     }
 
@@ -43,9 +50,11 @@ class ReplyMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.notificationRestorePost',
             with: [
-                'data' => $this->data
+                'name' => $this->name,
+                'email' => $this->email,
+                'post_id' => $this->post_id
             ]
         );
     }

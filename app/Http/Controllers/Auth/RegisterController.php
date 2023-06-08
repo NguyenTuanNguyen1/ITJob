@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IUserRepository;
+use App\Mail\RegisterMail;
 use App\Models\User;
 use App\Trait\Service;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,7 @@ class RegisterController extends Controller
         $getUser = $this->user_repo->create($input);
         $this->infor_repo->create($getUser['id'], (array)null);
         $this->ActivityLog('Bạn đã đăng ký thành công tài khoản', $getUser['id']);
-//        $this->sendMailUser($user, new RegisterMail($input['name']));
+        $this->sendMailUser($getUser, new RegisterMail($input['name']));
         switch ($input['role_id']) {
             case Constant::ROLE_CANDIDATE:
                 Auth::login($getUser);
