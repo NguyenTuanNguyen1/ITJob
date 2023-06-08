@@ -75,12 +75,12 @@ class UserRepository implements IUserRepository
 
     public function storage($id)
     {
-        return User::onlyTrashed()->where('id', $id)->first();
+        return User::withTrashed()->find($id);
     }
 
     public function restore($id)
     {
-        return User::onlyTrashed()->where('id', $id)->restore();
+        return User::withTrashed()->find($id)->restore();
     }
 
     public function getMajorUser($role)

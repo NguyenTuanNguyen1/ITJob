@@ -21,7 +21,6 @@ class Company extends Model
         'staff',
         'headquarters',
         'taxcode',
-
         'website',
         'business_license',
         'user_id'

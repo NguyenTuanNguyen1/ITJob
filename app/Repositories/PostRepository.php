@@ -73,7 +73,7 @@ class PostRepository implements IPostRepository
 
     public function findTrashed($id)
     {
-        return Post::onlyTrashed()->where('id', $id)->first();
+        return Post::withTrashed()->find($id);
     }
 
     public function trashed()
@@ -83,7 +83,7 @@ class PostRepository implements IPostRepository
 
     public function restore($id)
     {
-        return Post::onlyTrashed()->where('id', $id)->restore();
+        return Post::withTrashed()->find($id)->restore();
     }
 
     public function getMajorByPost($action, $major, $from, $to)
