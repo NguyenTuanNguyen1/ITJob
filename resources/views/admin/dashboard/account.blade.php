@@ -18,7 +18,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Tổng số người dùng</p>
-                                    <p class="card-title" id="all_user">
+                                    <p class="card-title">
+                                    {{ $all_user }}
                                     <p>
                                 </div>
                             </div>
@@ -45,7 +46,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Quản trị viên</p>
-                                    <p class="card-title" id="count_user_admin"></p>
+                                    <p class="card-title"></p>
+                                    {{ $count_user_admin }}
                                 </div>
                             </div>
                         </div>
@@ -71,7 +73,9 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Nhà tuyển dụng</p>
-                                    <p class="card-title" id="count_user_company"></p>
+                                    <p class="card-title">
+                                        {{ $count_user_company }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +101,9 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Ứng cử viên</p>
-                                    <p class="card-title" id="count_user_candidate"></p>
+                                    <p class="card-title">
+                                        {{ $count_user_candidate }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -130,8 +136,28 @@
                                 <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="user_admin">
-
+                                <tbody>
+                                @foreach($user_admin as $admin)
+                                    <tr>
+                                        <td>{{ $admin->name }}</td>
+                                        <td>{{ $admin->email }}</td>
+                                        <td>{{ $admin->phone }}</td>
+                                        <td>{{ $admin->address }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('dashboard.profile.user',['id' => $admin->id]) }}'">
+                                                Chi tiết
+                                            </button>
+                                            <form action="{{ Route('admin.delete.user') }}" method="POST" id="btn-delete-admin">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $admin->id }}">
+                                                <button class="btn btn-outline-danger" type="submit">
+                                                    Xoá
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -158,7 +184,29 @@
                                 <th>Chuyên ngành</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="user_company">
+                                <tbody>
+                                @foreach($user_company as $company)
+                                    <tr>
+                                        <td>{{ $company->name }}</td>
+                                        <td>{{ $company->email }}</td>
+                                        <td>{{ $company->phone }}</td>
+                                        <td>{{ $company->address }}</td>
+                                        <td>{{ $company->major }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('dashboard.profile.user',['id' => $company->id]) }}'">
+                                                Chi tiết
+                                            </button>
+                                            <form action="{{ Route('admin.delete.user') }}" method="POST" id="btn-delete-company">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $company->id }}">
+                                            <button class="btn btn-outline-danger" type="submit">
+                                                Xoá
+                                            </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -184,7 +232,28 @@
                                 <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="user_candidate">
+                                <tbody>
+                                @foreach($user_candidate as $candidate)
+                                    <tr>
+                                        <td>{{ $candidate->name }}</td>
+                                        <td>{{ $candidate->email }}</td>
+                                        <td>{{ $candidate->phone }}</td>
+                                        <td>{{ $candidate->address }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('dashboard.profile.user',['id' => $candidate->id]) }}'">
+                                                Chi tiết
+                                            </button>
+                                            <form action="{{ Route('admin.delete.user') }}" method="POST" id="btn-delete-candidate">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $candidate->id }}">
+                                            <button class="btn btn-outline-danger" type="submit">
+                                                Xoá
+                                            </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -210,8 +279,28 @@
                                 <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="user_trashed">
-
+                                <tbody>
+                                @foreach($user_trashed as $trashed)
+                                    <tr>
+                                        <td>{{ $trashed->name }}</td>
+                                        <td>{{ $trashed->email }}</td>
+                                        <td>{{ $trashed->phone }}</td>
+                                        <td>{{ $trashed->address }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('dashboard.profile.user',['id' => $trashed->id]) }}'">
+                                                Chi tiết
+                                            </button>
+                                            <form action="{{ Route('admin.restore.user') }}" method="POST" id="btn-restore-user">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $trashed->id }}">
+                                                <button class="btn btn-outline-dark" type="submit">
+                                                    Khôi phục
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -235,170 +324,12 @@
 
 <script>
     $(document).ready(function () {
-        var $tableAdmin = $("#user_admin")
-        var $tableCompany = $("#user_company")
-        var $tableCandidate = $("#user_candidate")
-        var $tableTrashed = $("#user_trashed")
-
-        load_data()
-        load_count_user_admin()
-        load_count_user_company()
-        load_count_user_candidate()
-        load_user_admin()
-        load_user_company()
-        load_user_candidate()
-        load_user_trashed()
-
-        function load_data() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                _li += res.all_user;
-                $('#all_user').html(_li);
-            });
-        }
-
-        function load_count_user_admin() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                _li += res.count_user_admin;
-                $('#count_user_admin').html(_li);
-            });
-        }
-
-        function load_count_user_company() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                _li += res.count_user_company;
-                $('#count_user_company').html(_li);
-            });
-        }
-
-        function load_count_user_candidate() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                _li += res.count_user_candidate;
-                $('#count_user_candidate').html(_li);
-            });
-        }
-
-        function load_user_admin() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                var data = res.user_admin;
-                data.forEach(function (item) {
-                    _li += '<tr>';
-                    _li += '<td>' + item.name + '</td>';
-                    _li += '<td>' + item.email + '</td>';
-                    _li += '<td>' + item.phone + '</td>';
-                    _li += '<td>' + item.email + '</td>';
-                    _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-admin" value="' + item.id + '">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-admin" value="' + item.id + '">Xoá</button>';
-                    _li += '</td>';
-                    _li += '</tr>';
-                    $('#user_admin').html(_li);
-                })
-            });
-        }
-
-        function load_user_company() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                var data = res.user_company;
-                data.forEach(function (item) {
-                    _li += '<tr>';
-                    _li += '<td>' + item.name + '</td>';
-                    _li += '<td>' + item.email + '</td>';
-                    _li += '<td>' + item.phone + '</td>';
-                    _li += '<td>' + item.address + '</td>';
-                    _li += '<td>' + item.major + '</td>';
-                    _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-company" value="' + item.id + '">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-company" value="' + item.id + '">Xoá</button>';
-                    _li += '</td>';
-                    _li += '</tr>';
-                    $('#user_company').html(_li);
-                })
-            });
-        }
-
-        function load_user_candidate() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                var data = res.user_candidate;
-                data.forEach(function (item) {
-                    _li += '<tr>';
-                    _li += '<td>' + item.name + '</td>';
-                    _li += '<td>' + item.email + '</td>';
-                    _li += '<td>' + item.phone + '</td>';
-                    _li += '<td>' + item.email + '</td>';
-                    _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-candidate" value="' + item.id + '">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete-candidate" value="' + item.id + '">Xoá</button>';
-                    _li += '</td>';
-                    _li += '</tr>';
-                    $('#user_candidate').html(_li);
-                })
-            });
-        }
-
-        function load_user_trashed() {
-            $.get('http://itjob.vn/dashboard/account?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li = '';
-                var data = res.user_trashed;
-                data.forEach(function (item) {
-                    console.log(item)
-                    _li += '<tr>';
-                    _li += '<td>' + item.name + '</td>';
-                    _li += '<td>' + item.email + '</td>';
-                    _li += '<td>' + item.phone + '</td>';
-                    _li += '<td>' + item.email + '</td>';
-                    _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail-trashed" value="' + item.id + '">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-restore-user" value="' + item.id + '">Khôi phục</button>';
-                    _li += '</td>';
-                    _li += '</tr>';
-                    $('#user_trashed').html(_li);
-                })
-            });
-        }
-
-        $tableAdmin.on('click', '#btn-detail-admin', function (e) {
-            e.preventDefault()
-            var user_id = $('#btn-detail-admin').val();
-            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
-        })
-
-        $tableCompany.on('click', '#btn-detail-company', function (e) {
-            e.preventDefault()
-            var user_id = $('#btn-detail-company').val();
-            console.log(user_id)
-            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
-        })
-
-        $tableCandidate.on('click', '#btn-detail-candidate', function (e) {
-            e.preventDefault()
-            var user_id = $('#btn-detail-candidate').val();
-            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
-        })
-
-        $tableTrashed.on('click', '#btn-detail-trashed', function (e) {
-            e.preventDefault()
-            var user_id = $('#btn-detail-trashed').val();
-            window.location.href = 'http://itjob.vn/dashboard/admin/user-profile/' + user_id;
-        })
-
-        $tableAdmin.on('click', '#btn-delete-admin', function (e) {
-            e.preventDefault()
-            var value = {
-                'id': $('#btn-delete-admin').val(),
-                'status': 1,
-                'admin_id': {{ Auth::user()->id }},
-                '_token': '{{ csrf_token() }}'
-            }
-            var obj = $(this);
+        $(document).on('click', '#btn-delete-admin', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            console.log(data)
             Swal.fire({
-                title: 'Bạn muốn xoá người dùng',
+                title: 'Bạn muốn xoá người dùng?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -410,12 +341,11 @@
                     $.ajax({
                         url: '{{ Route('admin.delete.user') }}',
                         type: 'POST',
-                        data: value,
-                        success: function (res) {
-                            load_data()
-                            load_count_user_admin()
-                            load_user_trashed()
-                            obj.parents("tr").remove();
+                        data: data,
+                        success: function () {
+                            $('#btn-delete-admin').submit()
+                            window.location.reload('{{ Route('dashboard.account') }}');
+                            $.get('{{ Route('mail.delete.user') }}/?id=' + data)
                         }
                     })
                     Swal.fire(
@@ -423,19 +353,14 @@
                     )
                 }
             })
-        })
+        });
 
-        $tableCompany.on('click', '#btn-delete-company', function (e) {
-            e.preventDefault()
-            var value = {
-                'id': $('#btn-delete-company').val(),
-                'status': 1,
-                'admin_id': {{ Auth::user()->id }},
-                '_token': '{{ csrf_token() }}'
-            }
-            var obj = $(this);
+        $(document).on('click', '#btn-delete-company', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            console.log(data)
             Swal.fire({
-                title: 'Bạn muốn xoá người dùng',
+                title: 'Bạn muốn xoá người dùng?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -447,12 +372,11 @@
                     $.ajax({
                         url: '{{ Route('admin.delete.user') }}',
                         type: 'POST',
-                        data: value,
-                        success: function (res) {
-                            load_data();
-                            load_count_user_company();
-                            load_user_trashed()
-                            obj.parents("tr").remove();
+                        data: data,
+                        success: function () {
+                            $('#btn-delete-company').submit()
+                            window.location.reload('{{ Route('dashboard.account') }}');
+                            $.get('{{ Route('mail.delete.user') }}/?id=' + data)
                         }
                     })
                     Swal.fire(
@@ -460,19 +384,14 @@
                     )
                 }
             })
-        })
+        });
 
-        $tableCandidate.on('click', '#btn-delete-candidate', function (e) {
-            e.preventDefault()
-            var value = {
-                'id': $('#btn-delete-candidate').val(),
-                'status': 1,
-                'admin_id': {{ Auth::user()->id }},
-                '_token': '{{ csrf_token() }}'
-            }
-            var obj = $(this);
+        $(document).on('click', '#btn-delete-candidate', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            console.log(data)
             Swal.fire({
-                title: 'Bạn muốn xoá người dùng',
+                title: 'Bạn muốn xoá người dùng?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -484,12 +403,11 @@
                     $.ajax({
                         url: '{{ Route('admin.delete.user') }}',
                         type: 'POST',
-                        data: value,
-                        success: function (res) {
-                            load_data();
-                            load_count_user_candidate();
-                            load_user_trashed()
-                            obj.parents("tr").remove();
+                        data: data,
+                        success: function () {
+                            $('#btn-delete-candidate').submit()
+                            window.location.reload('{{ Route('dashboard.account') }}');
+                            $.get('{{ Route('mail.delete.user') }}/?id=' + data)
                         }
                     })
                     Swal.fire(
@@ -497,19 +415,15 @@
                     )
                 }
             })
-        })
+        });
 
-        $tableTrashed.on('click', '#btn-restore-user', function (e) {
-            e.preventDefault()
-            var value = {
-                'id': $('#btn-restore-user').val(),
-                'admin_id': {{ Auth::user()->id }},
-                '_token': '{{ csrf_token() }}'
-            }
-            var obj = $(this);
+        $(document).on('click', '#btn-restore-user', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            console.log(data)
             Swal.fire({
-                title: 'Bạn muốn khôi phục người dùng',
-                icon: 'warning',
+                title: 'Bạn muốn khôi phục tài khoản?',
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -520,22 +434,18 @@
                     $.ajax({
                         url: '{{ Route('admin.restore.user') }}',
                         type: 'POST',
-                        data: value,
-                        success: function (res) {
-                            load_data()
-                            load_count_user_admin()
-                            load_user_trashed()
-                            load_user_admin()
-                            load_user_candidate()
-                            load_user_company()
-                            obj.parents("tr").remove();
+                        data: data,
+                        success: function () {
+                            $('#btn-restore-user').submit()
+                            window.location.reload('{{ Route('dashboard.account') }}');
+                            $.get('{{ Route('mail.restore.user') }}/?id=' + data)
                         }
                     })
                     Swal.fire(
-                        'Đã khôi phục thành công!',
+                        'Khôi phục thành công!',
                     )
                 }
             })
-        })
+        });
     });
 </script>

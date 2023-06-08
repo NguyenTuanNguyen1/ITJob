@@ -55,7 +55,7 @@ Route::prefix('post')->group(function () {
     Route::get('/post-detail/{id}', [PostController::class, 'show'])->name('post.detail');
     Route::post('/post-create', [PostController::class, 'store'])->name('post.create');
     Route::post('/post-update', [PostController::class, 'update'])->name('post.update');
-    Route::get('/post-delete', [PostController::class, 'delete'])->name('post.delete');
+    Route::post('/post-delete', [PostController::class, 'delete'])->name('post.delete');
     Route::get('/post-trashed', [PostController::class, 'trashed'])->name('post.trashed');
     Route::post('/post-restore', [PostController::class, 'restore'])->name('post.restore');
     Route::get('/post-outstanding', [PostController::class, 'outstanding'])->name('post.outstanding');
@@ -146,10 +146,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'authorize'], function () {
     Route::get('/callback/{provider}', [OAuthController::class, 'callback_Linkedin'])->name('callback.linkedin');
 });
 
+//Email
+Route::group(['prefix' => 'email'], function () {
+    Route::get('/email-delete-post', [BackendController::class, 'deletePostMail'])->name('mail.delete.post');
+    Route::get('/email-restore-post', [BackendController::class, 'restorePostMail'])->name('mail.restore.post');
+    Route::get('/email-delete-user', [BackendController::class, 'deleteUserMail'])->name('mail.delete.user');
+    Route::get('/email-restore-user', [BackendController::class, 'restoreUserMail'])->name('mail.restore.user');
+
+});
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [HomeController::class, 'notFound'])->name('not.found');
 
-//
+
 //Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
 Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

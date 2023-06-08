@@ -34,7 +34,7 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="active ">
-                    <a href="{{ Route('dashboard.index',['admin_id' => Auth::user()->id]) }}">
+                    <a href="{{ Route('dashboard.index') }}">
                         <i class="nc-icon nc-bank"></i>
                         <p>Dashboard</p>
                     </a>
@@ -52,19 +52,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('dashboard.account',['admin_id' => Auth::user()->id]) }}">
+                    <a href="{{ Route('dashboard.account') }}">
                         <i class="nc-icon nc-tile-56"></i>
                         <p>Tài khoản</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('dashboard.contact',['admin_id' => Auth::user()->id]) }}">
+                    <a href="{{ Route('dashboard.contact') }}">
                         <i class="nc-icon nc-tile-56"></i>
                         <p>Liên hệ</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ Route('dashboard.report',['admin_id' => Auth::user()->id]) }}">
+                    <a href="{{ Route('dashboard.report') }}">
                         <i class="nc-icon nc-book-bookmark"></i>
                         <p>Báo cáo</p>
                     </a>

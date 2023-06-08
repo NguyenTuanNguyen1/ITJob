@@ -7,16 +7,18 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
+use App\Interfaces\IUserRepository;
+use App\Mail\DeletePostMail;
 use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 /**
  * @property IPostRepository $post_repo
  * @property IInformationRepository $infor_repo
  * @property IAdminRepository $admin_repo
+ * @property IUserRepository $user_repo
  */
 class PostController extends Controller
 {
@@ -25,12 +27,14 @@ class PostController extends Controller
     (
         IPostRepository $postRepository,
         IInformationRepository $informationRepository,
-        IAdminRepository $adminRepository
+        IAdminRepository $adminRepository,
+        IUserRepository $userRepository,
     )
     {
         $this->post_repo = $postRepository;
         $this->infor_repo = $informationRepository;
         $this->admin_repo = $adminRepository;
+        $this->user_repo = $userRepository;
     }
 
     public function all(Request $request)
@@ -75,10 +79,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if (!$this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
-        {
-            abort(401);
-        }
 
         $post = $this->post_repo->create($input);
         if(empty($post))
@@ -101,27 +101,18 @@ class PostController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
+        if (Auth::user()->role_id == Constant::ROLE_ADMIN)
         {
-            abort(401);
+            $this->post_repo->delete($input['id']);
+            $this->ActivityLog(  "Bạn đã xoá bài tuyển dụng " , Auth::user()->role_id);
+            return redirect()->route('dashboard.index');
         }
-
         $this->post_repo->delete($input['id']);
-        $this->ActivityLog(  "Bạn đã xoá bài tuyển dụng " , $input['user_id']);
-
-        return response()->json([
-            'result' => true
-        ]);
     }
 
     public function trashed(Request $request)
     {
         $input = $request->all();
-
-        if ($this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
-        {
-            abort(401);
-        }
 
         $post = $this->post_repo->trashed();
         return response()->json([
@@ -132,11 +123,6 @@ class PostController extends Controller
     public function restore(Request $request)
     {
         $input = $request->all();
-
-        if (!$this->admin_repo->checkRole(Constant::ROLE_CANDIDATE, $input['user_id']))
-        {
-            abort(401);
-        }
 
         $this->post_repo->restore($input['id']);
         $this->ActivityLog(  "Bạn đã khôi phục bài viết*" . $input['id'] , Auth::user()->id);

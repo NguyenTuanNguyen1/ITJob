@@ -156,11 +156,14 @@
                                         <td>{{ $reply->username }}</td>
                                         <td>{{ $reply->content }}</td>
                                         <td>{{ $reply->created_at->format('d-m-Y') }}</td>
-                                        <td>
+                                        <td class="d-flex">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-value="123" data-toggle="modal"
                                                     data-target="#modalDetailReport"
-                                                    id="btn-replied" value="{{ $reply->id }}">Bài phản hồi
+                                                    id="btn-replied" value="{{ $reply->id }}">Phản hồi
+                                            </button>
+                                            <button class="btn btn-outline-warning" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $reply->id]) }}'">Xoá
                                             </button>
                                         </td>
                                     </tr>

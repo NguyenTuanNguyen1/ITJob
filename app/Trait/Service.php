@@ -9,7 +9,6 @@ use App\Models\Applied;
 use App\Models\Information;
 use App\Models\InformationType;
 use App\Models\Role;
-use App\Models\Skill;
 use App\Models\TicketType;
 use App\Models\User;
 use Carbon\Carbon;
