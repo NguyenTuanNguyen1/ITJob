@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,9 +16,10 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CascadeSoftDeletes;
     use SoftDeletes;
     protected $table = 'user';
+
     protected $fillable = [
         'name',
         'username',
@@ -39,21 +41,55 @@ class User extends Authenticatable
 
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->hasMany(Post::class, 'user_id');
     }
 
-//    public function company()
-//    {
-//        return $this->hasOne(Company::class,'user_id');
-//    }
+    public function company()
+    {
+        return $this->hasMany(Company::class, 'user_id');
+    }
 
-//    public function mail($condition, $attributes)
-//    {
-//        return $this->hasMany(Mail::class,'user_id');
-//    }
-//     public function getPasswordAttribute(){
-//         return $this->password;
-//     }
+    public function information()
+    {
+        return $this->hasMany(Information::class, 'user_id');
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class,'user_id');
+    }
+
+    public function applied()
+    {
+        return $this->hasMany(Applied::class,'user_id');
+    }
+
+    public function review()
+    {
+        return $this->hasMany(Review::class,'from_user_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($user){
+            $user->post()->delete();
+            $user->company()->delete();
+            $user->information()->delete();
+            $user->ticket()->delete();
+            $user->applied()->delete();
+            $user->review()->delete();
+        });
+
+        static::restoring(function ($user){
+            $user->post()->onlyTrashed()->restore();
+            $user->company()->onlyTrashed()->restore();
+            $user->information()->onlyTrashed()->restore();
+            $user->ticket()->onlyTrashed()->restore();
+            $user->applied()->onlyTrashed()->restore();
+            $user->review()->onlyTrashed()->restore();
+        });
+    }
 
     public function scopeSearch($query)
     {

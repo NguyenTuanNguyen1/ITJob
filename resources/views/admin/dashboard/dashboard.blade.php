@@ -228,6 +228,9 @@
                                 </thead>
                                 <tbody>
                                 @foreach($post_trashed as $trashed)
+                                    @if($trashed->user == null || $trashed->approved_user == null)
+
+                                    @else
                                     <tr>
                                         <td>{{ $trashed->user->name }}</td>
                                         <td>{{ $trashed->deleted_at->format('d-m-Y') }}</td>
@@ -246,6 +249,7 @@
                                             </form>
                                         </td>
                                     </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>

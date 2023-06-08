@@ -50,6 +50,29 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class,'post_id');
+    }
+
+    public function applied()
+    {
+        return $this->hasMany(Applied::class,'post_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($post){
+            $post->ticket()->delete();
+            $post->applied()->delete();
+        });
+        static::restoring(function ($post){
+            $post->ticket()->onlyTrashed()->restore();
+            $post->applied()->onlyTrashed()->restore();
+        });
+    }
+
     public function scopeSearch($query)
     {
         if (request('key'))
