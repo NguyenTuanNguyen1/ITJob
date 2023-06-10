@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @include('sweetalert::alert')
-    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
@@ -59,10 +59,10 @@
                             <div class="col-6">
                                 <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
                                    aria-expanded="false"><span
-                                        class="icon-th-large mr-2 text-danger"></span>Save Job</a>
+                                        class="icon-th-large mr-2 text-danger"></span>Chức năng</a>
                                 <div class="dropdown-menu">
                                     <button type="submit" class="dropdown-item" data-toggle="modal"
-                                            data-target="#modalReport">Báo cáo bài viết
+                                            data-target="#modalReportPost" >Báo cáo bài viết
                                     </button>
                                 </div>
                             </div>
@@ -140,7 +140,6 @@
                                     <div style="display: flex;justify-content: center">
                                         <span class="badge badge-success">{{ $post_major->major }}</span>
                                     </div>
-
                                 </div>
                             </div>
                         </li>
@@ -183,7 +182,6 @@
             var modal = $(this)
             modal.find('.modal-title').text('New message to ' + recipient)
             modal.find('.modal-body input').val(recipient)
-
         })
 
         {{--$('#btn-delete-post').on("click", function (e) {--}}

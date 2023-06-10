@@ -77,7 +77,7 @@ class HomeController extends Controller
 
     public function test()
     {
-        return view('layout.not-found');
+        return view('modal.Report.slides_show');
     }
 
     public function notFound()

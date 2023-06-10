@@ -2,9 +2,9 @@
 @section('content')
 <div class="app-content pt-3 p-md-3 p-lg-4">
     <div class="container-xl">
-        <div class="form-group" style="margin-left:100px;">
+        <div class="form-group mb-2" >
             <label for="job-region">Cấp bậc</label>
-            <select class="selectpicker border rounded" id="job-region" data-style="btn-black" data-width="100%"
+            <select class="selectpicker border rounded p-2" id="job-region" data-style="btn-black" data-width="100%"
                 data-live-search="true" title="Select Region" name="position">
                 <option>Thực tập sinh</option>
                 <option>Nhân viên</option>

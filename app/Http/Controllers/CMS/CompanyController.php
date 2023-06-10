@@ -65,7 +65,7 @@ class CompanyController extends Controller
         $input = $request->all();
 
         $users = $this->user_repo->getMajorByUser($input['major'], Constant::ROLE_CANDIDATE);
-
+        // dd($users);
         return view('company.candidate')->with('candidates', $users);
     }
 
