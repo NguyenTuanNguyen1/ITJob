@@ -142,7 +142,7 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img src="{{ url('image_avatar/') }}/{{ $user->img_avatar }}" width="200px" height="200px">
+                <img style="border-radius:5px;" src="{{ url('image_avatar/') }}/{{ $user->img_avatar }}" width="200px" height="200px">
                 <div class="d-flex align-items-center text-center p-1 py-3">
                     <label>{{ $user->name }}</label>
                 </div>

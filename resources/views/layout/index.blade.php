@@ -71,7 +71,7 @@
                     @foreach($posts as $post)
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                             <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post->id }}" data-value=""></a>
-                            <div class="job-listing-logo">
+                            <div class="job-listing-logo pt-2 pb-2 pr-2">
                                 <img src="{{ url('image_avatar/')}}/{{ $post->user->img_avatar }}"
                                      alt="Free Website Template by Free-Template.co" class="img-fluid">
                             </div>
@@ -82,7 +82,7 @@
                                 <div class="job-listing-location custom-width w-25 mb-3 mb-sm-0">
                                     <span class="icon-room"></span> {{ $post->workplace }}
                                 </div>
-                                <div class="job-listing-meta custom-width w-25">
+                                <div class="job-listing-meta custom-width w-25 mt-2">
                                     <div style="display: flex;justify-content: center">
                                         <span class="badge badge-success">{{ $post->major }}</span>
                                     </div>
@@ -203,8 +203,7 @@
                 <input type="hidden">
                 <button class="SL-job1 m-3" type="submit"
                     style="background-color:white;border-radius: 10px;border: none;">
-                    <img class="img-job1" width="200px" height="200px"
-                        src="{{ url('image_avatar') }}/{{ $company->user->img_avatar }}" alt="">
+                    <img class="img-job1" src="{{ url('image_avatar') }}/{{ $company->user->img_avatar }}" alt="">
                 </button>
             </form>
         </div>
