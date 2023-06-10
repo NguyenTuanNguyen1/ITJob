@@ -11,6 +11,7 @@ interface IPostRepository
     public function update($id,array $data);
     public function delete($id);
     public function storage($id);
+    public function findTrashed($id);
     public function trashed();
     public function restore($id);
     public function getMajorByPost($action, $major, $from, $to);

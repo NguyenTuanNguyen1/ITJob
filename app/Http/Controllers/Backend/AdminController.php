@@ -42,10 +42,6 @@ class AdminController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole($input['admin_id'], Constant::ROLE_ADMIN)) {
-            abort(401);
-        }
-
         $this->ActivityLog('Bạn đã xoá bài tuyển dụng*' . $input['id'], $input['user_id']);
 
         $post = $this->post_repo->delete($input['id']);
@@ -63,40 +59,35 @@ class AdminController extends Controller
     {
         $input = $request->all();
 
-        if (!$this->admin_repo->checkRole($input['admin_id'], Constant::ROLE_ADMIN)) {
-            abort(401);
-        }
         $user = $this->user_repo->find($input['id']);
-//        $this->sendMailUser($user['email'],new NotificationDeleteUser());
-        $this->ActivityLog("Bạn đã xoá người dùng%" . $user['username'] . '*' . $user['id'], $input['admin_id']);
+        $this->ActivityLog("Bạn đã xoá người dùng%" . $user['username'] . '*' . $user['id'],Auth::user()->id);
         $this->user_repo->delete($input['id']);
 
-        return response()->json([
-            'result' => true
-        ]);
+        return redirect()->route('dashboard.account');
+    }
+
+    public function restoreUserByAdmin(Request $request)
+    {
+        $input = $request->all();
+        $this->user_repo->restore($input['id']);
+        $user = $this->user_repo->find($input['id']);
+        $this->ActivityLog("Bạn đã khôi phục người dùng%" . $user['username'] . '*' . $user['id'], Auth::user()->id);
+
+        return redirect()->route('dashboard.account');
     }
 
     public function approved(Request $request)
     {
         $input = $request->all();
-
-        if (!$this->admin_repo->checkRole($input['admin_id'], Constant::ROLE_ADMIN)) {
-            abort(401);
-        }
-        $this->admin_repo->changeStatusPost($input['id'], $input['admin_id'], $input['status']);
+        $this->admin_repo->changeStatusPost($input['id'], Auth::user()->id, Constant::STATUS_APPROVED_POST);
         $this->ActivityLog("Bạn đã phê duyệt bài viết%" . $input['id'], Auth::user()->id);
-        return response()->json([
-            'message' => 'Phê duyệt thành công'
-        ]);
+
+        return redirect()->route('dashboard.index');
     }
 
     public function repliedContact(Request $request)
     {
         $input = $request->all();
-
-        if (!$this->admin_repo->checkRole($input['admin_id'], Constant::ROLE_ADMIN)) {
-            abort(401);
-        }
 
         $input['type_id'] = Constant::TICKET_CONTACT;
         $input['image'] = $input['post_id'] = null;
@@ -112,10 +103,6 @@ class AdminController extends Controller
     public function repliedReport(Request $request)
     {
         $input = $request->all();
-
-        if (!$this->admin_repo->checkRole($input['admin_id'], Constant::ROLE_ADMIN)) {
-            abort(401);
-        }
 
         $input['type_id'] = Constant::TICKET_REPORT;
         $input['image'] = null;

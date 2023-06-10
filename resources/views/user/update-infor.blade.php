@@ -265,32 +265,31 @@
                 <div id="Paris" class="tabcontent">
                     <div class="row" id="load-information">
                         <div class="col-md-12">
-                            @foreach($type_infor as $type)
+                            <div class="col-md-12">
+                                @foreach($information as $infor)
+                                    <label style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label><br>
+                                    <label style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label><br>
+                                @endforeach
+
                                 <form action="{{ Route('profile.update.information') }}" method="post">
                                     @csrf
                                     <div class="d-flex" style="justify-content:space-between;">
-                                        <label class="mt-4">{{ $type->content }}</label>
-                                        <div>
-                                            <button class="btn btn-sm btn-outline-success btn-round btn-icon mb-2 mt-4"
-                                                    id="btn-infor"><i class="fa fa-edit"></i></button>
-                                        </div>
+                                        <select class="selectpicker border rounded" style=" padding: 10px; width: 30%; margin-top: 25px;"
+                                                id="job-region"
+                                                data-style="btn-black" data-live-search="true"
+                                                title="Select Region" name="type_id">
+                                            @foreach($type_infor as $type)
+                                                <option value="{{ $type->id }}">{{ $type->content }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
-                                    <input type="hidden" class="form-control" name="type_id" value="{{ $type->id }}">
-
-                                    @if($information->isNotEmpty())
-                                        @foreach($information as $infor)
-                                            @if($infor->type_id == $type->id)
-                                                <textarea type="text" class="form-control" name="content" rows="3">{{ $infor->content }}</textarea>
-                                            @else
-                                                <textarea type="text" class="form-control" name="content" rows="3"></textarea>
-                                            @endif
-                                        @endforeach
-                                    @else
-                                        <textarea type="text" class="form-control" name="content" data-value=""></textarea>
-                                    @endif
+                                    <textarea type="text" class="form-control" name="content" style="margin-top: 15px;"
+                                              rows="3"></textarea>
+                                    <input type="hidden" name="id" value="{{ $user->id }}">
+                                    <button type="submit" style="margin-top: 15px;" class="btn btn-sm btn-outline-success">Lưu thông tin
+                                    </button>
                                 </form>
-                            @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

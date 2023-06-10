@@ -107,8 +107,8 @@
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
-                            </thead>
-                            <tbody id="report_reply">
+                                </thead>
+                                <tbody id="report_reply">
                                 @foreach($report_not_reply as $not_reply)
                                 <tr>
                                     <td>{{ $not_reply->username }}</td>
@@ -173,6 +173,21 @@
                                         </button>
                                     </td>
                                 </tr>
+                                    <tr>
+                                        <td>{{ $reply->username }}</td>
+                                        <td>{{ $reply->content }}</td>
+                                        <td>{{ $reply->created_at->format('d-m-Y') }}</td>
+                                        <td class="d-flex">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    data-value="123" data-toggle="modal"
+                                                    data-target="#modalDetailReport"
+                                                    id="btn-replied" value="{{ $reply->id }}">Phản hồi
+                                            </button>
+                                            <button class="btn btn-outline-warning" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $reply->id]) }}'">Xoá
+                                            </button>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -198,47 +213,38 @@
 <script src="{{ url('profile/demo/demo.js')  }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-$(document).ready(function() {
+    $(document).ready(function () {
 
-    $('#report_replied').on('click', '#btn-replied', function() {
-        var _li = '';
-        var value = {
-            'id': $(this).val()
-        }
-        $.ajax({
-            url: "{{ Route('report.replied') }}",
-            type: "GET",
-            data: value,
-            success: function(res) {
-                _li +=
-                    '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : ' +
-                    res.data.username + ' </label><br>';
-                _li +=
-                    '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
-                _li += '<label>' + res.data.content + '</label>';
-                $('#detail-replied').html(_li)
-            }
+        $('#report_replied').on('click', '#btn-replied', function () {
+            var _li = '';
+            var value = { 'id': $(this).val() }
+            $.ajax({
+                url: "{{ Route('report.replied') }}",
+                type: "GET",
+                data: value,
+                success: function (res) {
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : '+ res.data.username +' </label><br>';
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
+                    _li += '<label>'+ res.data.content +'</label>';
+                    $('#detail-replied').html(_li)
+                }
+            })
         })
-    })
 
-    $('#report_reply').on('click', '#btn-reply', function() {
-        var _li = '';
-        var value = {
-            'id': $(this).val()
-        }
-        $.ajax({
-            url: "{{ Route('report.detail') }}",
-            type: "GET",
-            data: value,
-            success: function(res) {
-                _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
-                _li += '<input type="hidden" name="post_id" value="' + res.data.post_id +
-                    '">';
-                _li += '<input type="hidden" name="reply_user_id" value="' + res.data
-                    .user_id + '">';
-                $('#replied_report').html(_li)
-            }
+        $('#report_reply').on('click', '#btn-reply', function () {
+            var _li = '';
+            var value = { 'id': $(this).val() }
+            $.ajax({
+                url: "{{ Route('report.detail') }}",
+                type: "GET",
+                data: value,
+                success: function (res) {
+                    _li += '<input type="hidden" name="ticket_id" value="'+ res.data.id +'">';
+                    _li += '<input type="hidden" name="post_id" value="'+ res.data.post_id +'">';
+                    _li += '<input type="hidden" name="reply_user_id" value="'+ res.data.user_id +'">';
+                    $('#replied_report').html(_li)
+                }
+            })
         })
-    })
-});
+    });
 </script>

@@ -25,11 +25,9 @@ class RegisterMail extends Mailable
     public function __construct
     (
         $username,
-        $user_id
     )
     {
         $this->username = $username;
-        $this->user_id = $user_id;
     }
 
     /**
@@ -40,6 +38,7 @@ class RegisterMail extends Mailable
     public function envelope()
     {
         return new Envelope(
+            replyTo: mb_encode_mimeheader(env('MAIL_FROM_ADDRESS')),
             subject: 'Đăng ký tài khoản thành công',
         );
     }
@@ -52,7 +51,10 @@ class RegisterMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.registerUser',
+            with: [
+                'username' => $this->username
+            ]
         );
     }
 }

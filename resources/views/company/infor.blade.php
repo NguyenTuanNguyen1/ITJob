@@ -152,6 +152,9 @@
             <div class="p-3 py-5">
                 <div class="tab" style="display:flex;">
                     <button class="tablinks" onclick="openCity(event, 'London')">Thông tin cá nhân</button>
+                    @if($user->role_id == 2)
+                    <button class="tablinks" onclick="openCity(event, 'VietNam')">Thông tin công ty</button>
+                    @endif
                     <button class="tablinks" onclick="openCity(event, 'Paris')">Thông tin thêm</button>
                     <button class="tablinks" onclick="openCity(event, 'Tokyo')">Bình luận đánh giá</button>
                 </div>
@@ -196,17 +199,49 @@
                         </div>
                     </div>
                 </div>
-
+                @if($user->role_id == 2)
+                    <div id="VietNam" class="tabcontent" style="display:block">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Trụ sở chính : </label>
+                                    <label style="font-weight: bold">{{ $company->headquarters }}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Số nhân viên : </label><br>
+                                    <label style="font-weight: bold">{{ $company->staff }}</label><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label>Mã số thuế : </label>
+                                <label style="font-weight: bold">{{ $company->taxcode }}</label>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label>Mô tả : </label>
+                                <label style="font-weight: bold">{{ $company->description }}</label>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label>Website : </label>
+                                <label style="font-weight: bold"><a
+                                        href="{{ $company->website }}">{{ $company->website }}</a></label><br>
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 <div id="Paris" class="tabcontent">
                     <div class="row" id="load-information">
                         <div class="col-md-12">
-                            @foreach($type_infor as $type)
-                                <div class="d-flex" style="justify-content:space-between;">
-                                    <label class="mt-4">{{ $type->content }}</label><br>
-                                </div>
-                                @foreach($information as $infor)
-                                    <label style="font-weight: 900;">{{ $infor->content }}</label>
-                                @endforeach
+                            @foreach($information as $infor)
+                                <label class="mt-4">{{ $infor->type->content }}</label><br>
+                                <label style="font-weight: 900;">{{ $infor->content }}</label>
                             @endforeach
                         </div>
                     </div>
@@ -218,7 +253,9 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     @if(!Auth::check())
-                                        <button type="submit" class="btn btn-success pull-right">Đăng nhập</button>
+                                        <button type="submit" class="btn btn-success pull-right"><a
+                                                href="{{ Route('user.login') }}" style="color: white">Đăng nhập</a>
+                                        </button>
                                     @elseif(Auth::user()->id != $user->id)
                                         <h3>{{ $count_review }} bình luận</h3>
                                         <div id="load_review">

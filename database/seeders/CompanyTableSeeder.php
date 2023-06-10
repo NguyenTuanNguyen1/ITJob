@@ -36,6 +36,14 @@ class CompanyTableSeeder extends Seeder
                 'user_id' => $i,
                 'type_id' => rand(1,5),
             ]);
+
+            DB::table('company_information')->insert([
+                'staff' => fake()->numerify,
+                'headquarters' => fake()->address,
+                'taxcode' => fake()->numerify,
+                'website' => 'https://' . fake()->domainName,
+                'user_id' => $i
+            ]);
         }
     }
 }

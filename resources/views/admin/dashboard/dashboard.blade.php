@@ -19,7 +19,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Tổng số bài viết</p>
-                                    <p class="card-title" id="all_post">
+                                    <p class="card-title">
+                                    {{ $all_post }}
                                     <p>
                                 </div>
                             </div>
@@ -46,7 +47,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Đã phê duyệt</p>
-                                    <p class="card-title" id="count_post_approved">
+                                    <p class="card-title">
+                                    {{ $count_post_approved }}
                                     <p>
                                 </div>
                             </div>
@@ -73,7 +75,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Chưa phê duyệt</p>
-                                    <p class="card-title" id="count_post_not_approved">
+                                    <p class="card-title">
+                                    {{ $count_not_post_approved }}
                                     <p>
                                 </div>
                             </div>
@@ -100,7 +103,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Bài viết đã xoá</p>
-                                    <p class="card-title" id="count_post_trashed">
+                                    <p class="card-title">
+                                    {{ $count_post_trashed }}
                                     <p>
                                 </div>
                             </div>
@@ -133,8 +137,27 @@
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="post-not-approved">
-                                </tbody>
+                                @foreach($post_not_approved as $not_approved)
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ $not_approved->user->name }}</td>
+                                        <td>{{ $not_approved->created_at->format('d-m-Y') }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-success" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('post.detail',['id' => $not_approved->id]) }}'">
+                                                Chi tiết
+                                            </button>
+                                            <form action="{{ Route('admin.approved.post') }}" method="POST" id="btn-approved">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $not_approved->id }}">
+                                                <button class="btn btn-outline-danger" type="submit">
+                                                    Phê duyệt
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -158,7 +181,27 @@
                                 <th>Phê duyệt</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="post-approved">
+                                <tbody>
+                                @foreach($approved_last_week as $approved)
+                                    <tr>
+                                        <td>{{ $approved->user->name }}</td>
+                                        <td>{{ $approved->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $approved->approved_user->name }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('post.detail',['id' => $approved->id]) }}'">
+                                                Chi tiết
+                                            </button>
+                                            <form action="{{ Route('post.delete') }}" method="POST" id="btn-delete">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $approved->id }}">
+                                                <button class="btn btn-outline-danger" type="submit">
+                                                    Xoá
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -183,7 +226,31 @@
                                 <th>Phê duyệt</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="post-trashed">
+                                <tbody>
+                                @foreach($post_trashed as $trashed)
+                                    @if($trashed->user == null || $trashed->approved_user == null)
+
+                                    @else
+                                    <tr>
+                                        <td>{{ $trashed->user->name }}</td>
+                                        <td>{{ $trashed->deleted_at->format('d-m-Y') }}</td>
+                                        <td>{{ $trashed->approved_user->name }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('post.detail',['id' => $trashed->id]) }}'">
+                                                Chi tiết
+                                            </button>
+                                            <form action="{{ Route('post.restore') }}" method="POST" id="btn-restore">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $trashed->id }}">
+                                                <button class="btn btn-outline-dark" type="submit">
+                                                    Khôi phục
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -206,209 +273,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function () {
-        var $tablePost = $("#post-approved")
-        var $tableTrashed = $("#post-trashed")
-        var $tableNotApproved = $("#post-not-approved")
 
-        load_data()
-        load_data_not_approved()
-        load_data_trashed()
-        load_all_post()
-        load_approved_post()
-        load_not_approved_post()
-        load_post_trahsed()
-
-        function load_data_not_approved() {
-            $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li ='';
-                var data = res.post_not_approved;
-                console.log(data)
-                data.forEach(function (item) {
-                    _li += '<tr>';
-                    _li += '<td>' + item.user.name +'</td>';
-                    _li += '<td>' + item.created_at +'</td>';
-                    _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-approved" value="' + item.id +'">Phê duyệt</button>';
-                    _li += '</td>';
-                    _li += '</tr>';
-                    $('#post-not-approved').html(_li);
-                })
-            })
-        }
-
-        function load_data() {
-            $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li ='';
-                var data = res.approved_last_week;
-                data.forEach(function (item) {
-                    _li += '<tr>';
-                    _li += '<td>' + item.user.name +'</td>';
-                    _li += '<td>' + item.created_at +'</td>';
-                    _li += '<td>' + item.approved_user.username +'</td>';
-                    _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-danger" type="submit" id="btn-delete" value="' + item.id +'">Xoá bài viết</button>';
-                    _li += '</td>';
-                    _li += '</tr>';
-                    $('#post-approved').html(_li);
-                })
-            })
-        }
-
-        function load_data_trashed() {
-            $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li ='';
-                var data = res.post_trashed;
-                data.forEach(function (item) {
-                    _li += '<tr>';
-                    _li += '<td>' + item.user.name +'</td>';
-                    _li += '<td>' + item.deleted_at +'</td>';
-                    _li += '<td>' + item.approved_user.name +'</td>';
-                    _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-success" type="submit" style="margin: 5px" id="btn-detail" value="' + item.id +'">Chi tiết</button>';
-                    _li += '<button class="btn btn-outline-dark" type="submit" id="btn-restore" value="' + item.id +'">Khôi phục</button>';
-                    _li += '</td>';
-                    _li += '</tr>';
-                    $('#post-trashed').html(_li);
-                })
-            })
-        }
-
-        function load_all_post() {
-            $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li ='';
-                _li += res.all_post;
-                $('#all_post').html(_li);
-            });
-        }
-
-        function load_approved_post() {
-            $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li ='';
-                _li += res.count_post_approved;
-                $('#count_post_approved').html(_li);
-            });
-        }
-
-        function load_not_approved_post() {
-            $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li ='';
-                _li += res.count_not_post_approved;
-                $('#count_post_not_approved').html(_li);
-            });
-        }
-
-        function load_post_trahsed() {
-            $.get('http://itjob.vn/dashboard/admin?admin_id={{ Auth::user()->id }}', function (res) {
-                var _li ='';
-                _li += res.count_post_trashed;
-                $('#count_post_trashed').html(_li);
-            });
-        }
-
-        $tablePost.on('click', '#btn-detail', function (e) {
-            e.preventDefault()
-            var post_id = $('#btn-detail').val();
-            window.location.href = 'http://itjob.vn/post/post-detail/' + post_id + '';
-        })
-
-        $tablePost.on('click', '#btn-delete', function (e) {
-            e.preventDefault()
-            var value = {
-                'id': $('#btn-delete').val(),
-                'user_id': {{ Auth::user()->id }},
-                '_token': '{{ csrf_token() }}'
-            }
-            var obj = $(this);
+        $(document).on('click', '#btn-approved', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            console.log(data)
             Swal.fire({
-                title: 'Bạn chắc chắn muốn xoá bài viết ?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Không',
-                confirmButtonText: 'Có',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ Route('post.delete') }}',
-                        type: 'GET',
-                        data: value,
-                        success: function (res) {
-                            obj.parents("tr").remove();
-                            load_data();
-                            load_post_trahsed();
-                        }
-                    })
-                    Swal.fire(
-                        'Xoá thành công!',
-                    )
-                }
-            })
-        })
-
-        $tableTrashed.on('click', '#btn-detail', function (e) {
-            e.preventDefault()
-            var post_id = $('#btn-detail').val();
-            window.location.href = 'http://itjob.vn/post/post-detail/' + post_id + '';
-        })
-
-        $tableTrashed.on('click', '#btn-restore', function (e) {
-            e.preventDefault()
-            var value = {
-                'id': $('#btn-restore').val(),
-                'user_id': {{ Auth::user()->id }},
-                '_token': '{{ csrf_token() }}'
-            }
-            console.log(value)
-            var obj = $(this);
-            Swal.fire({
-                title: 'Bạn muốn khôi phục bài viết ?',
-                icon: 'success',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Không',
-                confirmButtonText: 'Có',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ Route('post.restore') }}',
-                        type: 'POST',
-                        data: value,
-                        success: function (res) {
-                            obj.parents("tr").remove();
-                            load_data();
-                            load_post_trahsed();
-                        }
-                    })
-                    Swal.fire(
-                        'Khôi phục thành công!',
-                    )
-                }
-            })
-        })
-
-        $tableNotApproved.on('click', '#btn-detail', function (e) {
-            e.preventDefault()
-            var post_id = $('#btn-detail').val();
-            window.location.href = 'http://itjob.vn/post/post-detail/' + post_id + '';
-        })
-
-        $tableNotApproved.on('click', '#btn-approved', function (e) {
-            e.preventDefault()
-            var value = {
-                'id': $('#btn-approved').val(),
-                'status': 1,
-                'admin_id': {{ Auth::user()->id }},
-                '_token': '{{ csrf_token() }}'
-            }
-            console.log(value)
-            var obj = $(this);
-            Swal.fire({
-                title: 'Bạn muốn khôi phục bài viết ?',
-                icon: 'success',
+                title: 'Bạn muốn phê duyệt bài viết?',
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -419,18 +291,71 @@
                     $.ajax({
                         url: '{{ Route('admin.approved.post') }}',
                         type: 'POST',
-                        data: value,
-                        success: function (res) {
-                            obj.parents("tr").remove();
-                            load_approved_post()
-                            load_not_approved_post()
-                            load_all_post();
-                            load_data_not_approved();
+                        data: data,
+                        success: function () {
+                            $('#btn-approved').submit()
+                            window.location.reload('{{ Route('dashboard.index') }}');
                         }
                     })
-                    Swal.fire(
-                        'Khôi phục thành công!',
-                    )
+                    // Swal.fire(
+                    //     'Phê duyêt thành công!',
+                    // )
+                }
+            })
+        });
+
+        $(document).on('click', '#btn-delete', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            console.log(data)
+            Swal.fire({
+                title: 'Bạn muốn xoá bài viết?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ Route('post.delete') }}',
+                        type: 'POST',
+                        data: data,
+                        success: function () {
+                            $('#btn-delete').submit()
+                            window.location.reload('{{ Route('dashboard.index') }}');
+                            $.get('{{ Route('mail.delete.post') }}/?id=' + data)
+                        }
+                    })
+                }
+            })
+        })
+
+        $(document).on('click', '#btn-restore', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            console.log(data)
+            Swal.fire({
+                title: 'Bạn có muốn khôi phục bài viết?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ Route('post.restore') }}',
+                        type: 'POST',
+                        data: data,
+                        success: function () {
+                            $('#btn-restore').submit()
+                            window.location.reload('{{ Route('dashboard.index') }}');
+                            $.get('{{ Route('mail.restore.post') }}/?id=' + data)
+                        }
+                    })
                 }
             })
         })

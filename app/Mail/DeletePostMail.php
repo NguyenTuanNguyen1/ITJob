@@ -9,42 +9,45 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RestoreUserMail extends Mailable
+/**
+ * @property $time
+ */
+class DeletePostMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
-    public function __construct()
+    public function __construct
+    (
+        $time
+    )
     {
-        //
+        $this->time =$time;
     }
 
     /**
      * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
+    public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Restore User Mail',
+            replyTo: mb_encode_mimeheader(env('MAIL_FROM_ADDRESS')),
+            subject: 'THÔNG BÁO XOÁ BÀI VIẾT',
         );
     }
 
     /**
      * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content()
+    public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.notificationDeletePost',
+            with: [
+                'time' => $this->time->format('d-m-Y H:i')
+            ]
         );
     }
-
 }

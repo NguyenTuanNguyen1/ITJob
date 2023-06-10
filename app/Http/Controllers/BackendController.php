@@ -11,6 +11,10 @@ use App\Interfaces\IReviewRepository;
 use App\Interfaces\ISearchRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
+use App\Mail\DeletePostMail;
+use App\Mail\NotificationDeleteUser;
+use App\Mail\NotificationRestoreUser;
+use App\Mail\RestorePostMail;
 use App\Models\Post;
 use App\Models\User;
 use App\Repositories\RoleRepostitory;
@@ -110,5 +114,33 @@ class BackendController extends Controller
             'message' => 'Đã tìm thấy ' . $data->count() . ' kết quả',
             'data' => $data,
         ]);
+    }
+
+    public function deletePostMail(Request $request)
+    {
+        $input = $request->all();
+        $post = $this->post_repo->findTrashed($input['id']);
+        $this->sendMailUser($post->user, new DeletePostMail(Carbon::now()));
+    }
+
+    public function restorePostMail(Request $request)
+    {
+        $input = $request->all();
+        $post = $this->post_repo->find($input['id']);
+        $this->sendMailUser($post->user, new RestorePostMail($post->user->name, $post->user->emai, $input['id']));
+    }
+
+    public function deleteUserMail(Request $request)
+    {
+        $input = $request->all();
+        $user = $this->user_repo->storage($input['id']);
+        $this->sendMailUser($user, new NotificationDeleteUser());
+    }
+
+    public function restoreUserMail(Request $request)
+    {
+        $input = $request->all();
+        $user = $this->user_repo->find($input['id']);
+        $this->sendMailUser($user, new NotificationRestoreUser($user->name, $user->email));
     }
 }
