@@ -21,12 +21,13 @@ class CompanyTableSeeder extends Seeder
         for ($i = 3; $i <= 6; $i++) {
             DB::table('user')->insert([
                 'name' => fake()->name,
-                'username' => fake()->name,
+                'username' => fake()->firstName,
                 'phone' => fake()->phoneNumber,
                 'major' => Constant::MAJOR_MARKETING,
                 'position' => 'Trưởng phòng',
                 'role_id' => Constant::ROLE_COMPANY,
                 'email' =>fake()->email,
+                'description' => fake()->text,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);

@@ -28,7 +28,6 @@ use Illuminate\Http\Request;
  * @property IAdminRepository $admin_repo
  * @property ITicketRepository $ticket_repo
  * @property IInformationRepository $information_repo
- * @property IReviewRepository $review_repo
  * @property RoleRepostitory $role_repo
  * @property ISearchRepository $search_repo
  * @property IBackendRepository $back_repo
@@ -43,7 +42,6 @@ class BackendController extends Controller
         IAdminRepository $adminRepository,
         ITicketRepository $ticketRepository,
         IInformationRepository $informationRepository,
-        IReviewRepository $reviewRepository,
         RoleRepostitory $roleRepostitory,
         ISearchRepository $searchRepository,
         IBackendRepository $backendRepository
@@ -54,7 +52,6 @@ class BackendController extends Controller
         $this->admin_repo = $adminRepository;
         $this->ticket_repo = $ticketRepository;
         $this->information_repo = $informationRepository;
-        $this->review_repo = $reviewRepository;
         $this->role_repo = $roleRepostitory;
         $this->search_repo = $searchRepository;
         $this->back_repo = $backendRepository;
@@ -68,7 +65,6 @@ class BackendController extends Controller
         $candidate = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_CANDIDATE);
         $role = $this->role_repo->all();
         $information_type = $this->information_repo->all();
-        $review = $this->review_repo->all();
     }
 
     public function searchFilter(Request $request)
@@ -80,6 +76,14 @@ class BackendController extends Controller
         });
         $test = collect($result);
         return view('user.job.search_result')->with('posts', $test);
+    }
+
+    public function searchCompanyFilter(Request $request)
+    {
+        $input = $request->all();
+        $users = $this->search_repo->searchCompanyFilter($input);
+
+        return view('company.search_result')->with('users', $users);
     }
 
     public function searchAjax()

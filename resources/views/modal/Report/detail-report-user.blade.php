@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalDetailReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalDetailReportUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group" id="detail-replied">
+                <div class="form-group" id="detail-replied-user">
 
                 </div>
             </div>

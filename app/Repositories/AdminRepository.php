@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Constant;
 use App\Interfaces\IAdminRepository;
 use App\Models\Activity;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
@@ -32,5 +33,15 @@ class AdminRepository implements IAdminRepository
     public function history($id)
     {
         return Activity::with('user')->where('user_id', $id)->get();
+    }
+
+    public function getImageReport()
+    {
+        return Image::with('ticket')->get();
+    }
+
+    public function getImageReportByCondition($action)
+    {
+        return Image::with('ticket')->where('ticket_id', $action)->get();
     }
 }

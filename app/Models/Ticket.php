@@ -25,9 +25,9 @@ class Ticket extends Model
         'username',
         'email',
         'content',
-        'image',
         'status',
-        'user_id',
+        'from_user_id',
+        'to_user_id',
         'type_id',
         'post_id',
         'ticket_id'
@@ -36,5 +36,15 @@ class Ticket extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function from_user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function image()
+    {
+        return $this->hasMany(Image::class,'ticket_id');
     }
 }

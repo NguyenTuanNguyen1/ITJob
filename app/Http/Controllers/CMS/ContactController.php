@@ -50,11 +50,7 @@ class ContactController extends Controller
     {
         $input = $request->all();
 
-        $input['type_id'] = Constant::TICKET_CONTACT;
-        $input['image'] = $input['post_id']  = null;
-        $input['user_id'] = is_null(Auth::user()->id) ?: Auth::user()->id;
-
-        $contact = $this->ticket_repo->create($input);
+        $contact = $this->ticket_repo->createContact($input);
         if (empty($contact)) {
             alert('Bạn đã gửi tin nhắn thất bại', null,'error');
             return redirect()->route('contact.index');
@@ -77,7 +73,8 @@ class ContactController extends Controller
     {
         $input = $request->all();
 
-        $contact = $this->ticket_repo->listReplied($input['id'], Constant::TICKET_CONTACT);
+        $contact = $this->ticket_repo->listReplied($input['id'], Constant::TICKET_CONTACT_REPLIED, Constant::TICKET_CONTACT);
+
         return response()->json([
             'data' => $contact
         ]);

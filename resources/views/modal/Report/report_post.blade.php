@@ -16,7 +16,7 @@
                     </button>
                 </div>
                 <div class="container2">
-                    <input type="file" id="file-input" accept="image/png, image/jpeg" onchange="preview()" multiple>
+                    <input type="file" id="file-input" onchange="preview()"  name="image[]" multiple>
                     <label for="file-input">
                         <i class="fas fa-upload"></i> &nbsp; Choose A Photo
                     </label>

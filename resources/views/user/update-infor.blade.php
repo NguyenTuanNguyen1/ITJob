@@ -168,8 +168,9 @@
                 <div class="tab" style="display:flex;">
                     <button class="tablinks" onclick="openCity(event, 'London')">Thông tin cá nhân</button>
                     <button class="tablinks" onclick="openCity(event, 'Paris')">Thông tin thêm</button>
-                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Bình luận đánh giá</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Đánh giá</button>
                     <button class="tablinks" onclick="openCity(event, 'France')">Đổi mật khẩu</button>
+                    <button class="tablinks" onclick="openCity(event, 'VietNam')">Phản hồi</button>
                 </div>
 
                 <div id="London" class="tabcontent" style="display:block">
@@ -267,14 +268,19 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 @foreach($information as $infor)
-                                    <label style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label><br>
-                                    <label style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label><br>
+                                    <label
+                                        style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label>
+                                    <br>
+                                    <label
+                                        style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label>
+                                    <br>
                                 @endforeach
 
                                 <form action="{{ Route('profile.update.information') }}" method="post">
                                     @csrf
                                     <div class="d-flex" style="justify-content:space-between;">
-                                        <select class="selectpicker border rounded" style=" padding: 10px; width: 30%; margin-top: 25px;"
+                                        <select class="selectpicker border rounded"
+                                                style=" padding: 10px; width: 30%; margin-top: 25px;"
                                                 id="job-region"
                                                 data-style="btn-black" data-live-search="true"
                                                 title="Select Region" name="type_id">
@@ -286,7 +292,8 @@
                                     <textarea type="text" class="form-control" name="content" style="margin-top: 15px;"
                                               rows="3"></textarea>
                                     <input type="hidden" name="id" value="{{ $user->id }}">
-                                    <button type="submit" style="margin-top: 15px;" class="btn btn-sm btn-outline-success">Lưu thông tin
+                                    <button type="submit" style="margin-top: 15px;"
+                                            class="btn btn-sm btn-outline-success">Lưu thông tin
                                     </button>
                                 </form>
                             </div>
@@ -328,47 +335,70 @@
                         </div>
                     </section>
                 </div>
-                <div>
-                    <div id="France" class="tabcontent">
-                        <div class="col mt-3">
-                            <form action="{{ Route('password.update') }}" method="post">
-                                @csrf
-                                <div class="col-md-6" style="margin-left:25%">
-                                    <label>Nhập mật khẩu hiện tại</label>
-                                    <input type="password" class="inputpass" name="password_old" value="">
-                                    @error('password_old')
-                                    <div style="color:red;">{{ $message }}</div>
-                                    <br>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6" style="margin-left:25%">
-                                    <label>Nhập mật khẩu mới</label>
-                                    <input type="password" class="inputpass" name="password" value="">
-                                    @error('password')
-                                    <div style="color:red;">{{ $message }}</div>
-                                    <br>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6" style="margin-left:25%">
-                                    <label>Nhập lại mật khẩu mới</label>
-                                    <input type="password" class="inputpass" name="password_confirmation" value="">
-                                    @error('password_confirmation')
-                                    <div style="color:red;">{{ $message }}</div>
-                                    <br>
-                                    @enderror
-                                </div>
-                                <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                <div class="mt-2 text-center">
-                                    <button class="btn btn-primary profile-button"
-                                            type="submit">Xác nhận
-                                    </button>
-                                    @if(session('Error'))
-                                        <p style="color:red">{{session('Error')}}</p>
-                                    @endif
-                                </div>
-                            </form>
-                        </div>
+                <div id="France" class="tabcontent">
+                    <div class="col mt-3">
+                        <form action="{{ Route('password.update') }}" method="post">
+                            @csrf
+                            <div class="col-md-6" style="margin-left:25%">
+                                <label>Nhập mật khẩu hiện tại</label>
+                                <input type="password" class="inputpass" name="password_old" value="">
+                                @error('password_old')
+                                <div style="color:red;">{{ $message }}</div>
+                                <br>
+                                @enderror
+                            </div>
+                            <div class="col-md-6" style="margin-left:25%">
+                                <label>Nhập mật khẩu mới</label>
+                                <input type="password" class="inputpass" name="password" value="">
+                                @error('password')
+                                <div style="color:red;">{{ $message }}</div>
+                                <br>
+                                @enderror
+                            </div>
+                            <div class="col-md-6" style="margin-left:25%">
+                                <label>Nhập lại mật khẩu mới</label>
+                                <input type="password" class="inputpass" name="password_confirmation" value="">
+                                @error('password_confirmation')
+                                <div style="color:red;">{{ $message }}</div>
+                                <br>
+                                @enderror
+                            </div>
+                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                            <div class="mt-2 text-center">
+                                <button class="btn btn-primary profile-button"
+                                        type="submit">Xác nhận
+                                </button>
+                                @if(session('Error'))
+                                    <p style="color:red">{{session('Error')}}</p>
+                                @endif
+                            </div>
+                        </form>
                     </div>
+                </div>
+                <div id="VietNam" class="tabcontent">
+                    <section class="content-item" id="comments">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div>
+                                        @foreach($admin_replied as $replied)
+                                            <div class="media">
+                                                <a class="pull-left" href="#"><img class="media-object" src="{{ url('image_avatar') }}/{{ $replied->from_user->img_avatar}}"></a>
+                                                <div class="media-body">
+                                                    <p>{{ $replied->content }}</p>
+                                                    <ul class="list-unstyled list-inline media-detail pull-left"
+                                                        style="display: flex;">
+                                                        <li><i class="fa fa-calendar"></i>{{ $replied->created_at->format('d-m-Y') }}</li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -496,13 +526,13 @@
 
         function load_review() {
             var _li = '';
-            $.get('http://itjob.vn/user/user-profile/{{Auth::user()->id}}', (res) => {
+            $.get('http://itjob.vn/profile/user-profile/{{Auth::user()->id}}', (res) => {
                 var data = res.reviews;
                 data.forEach(function (item) {
+                    console.log(item.from_user_id)
                     _li += '<div class="media">';
-                    _li += '<a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>';
+                    _li += '<a class="pull-left" href="#"><img class="media-object" src="{{ url('image_avatar') }}/' + item.from_user.img_avatar + '" alt=""></a>';
                     _li += '<div class="media-body">';
-                    _li += '<h4 class="media-heading">' + item.from_user_id + '</h4>';
                     _li += '<p>' + item.content + '</p>';
                     _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
                     _li += '<li><i class="fa fa-calendar"></i>' + item.created_at + '</li>'

@@ -6,6 +6,7 @@ use App\Constant;
 use App\Interfaces\IUserRepository;
 use App\Models\Activity;
 use App\Models\Applied;
+use App\Models\Image;
 use App\Models\Information;
 use App\Models\InformationType;
 use App\Models\Role;
@@ -150,21 +151,19 @@ trait Service
         ]);
     }
 
-    public function updateInformation($user_id, array $data)
+    public function saveImageReport($images, $ticket_id)
     {
-        return Information::where('user_id', $user_id)->update([
-            'content' => $data['content'],
-//                'type_id' => $data['type_id'],
+        return Image::create([
+           'image' =>  $images,
+            'ticket_id' => $ticket_id
         ]);
     }
 
-    public function createInformation($user_id)
+    public function saveImageReportUser($images, $user_id)
     {
-//        $infor = new Information();
-//        $infor->content = $content;
-//        $infor->user_id = $user_id;
-//        $infor->type_id = $type_id;
-//        $infor->save();
-        return 123;
+        return Image::create([
+            'image' =>  $images,
+            'ticket_id' => $ticket_id
+        ]);
     }
 }
