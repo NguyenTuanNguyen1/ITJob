@@ -17,8 +17,6 @@
                     <textarea name="content" cols="60" rows="4"></textarea>
                     <div id="replied_report"></div>
                 </div>
-                <input type="hidden" name="username" value="{{ Auth::user()->username }}">
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

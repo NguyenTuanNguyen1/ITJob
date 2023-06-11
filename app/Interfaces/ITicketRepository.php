@@ -7,12 +7,16 @@ use App\Models\Ticket;
 interface ITicketRepository
 {
     public function all($action);
-    public function create(array $data);
-    public function find($id, $action);
+    public function createReportUser(array $report);
+    public function createReportPost(array $post);
+    public function createContact(array $contact);
+    public function createReview(array $review);
+    public function find($id);
     public function delete($id);
     public function update($id);
-    public function reply(array $data);
-    public function getTicketNotReply($action, $status);
-    public function getTicketReplyLastWeek($action, $status);
-    public function listReplied($id, $action);
+    public function replyContact(array $contact);
+    public function getTicket($action, $status);
+    public function listReplied($id, $action, $type);
+    public function getTicketByUser($to_user_id, $action);
+    public function getTicketReplied($id);
 }

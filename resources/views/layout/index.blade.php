@@ -5,7 +5,7 @@
             <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
-                <form action="{{ Route('search.filter') }}" method="post" class="search-jobs-form">
+                <form action="{{ Route('search.layout.filter') }}" method="post" class="search-jobs-form">
                     @csrf
                     <div class="row mb-5">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">

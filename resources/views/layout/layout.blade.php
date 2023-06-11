@@ -44,14 +44,6 @@
             @elseif(Auth::check())
                 <div class="right-cta-menu text-right d-flex aligin-items-center col-6 d-none d-xl-block">
                     <div class="ml-auto">
-                        <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class=" icon-line-newspaper"></span></a>
-                        <a href="{{ Route('show.message',['from_user_name' => Auth::user()->id ]) }}"
-                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class=" icon-line-chat"></span></a>
-                        <a href="{{ Route('index.message') }}"
-                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class=" icon-line-chat"></span></a>
                         <a class="btn btn-success border-width-2 d-none d-lg-inline-block " href="" role="button"
                            data-toggle="dropdown" aria-expanded="false">
                             <span class=" icon-line-profile-male"></span>

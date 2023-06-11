@@ -124,6 +124,7 @@
             </div>
         </nav>
         @yield('content')
+        @yield('report')
     </div>
 </div>
 

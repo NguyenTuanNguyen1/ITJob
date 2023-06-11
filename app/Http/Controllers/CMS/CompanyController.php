@@ -8,6 +8,7 @@ use App\Interfaces\IAdminRepository;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
+use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
  * @property IUserRepository $user_repo
  * @property ICompanyRepository $company_repo
  * @property IInformationRepository $infor_repo
+ * @property ITicketRepository $ticket_repo
  */
 class CompanyController extends Controller
 {
@@ -28,7 +30,8 @@ class CompanyController extends Controller
         IAdminRepository $adminRepository,
         IUserRepository $userRepository,
         ICompanyRepository $companyRepository,
-        IInformationRepository $informationRepository
+        IInformationRepository $informationRepository,
+        ITicketRepository $ticketRepository
     )
     {
         $this->post_repo = $postRepository;
@@ -36,6 +39,7 @@ class CompanyController extends Controller
         $this->user_repo = $userRepository;
         $this->company_repo = $companyRepository;
         $this->infor_repo = $informationRepository;
+        $this->ticket_repo = $ticketRepository;
     }
 
     public function index(Request $request)
@@ -62,10 +66,8 @@ class CompanyController extends Controller
 
     public function candidate(Request $request)
     {
-        $input = $request->all();
-
-        $users = $this->user_repo->getMajorByUser($input['major'], Constant::ROLE_CANDIDATE);
-        // dd($users);
+//        $users = $this->user_repo->getMajorByUser($input['major'], Constant::ROLE_CANDIDATE);
+        $users = $this->user_repo->all();
         return view('company.candidate')->with('candidates', $users);
     }
 
@@ -81,5 +83,18 @@ class CompanyController extends Controller
         $this->company_repo->update($input['id'], $input);
         $information = $this->infor_repo->all();
         return redirect()->route('company.profile');
+    }
+
+    public function review(Request $request)
+    {
+        $review = $this->ticket_repo->getTicket(Constant::TICKET_REVIEW,Constant::TICKET_NOT_REPLY);
+        return view('company.review')->with('reviews', $review);
+    }
+
+    public function replied(Request $request)
+    {
+        $input = $request->all();
+        $review = $this->ticket_repo->getTicketReplied($input['id']);
+        return view('company.review')->with('reviews', $review);
     }
 }

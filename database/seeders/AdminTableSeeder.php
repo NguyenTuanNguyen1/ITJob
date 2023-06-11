@@ -20,7 +20,6 @@ class AdminTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = new User();
         DB::table('user')->insert([
             'name' => fake()->name(),
             'username' => 'job',
@@ -30,6 +29,7 @@ class AdminTableSeeder extends Seeder
             'major' => Constant::MAJOR_IT,
             'position' => 'Giám đốc',
             'email' => 'thinh.tranlequang@.com',
+            'description' => fake()->text,
             'password' => Hash::make('12345678'),
             'created_at' => Carbon::now()
         ]);
@@ -43,6 +43,7 @@ class AdminTableSeeder extends Seeder
             'position' => 'Giám đốc',
             'role_id' => Constant::ROLE_ADMIN,
             'email' => 'thinh.tranlequang@ncc.asia',
+            'description' => fake()->text,
             'password' => Hash::make('12345678'),
             'created_at' => Carbon::now()
         ]);

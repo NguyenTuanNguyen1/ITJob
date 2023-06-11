@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Constant;
@@ -22,11 +23,19 @@ class SearchRepository implements ISearchRepository
     public function searchFilter(array $data)
     {
         return Post::with('user')
-                    ->orWhere('position', $data['position'])
-                    ->orWhere('working', $data['working'])
-                    ->orWhere('major', $data['major'])
-                    ->orderBy('id','DESC')
-                    ->paginate(8);
+            ->where('major', $data['major'])
+            ->where('working', $data['working'])
+            ->where('position', $data['position'])
+            ->orderBy('id', 'DESC')
+            ->paginate(8);
+    }
+
+    public function searchCompanyFilter(array $data)
+    {
+        return User::where('major', $data['major'])
+            ->where('position', $data['position'])
+            ->where('role_id', Constant::ROLE_CANDIDATE)
+            ->get();
     }
 
     public function searchUserByRole($role)
