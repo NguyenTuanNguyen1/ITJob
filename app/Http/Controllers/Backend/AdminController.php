@@ -108,7 +108,7 @@ class AdminController extends Controller
         $this->ticket_repo->update($input['ticket_id']);
         $this->ticket_repo->replyReport($input);
 
-        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng%' . $input['from_user_id'], $input['admin_id']);
+        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng%' . $input['to_user_id'], $input['admin_id']);
         alert('Bạn đã phản hồi báo cáo', null, 'success');
         return redirect()->route('dashboard.report', ['admin_id' => $input['admin_id']]);
     }
@@ -121,7 +121,7 @@ class AdminController extends Controller
         $this->ticket_repo->update($input['ticket_id']);
         $this->ticket_repo->replyReport($input);
 
-        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng%' . $input['from_user_id'], $input['admin_id']);
+        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng%' . $input['to_user_id'], $input['admin_id']);
         alert('Bạn đã phản hồi báo cáo', null, 'success');
         return redirect()->route('dashboard.report', ['admin_id' => $input['admin_id']]);
     }

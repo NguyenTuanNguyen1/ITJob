@@ -217,7 +217,7 @@
                 success: function (res) {
                     console.log(res)
                     _li += '<input type="hidden" name="ticket_id" value="'+ res.data.id +'">';
-                    _li += '<input type="text" name="to_user_id" value="'+ res.data.from_user_id +'">';
+                    _li += '<input type="hidden" name="to_user_id" value="'+ res.data.from_user_id +'">';
                     $('#replied_contact').html(_li)
                 }
             })

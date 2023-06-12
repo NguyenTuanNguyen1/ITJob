@@ -372,7 +372,7 @@
                 success: function (res) {
                     _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
                     _li += '<input type="hidden" name="post_id" value="' + res.data.post_id + '">';
-                    _li += '<input type="hidden" name="reply_user_id" value="' + res.data.user_id + '">';
+                    _li += '<input type="hidden" name="to_user_id" value="' + res.data.from_user_id + '">';
                     $('#replied_report').html(_li)
                 }
             })
@@ -387,9 +387,9 @@
                 data: value,
                 success: function (res) {
                     console.log(res)
-                    _li += '<input type="text" name="ticket_id" value="' + res.data.id + '">';
-                    _li += '<input type="text" name="from_user_id" value="' + res.data.from_user_id + '">';
-                    _li += '<input type="text" name="to_user_id" value="' + res.data.to_user_id + '">';
+                    _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
+                    _li += '<input type="hidden" name="from_user_id" value="' + res.data.from_user_id + '">';
+                    _li += '<input type="hidden" name="to_user_id" value="' + res.data.to_user_id + '">';
                     $('#replied_user_report').html(_li)
                 }
             })

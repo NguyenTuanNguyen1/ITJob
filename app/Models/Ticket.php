@@ -47,4 +47,12 @@ class Ticket extends Model
     {
         return $this->hasMany(Image::class,'ticket_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($ticket){
+            $ticket->image()->delete();
+        });
+    }
 }
