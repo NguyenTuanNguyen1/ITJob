@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @include('sweetalert::alert')
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
@@ -44,7 +44,7 @@
                                 <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span> {{ $post->user->img_avatar }}</span>
                                 <span class="m-2"><span class="icon-room mr-2"></span>{{ $post->workplace }}</span>
                                 <span class="m-2"><span class="icon-clock-o mr-2"></span><span
-                                        class="text-primary">{{ $post->position }}</span></span>
+                                            class="text-primary">{{ $post->position }}</span></span>
                             </div>
                         </div>
                     </div>
@@ -59,10 +59,10 @@
                             <div class="col-6">
                                 <a class="btn btn-block btn-light btn-md " role="button" data-toggle="dropdown"
                                    aria-expanded="false"><span
-                                        class="icon-th-large mr-2 text-danger"></span>Chức năng</a>
+                                            class="icon-th-large mr-2 text-danger"></span>Chức năng</a>
                                 <div class="dropdown-menu">
                                     <button type="submit" class="dropdown-item" data-toggle="modal"
-                                            data-target="#modalReportPost" >Báo cáo bài viết
+                                            data-target="#modalReportPost">Báo cáo bài viết
                                     </button>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
     </section>
 
     @include('modal.post.edit')
-    @include('modal.Report.report_post')
+    @include('modal.report.report_post')
     <div class="container" style="padding-top:10px">
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">

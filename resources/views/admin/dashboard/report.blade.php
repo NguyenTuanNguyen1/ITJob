@@ -224,10 +224,10 @@
             </div>
         </div>
     </div>
-    @include('modal.Report.slides_show')
-    @include('modal.Report.report')
-    @include('modal.Report.report_user')
-    @include('modal.Report.detail-report')
+    @include('modal.report.slides_show')
+    @include('modal.report.report')
+    @include('modal.report.report_user')
+    @include('modal.report.detail-report')
     <div class="content" style="margin-top: 5px">
         <div class="row">
             <div class="col-md-12">
@@ -345,7 +345,7 @@
         </div>
     </div>
     @include('modal.contact.detail-reply')
-    @include('modal.Report.detail-report-user')
+    @include('modal.report.detail-report-user')
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
 <script src="{{ url('profile/js/core/popper.min.js') }}"></script>
@@ -440,16 +440,13 @@
                     var data = res.images;
                     var key = 0;
                     data.forEach(function (item) {
-                        if (key == 0)
-                        {
+                        if (key == 0) {
                             _li += '<div class="carousel-item active">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
-                        }
-                        else
-                        {
+                        } else {
                             _li += '<div class="carousel-item">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
                         }
                         key += 1;
@@ -470,16 +467,13 @@
                     var data = res.images;
                     var key = 0;
                     data.forEach(function (item) {
-                        if (key == 0)
-                        {
+                        if (key == 0) {
                             _li += '<div class="carousel-item active">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
-                        }
-                        else
-                        {
+                        } else {
                             _li += '<div class="carousel-item">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
                         }
                         key += 1;
@@ -500,16 +494,13 @@
                     var data = res.images;
                     var key = 0;
                     data.forEach(function (item) {
-                        if (key == 0)
-                        {
+                        if (key == 0) {
                             _li += '<div class="carousel-item active">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
-                        }
-                        else
-                        {
+                        } else {
                             _li += '<div class="carousel-item">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
                         }
                         key += 1;
@@ -530,16 +521,13 @@
                     var data = res.images;
                     var key = 0;
                     data.forEach(function (item) {
-                        if (key == 0)
-                        {
+                        if (key == 0) {
                             _li += '<div class="carousel-item active">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
-                        }
-                        else
-                        {
+                        } else {
                             _li += '<div class="carousel-item">';
-                            _li += '<img src="{{ url('Images')}}/'+ item.image +'" class="d-block w-100" alt="...">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
                             _li += '</div>'
                         }
                         key += 1;

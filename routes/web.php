@@ -151,9 +151,5 @@ Route::group(['prefix' => 'email'], function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [HomeController::class, 'notFound'])->name('not.found');
 
-
 //Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
-Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-Route::get('123', [HomeController::class, 'mail'])->name('test-mail');

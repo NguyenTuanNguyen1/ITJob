@@ -5,7 +5,7 @@
             <form action="{{ Route('admin.replied.report') }}" method="post">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Phản hồi liên hệ</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Phản hồi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times</span>
                     </button>
