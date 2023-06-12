@@ -291,8 +291,10 @@
 </header><!--//app-header-->
 
 <div class="app-wrapper">
-    @yield('content')
-    @yield('profile')
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        @yield('content')
+        @yield('profile')
+    </div>
 </div>
 
 

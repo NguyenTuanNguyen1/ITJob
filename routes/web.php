@@ -64,6 +64,7 @@ Route::prefix('post')->group(function () {
 Route::prefix('search')->group(function () {
     Route::post('/', [BackendController::class, 'searchFilter'])->name('search.layout.filter');
     Route::post('/filter', [BackendController::class, 'searchCompanyFilter'])->name('search.company.filter');
+    Route::post('/filter-datetime', [BackendController::class, 'searchFilterDatetime'])->name('search.filter.datetime');
     Route::get('/', [BackendController::class, 'searchAjax'])->name('search.ajax');
     Route::get('/get-post-by-major', [BackendController::class, 'getPostByMajor'])->name('post.major');
     Route::get('/messenger/name', [BackendController::class, 'searchAjaxName'])->name('search.name');

@@ -21,6 +21,7 @@ use App\Repositories\RoleRepostitory;
 use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property IPostRepository $post_repo
@@ -81,9 +82,32 @@ class BackendController extends Controller
     public function searchCompanyFilter(Request $request)
     {
         $input = $request->all();
+
         $users = $this->search_repo->searchCompanyFilter($input);
 
-        return view('company.search_result')->with('users', $users);
+        return view('company.search_result')->with([
+            'users' => $users,
+        ]);
+    }
+
+    public function searchFilterDatetime(Request $request)
+    {
+        $input = $request->all();
+
+        $posts = $this->search_repo->searchDatetimeFilter($input['from'], $input['to'], $input['user_id']);
+        $all_post = $this->post_repo->getPostByCondition('user_id', Auth::user()->id);
+        $post_approved = array_filter($all_post->toArray(), function ($data){
+            return $data['status'] == Constant::STATUS_APPROVED_POST;
+        });
+        $post_not_approved = array_filter($all_post->toArray(), function ($data){
+            return $data['status'] == Constant::STATUS_NOT_APPROVED_POST;
+        });
+        return view('company.searchDatetimeResult')->with([
+            'posts' => $posts,
+            'count_all_post' => count($all_post),
+            'count_post_approved' => count($post_approved),
+            'count_post_not_approved' => count($post_not_approved),
+        ]);
     }
 
     public function searchAjax()
