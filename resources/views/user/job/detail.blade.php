@@ -85,8 +85,6 @@
                 <div class="col-lg-8">
                     <div id="detail-post">
                     </div>
-
-
                 </div>
                 <div class="col-lg-4">
                     <div class="bg-light p-3 border rounded mb-4">

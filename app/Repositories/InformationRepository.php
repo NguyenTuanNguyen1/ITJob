@@ -25,7 +25,8 @@ class InformationRepository implements IInformationRepository
 
     public function update($user_id, array $data)
     {
-        $checkExist = Information::where('type_id', $data['type_id'])->count();
+        $checkExist = Information::where('user_id', $user_id)->where('type_id', $data['type_id'])->count();
+
         if ($checkExist > 0) {
             return Information::where('user_id', $user_id)->update([
                 'content' => $data['content'],

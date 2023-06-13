@@ -51,29 +51,7 @@ class ReportController extends Controller
     {
         $input = $request->all();
 
-        $path = [];
         $report = $this->ticket_repo->createReportPost($input);
-
-        $nameImage = Str::random(6);
-        if ($files = $request->file('image')) {
-            foreach ($files as $file) {
-                $fileName = "{$nameImage}.jpg";
-                $path[] = $file->move('Images', $fileName, 'public');
-                $this->saveImageReport($fileName, $report['id']);
-            }
-        }
-
-        alert('Đã gửi thành công', null, 'success');
-        return redirect()->route('post.detail', ['id' => $input['post_id']]);
-
-    }
-
-    public function user(Request $request)
-    {
-        $input = $request->all();
-
-//        $path = [];
-        $report = $this->ticket_repo->createReportUser($input);
 
         $nameImage = Str::random(6);
         if ($files = $request->file('image')) {
@@ -88,13 +66,46 @@ class ReportController extends Controller
         return redirect()->route('post.detail', ['id' => $input['post_id']]);
     }
 
+    public function user(Request $request)
+    {
+        $input = $request->all();
+        $report = $this->ticket_repo->createReportUser($input);
+
+        $nameImage = Str::random(6);
+        if ($files = $request->file('image')) {
+            foreach ($files as $file) {
+                $fileName = "{$nameImage}.jpg";
+                $file->move('Images', $fileName, 'public');
+                $this->saveImageReport($fileName, $report['id']);
+            }
+        }
+
+        alert('Đã gửi thành công', null, 'success');
+        if ($input['role_id'] == Constant::ROLE_COMPANY)
+        {
+            return redirect()->route('company.review');
+        }
+        elseif ($input['role_id'] == Constant::ROLE_CANDIDATE)
+        {
+            return redirect()->route('profile.user.detail',['id' => $input['user_id']]);
+        }
+        return redirect()->route('post.detail', ['id' => $input['post_id']]);
+    }
+
     public function delete(Request $request)
     {
         $input = $request->all();
 
         $this->ticket_repo->delete($input['id']);
+        if ($input['role_id'] == Constant::ROLE_COMPANY)
+        {
+            return redirect()->route('company.review');
+        }
+        elseif ($input['role_id'] == Constant::ROLE_CANDIDATE)
+        {
+            return redirect()->route('profile.user.detail',['id' => $input['user_id']]);
+        }
         $this->ActivityLog('Bạn đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
-
         return redirect()->route('dashboard.report');
     }
 

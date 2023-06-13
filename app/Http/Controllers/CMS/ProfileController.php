@@ -68,8 +68,9 @@ class ProfileController extends Controller
                 'company' => $company,
                 'information' => $information,
                 'type_infor' => $type,
+                'admin_replied' => $admin_replied,
                 'count_review' => count($review),
-                'admin_replied' => $admin_replied
+                'reviews' => $review
             ]);
     }
 
@@ -137,6 +138,7 @@ class ProfileController extends Controller
         }
         elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
+            alert('Cập nhật thông tin thành công', null, 'success');
             return redirect()->route('company.profile', $input['id']);
         }
 
@@ -151,20 +153,34 @@ class ProfileController extends Controller
         $company = $this->company_repo->find($id);
         $type = $this->type_repo->all();
         $review = $this->ticket_repo->getTicketByUser($id,Constant::TICKET_REVIEW);
-        if ($request->ajax())
-        {
-            return response()->json([
-                'reviews' => $review,
-                'count_review' => count($review)
-            ]);
-        }
 
         return view('company.infor')->with([
             'user' => $user,
             'information' => $information,
             'type_infor' => $type,
             'company' => $company,
-            'count_review' => count($review)
+            'count_review' => count($review),
+            'reviews' => $review
+        ]);
+    }
+
+    public function userProfile($id, Request $request)
+    {
+        $user = $this->user_repo->find($id);
+        $information = $this->information_repo->find($id);
+        $company = $this->company_repo->find($id);
+        $type = $this->type_repo->all();
+        $review = $this->ticket_repo->getTicketByUser($id,Constant::TICKET_REVIEW);
+        $admin_replied = $this->ticket_repo->getTicketReplied($id);
+
+        return view('profile.profile')->with([
+            'user' => $user,
+            'information' => $information,
+            'type_infor' => $type,
+            'company' => $company,
+            'count_review' => count($review),
+            'reviews' => $review,
+            'admin_replied' => $admin_replied
         ]);
     }
 

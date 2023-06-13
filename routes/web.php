@@ -40,7 +40,8 @@ Route::prefix('user')->group(function () {
 
 //Profile
 Route::prefix('profile')->group(function () {
-    Route::get('profile/{id}', [ProfileController::class, 'userCompany'])->name('profile.user');
+    Route::get('/{id}', [ProfileController::class, 'userCompany'])->name('profile.user');
+    Route::get('/detail/{id}', [ProfileController::class, 'userProfile'])->name('profile.user.detail');
     Route::get('/user-profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
     Route::post('/user-update', [ProfileController::class, 'handleUpdate'])->name('profile.update');
     Route::post('/user-update-basic', [ProfileController::class, 'handleUpdateBasic'])->name('profile.update.basic');

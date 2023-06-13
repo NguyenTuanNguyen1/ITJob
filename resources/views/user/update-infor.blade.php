@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @include('layout.page-css')
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <style>
     .content-item {
@@ -307,7 +308,44 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h3>{{ $count_review }} bình luận</h3>
-                                    <div id="load_review">
+                                    <div>
+                                        @foreach($reviews as $review)
+                                            <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object" src="{{ url('image_avatar') }}/{{ $review->from_user->img_avatar }}" alt="">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="d-flex" id="report_user">
+                                                        <h4 class="media-heading" style="color: black">{{ $review->from_user->username }}</h4>
+                                                        <div class="col-6">
+                                                            <a class="btn btn-light" role="button" data-toggle="dropdown"
+                                                               aria-expanded="false"><i class="fas fa-bars"></i></a>
+                                                            <div class="dropdown-menu">
+                                                                <button type="submit" class="dropdown-item" data-toggle="modal"
+                                                                        value="{{ $review->from_user_id }}"
+                                                                        data-target="#modalCompanyReport" id="company_report_user">Báo cáo
+                                                                </button>
+                                                                <form action="{{ Route('report.delete') }}" method="get">
+                                                                    <input type="hidden" name="id" value="{{ $review->id }}">
+                                                                    <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
+                                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                                    <button type="submit" class="dropdown-item" data-toggle="modal"
+                                                                            data-target="#modalReportPost">Xoá đánh giá
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <p>{{ $review->content }}</p>
+                                                    <ul class="list-unstyled list-inline media-detail pull-left"
+                                                        style="display: flex">
+                                                        <li>
+                                                            <i class="fa fa-calendar"></i>{{ $review->created_at->format('d-m-Y') }}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                     <hr>
                                     @if(Auth::user()->id == $user->id)
@@ -383,12 +421,15 @@
                                     <div>
                                         @foreach($admin_replied as $replied)
                                             <div class="media">
-                                                <a class="pull-left" href="#"><img class="media-object" src="{{ url('image_avatar') }}/{{ $replied->from_user->img_avatar}}"></a>
+                                                <a class="pull-left" href="#"><img class="media-object"
+                                                                                   src="{{ url('image_avatar') }}/{{ $replied->from_user->img_avatar}}"></a>
                                                 <div class="media-body">
                                                     <p>{{ $replied->content }}</p>
                                                     <ul class="list-unstyled list-inline media-detail pull-left"
                                                         style="display: flex;">
-                                                        <li><i class="fa fa-calendar"></i>{{ $replied->created_at->format('d-m-Y') }}</li>
+                                                        <li>
+                                                            <i class="fa fa-calendar"></i>{{ $replied->created_at->format('d-m-Y') }}
+                                                        </li>
                                                     </ul>
 
                                                 </div>
@@ -405,7 +446,11 @@
     </div>
 </div>
 </body>
+@include('modal.report.company_report')
 @include('layout.page-js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script>
     function openCity(evt, cityName) {
@@ -444,9 +489,6 @@
     }
 
     $(document).ready(() => {
-        load_review()
-
-
         $("#content-information").validate({
             rule: {
                 content: "required"
@@ -506,43 +548,13 @@
             })
         })
 
-        $('#create-review').submit(function (e) {
-            e.preventDefault();
-            var value = {
-                "content": $("#message").val(),
-                "from_user_id": {{ Auth::user()->id }},
-                "to_user_id": {{ $user->id }},
-                "_token": "{{ csrf_token() }}",
-            }
-            $.ajax({
-                url: '{{ Route('review.create') }}',
-                type: 'POST',
-                data: value,
-                success: function (res) {
-                    load_review();
-                }
-            })
-        })
-
-        function load_review() {
+        $('#report_user').on('click', '#company_report_user', function () {
+            var value = {'id': $(this).val()}
+            // console.log(value)
             var _li = '';
-            $.get('http://itjob.vn/profile/user-profile/{{Auth::user()->id}}', (res) => {
-                var data = res.reviews;
-                data.forEach(function (item) {
-                    console.log(item.from_user_id)
-                    _li += '<div class="media">';
-                    _li += '<a class="pull-left" href="#"><img class="media-object" src="{{ url('image_avatar') }}/' + item.from_user.img_avatar + '" alt=""></a>';
-                    _li += '<div class="media-body">';
-                    _li += '<p>' + item.content + '</p>';
-                    _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
-                    _li += '<li><i class="fa fa-calendar"></i>' + item.created_at + '</li>'
-                    _li += '</ul>';
-                    _li += '</div>'
-                    _li += '</div>'
-                    $('#load_review').html(_li);
-                })
-            });
-        }
+            _li = '<input type="hidden" name="to_user_id" value="' + value.id + '">';
+            $('#company-report').html(_li)
+        })
     });
 </script>
 
