@@ -57,32 +57,6 @@ trait Service
 
     }
 
-    public function checkExist($data, $action)
-    {
-        switch ($action) {
-            case Constant::TYPE_INFORMATION:
-                $informationTypeExist = InformationType::where('content', $data['content'])->count();
-                if ($informationTypeExist > 0) {
-                    return true;
-                }
-                return false;
-
-            case Constant::TYPE_TICKET:
-                $ticketTypeExists = TicketType::where('content', $data['content'])->count();
-                if ($ticketTypeExists > 0) {
-                    return true;
-                }
-                return false;
-
-            case Constant::TYPE_ROLE:
-                $roleExist = Role::where('content', $data['content'])->count();
-                if ($roleExist > 0) {
-                    return true;
-                }
-                return false;
-        }
-    }
-
     public function sendMailUser($user, $mailable)
     {
         if (self::isValidMail($user['email'])) {

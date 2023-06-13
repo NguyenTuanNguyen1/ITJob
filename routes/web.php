@@ -15,6 +15,7 @@ use App\Http\Controllers\CMS\ProfileController;
 use App\Http\Controllers\CMS\ReportController;
 use App\Http\Controllers\CMS\ReviewController;
 use App\Http\Controllers\CMS\CompanyController;
+use App\Http\Controllers\CMS\TypeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -100,6 +101,13 @@ Route::prefix('review')->group(function () {
     Route::post('/review-delete', [ReviewController::class, 'delete'])->name('review.delete');
 });
 
+//Type
+Route::prefix('type')->group(function (){
+    Route::post('/type-create',[TypeController::class,'store'])->name('type.create');
+    Route::post('/type-update',[TypeController::class,'update'])->name('type.update');
+    Route::post('/type-delete',[TypeController::class,'delete'])->name('type.delete');
+});
+
 //Dashboard
 Route::group(['prefix' => 'dashboard', 'middleware' => 'authorize'], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -109,6 +117,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'authorize'], function ()
     Route::get('/account', [DashboardController::class, 'account'])->name('dashboard.account');
     Route::get('/contact', [DashboardController::class, 'contact'])->name('dashboard.contact');
     Route::get('/report', [DashboardController::class, 'report'])->name('dashboard.report');
+    Route::get('/information', [DashboardController::class, 'information'])->name('dashboard.information');
     Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
 });
 

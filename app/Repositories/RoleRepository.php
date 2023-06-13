@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Role;
 use App\Interfaces\ITypeRepository;
 
-class RoleRepostitory implements ITypeRepository
+class RoleRepository implements ITypeRepository
 {
     public function all()
     {
@@ -38,18 +38,8 @@ class RoleRepostitory implements ITypeRepository
         return Role::find($id)->delete();
     }
 
-    public function storage($id)
-    {
-        // TODO: Implement storage() method.
-    }
-
-    public function trashed()
-    {
-        return Role::onlyTrashed()->get();
-    }
-
     public function restore($id)
     {
-        return Role::onlyTrashed()->where('id', $id)->restore();
+        return Role::onlyTrashed()->find($id)->restore();
     }
 }

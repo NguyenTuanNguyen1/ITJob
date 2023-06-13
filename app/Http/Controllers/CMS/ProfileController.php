@@ -154,6 +154,14 @@ class ProfileController extends Controller
         $type = $this->type_repo->all();
         $review = $this->ticket_repo->getTicketByUser($id,Constant::TICKET_REVIEW);
 
+        if ($request->ajax())
+        {
+            return response()->json([
+                'reviews' => $review,
+                'count_review' => count($review),
+            ]);
+        }
+
         return view('company.infor')->with([
             'user' => $user,
             'information' => $information,

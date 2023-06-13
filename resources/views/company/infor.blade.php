@@ -258,7 +258,7 @@
                                                 href="{{ Route('user.login') }}" style="color: white">Đăng nhập</a>
                                         </button>
                                     @elseif(Auth::user()->id != $user->id)
-                                        <h3>{{ $count_review }} bình luận</h3>
+                                        <h3 id="count_review">  </h3>
                                         <div id="load_review">
                                         </div>
                                         <hr>
@@ -372,6 +372,7 @@
     }
 
     $(document).ready(() => {
+        load_count_review()
         load_review()
 
         $('#create-review').submit(function (e) {
@@ -386,6 +387,7 @@
                 type: 'POST',
                 data: value,
                 success: function (res) {
+                    load_count_review()
                     load_review();
                 }
             })
@@ -393,7 +395,7 @@
 
         function load_review() {
             var _li = '';
-            $.get('http://itjob.vn/profile/profile/{{ $user->id}}', (res) => {
+            $.get('http://itjob.vn/profile/{{ $user->id}}', (res) => {
                 var data = res.reviews;
                 console.log(data)
                 data.forEach(function (item) {
@@ -410,6 +412,15 @@
                     $('#load_review').html(_li);
                 })
             });
+        }
+
+        function load_count_review() {
+            var _li = '';
+            $.get('http://itjob.vn/profile/{{ $user->id}}', (res) => {
+                var data = res.count_review;
+                _li += data + ' bình luận';
+                $('#count_review').html(_li);
+            })
         }
     });
 </script>

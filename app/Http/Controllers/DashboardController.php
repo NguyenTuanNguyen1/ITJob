@@ -12,7 +12,7 @@ use App\Interfaces\ISearchRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
 use App\Repositories\InformationTypeRepository;
-use App\Repositories\RoleRepostitory;
+use App\Repositories\RoleRepository;
 use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
  * @property IAdminRepository $admin_repo
  * @property ITicketRepository $ticket_repo
  * @property IInformationRepository $information_repo
- * @property RoleRepostitory $role_repo
+ * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
  * @property IBackendRepository $back_repo
  * @property InformationTypeRepository $type_repo
@@ -40,7 +40,7 @@ class DashboardController extends Controller
         IAdminRepository $adminRepository,
         ITicketRepository $ticketRepository,
         IInformationRepository $informationRepository,
-        RoleRepostitory $roleRepository,
+        RoleRepository $roleRepository,
         ISearchRepository $searchRepository,
         IBackendRepository $backendRepository,
         ICompanyRepository $companyRepository,
@@ -165,6 +165,22 @@ class DashboardController extends Controller
             'report_post_reply' => $report_post_reply,
             'report_user_reply' => $report_user_reply,
             'images' => $image_report
+        ]);
+    }
+
+    public function information(Request $request)
+    {
+        $type = $this->type_repo->all();
+
+        if ($request->ajax())
+        {
+            return response()->json([
+               'data' => $type
+            ]);
+        }
+
+        return view('admin.dashboard.type')->with([
+            'data' => $type
         ]);
     }
 

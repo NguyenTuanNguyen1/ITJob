@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\CMS;
 
-use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
@@ -52,7 +51,10 @@ class ReviewController extends Controller
         $input = $request->all();
 
         $this->ticket_repo->createReview($input);
-        return redirect()->route('profile.user.detail',['id' => $input['id']]);
+
+        return response()->json([
+            'result' => true
+        ]);
     }
 
 //    public function update(Request $request)

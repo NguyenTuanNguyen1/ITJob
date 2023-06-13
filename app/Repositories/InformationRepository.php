@@ -46,24 +46,4 @@ class InformationRepository implements IInformationRepository
     {
         return Information::with('type')->where('user_id', $id)->get();
     }
-
-    public function delete($id)
-    {
-        return Information::find($id)->delete();
-    }
-
-    public function trashed()
-    {
-        return Information::withTrashed()->get();
-    }
-
-    public function storage($id)
-    {
-        // TODO: Implement storage() method.
-    }
-
-    public function restore($id)
-    {
-        return Information::withTrashed()->where('id', $id)->restore();
-    }
 }

@@ -17,7 +17,7 @@ use App\Mail\NotificationRestoreUser;
 use App\Mail\RestorePostMail;
 use App\Models\Post;
 use App\Models\User;
-use App\Repositories\RoleRepostitory;
+use App\Repositories\RoleRepository;
 use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
  * @property IAdminRepository $admin_repo
  * @property ITicketRepository $ticket_repo
  * @property IInformationRepository $information_repo
- * @property RoleRepostitory $role_repo
+ * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
  * @property IBackendRepository $back_repo
  */
@@ -43,7 +43,7 @@ class BackendController extends Controller
         IAdminRepository $adminRepository,
         ITicketRepository $ticketRepository,
         IInformationRepository $informationRepository,
-        RoleRepostitory $roleRepostitory,
+        RoleRepository $roleRepostitory,
         ISearchRepository $searchRepository,
         IBackendRepository $backendRepository
     )

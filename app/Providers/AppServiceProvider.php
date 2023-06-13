@@ -17,7 +17,7 @@ use App\Repositories\CompanyRepository;
 use App\Repositories\InformationTypeRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\InformationRepository;
-use App\Repositories\RoleRepostitory;
+use App\Repositories\RoleRepository;
 use App\Repositories\SearchRepository;
 use App\Repositories\TicketRepository;
 use App\Repositories\TicketTypeRepository;
@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ISearchRepository::class, SearchRepository::class);
         $this->app->bind(ITicketRepository::class, TicketRepository::class);
         $this->app->bind(ITypeRepository::class, InformationTypeRepository::class);
-        $this->app->bind(ITypeRepository::class, RoleRepostitory::class);
+        $this->app->bind(ITypeRepository::class, RoleRepository::class);
         $this->app->bind(ITypeRepository::class, TicketTypeRepository::class);
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IAdminRepository::class, AdminRepository::class);

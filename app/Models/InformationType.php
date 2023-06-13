@@ -27,6 +27,18 @@ class InformationType extends Model
 
     public function information()
     {
-        return $this->belongsTo(Information::class,'id');
+        return $this->hasMany(Information::class,'type_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($info){
+            $info->information()->delete();
+        });
+
+        static::restoring(function ($info){
+            $info->information()->onlyTrashed()->restore();
+        });
     }
 }
