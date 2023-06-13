@@ -28,7 +28,7 @@ class AdminTableSeeder extends Seeder
             'role_id' => Constant::ROLE_ADMIN,
             'major' => Constant::MAJOR_IT,
             'position' => 'Giám đốc',
-            'email' => 'thinh.tranlequang@.com',
+            'email' => 'thinhminhlove@gmail.com',
             'description' => fake()->text,
             'password' => Hash::make('12345678'),
             'created_at' => Carbon::now()

@@ -254,7 +254,13 @@
                                 </select>
                             </div>
                         </div>
-
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label>Mô tả</label><br>
+                                <textarea name="description"cols="102" rows="7">{{ $user->description }}</textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-button"
                                     type="submit">Lưu

@@ -188,15 +188,23 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label for="job-region">Chuyên ngành</label><br>
-                            <label style="font-weight: 900;">{{ $user->major }}</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Chuyên ngành</label><br>
+                                <label style="font-weight: 900;">{{ $user->major }}</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Vị trí</label><br>
+                                <label style="font-weight: 900;">{{ $user->position }}</label>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            <label for="job-region">Vị trí</label><br>
-                            <label style="font-weight: 900;">{{ $user->position }}</label>
+                            <label>Mô tả</label><br>
+                            <label style="font-weight: 900;">{{ $user->description }}</label>
                         </div>
                     </div>
                 </div>
@@ -220,12 +228,6 @@
                             <div class="col-md-12">
                                 <label>Mã số thuế : </label>
                                 <label style="font-weight: bold">{{ $company->taxcode }}</label>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label>Mô tả : </label>
-                                <label style="font-weight: bold">{{ $company->description }}</label>
                             </div>
                         </div>
                         <div class="row mt-3">

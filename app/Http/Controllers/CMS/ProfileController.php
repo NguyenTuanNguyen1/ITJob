@@ -77,7 +77,6 @@ class ProfileController extends Controller
     public function handleUpdate(UpdateRequest $request)
     {
         $input = $request->all();
-
         $profile = $this->user_repo->update($input['id'], $input);
         $this->ActivityLog("Bạn đã cập nhật thông tin cá nhân", $input['id']);
 
@@ -91,6 +90,10 @@ class ProfileController extends Controller
         if (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
             return redirect()->route('company.profile', $input['id']);
+        }
+        elseif (Auth::user()->role_id == Constant::ROLE_CANDIDATE)
+        {
+            return redirect()->route('profile.index', $input['id']);
         }
 
         return redirect()->route('user.profile', $input['id']);

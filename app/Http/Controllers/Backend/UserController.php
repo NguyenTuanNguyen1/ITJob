@@ -32,8 +32,7 @@ class UserController extends Controller
     {
         $input = $request->all();
         $this->appliedPost($input['user_id'], $input['post_id']);
-        alert('Bạn đã ứng tuyển thành công', null, 'success');
-//        alert()->success('Post Created', 'Successfully');
+        alert()->success('Bạn đã ứng tuyển thành công');
         return redirect()->route('post.detail',$input['post_id']);
     }
 

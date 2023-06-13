@@ -18,7 +18,7 @@ class CompanyTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 3; $i <= 6; $i++) {
+        for ($i = 3; $i <= 3; $i++) {
             DB::table('user')->insert([
                 'name' => fake()->name,
                 'username' => fake()->firstName,
@@ -26,7 +26,35 @@ class CompanyTableSeeder extends Seeder
                 'major' => Constant::MAJOR_MARKETING,
                 'position' => 'Trưởng phòng',
                 'role_id' => Constant::ROLE_COMPANY,
-                'email' =>fake()->email,
+                'email' => 'tranlequangthinh24122002@gmail.com',
+                'description' => fake()->text,
+                'password' => Hash::make('12345678'),
+                'created_at' => Carbon::now()
+            ]);
+
+            DB::table('information')->insert([
+                'content' => fake()->text,
+                'user_id' => $i,
+                'type_id' => rand(1,5),
+            ]);
+
+            DB::table('company_information')->insert([
+                'staff' => fake()->numerify,
+                'headquarters' => fake()->address,
+                'taxcode' => fake()->numerify,
+                'website' => 'https://' . fake()->domainName,
+                'user_id' => $i
+            ]);
+        }
+        for ($i = 4; $i <= 6; $i++) {
+            DB::table('user')->insert([
+                'name' => fake()->name,
+                'username' => fake()->firstName,
+                'phone' => fake()->phoneNumber,
+                'major' => Constant::MAJOR_MARKETING,
+                'position' => 'Trưởng phòng',
+                'role_id' => Constant::ROLE_COMPANY,
+                'email' => fake()->email,
                 'description' => fake()->text,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()

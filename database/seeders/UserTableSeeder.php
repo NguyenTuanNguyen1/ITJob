@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 7; $i <= 8; $i++) {
+        for ($i = 7; $i <= 7; $i++) {
             DB::table('user')->insert([
                 'name' => fake()->name,
                 'username' => fake()->firstName,
@@ -28,7 +28,22 @@ class UserTableSeeder extends Seeder
                 'major' => Constant::MAJOR_MANUFACTURING,
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
-                'email' => fake()->email,
+                'email' => 'kensu8434@gmail.com',
+                'password' => Hash::make('12345678'),
+                'created_at' => Carbon::now()
+            ]);
+        }
+
+        for ($i = 8; $i <= 8; $i++) {
+            DB::table('user')->insert([
+                'name' => fake()->name,
+                'username' => fake()->firstName,
+                'phone' => fake()->phoneNumber,
+                'role_id' => Constant::ROLE_CANDIDATE,
+                'major' => Constant::MAJOR_MANUFACTURING,
+                'position' => 'Nhân viên',
+                'description' => fake()->text,
+                'email' => '0306201384@caothang.edu,vn',
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);

@@ -48,7 +48,7 @@ class ResetController extends Controller
                 }
 
                 alert('Thông báo','Cập nhật mật khẩu thành công','success');
-                return redirect()->route('user.profile',['id' => $input['id']]);
+                return redirect()->route('profile.index',['id' => $input['id']]);
             }
             else {
                 return redirect()->back()->with("Error","Xác nhận mật khẩu không chính xác");
