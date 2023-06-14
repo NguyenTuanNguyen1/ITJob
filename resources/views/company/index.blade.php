@@ -1,12 +1,14 @@
 @extends('company.layout')
 @section('content')
     @include('company.search')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
     <script src="https://unpkg.com/feather-icons"></script>
     <div class="row g-4 mb-4">
         @foreach($all_post as $post)
-            <form action="{{ Route('post.detail',['id' => $post->id]) }}" method="post">
-                <div class="btn btn-white col-12 col-lg-4">
+
+                <div class="col-12 col-lg-4">
                     <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
                         <div class="app-card-header p-3 border-bottom-0">
                             <div class="row align-items-center gx-3">
@@ -30,11 +32,20 @@
                                         <h4 class="app-card-title">Chưa phê duyệt</h4>
                                     </div>
                                 @endif
-                                <div class="col-auto">
-                                    <div class="toggle focus">
-                                        <input type="checkbox">
-                                        <span class="slider focus"></span>
-                                        <span class="label">Ẩn bài viết</span>
+                                <div class="col-auto" style="position: absolute;left: 80%;">
+                                    <a class="btn btn-light" role="button" data-toggle="dropdown"
+                                       aria-expanded="false"><i class="fas fa-bars"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a class="ml-3" href="{{ Route('post.detail',['id' => $post->id]) }}" style="text-decoration: none; color: black">Chi tiết bài viết</a>
+                                        <form action="{{ Route('company.applied.post') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ Auth::user()->role_id }}">
+                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                            <button type="submit" class="dropdown-item" data-toggle="modal">
+                                                Danh sách ứng tuyển
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -48,16 +59,22 @@
                         </div>
                         <!--//app-card-body-->
                         <div class="app-card-footer p-4 mt-auto">
-                            <!-- <a class="btn app-btn-secondary" id="1" href="#">Đóng bài viết</a> -->
-                            <a class="btn app-btn-primary" id="2" href="#">Xoá bài viết</a>
+                            <div class="col-auto">
+                                <div class="toggle focus">
+                                    <input type="checkbox">
+                                    <span class="slider focus"></span>
+                                    <span class="label">Ẩn bài viết</span>
+                                </div>
+                            </div>
+                            <a class="btn btn-outline-success" href="#" style="position: absolute;left: 65%;bottom: 25px;">Xoá bài viết</a>
                         </div>
-                        <!--//app-card-footer-->
                     </div>
-                    <!--//app-card-->
                 </div>
-            </form>
         @endforeach
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.toggle input[type="checkbox"]').click(function () {
@@ -155,7 +172,7 @@
         .toggle.on .slider { background-color: #4287f5; }
         .toggle.on .slider:before { transform: translateX(26px); box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); }
 
-        .toggle .label { position: absolute; left: 50px; top: 4px; vertical-align: middle;width: 170%;font-size: 14px; }
+        .toggle .label { position: absolute; left: 64px; top: 4px; vertical-align: middle;width: 170%;font-size: 14px; }
         .checkbox .label { position: absolute; left: 50px; top: 4px; vertical-align: middle; }
 
         input[type="checkbox"] { height: 100%; width: 100%; opacity: 0; position: absolute; z-index: 100; cursor: pointer; vertical-align: middle;}
