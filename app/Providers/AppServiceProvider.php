@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Interfaces\IAdminRepository;
-use App\Interfaces\IBackendRepository;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
@@ -12,7 +11,6 @@ use App\Interfaces\ITicketRepository;
 use App\Interfaces\ITypeRepository;
 use App\Interfaces\IUserRepository;
 use App\Repositories\AdminRepository;
-use App\Repositories\BackendRepository;
 use App\Repositories\CompanyRepository;
 use App\Repositories\InformationTypeRepository;
 use App\Repositories\PostRepository;
@@ -41,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ITypeRepository::class, TicketTypeRepository::class);
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IAdminRepository::class, AdminRepository::class);
-        $this->app->bind(IBackendRepository::class, BackendRepository::class);
     }
 
     /**

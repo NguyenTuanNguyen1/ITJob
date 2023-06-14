@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Constant;
 use App\Interfaces\IAdminRepository;
-use App\Interfaces\IBackendRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
-use App\Interfaces\IReviewRepository;
 use App\Interfaces\ISearchRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
@@ -31,7 +29,6 @@ use Illuminate\Support\Facades\Auth;
  * @property IInformationRepository $information_repo
  * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
- * @property IBackendRepository $back_repo
  */
 class BackendController extends Controller
 {
@@ -45,7 +42,6 @@ class BackendController extends Controller
         IInformationRepository $informationRepository,
         RoleRepository $roleRepostitory,
         ISearchRepository $searchRepository,
-        IBackendRepository $backendRepository
     )
     {
         $this->post_repo = $postRepository;
@@ -55,7 +51,6 @@ class BackendController extends Controller
         $this->information_repo = $informationRepository;
         $this->role_repo = $roleRepostitory;
         $this->search_repo = $searchRepository;
-        $this->back_repo = $backendRepository;
     }
 
     public function getAllPost()

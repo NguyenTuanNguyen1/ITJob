@@ -16,6 +16,5 @@ interface IUserRepository
     public function getMajorUser($role);
     public function getUserByRole($role);
     public function getUserByCondition($condition, $value);
-    public function getUserApplied($user_id);
     public function getMajorByUser($major, $role);
 }

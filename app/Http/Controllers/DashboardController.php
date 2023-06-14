@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Constant;
 use App\Interfaces\IAdminRepository;
-use App\Interfaces\IBackendRepository;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
@@ -25,7 +24,6 @@ use Illuminate\Http\Request;
  * @property IInformationRepository $information_repo
  * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
- * @property IBackendRepository $back_repo
  * @property InformationTypeRepository $type_repo
  * @property ICompanyRepository $company_repo
  */
@@ -42,7 +40,6 @@ class DashboardController extends Controller
         IInformationRepository $informationRepository,
         RoleRepository $roleRepository,
         ISearchRepository $searchRepository,
-        IBackendRepository $backendRepository,
         ICompanyRepository $companyRepository,
         InformationTypeRepository $typeRepository
     ) {
@@ -53,7 +50,6 @@ class DashboardController extends Controller
         $this->information_repo = $informationRepository;
         $this->role_repo = $roleRepository;
         $this->search_repo = $searchRepository;
-        $this->back_repo = $backendRepository;
         $this->company_repo = $companyRepository;
         $this->type_repo = $typeRepository;
     }

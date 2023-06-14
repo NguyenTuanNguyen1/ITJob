@@ -31,10 +31,10 @@
         <div
             style="font-size:13px;color:#2d383c; line-height:1.8; font-weight:400; margin:0 0 12px;text-align: left">
             <span>
-                Tên người ứng tuyển : {{ $user->name }}
+                Tên người ứng tuyển : {{ $user->user->name }}
             </span>
             <span style="float: right">
-                <a href="{{ env('APP_DOMAIN') }}/user/user-profile/{{ $user->id }}"> Xem chi tiết </a>
+                <a href="{{ env('APP_DOMAIN') }}/profile/{{ $user->id }}"> Xem chi tiết </a>
             </span>
         </div>
         <hr style="opacity: 0.3;width: auto;">
@@ -49,7 +49,7 @@
             align="center;">
             <button style="background-color: #4284e4;color: #fff;border: none;outline: none;padding: 10px 30px">
                 <a style="padding: 0 12px; color:white;text-decoration: none"
-                   href="{{ env('APP_DOMAIN') }}/post/-detail/{{ $posts->id }}">Xem chi tiết</a></button>
+                   href="{{ env('APP_DOMAIN') }}/post/post-detail/{{ $posts->id }}">Xem chi tiết</a></button>
         </div>
     </div>
     <div style="margin:36px 0 24px;padding:0">
