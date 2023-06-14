@@ -16,17 +16,27 @@ class TicketTypeTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 2; $i++) {
+        for ($i = 1; $i <= 4; $i++) {
             switch ($i)
             {
-                case Constant::TICKET_REPORT:
+                case Constant::TICKET_REPORT_USER:
                     DB::table('ticket_type')->insert([
-                        'content' => 'report',
+                        'content' => 'Báo cáo người dùng',
+                    ]);
+                    break;
+                case Constant::TICKET_REPORT_POST:
+                    DB::table('ticket_type')->insert([
+                        'content' => 'Báo cáo bài viết',
                     ]);
                     break;
                 case Constant::TICKET_CONTACT:
                     DB::table('ticket_type')->insert([
-                        'content' => 'contact',
+                        'content' => 'Liên hệ',
+                    ]);
+                    break;
+                case Constant::TICKET_REVIEW:
+                    DB::table('ticket_type')->insert([
+                        'content' => 'Đánh giá',
                     ]);
                     break;
             }

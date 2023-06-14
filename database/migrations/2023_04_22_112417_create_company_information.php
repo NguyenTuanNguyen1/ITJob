@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('headquarters')->nullable();
             $table->string('taxcode')->nullable()->unique();
             $table->string('website')->nullable();
-            $table->string('business_license')->nullable();
 
             $table->unsignedBigInteger('user_id')->nullable();
 

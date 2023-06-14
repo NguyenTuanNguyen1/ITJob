@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group" style="padding-top:10px">
                 <label class="pt-1 pb-1" for="job-description">Tiêu đề</label><br>
-                <textarea name="title" rows="3" cols="160"></textarea>
+                <textarea name="title" rows="3" cols="153"></textarea>
             </div>
 
             <div class="form-group" >
@@ -35,7 +35,7 @@
                     <label class="pt-3 pb-2" for="job-description">Địa điểm làm việc</label><br>
                     <input class="p-2" style="width:100%;border: 1px solid #dee2e6;border-radius:5px" type="text" name="workplace"  placeholder=" Địa chỉ công ty....."
                            cols="112">
-                </div> 
+                </div>
             <div class="set-row">
                 <div class="form-group">
                     <label for="job-region">Chuyên ngành</label>

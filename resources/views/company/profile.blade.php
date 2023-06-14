@@ -161,7 +161,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label for="job-region">Mô tả</label><br>
-                                    <textarea name="description" rows="3" cols="97">{{ Auth::user()->description }}</textarea>
+                                    <textarea name="description" rows="3" cols="93">{{ Auth::user()->description }}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="position" value="{{ null }}">

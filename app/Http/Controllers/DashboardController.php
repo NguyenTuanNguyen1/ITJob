@@ -8,12 +8,11 @@ use App\Interfaces\IBackendRepository;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
-use App\Interfaces\IReviewRepository;
 use App\Interfaces\ISearchRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
 use App\Repositories\InformationTypeRepository;
-use App\Repositories\RoleRepostitory;
+use App\Repositories\RoleRepository;
 use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,8 +23,7 @@ use Illuminate\Http\Request;
  * @property IAdminRepository $admin_repo
  * @property ITicketRepository $ticket_repo
  * @property IInformationRepository $information_repo
- * @property IReviewRepository $review_repo
- * @property RoleRepostitory $role_repo
+ * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
  * @property IBackendRepository $back_repo
  * @property InformationTypeRepository $type_repo
@@ -34,6 +32,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     use Service;
+
     public function __construct
     (
         IUserRepository $userRepository,
@@ -41,8 +40,7 @@ class DashboardController extends Controller
         IAdminRepository $adminRepository,
         ITicketRepository $ticketRepository,
         IInformationRepository $informationRepository,
-        IReviewRepository $reviewRepository,
-        RoleRepostitory $roleRepository,
+        RoleRepository $roleRepository,
         ISearchRepository $searchRepository,
         IBackendRepository $backendRepository,
         ICompanyRepository $companyRepository,
@@ -53,7 +51,6 @@ class DashboardController extends Controller
         $this->admin_repo = $adminRepository;
         $this->ticket_repo = $ticketRepository;
         $this->information_repo = $informationRepository;
-        $this->review_repo = $reviewRepository;
         $this->role_repo = $roleRepository;
         $this->search_repo = $searchRepository;
         $this->back_repo = $backendRepository;
@@ -107,14 +104,11 @@ class DashboardController extends Controller
         $company = $this->company_repo->find($id);
         $information = $this->information_repo->find($id);
         $type = $this->type_repo->all();
-        $review = $this->review_repo->getReviewByUser($id);
         if ($request->ajax()) {
             return response()->json([
                 'information' => $information,
                 'user' => $user,
                 'company' => $company,
-                'reviews' => $review,
-                'count_review' => count($review)
             ]);
         }
 
@@ -124,8 +118,6 @@ class DashboardController extends Controller
                 'company' => $company,
                 'information' => $information,
                 'type_infor' => $type,
-                'reviews' => $review,
-                'count_review' => count($review)
             ]);
     }
 
@@ -142,29 +134,53 @@ class DashboardController extends Controller
 
     public function contact(Request $request)
     {
-        $contact_not_reply = $this->ticket_repo->getTicketNotReply(Constant::TICKET_CONTACT,Constant::TICKET_NOT_REPLY);
-        $contact_reply = $this->ticket_repo->getTicketReplyLastWeek(Constant::TICKET_CONTACT, Constant::TICKET_REPLIED);
+        $contact_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_CONTACT, Constant::TICKET_NOT_REPLY);
+        $contact_reply = $this->ticket_repo->getTicket(Constant::TICKET_CONTACT, Constant::TICKET_REPLIED);
 
         return view('admin.dashboard.contact')->with([
             'count_contact' => count($contact_not_reply) + count($contact_reply),
             'count_contact_not_reply' => count($contact_not_reply),
             'count_contact_reply' => count($contact_reply),
             'contact_not_reply' => $contact_not_reply,
-            'contact_reply' => $contact_reply
+            'contact_reply' => $contact_reply,
         ]);
     }
 
     public function report()
     {
-        $report_not_reply = $this->ticket_repo->getTicketNotReply(Constant::TICKET_REPORT,Constant::TICKET_NOT_REPLY);
-        $report_reply = $this->ticket_repo->getTicketReplyLastWeek(Constant::TICKET_REPORT, Constant::TICKET_REPLIED);
+        $report_post_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST, Constant::TICKET_NOT_REPLY);
+        $report_user_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER, Constant::TICKET_NOT_REPLY);
+
+        $report_post_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST, Constant::TICKET_REPLIED);
+        $report_user_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER, Constant::TICKET_REPLIED);
+        $image_report = $this->admin_repo->getImageReport();
 
         return view('admin.dashboard.report')->with([
-            'count_report' => count($report_not_reply) + count($report_reply),
-            'count_report_not_reply' => count($report_not_reply),
-            'count_report_reply' => count($report_reply),
-            'report_not_reply' => $report_not_reply,
-            'report_reply' => $report_reply
+            'count_report_post' => count($report_post_not_reply),
+            'count_report_user' =>count($report_user_not_reply),
+            'count_report_not_reply' => count($report_post_not_reply) + count($report_user_not_reply),
+            'count_report_reply' => count($report_post_reply) + count($report_user_reply),
+            'report_post_not_reply' => $report_post_not_reply,
+            'report_user_not_reply' => $report_user_not_reply,
+            'report_post_reply' => $report_post_reply,
+            'report_user_reply' => $report_user_reply,
+            'images' => $image_report
+        ]);
+    }
+
+    public function information(Request $request)
+    {
+        $type = $this->type_repo->all();
+
+        if ($request->ajax())
+        {
+            return response()->json([
+               'data' => $type
+            ]);
+        }
+
+        return view('admin.dashboard.type')->with([
+            'data' => $type
         ]);
     }
 

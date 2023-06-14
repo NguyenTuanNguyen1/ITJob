@@ -28,7 +28,7 @@ class TicketTypeRepository implements ITypeRepository
 
     public function update($id, array $data)
     {
-        $result = TicketType::find($id)->update([
+        return TicketType::find($id)->update([
             'content' => $data['content'],
         ]);
     }
@@ -38,17 +38,8 @@ class TicketTypeRepository implements ITypeRepository
         return TicketType::find($id)->delete();
     }
 
-    public function storage($id)
-    {
-        // TODO: Implement storage() method.
-    }
-
-    public function trashed()
-    {
-        return TicketType::onlyTrashed()->get();
-    }
     public function restore($id)
     {
-        return TicketType::onlyTrashed()->where('id', $id)->restore();
+        return TicketType::onlyTrashed()->find($id)->restore();
     }
 }

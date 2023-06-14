@@ -25,7 +25,8 @@ class InformationRepository implements IInformationRepository
 
     public function update($user_id, array $data)
     {
-        $checkExist = Information::where('type_id', $data['type_id'])->count();
+        $checkExist = Information::where('user_id', $user_id)->where('type_id', $data['type_id'])->count();
+
         if ($checkExist > 0) {
             return Information::where('user_id', $user_id)->update([
                 'content' => $data['content'],
@@ -44,25 +45,5 @@ class InformationRepository implements IInformationRepository
     public function find($id)
     {
         return Information::with('type')->where('user_id', $id)->get();
-    }
-
-    public function delete($id)
-    {
-        return Information::find($id)->delete();
-    }
-
-    public function trashed()
-    {
-        return Information::withTrashed()->get();
-    }
-
-    public function storage($id)
-    {
-        // TODO: Implement storage() method.
-    }
-
-    public function restore($id)
-    {
-        return Information::withTrashed()->where('id', $id)->restore();
     }
 }

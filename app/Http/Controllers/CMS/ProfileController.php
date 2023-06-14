@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRequest;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
-use App\Interfaces\IReviewRepository;
+use App\Interfaces\ITicketRepository;
 use App\Interfaces\ITypeRepository;
 use App\Interfaces\IUserRepository;
 use App\Repositories\InformationTypeRepository;
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\DB;
  * @property ICompanyRepository $company_repo
  * @property IInformationRepository $information_repo
  * @property ITypeRepository $type_repo
- * @property IReviewRepository $review_repo
+ * @property ITicketRepository $ticket_repo
  */
 class ProfileController extends Controller
 {
@@ -32,14 +32,14 @@ class ProfileController extends Controller
         ICompanyRepository $companyRepository,
         IInformationRepository $informationRepository,
         InformationTypeRepository $typeRepository,
-        IReviewRepository $reviewRepository
+        ITicketRepository $ticketRepository
     )
     {
         $this->user_repo = $userRepository;
         $this->company_repo = $companyRepository;
         $this->information_repo = $informationRepository;
         $this->type_repo = $typeRepository;
-        $this->review_repo = $reviewRepository;
+        $this->ticket_repo = $ticketRepository;
     }
 
     public function profile($id, Request $request)
@@ -48,15 +48,16 @@ class ProfileController extends Controller
         $company = $this->company_repo->find($id);
         $information = $this->information_repo->find($id);
         $type = $this->type_repo->all();
-        $review = $this->review_repo->getReviewByUser($id);
+        $review = $this->ticket_repo->getTicketByUser($id, Constant::TICKET_REVIEW);
+        $admin_replied = $this->ticket_repo->getTicketReplied($id);
 
         if ($request->ajax()) {
             return response()->json([
                 'information' => $information,
                 'user' => $user,
                 'company' => $company,
-                'reviews' => $review,
                 'type_infor' => $type,
+                'reviews' => $review,
                 'count_review' => count($review)
             ]);
         }
@@ -67,15 +68,15 @@ class ProfileController extends Controller
                 'company' => $company,
                 'information' => $information,
                 'type_infor' => $type,
-                'reviews' => $review,
-                'count_review' => count($review)
+                'admin_replied' => $admin_replied,
+                'count_review' => count($review),
+                'reviews' => $review
             ]);
     }
 
     public function handleUpdate(UpdateRequest $request)
     {
         $input = $request->all();
-
         $profile = $this->user_repo->update($input['id'], $input);
         $this->ActivityLog("Bạn đã cập nhật thông tin cá nhân", $input['id']);
 
@@ -89,6 +90,10 @@ class ProfileController extends Controller
         if (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
             return redirect()->route('company.profile', $input['id']);
+        }
+        elseif (Auth::user()->role_id == Constant::ROLE_CANDIDATE)
+        {
+            return redirect()->route('profile.index', $input['id']);
         }
 
         return redirect()->route('user.profile', $input['id']);
@@ -136,6 +141,7 @@ class ProfileController extends Controller
         }
         elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
+            alert('Cập nhật thông tin thành công', null, 'success');
             return redirect()->route('company.profile', $input['id']);
         }
 
@@ -149,11 +155,13 @@ class ProfileController extends Controller
         $information = $this->information_repo->find($id);
         $company = $this->company_repo->find($id);
         $type = $this->type_repo->all();
-        $review = $this->review_repo->getReviewByUser($id);
+        $review = $this->ticket_repo->getTicketByUser($id,Constant::TICKET_REVIEW);
+
         if ($request->ajax())
         {
             return response()->json([
                 'reviews' => $review,
+                'count_review' => count($review),
             ]);
         }
 
@@ -162,17 +170,38 @@ class ProfileController extends Controller
             'information' => $information,
             'type_infor' => $type,
             'company' => $company,
-            'count_review' => count($review)
+            'count_review' => count($review),
+            'reviews' => $review
         ]);
     }
 
-    public function profileCompany(Request $request)
+    public function userProfile($id, Request $request)
     {
-        $user = $this->user_repo->find(Auth::user()->id);
-        $company = $this->company_repo->find(Auth::user()->id);
-        $information = $this->information_repo->find(Auth::user()->id);
+        $user = $this->user_repo->find($id);
+        $information = $this->information_repo->find($id);
+        $company = $this->company_repo->find($id);
         $type = $this->type_repo->all();
-        $review = $this->review_repo->getReviewByUser(Auth::user()->id);
+        $review = $this->ticket_repo->getTicketByUser($id,Constant::TICKET_REVIEW);
+        $admin_replied = $this->ticket_repo->getTicketReplied($id);
+
+        return view('profile.profile')->with([
+            'user' => $user,
+            'information' => $information,
+            'type_infor' => $type,
+            'company' => $company,
+            'count_review' => count($review),
+            'reviews' => $review,
+            'admin_replied' => $admin_replied
+        ]);
+    }
+
+    public function profileCompany($id,Request $request)
+    {
+        $user = $this->user_repo->find($id);
+        $company = $this->company_repo->find($id);
+        $information = $this->information_repo->find($id);
+        $type = $this->type_repo->all();
+        $review = $this->ticket_repo->getTicketByUser($id, Constant::TICKET_REVIEW);
 
         if ($request->ajax()) {
             return response()->json([

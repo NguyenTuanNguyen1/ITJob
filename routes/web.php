@@ -15,6 +15,7 @@ use App\Http\Controllers\CMS\ProfileController;
 use App\Http\Controllers\CMS\ReportController;
 use App\Http\Controllers\CMS\ReviewController;
 use App\Http\Controllers\CMS\CompanyController;
+use App\Http\Controllers\CMS\TypeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -40,13 +41,13 @@ Route::prefix('user')->group(function () {
 
 //Profile
 Route::prefix('profile')->group(function () {
-    Route::get('profile/{id}', [ProfileController::class, 'userCompany'])->name('profile.user');
+    Route::get('/{id}', [ProfileController::class, 'userCompany'])->name('profile.user');
+    Route::get('/detail/{id}', [ProfileController::class, 'userProfile'])->name('profile.user.detail');
     Route::get('/user-profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
     Route::post('/user-update', [ProfileController::class, 'handleUpdate'])->name('profile.update');
     Route::post('/user-update-basic', [ProfileController::class, 'handleUpdateBasic'])->name('profile.update.basic');
     Route::post('/user-update-information', [ProfileController::class, 'handleUpdateInfor'])->name('profile.update.information');
-    Route::get('/company-profile', [ProfileController::class, 'profileCompany'])->name('company.profile');
-//    Route::post('/user-delete-information', [ProfileController::class, 'handleDeleteInfor'])->name('profile.delete.information');
+    Route::get('/company-profile/{id}', [ProfileController::class, 'profileCompany'])->name('company.profile');
 });
 
 //Post
@@ -63,19 +64,12 @@ Route::prefix('post')->group(function () {
 
 //Backend
 Route::prefix('search')->group(function () {
-    Route::post('/', [BackendController::class, 'searchFilter'])->name('search.filter');
+    Route::post('/', [BackendController::class, 'searchFilter'])->name('search.layout.filter');
+    Route::post('/filter', [BackendController::class, 'searchCompanyFilter'])->name('search.company.filter');
+    Route::post('/filter-datetime', [BackendController::class, 'searchFilterDatetime'])->name('search.filter.datetime');
     Route::get('/', [BackendController::class, 'searchAjax'])->name('search.ajax');
     Route::get('/get-post-by-major', [BackendController::class, 'getPostByMajor'])->name('post.major');
     Route::get('/messenger/name', [BackendController::class, 'searchAjaxName'])->name('search.name');
-});
-
-//Chat
-Route::middleware('cors')->group(function () {
-    Route::prefix('messenger')->group(function () {
-        Route::get('/index', [ChatController::class, 'index'])->name('index.message');
-        Route::get('/{from_user_name}', [ChatController::class, 'messenger'])->name('show.message');
-        Route::post('/sent_message', [ChatController::class, 'chat'])->name('sent.message');
-    });
 });
 
 //Contact
@@ -91,7 +85,9 @@ Route::prefix('contact')->group(function () {
 Route::prefix('report')->group(function () {
     Route::get('/list-report', [ReportController::class, 'index'])->name('report.all');
     Route::get('/report-detail', [ReportController::class, 'show'])->name('report.detail');
+    Route::get('/image', [ReportController::class, 'image'])->name('report.image');
     Route::post('/report-create', [ReportController::class, 'store'])->name('report.create');
+    Route::post('/report-user', [ReportController::class, 'user'])->name('report.user');
     Route::get('/report-delete', [ReportController::class, 'delete'])->name('report.delete');
     Route::get('/report-reply', [ReportController::class, 'reply'])->name('report.reply');
     Route::get('/list-report-replied', [ReportController::class, 'replied'])->name('report.replied');
@@ -102,10 +98,14 @@ Route::prefix('review')->group(function () {
     Route::get('/list-review', [ReviewController::class, 'index'])->name('review.view');
     Route::post('/review-create', [ReviewController::class, 'store'])->name('review.create');
     Route::post('/review-update', [ReviewController::class, 'update'])->name('review.update');
-    Route::get('/review-detail/{id}', [ReviewController::class, 'show'])->name('review.show');
-    Route::get('/review-trashed', [ReviewController::class, 'trashed'])->name('review.trashed');
     Route::post('/review-delete', [ReviewController::class, 'delete'])->name('review.delete');
-    Route::post('/review-restore', [ReviewController::class, 'restore'])->name('review.restore');
+});
+
+//Type
+Route::prefix('type')->group(function (){
+    Route::post('/type-create',[TypeController::class,'store'])->name('type.create');
+    Route::post('/type-update',[TypeController::class,'update'])->name('type.update');
+    Route::post('/type-delete',[TypeController::class,'delete'])->name('type.delete');
 });
 
 //Dashboard
@@ -117,6 +117,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'authorize'], function ()
     Route::get('/account', [DashboardController::class, 'account'])->name('dashboard.account');
     Route::get('/contact', [DashboardController::class, 'contact'])->name('dashboard.contact');
     Route::get('/report', [DashboardController::class, 'report'])->name('dashboard.report');
+    Route::get('/information', [DashboardController::class, 'information'])->name('dashboard.information');
     Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
 });
 
@@ -127,12 +128,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'authorize'], function () {
     Route::post('/restore-user', [AdminController::class, 'restoreUserByAdmin'])->name('admin.restore.user');
     Route::post('/replied-contact', [AdminController::class, 'repliedContact'])->name('admin.replied.contact');
     Route::post('/replied-report', [AdminController::class, 'repliedReport'])->name('admin.replied.report');
+    Route::post('/replied-report-user', [AdminController::class, 'repliedReportUser'])->name('admin.replied.report.user');
 });
 
 //Company
 Route::group(['prefix' => 'company'], function () {
     Route::get('/index', [CompanyController::class, 'index'])->name('company.index');
     Route::get('/candidate', [CompanyController::class, 'candidate'])->name('company.candidate');
+    Route::get('/review', [CompanyController::class, 'review'])->name('company.review');
+    Route::get('/replied', [CompanyController::class, 'review'])->name('company.replied');
     Route::get('/post-create', [CompanyController::class, 'post'])->name('company.post.create');
     Route::post('/update-profile', [CompanyController::class, 'update'])->name('company.update');
 });
@@ -157,9 +161,5 @@ Route::group(['prefix' => 'email'], function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [HomeController::class, 'notFound'])->name('not.found');
 
-
 //Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
-Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-Route::get('123', [HomeController::class, 'mail'])->name('test-mail');

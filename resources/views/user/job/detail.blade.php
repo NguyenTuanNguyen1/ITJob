@@ -1,8 +1,9 @@
 @extends('layout.layout')
 @section('content')
     @include('sweetalert::alert')
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/css/jquery.fancybox.min.css') }}">
@@ -62,15 +63,9 @@
                                         class="icon-th-large mr-2 text-danger"></span>Chức năng</a>
                                 <div class="dropdown-menu">
                                     <button type="submit" class="dropdown-item" data-toggle="modal"
-                                            data-target="#modalReportPost" >Báo cáo bài viết
+                                            data-target="#modalReportPost">Báo cáo bài viết
                                     </button>
                                 </div>
-                            </div>
-
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-block btn-primary btn-md" id="applied">
-                                    <a href="{{ Route('user.login') }}" style="color: white">Đăng nhập</a>
-                                </button>
                             </div>
                         </div>
                     @else
@@ -85,8 +80,6 @@
                 <div class="col-lg-8">
                     <div id="detail-post">
                     </div>
-
-
                 </div>
                 <div class="col-lg-4">
                     <div class="bg-light p-3 border rounded mb-4">
@@ -106,12 +99,22 @@
                         </ul>
                     </div>
                 </div>
+                @if(Auth::check())
+                    <div class="col-6">
+                        <form action="{{ Route('user.applied.post') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <button type="submit" class="btn btn-block btn-primary">Ứng tuyển ngay</button>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
     </section>
 
     @include('modal.post.edit')
-    @include('modal.Report.report_post')
+    @include('modal.report.report_post')
     <div class="container" style="padding-top:10px">
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">

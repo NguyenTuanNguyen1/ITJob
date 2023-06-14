@@ -17,10 +17,11 @@ use App\Mail\NotificationRestoreUser;
 use App\Mail\RestorePostMail;
 use App\Models\Post;
 use App\Models\User;
-use App\Repositories\RoleRepostitory;
+use App\Repositories\RoleRepository;
 use App\Trait\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property IPostRepository $post_repo
@@ -28,8 +29,7 @@ use Illuminate\Http\Request;
  * @property IAdminRepository $admin_repo
  * @property ITicketRepository $ticket_repo
  * @property IInformationRepository $information_repo
- * @property IReviewRepository $review_repo
- * @property RoleRepostitory $role_repo
+ * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
  * @property IBackendRepository $back_repo
  */
@@ -43,8 +43,7 @@ class BackendController extends Controller
         IAdminRepository $adminRepository,
         ITicketRepository $ticketRepository,
         IInformationRepository $informationRepository,
-        IReviewRepository $reviewRepository,
-        RoleRepostitory $roleRepostitory,
+        RoleRepository $roleRepostitory,
         ISearchRepository $searchRepository,
         IBackendRepository $backendRepository
     )
@@ -54,7 +53,6 @@ class BackendController extends Controller
         $this->admin_repo = $adminRepository;
         $this->ticket_repo = $ticketRepository;
         $this->information_repo = $informationRepository;
-        $this->review_repo = $reviewRepository;
         $this->role_repo = $roleRepostitory;
         $this->search_repo = $searchRepository;
         $this->back_repo = $backendRepository;
@@ -68,7 +66,6 @@ class BackendController extends Controller
         $candidate = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_CANDIDATE);
         $role = $this->role_repo->all();
         $information_type = $this->information_repo->all();
-        $review = $this->review_repo->all();
     }
 
     public function searchFilter(Request $request)
@@ -80,6 +77,37 @@ class BackendController extends Controller
         });
         $test = collect($result);
         return view('user.job.search_result')->with('posts', $test);
+    }
+
+    public function searchCompanyFilter(Request $request)
+    {
+        $input = $request->all();
+
+        $users = $this->search_repo->searchCompanyFilter($input);
+
+        return view('company.search_result')->with([
+            'users' => $users,
+        ]);
+    }
+
+    public function searchFilterDatetime(Request $request)
+    {
+        $input = $request->all();
+
+        $posts = $this->search_repo->searchDatetimeFilter($input['from'], $input['to'], $input['user_id']);
+        $all_post = $this->post_repo->getPostByCondition('user_id', Auth::user()->id);
+        $post_approved = array_filter($all_post->toArray(), function ($data){
+            return $data['status'] == Constant::STATUS_APPROVED_POST;
+        });
+        $post_not_approved = array_filter($all_post->toArray(), function ($data){
+            return $data['status'] == Constant::STATUS_NOT_APPROVED_POST;
+        });
+        return view('company.searchDatetimeResult')->with([
+            'posts' => $posts,
+            'count_all_post' => count($all_post),
+            'count_post_approved' => count($post_approved),
+            'count_post_not_approved' => count($post_not_approved),
+        ]);
     }
 
     public function searchAjax()

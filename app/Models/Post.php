@@ -64,7 +64,7 @@ class Post extends Model
     {
         parent::boot();
         static::deleting(function ($post){
-            $post->ticket()->delete();
+            $post->ticket()->delete();  
             $post->applied()->delete();
         });
         static::restoring(function ($post){

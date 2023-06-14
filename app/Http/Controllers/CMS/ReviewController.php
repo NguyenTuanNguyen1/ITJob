@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\IReviewRepository;
+use App\Interfaces\ICompanyRepository;
+use App\Interfaces\IInformationRepository;
+use App\Interfaces\ITicketRepository;
+use App\Interfaces\ITypeRepository;
+use App\Interfaces\IUserRepository;
+use App\Repositories\InformationTypeRepository;
 use App\Trait\Service;
 use Illuminate\Http\Request;
 
 /**
- * @property IReviewRepository $review_repo
+ * @property IUserRepository $user_repo
+ * @property ITicketRepository $ticket_repo
+ * @property ICompanyRepository $company_repo
+ * @property IInformationRepository $information_repo
+ * @property ITypeRepository $type_repo
  */
 class ReviewController extends Controller
 {
@@ -16,87 +25,64 @@ class ReviewController extends Controller
 
     public function __construct
     (
-        IReviewRepository $reviewRepository
+        IUserRepository $userRepository,
+        ITicketRepository $ticketRepository,
+        ICompanyRepository $companyRepository,
+        IInformationRepository $informationRepository,
+        InformationTypeRepository $typeRepository,
     ) {
-        $this->review_repo = $reviewRepository;
+        $this->user_repo = $userRepository;
+        $this->ticket_repo = $ticketRepository;
+        $this->company_repo = $companyRepository;
+        $this->information_repo = $informationRepository;
+        $this->type_repo = $typeRepository;
     }
 
-    public function index()
-    {
-        $review = $this->review_repo->all();
-        return response()->json([
-            'data' => $review
-        ]);
-    }
-
-    public function show($id)
-    {
-        $review = $this->review_repo->find($id);
-        return view('home')->with('review', $review);
-    }
+//    public function index()
+//    {
+//        $review = $this->review_repo->all();
+//        return response()->json([
+//            'data' => $review
+//        ]);
+//    }
 
     public function store(Request $request)
     {
         $input = $request->all();
 
-        try {
-            $review = $this->review_repo->create($input);
-            if (empty($review)) {
-                return response()->json([
-                    'result' => false,
-                    'message' => 'Tạo bài viết thất bại'
-                ]);
-            }
-            if ($request->ajax()) {
-                return response()->json([
-                    'result' => true,
-                    'message' => $request
-                ]);
-            }
+        $this->ticket_repo->createReview($input);
 
-            return redirect()->route('user.profile', $input['id']);
-        } catch (\Exception $e) {
-            return response()->json([
-                'result' => false,
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
-
-    public function update(Request $request)
-    {
-        $input = $request->all();
-
-        try {
-            $this->review_repo->update($input['id'], $input);
-            $this->ActivityLog("Bạn đã chỉnh sửa nhận xét của mình tại " . $input['id'], $input['user_id']);
-            toast('Chỉnh sửa thành công', 'success');
-            return response()->json([
-                'result' => true,
-                'message' => 'Chỉnh sửa bài viết thành công'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'result' => false,
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
-
-    public function trashed()
-    {
-        $review = $this->review_repo->trashed();
         return response()->json([
-            'data' => $review
+            'result' => true
         ]);
     }
+
+//    public function update(Request $request)
+//    {
+//        $input = $request->all();
+//
+//        try {
+//            $this->review_repo->update($input['id'], $input);
+//            $this->ActivityLog("Bạn đã chỉnh sửa nhận xét của mình tại " . $input['id'], $input['user_id']);
+//            toast('Chỉnh sửa thành công', 'success');
+//            return response()->json([
+//                'result' => true,
+//                'message' => 'Chỉnh sửa bài viết thành công'
+//            ]);
+//        } catch (\Exception $e) {
+//            return response()->json([
+//                'result' => false,
+//                'message' => $e->getMessage()
+//            ]);
+//        }
+//    }
 
     public function delete(Request $request)
     {
         $input = $request->all();
 
         try {
-            $review = $this->review_repo->delete($input['id']);
+            $review = $this->ticket_repo->delete($input['id']);
             $this->ActivityLog('Bạn đã xoá bài nhận xét', $input['user_id']);
 
             if (empty($review)) {
@@ -113,27 +99,6 @@ class ReviewController extends Controller
             return response()->json([
                 'result' => false,
                 'message' => $e->getMessage()
-            ]);
-        }
-    }
-
-    public function restore(Request $request)
-    {
-        $input = $request->all();
-
-        try {
-            $review = $this->review_repo->restore($input['id']);
-
-            $this->ActivityLog('Bạn đã khôi phục bài nhận xét*' . $input['id'], $input['user_id']);
-
-            return response()->json([
-                'result' => true,
-                'data' => $review
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'result' => false,
-                'data' => $e->getMessage()
             ]);
         }
     }

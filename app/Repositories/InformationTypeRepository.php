@@ -38,18 +38,8 @@ class InformationTypeRepository implements ITypeRepository
         return InformationType::find($id)->delete();
     }
 
-    public function storage($id)
-    {
-        // TODO: Implement storage() method.
-    }
-
-    public function trashed()
-    {
-        return InformationType::onlyTrashed()->get();
-    }
-
     public function restore($id)
     {
-        return InformationType::onlyTrashed()->where('id', $id)->restore();
+        return InformationType::onlyTrashed()->find($id)->restore();
     }
 }

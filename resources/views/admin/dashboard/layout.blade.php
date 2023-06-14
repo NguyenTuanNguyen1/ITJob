@@ -70,6 +70,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ Route('dashboard.information') }}">
+                        <i class="nc-icon nc-book-bookmark"></i>
+                        <p>Thông tin thêm</p>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ Route('dashboard.history',['id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-book-bookmark"></i>
                         <p>Lịch sử</p>
@@ -124,6 +130,7 @@
             </div>
         </nav>
         @yield('content')
+        @yield('report')
     </div>
 </div>
 

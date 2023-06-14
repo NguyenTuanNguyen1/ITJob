@@ -6,6 +6,7 @@ use App\Constant;
 use App\Interfaces\IUserRepository;
 use App\Models\Activity;
 use App\Models\Applied;
+use App\Models\Image;
 use App\Models\Information;
 use App\Models\InformationType;
 use App\Models\Role;
@@ -54,32 +55,6 @@ trait Service
     {
         dd($request);
 
-    }
-
-    public function checkExist($data, $action)
-    {
-        switch ($action) {
-            case Constant::TYPE_INFORMATION:
-                $informationTypeExist = InformationType::where('content', $data['content'])->count();
-                if ($informationTypeExist > 0) {
-                    return true;
-                }
-                return false;
-
-            case Constant::TYPE_TICKET:
-                $ticketTypeExists = TicketType::where('content', $data['content'])->count();
-                if ($ticketTypeExists > 0) {
-                    return true;
-                }
-                return false;
-
-            case Constant::TYPE_ROLE:
-                $roleExist = Role::where('content', $data['content'])->count();
-                if ($roleExist > 0) {
-                    return true;
-                }
-                return false;
-        }
     }
 
     public function sendMailUser($user, $mailable)
@@ -134,6 +109,12 @@ trait Service
 
     public function appliedPost($user_id, $post_id)
     {
+        $checkExist = Applied::where('user_id', $user_id)->where('post_id', $post_id)->count();
+        if ($checkExist > 0)
+        {
+
+            return false;
+        }
         return Applied::insert([
             'user_id' => $user_id,
             'post_id' => $post_id
@@ -150,21 +131,19 @@ trait Service
         ]);
     }
 
-    public function updateInformation($user_id, array $data)
+    public function saveImageReport($images, $ticket_id)
     {
-        return Information::where('user_id', $user_id)->update([
-            'content' => $data['content'],
-//                'type_id' => $data['type_id'],
+        return Image::create([
+           'image' =>  $images,
+            'ticket_id' => $ticket_id
         ]);
     }
 
-    public function createInformation($user_id)
+    public function saveImageReportUser($images, $user_id)
     {
-//        $infor = new Information();
-//        $infor->content = $content;
-//        $infor->user_id = $user_id;
-//        $infor->type_id = $type_id;
-//        $infor->save();
-        return 123;
+        return Image::create([
+            'image' =>  $images,
+            'ticket_id' => $ticket_id
+        ]);
     }
 }

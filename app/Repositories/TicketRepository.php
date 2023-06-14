@@ -6,6 +6,7 @@ use App\Constant;
 use App\Interfaces\ITicketRepository;
 use App\Models\Ticket;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 class TicketRepository implements ITicketRepository
@@ -16,25 +17,55 @@ class TicketRepository implements ITicketRepository
         return Ticket::with('user')->where('type_id', $action)->orderBy('id', 'DESC')->get();
     }
 
-    public function create(array $type)
+    public function createReportUser(array $report)
     {
         $data = new Ticket();
-        $data->username = $type['username'];
-        $data->email = $type['email'];
-        $data->content = $type['content'];
-        $data->image = $type['image'];
-        $data->type_id = $type['type_id'];
-        $data->user_id = $type['user_id'];
-        $data->post_id = $type['post_id'];
+        $data->content = $report['content'];
+        $data->type_id = Constant::TICKET_REPORT_USER;
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->to_user_id = $report['to_user_id'];
         $data->save();
         return $data;
     }
 
-    public function find($id,$action)
+    public function createReportPost(array $post)
     {
-        return Ticket::where('id', $id)
-            ->where('status',Constant::TICKET_NOT_REPLY)
-            ->where('type_id', $action)->first();
+        $data = new Ticket();
+        $data->content = $post['content'];
+        $data->type_id = Constant::TICKET_REPORT_POST;
+        $data->post_id = $post['post_id'];
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->save();
+        return $data;
+
+    }
+
+    public function createContact(array $contact)
+    {
+        $data = new Ticket();
+        $data->username = $contact['username'];
+        $data->email = $contact['email'];
+        $data->content = $contact['content'];
+        $data->type_id = Constant::TICKET_CONTACT;
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->save();
+        return $data;
+    }
+
+    public function createReview(array $review)
+    {
+        $data = new Ticket();
+        $data->content = $review['content'];
+        $data->type_id = Constant::TICKET_REVIEW;
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->to_user_id = $review['to_user_id'];
+        $data->save();
+        return $data;
+    }
+
+    public function find($id)
+    {
+        return Ticket::find($id);
     }
 
     public function delete($id)
@@ -49,46 +80,63 @@ class TicketRepository implements ITicketRepository
         ]);
     }
 
-    public function reply(array $data)
+    public function replyContact(array $contact)
     {
-        $ticket = new Ticket();
-        $ticket->username = $data['username'];
-        $ticket->content = $data['content'];
-        $ticket->image = $data['image'];
-        $ticket->type_id = $data['type_id'];
-        $ticket->status = Constant::TICKET_REPLIED;
-        $ticket->user_id = $data['user_id'];
-        $ticket->post_id = $data['post_id'];
-        $ticket->ticket_id = $data['ticket_id'];
-        $ticket->save();
-        return $ticket;
+        $data = new Ticket();
+        $data->ticket_id = $contact['ticket_id'];
+        $data->content = $contact['content'];
+        $data->type_id = Constant::TICKET_CONTACT;
+        $data->status = Constant::TICKET_CONTACT_REPLIED;
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->to_user_id = $contact['to_user_id'];
+        $data->save();
+        return $data;
     }
 
-    public function getTicketNotReply($action, $status)
+    public function replyReport(array $report)
     {
-        return Ticket::with('user')
+        $data = new Ticket();
+        $data->ticket_id = $report['ticket_id'];
+        $data->content = $report['content'];
+        $data->type_id = $report['type_id'];
+        $data->status = Constant::TICKET_REPORT_REPLIED;
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->to_user_id = $report['to_user_id'];
+        $data->save();
+        return $data;
+    }
+
+    public function getTicket($action, $status)
+    {
+        return Ticket::with('from_user', 'image')
             ->where('type_id', $action)
             ->where('status', $status)
             ->orderByDesc('id')
             ->get();
     }
 
-    public function getTicketReplyLastWeek($action, $status)
+    public function listReplied($id, $action, $type)
     {
-        return Ticket::with('user')
+        return Ticket::with('from_user')
+            ->where('ticket_id', $id)
+            ->where('status', $action)
+            ->where('type_id', $type)
+            ->first();
+    }
+
+    public function getTicketByUser($to_user_id, $action)
+    {
+        return Ticket::with('from_user')
+            ->where('to_user_id', $to_user_id)
             ->where('type_id', $action)
-            ->where('status', $status)
-            ->where('created_at', '>=', Carbon::now()->subWeek()->startOfWeek())
-            ->where('created_at', '<=', Carbon::now()->subWeek()->endOfWeek())
             ->get();
     }
 
-    public function listReplied($id, $action)
+    public function getTicketReplied($id)
     {
-        return Ticket::with('user')
-            ->where('ticket_id', $id)
-            ->where('status',Constant::TICKET_REPLIED)
-            ->where('type_id', $action)
-            ->first();
+        return Ticket::with('from_user')
+            ->where('to_user_id', $id)
+            ->where('status','<>', Constant::TICKET_NOT_REPLY)
+            ->get();
     }
 }

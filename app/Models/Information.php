@@ -19,7 +19,6 @@ class Information extends Model
     protected $table = 'information';
     protected $fillable = [
         'content',
-//        'ticket_reply',
         'user_id',
         'type_id',
     ];

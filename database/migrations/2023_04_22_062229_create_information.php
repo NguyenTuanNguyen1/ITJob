@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('information', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('content')->nullable();
-            $table->string('ticket_reply')->nullable();
 
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('post_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
 
             $table->timestamps();
@@ -25,7 +23,6 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->foreign('type_id')->references('id')->on('information_type')->onDelete('cascade');
-            $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
         });
     }
 

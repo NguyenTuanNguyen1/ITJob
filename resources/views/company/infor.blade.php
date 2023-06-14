@@ -153,10 +153,11 @@
                 <div class="tab" style="display:flex;">
                     <button class="tablinks" onclick="openCity(event, 'London')">Thông tin cá nhân</button>
                     @if($user->role_id == 2)
-                    <button class="tablinks" onclick="openCity(event, 'VietNam')">Thông tin công ty</button>
+                    <button class="tablinks" onclick="openCity(event, 'VietNam')">Công ty</button>
                     @endif
                     <button class="tablinks" onclick="openCity(event, 'Paris')">Thông tin thêm</button>
-                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Bình luận đánh giá</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Đánh giá</button>
+                    <button class="tablinks" onclick="openCity(event, 'Berlin')">Báo cáo</button>
                 </div>
 
                 <div id="London" class="tabcontent" style="display:block">
@@ -187,15 +188,23 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label for="job-region">Chuyên ngành</label><br>
-                            <label style="font-weight: 900;">{{ $user->major }}</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Chuyên ngành</label><br>
+                                <label style="font-weight: 900;">{{ $user->major }}</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Vị trí</label><br>
+                                <label style="font-weight: 900;">{{ $user->position }}</label>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            <label for="job-region">Vị trí</label><br>
-                            <label style="font-weight: 900;">{{ $user->position }}</label>
+                            <label>Mô tả</label><br>
+                            <label style="font-weight: 900;">{{ $user->description }}</label>
                         </div>
                     </div>
                 </div>
@@ -219,12 +228,6 @@
                             <div class="col-md-12">
                                 <label>Mã số thuế : </label>
                                 <label style="font-weight: bold">{{ $company->taxcode }}</label>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label>Mô tả : </label>
-                                <label style="font-weight: bold">{{ $company->description }}</label>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -257,7 +260,7 @@
                                                 href="{{ Route('user.login') }}" style="color: white">Đăng nhập</a>
                                         </button>
                                     @elseif(Auth::user()->id != $user->id)
-                                        <h3>{{ $count_review }} bình luận</h3>
+                                        <h3 id="count_review">  </h3>
                                         <div id="load_review">
                                         </div>
                                         <hr>
@@ -280,6 +283,45 @@
                                         </form>
                                     @else
 
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div id="Berlin" class="tabcontent">
+                    <section class="content-item" id="comments">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @if(!Auth::check())
+                                        <div class="col-6">
+                                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>
+                                        </div>
+                                    @else
+                                        <form action="{{ Route('report.user') }}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="container2">
+                                                <input type="file" id="file-input" onchange="preview()"  name="image[]" multiple>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung :
+                                                    </label>
+                                                </div>
+                                                <label>
+                                                    <textarea name="content" cols="50" rows="4"></textarea>
+                                                </label>
+                                                <div id="replied_report"></div>
+                                            </div>
+                                            <input type="hidden" name="post_id" value="{{ 123 }}">
+                                            <input type="hidden" name="user_id" value="{{ isset(Auth::user()->id) ? Auth::user()->id : null }}">
+                                            <input type="hidden" name="username" value="{{ isset(Auth::user()->username) ? Auth::user()->username : null }}">
+                                            <input type="hidden" name="email" value="{{ isset(Auth::user()->email) ? Auth::user()->email : null }}">
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Gửi</button>
+                                            </div>
+                                        </form>
                                     @endif
                                 </div>
                             </div>
@@ -332,13 +374,13 @@
     }
 
     $(document).ready(() => {
+        load_count_review()
         load_review()
 
         $('#create-review').submit(function (e) {
             e.preventDefault();
             var value = {
                 "content": $("#message").val(),
-                {{--"from_user_id": {{ Auth::user()->id }},--}}
                 "to_user_id": {{ $user->id }},
                 "_token": "{{ csrf_token() }}",
             }
@@ -347,6 +389,7 @@
                 type: 'POST',
                 data: value,
                 success: function (res) {
+                    load_count_review()
                     load_review();
                 }
             })
@@ -354,11 +397,12 @@
 
         function load_review() {
             var _li = '';
-            $.get('http://itjob.vn/profile/profile/{{ $user->id}}', (res) => {
+            $.get('http://itjob.vn/profile/{{ $user->id}}', (res) => {
                 var data = res.reviews;
+                console.log(data)
                 data.forEach(function (item) {
                     _li += '<div class="media">';
-                    _li += '<a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>';
+                    _li += '<a class="pull-left" href="#"><img class="media-object" src="{{ url('image_avatar') }}/'+ item.from_user.img_avatar +'" alt=""></a>';
                     _li += '<div class="media-body">';
                     _li += '<h4 class="media-heading">' + item.from_user_id + '</h4>';
                     _li += '<p>' + item.content + '</p>';
@@ -370,6 +414,15 @@
                     $('#load_review').html(_li);
                 })
             });
+        }
+
+        function load_count_review() {
+            var _li = '';
+            $.get('http://itjob.vn/profile/{{ $user->id}}', (res) => {
+                var data = res.count_review;
+                _li += data + ' bình luận';
+                $('#count_review').html(_li);
+            })
         }
     });
 </script>

@@ -198,8 +198,8 @@
                 type: "GET",
                 data: value,
                 success: function (res) {
-                    console.log(res.data)
-                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : '+ res.data.username +' </label><br>';
+                    console.log(value)
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : '+ res.data.from_user.username +' </label><br>';
                     _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
                     _li += '<label>'+ res.data.content +'</label>';
                     $('#detail-replied').html(_li)
@@ -217,7 +217,7 @@
                 success: function (res) {
                     console.log(res)
                     _li += '<input type="hidden" name="ticket_id" value="'+ res.data.id +'">';
-                    _li += '<input type="hidden" name="reply_user_id" value="'+ res.data.user_id +'">';
+                    _li += '<input type="hidden" name="to_user_id" value="'+ res.data.from_user_id +'">';
                     $('#replied_contact').html(_li)
                 }
             })

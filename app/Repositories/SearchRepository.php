@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Constant;
@@ -6,6 +7,7 @@ use App\Interfaces\ISearchRepository;
 use App\Models\InformationType;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 
 class SearchRepository implements ISearchRepository
 {
@@ -22,11 +24,28 @@ class SearchRepository implements ISearchRepository
     public function searchFilter(array $data)
     {
         return Post::with('user')
-                    ->orWhere('position', $data['position'])
-                    ->orWhere('working', $data['working'])
-                    ->orWhere('major', $data['major'])
-                    ->orderBy('id','DESC')
-                    ->paginate(8);
+            ->where('major', $data['major'])
+            ->where('working', $data['working'])
+            ->where('position', $data['position'])
+            ->orderBy('id', 'DESC')
+            ->paginate(8);
+    }
+
+    public function searchCompanyFilter(array $data)
+    {
+        return User::where('major', $data['major'])
+            ->where('position', $data['position'])
+            ->where('role_id', Constant::ROLE_CANDIDATE)
+            ->get();
+    }
+
+    public function searchDatetimeFilter($from, $to, $user_id)
+    {
+        return Post::where('status', Constant::STATUS_APPROVED_POST)
+            ->where('user_id', $user_id)
+            ->where('created_at', '>=' , $from)
+            ->where('created_at', '<=', Carbon::parse($to)->endOfDay())
+            ->get();
     }
 
     public function searchUserByRole($role)

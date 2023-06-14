@@ -5,7 +5,7 @@
         <div class="container" style="padding-top:8%">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-12">
-                    <form action="{{ Route('search.filter') }}" method="post" class="search-jobs-form">
+                    <form action="{{ Route('search.layout.filter') }}" method="post" class="search-jobs-form">
                         @csrf
                         <div class="row mb-5">
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -85,14 +85,41 @@
             </div>
         </div>
     @else
-        <section id="not-found">
-            <div id="title">Simple Pure CSS3 &bull; 404 Error Page</div>
-            <div class="circles">
-                <p>Không tìm thấy nội dung<br>
-                    <small></small>
-                </p>
+        <div class="container" style="padding-top:8%">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+                    <h1 style="color: white"> KHÔNG TÌM THẤY NỘI DUNG</h1>
+                </div>
             </div>
-        </section>
+        </div>
+        <div class="container" style="padding-top:8%">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding-top:8%">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding-top:8%">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding-top:8%">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+        </div>
     @endif
 
     @include('layout.page-js')

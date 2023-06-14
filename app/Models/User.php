@@ -64,11 +64,6 @@ class User extends Authenticatable
         return $this->hasMany(Applied::class,'user_id');
     }
 
-    public function review()
-    {
-        return $this->hasMany(Review::class,'from_user_id');
-    }
-
     protected static function boot()
     {
         parent::boot();
@@ -78,7 +73,6 @@ class User extends Authenticatable
             $user->information()->delete();
             $user->ticket()->delete();
             $user->applied()->delete();
-            $user->review()->delete();
         });
 
         static::restoring(function ($user){
@@ -87,7 +81,6 @@ class User extends Authenticatable
             $user->information()->onlyTrashed()->restore();
             $user->ticket()->onlyTrashed()->restore();
             $user->applied()->onlyTrashed()->restore();
-            $user->review()->onlyTrashed()->restore();
         });
     }
 
