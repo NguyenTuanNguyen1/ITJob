@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Constant;
 use App\Interfaces\IAdminRepository;
 use App\Models\Activity;
+use App\Models\Applied;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
@@ -43,5 +44,12 @@ class AdminRepository implements IAdminRepository
     public function getImageReportByCondition($action)
     {
         return Image::with('ticket')->where('ticket_id', $action)->get();
+    }
+
+    public function getApplied($post_id)
+    {
+        return Applied::with('user', 'post')
+            ->where('post_id', $post_id)
+            ->get();
     }
 }

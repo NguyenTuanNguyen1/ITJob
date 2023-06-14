@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Applied extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $table = 'applied';
     protected $fillable = [
         'user_id',
@@ -20,8 +21,8 @@ class Applied extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getName()
+    public function post()
     {
-        return $this->user->username;
+        return $this->belongsTo(Post::class);
     }
 }

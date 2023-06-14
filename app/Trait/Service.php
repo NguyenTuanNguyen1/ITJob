@@ -50,13 +50,6 @@ trait Service
         }
     }
 
-
-    public function uploadMultipleImage(Request $request)
-    {
-        dd($request);
-
-    }
-
     public function sendMailUser($user, $mailable)
     {
         if (self::isValidMail($user['email'])) {
@@ -135,14 +128,6 @@ trait Service
     {
         return Image::create([
            'image' =>  $images,
-            'ticket_id' => $ticket_id
-        ]);
-    }
-
-    public function saveImageReportUser($images, $user_id)
-    {
-        return Image::create([
-            'image' =>  $images,
             'ticket_id' => $ticket_id
         ]);
     }

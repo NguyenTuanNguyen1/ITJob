@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Constant;
+use App\Interfaces\IAdminRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\ISearchRepository;
 use App\Interfaces\IUserRepository;
@@ -35,17 +36,20 @@ class StatisticalEmail extends Command
      * @var string
      */
     protected $description = 'Send mail once a week at 9:00 am on Monday';
+    private IAdminRepository $admin_repo;
 
     public function __construct
     (
         ISearchRepository $searchRepository,
         IPostRepository $postRepository,
-        IUserRepository $userRepository
+        IUserRepository $userRepository,
+        IAdminRepository $adminRepository
     ) {
         parent::__construct();
         $this->search_repo = $searchRepository;
         $this->post_repo = $postRepository;
         $this->user_repo = $userRepository;
+        $this->admin_repo = $adminRepository;
     }
 
     /**
@@ -73,31 +77,18 @@ class StatisticalEmail extends Command
             $this->sendMailUser($data['user'], new WeeeklyMailCandidate($data['user'], $data['post']));
         }
 
-        $company_posts = $this->post_repo->all();
-        $data_company = [];
-        foreach ($company_posts as $post) {
-            $data_company[] = [
-                'allPost' => $post,
-                'user_applied' => $this->user_repo->getUserApplied($post->id)
-            ];
-        }
+        $all_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
+        foreach ($all_company as $company)
+        {
 
-        $list_applied = array_filter($data_company, function ($data) {
-            return $data['user_applied']->isNotEmpty();
-        });
-
-        $get_user = [];
-        $get_company = null;
-        $applied = null;
-
-        foreach ($list_applied as $applied) {
-            for ($i = 0; $i < count($applied['user_applied']); $i++) {
-                $get_user[] = $this->user_repo->find($applied['user_applied'][$i]->user_id);
-                $get_company = $this->user_repo->find($applied['allPost']->user_id);
-
+            $post_by_company = $this->post_repo->getPostByCondition('user_id', $company->id);
+            foreach ($post_by_company as $post)
+            {
+                $users = $this->admin_repo->getApplied($post->id);
+                $this->sendMailUser($company, new WeeklyMailCompany($users, $post));
             }
         }
-        $this->sendMailUser($get_company, new WeeklyMailCompany($get_user, $applied['allPost']));
+
         $this->sendMailByRole(Constant::ROLE_ADMIN,new StatisticalMail($post_not_approved, $post_approved, $from, $to));
     }
 }

@@ -16,7 +16,7 @@ class PostRepository implements IPostRepository
 
     public function all()
     {
-        return Post::all();
+        return Post::with('user')->get();
     }
 
     public function create(array $data)
@@ -108,5 +108,10 @@ class PostRepository implements IPostRepository
             ->where('approved_date', '>=', $from)
             ->where('approved_date', '<=', $to)
             ->get();
+    }
+
+    public function getPostByUserId($condition, $action)
+    {
+        return Post::where($condition, $action)->first();
     }
 }

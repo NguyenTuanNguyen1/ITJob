@@ -6,7 +6,6 @@ use App\Constant;
 use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IUserRepository;
-use App\Repositories\BackendRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\Route;
  * @property IPostRepository $post_repo
  * @property ICompanyRepository $company_repo
  * @property IUserRepository $user_repo
- * @property BackendRepository $back_repo
  */
 class HomeController extends Controller
 {
@@ -24,12 +22,10 @@ class HomeController extends Controller
         IPostRepository $postRepository,
         ICompanyRepository $companyRepository,
         IUserRepository $userRepository,
-        BackendRepository $backendRepository
     ) {
         $this->post_repo = $postRepository;
         $this->company_repo = $companyRepository;
         $this->user_repo = $userRepository;
-        $this->back_repo = $backendRepository;
     }
 
     public function index()

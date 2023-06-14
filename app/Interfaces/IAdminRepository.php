@@ -9,4 +9,5 @@ interface IAdminRepository
     public function history($id);
     public function getImageReport();
     public function getImageReportByCondition($action);
+    public function getApplied($post_id);
 }
