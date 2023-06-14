@@ -27,6 +27,13 @@
                                     <h4 class="app-card-title">Chưa phê duyệt</h4>
                                 </div>
                             @endif
+                            <div class="col-auto">
+                                <div class="toggle focus">
+                                    <input type="checkbox">
+                                    <span class="slider focus"></span>
+                                    <span class="label">Ẩn bài viết</span>
+                                </div>
+                            </div>
                         </div><!--//row-->
                     </div><!--//app-card-header-->
                     <div class="app-card-body px-4">
@@ -35,7 +42,7 @@
                         </div>
                     </div><!--//app-card-body-->
                     <div class="app-card-footer p-4 mt-auto">
-                        <a class="btn app-btn-secondary" href="#">Đóng bài viết</a>
+                        <!-- <a class="btn app-btn-secondary" href="#">Đóng bài viết</a> -->
                         <a class="btn app-btn-primary" href="#">Xoá bài viết</a>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card-->

@@ -86,3 +86,12 @@
 .form-group label {
     color: #000;
 }
+.form-group.mb-2 button {
+    border-radius: 5px;
+    background-color: #15a362;
+    color: white;
+    border: none;
+    font-size: 15px;
+    padding: 3px 12px;
+    font-weight: 600;
+}

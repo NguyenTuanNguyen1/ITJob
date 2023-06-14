@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <div class="row g-4 mb-4">
         @foreach($all_post as $post)
-            <div class="col-12 col-lg-4">
+            <div class="btn btn-white col-12 col-lg-4">
                 <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
                     <div class="app-card-header p-3 border-bottom-0">
                         <div class="row align-items-center gx-3">
