@@ -2,7 +2,7 @@
 @section('content')
     @include('company.search')
 
-    {{--    <link rel="stylesheet" href="{{ url('board-master/css/checkpoint.css') }}">--}}
+    <link rel="stylesheet" href="{{ url('board-master/css/checkpoint.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <div class="row g-4 mb-4">
@@ -59,5 +59,25 @@
             <!--//col-->
         @endforeach
     </div>
-    <script src="{{ url('board-master/js/checkpoint.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.toggle input[type="checkbox"]').click(function () {
+                $(this).parent().toggleClass('on')
+                if ($(this).parent().hasClass('on')) {
+                    console.log(123)
+                    $(this).parent().children('.label').text('Hiện bài viết')
+                } else {
+                    console.log(456)
+                    $(this).parent().children('.label').text('Ẩn bài viết')
+                }
+            });
+            $('input').focusin(function () {
+                $(this).parent().addClass('focus');
+            });
+            $('input').focusout(function () {
+                $(this).parent().removeClass('focus');
+            });
+        });
+
+    </script>
 @endsection
