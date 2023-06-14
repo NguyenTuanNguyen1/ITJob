@@ -47,7 +47,7 @@ Route::prefix('profile')->group(function () {
     Route::post('/user-update', [ProfileController::class, 'handleUpdate'])->name('profile.update');
     Route::post('/user-update-basic', [ProfileController::class, 'handleUpdateBasic'])->name('profile.update.basic');
     Route::post('/user-update-information', [ProfileController::class, 'handleUpdateInfor'])->name('profile.update.information');
-    Route::get('/company-profile', [ProfileController::class, 'profileCompany'])->name('company.profile');
+    Route::get('/company-profile/{id}', [ProfileController::class, 'profileCompany'])->name('company.profile');
 });
 
 //Post

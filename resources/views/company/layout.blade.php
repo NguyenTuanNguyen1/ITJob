@@ -164,7 +164,7 @@
                                     src="{{ url('image_avatar') }}/{{ Auth::user()->img_avatar }}"
                                     alt="user profile"></a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                <li><a class="dropdown-item" href="{{ Route('company.profile') }}">Thông tin cá nhân</a>
+                                <li><a class="dropdown-item" href="{{ Route('company.profile',['id' => Auth::user()->id]) }}">Thông tin cá nhân</a>
                                 </li>
                                 <li><a class="dropdown-item" href="{{ Route('company.post.create') }}">Đăng bài viết</a>
                                 </li>

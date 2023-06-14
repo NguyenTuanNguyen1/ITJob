@@ -195,13 +195,13 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function profileCompany(Request $request)
+    public function profileCompany($id,Request $request)
     {
-        $user = $this->user_repo->find(Auth::user()->id);
-        $company = $this->company_repo->find(Auth::user()->id);
-        $information = $this->information_repo->find(Auth::user()->id);
+        $user = $this->user_repo->find($id);
+        $company = $this->company_repo->find($id);
+        $information = $this->information_repo->find($id);
         $type = $this->type_repo->all();
-        $review = $this->ticket_repo->getTicketByUser(Auth::user()->id, Constant::TICKET_REVIEW);
+        $review = $this->ticket_repo->getTicketByUser($id, Constant::TICKET_REVIEW);
 
         if ($request->ajax()) {
             return response()->json([

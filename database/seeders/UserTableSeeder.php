@@ -43,7 +43,7 @@ class UserTableSeeder extends Seeder
                 'major' => Constant::MAJOR_MANUFACTURING,
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
-                'email' => '0306201384@caothang.edu,vn',
+                'email' => '0306201384@caothang.edu.vn',
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
