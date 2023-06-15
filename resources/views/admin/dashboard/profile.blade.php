@@ -83,12 +83,12 @@
                     <div class="card-body">
                         <form action="{{ Route('profile.update') }}" method="post">
                             @csrf
-                            <div class="row mt-3">
+                            <div class="row ">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tên đăng nhập</label>
-
-                                        <input type="text" name="username" value="{{ $user->username }}">
+                                        <label>Tên đăng nhập</label><br>
+                                        <input type="text" class="form-control" name="username"
+                                               value="{{ $user->username }}">
                                     </div>
                                     @error('username')
                                     <div style="color:red;">{{ $message }}</div>

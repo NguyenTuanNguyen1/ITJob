@@ -141,8 +141,8 @@
                                         <td>{{ $admin->name }}</td>
                                         <td>{{ $admin->email }}</td>
                                         <td>{{ $admin->phone }}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                        <td class="text-content1">
+                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $admin->id]) }}'">
                                                 Chi tiết
                                             </button>
@@ -186,8 +186,8 @@
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->email }}</td>
                                         <td>{{ $company->phone }}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                        <td class="text-content1">
+                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $company->id]) }}'">
                                                 Chi tiết
                                             </button>
@@ -231,8 +231,8 @@
                                         <td>{{ $candidate->name }}</td>
                                         <td>{{ $candidate->email }}</td>
                                         <td>{{ $candidate->phone }}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                        <td class="text-content1">
+                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $candidate->id]) }}'">
                                                 Chi tiết
                                             </button>
@@ -276,8 +276,8 @@
                                         <td>{{ $trashed->name }}</td>
                                         <td>{{ $trashed->email }}</td>
                                         <td>{{ $trashed->phone }}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                        <td class="text-content1">
+                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $trashed->id]) }}'">
                                                 Chi tiết
                                             </button>
@@ -299,6 +299,16 @@
             </div>
         </div>
     </div>
+    <style>
+        .text-content1{
+            display:flex;
+            justify-content:center;
+        }
+        .text-content1 button{
+            height:fit-content;
+            margin-right: 10px;
+        }
+    </style>
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
 <script src="{{ url('profile/js/core/popper.min.js') }}"></script>
