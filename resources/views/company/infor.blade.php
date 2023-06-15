@@ -404,7 +404,7 @@
                     _li += '<div class="media">';
                     _li += '<a class="pull-left" href="#"><img class="media-object" src="{{ url('image_avatar') }}/'+ item.from_user.img_avatar +'" alt=""></a>';
                     _li += '<div class="media-body">';
-                    _li += '<h4 class="media-heading">' + item.from_user_id + '</h4>';
+                    _li += '<h4 class="media-heading" style="color: black">' + item.from_user.name + '</h4>';
                     _li += '<p>' + item.content + '</p>';
                     _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
                     _li += '<li><i class="fa fa-calendar"></i>' + item.created_at + '</li>'

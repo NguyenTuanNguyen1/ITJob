@@ -325,7 +325,7 @@
                                                         <h4 class="media-heading" style="color: black">{{ $review->from_user->username }}</h4>
                                                         <div class="col-6">
                                                             <a class="btn btn-light" role="button" data-toggle="dropdown"
-                                                               aria-expanded="false"><i class="fas fa-bars"></i></a>
+                                                               aria-expanded="false" style="position: absolute; left: 175%;bottom: 12px"><i class="fas fa-bars"></i></a>
                                                             <div class="dropdown-menu">
                                                                 <button type="submit" class="dropdown-item" data-toggle="modal"
                                                                         value="{{ $review->from_user_id }}"
