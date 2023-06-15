@@ -96,7 +96,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Danh sách bài liên hệ chưa phản hồi</h4>
+                        <h4 class="card-title"> Danh sách liên hệ chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -110,7 +110,11 @@
                                 <tbody id="contact_reply">
                                 @foreach($contact_not_reply as $key => $not_reply)
                                     <tr>
-                                        <td>{{ $not_reply->username }}</td>
+                                        @if($not_reply->username == null)
+                                            <td>{{ $not_reply->from_user->name }}</td>
+                                        @else
+                                            <td>{{ $not_reply->username }}</td>
+                                        @endif
                                         <td>{{ $not_reply->content }}</td>
                                         <td>{{ $not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
@@ -151,7 +155,11 @@
                                 <tbody id="contact_replied">
                                 @foreach($contact_reply as $reply)
                                     <tr>
-                                        <td>{{ $reply->username }}</td>
+                                        @if($reply->username == null)
+                                            <td>{{ $reply->from_user->name }}</td>
+                                        @else
+                                            <td>{{ $reply->username }}</td>
+                                        @endif
                                         <td>{{ $reply->content }}</td>
                                         <td>{{ $reply->created_at->format('d-m-Y') }}</td>
                                         <td class="d-flex">

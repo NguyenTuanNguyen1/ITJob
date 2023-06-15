@@ -140,6 +140,9 @@ Route::group(['prefix' => 'company'], function () {
     Route::get('/post-create', [CompanyController::class, 'post'])->name('company.post.create');
     Route::post('/update-profile', [CompanyController::class, 'update'])->name('company.update');
     Route::post('/user-applied-post', [CompanyController::class, 'applied'])->name('company.applied.post');
+    Route::get('/company-ticket-replied', [CompanyController::class, 'ticket'])->name('company.ticket.replied');
+    Route::get('/delete-ticket-replied', [CompanyController::class, 'deleteTicket'])->name('company.ticket.delete');
+    Route::post('/contact-create', [CompanyController::class, 'contactCreate'])->name('company.contact.create');
 });
 
 //Social

@@ -33,19 +33,18 @@
 
     <section class="site-section">
         <div class="container" style="background-color: white;padding: 10px;border-radius: 10px;">
-            <div class="row align-items-center mb-5">
+            <div class="row align-items-center mb-3">
                 <div class="col-lg-8 mb-4 mb-lg-0">
                     <div class="d-flex align-items-center">
                         <div class="border p-2 d-inline-block mr-3 rounded">
                             <img src="{{ url('image_avatar/')}}/{{ $post->user->img_avatar}}" width="100" height="100">
                         </div>
                         <div>
-                            <h2 style="color:black;">{{ $post->title }} </h2>
+{{--                            <h2 style="color:black;"> </h2>--}}
+                            <p style="color: black;font-weight: bold;font-size: 20px">{{ $post->title }}</p>
                             <div>
-                                <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span> {{ $post->user->img_avatar }}</span>
+                                <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase"></span> {{ $post->user->name }}</span>
                                 <span class="m-2"><span class="icon-room mr-2"></span>{{ $post->workplace }}</span>
-                                <span class="m-2"><span class="icon-clock-o mr-2"></span><span
-                                        class="text-primary">{{ $post->position }}</span></span>
                             </div>
                         </div>
                     </div>
@@ -69,9 +68,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="col-6">
-                            <a href="{{ Route('user.login') }}" class="btn btn-block btn-primary btn-md">Đăng nhập</a>
-                        </div>
+
                     @endif
                 </div>
             </div>

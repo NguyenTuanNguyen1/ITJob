@@ -35,7 +35,7 @@
                     <div class="ml-auto">
                         <form action="{{ Route('company.index') }}" method="get">
                             <button type="submit" class="btn btn-primary text-white">
-{{--                                <input type="hidden" name="admin_id" value="{{ Auth::user()->role_id }}">--}}
+                                {{--                                <input type="hidden" name="admin_id" value="{{ Auth::user()->role_id }}">--}}
                                 <i class="fas fa-home"> Trở về</i>
                             </button>
                         </form>

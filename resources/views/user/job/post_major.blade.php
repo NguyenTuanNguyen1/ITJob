@@ -85,9 +85,29 @@
             </div>
         </div>
     </div>
+
+    <section class="site-section py-4" style="background-color:white;">
+        <p style="color: black;font-size: 30px;font-weight: bold;">Top công ty nổi bật</p>
+
+        <div class="top-job1">
+            @foreach($company_outstanding as $company)
+                <div>
+                    <form action="{{ Route('profile.user',['id' => $company->user_id]) }}" method="get">
+                        <input type="hidden">
+                        <button class="SL-job1 m-3" type="submit"
+                                style="background-color:white;border-radius: 10px;border: none;">
+                            <img class="img-job1" src="{{ url('image_avatar') }}/{{ $company->user->img_avatar }}"
+                                 alt="">
+                        </button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
+
+    </section>
+
     @include('layout.page-js')
     <script>
-        // $("search-ajax-result").hide();
 
         $(".input-search").keyup(function () {
 

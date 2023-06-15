@@ -1,8 +1,6 @@
 @extends('company.layout')
 @section('content')
     @include('layout.page-css')
-
-
     <div class="form-group mb-2">
         <form action="{{ Route('search.company.filter') }}" method="post" class="search-jobs-form">
             @csrf

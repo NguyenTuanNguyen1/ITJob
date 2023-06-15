@@ -101,6 +101,40 @@ class CompanyController extends Controller
     public function applied(Request $request)
     {
         $input = $request->all();
-        dd($input);
+
+        $applied = $this->admin_repo->getApplied($input['post_id']);
+
+        return view('company.applied')->with('applied', $applied);
+    }
+
+    public function ticket(Request $request)
+    {
+        $input = $request->all();
+
+        $ticket = $this->ticket_repo->getTicketReplied($input['id']);
+
+        return view('company.ticket')->with([
+           'tickets' => $ticket
+        ]);
+    }
+
+    public function deleteTicket(Request $request)
+    {
+        $input = $request->all();
+
+        $this->ticket_repo->delete($input['id']);
+
+        return redirect()->route('company.ticket.replied',['id' => Auth::user()->id]);
+    }
+
+    public function contactCreate(Request $request)
+    {
+        $input = $request->all();
+
+        $input['username'] = $input['email'] = null;
+        $this->ticket_repo->createContact($input);
+
+        alert('Bạn đã gửi tin nhắn thành công', null,'success');
+        return redirect()->route('company.index');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constant;
 use App\Interfaces\IAdminRepository;
+use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\ISearchRepository;
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Auth;
  * @property IInformationRepository $information_repo
  * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
+ * @property ICompanyRepository $company_repo
  */
 class BackendController extends Controller
 {
@@ -42,6 +44,7 @@ class BackendController extends Controller
         IInformationRepository $informationRepository,
         RoleRepository $roleRepostitory,
         ISearchRepository $searchRepository,
+        ICompanyRepository $companyRepository
     )
     {
         $this->post_repo = $postRepository;
@@ -51,16 +54,7 @@ class BackendController extends Controller
         $this->information_repo = $informationRepository;
         $this->role_repo = $roleRepostitory;
         $this->search_repo = $searchRepository;
-    }
-
-    public function getAllPost()
-    {
-        $posts = $this->post_repo->all(Constant::STATUS_APPROVED_POST);
-        $admin = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_ADMIN);
-        $company = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_COMPANY);
-        $candidate = $this->user_repo->getUserByCondition('role_id',Constant::ROLE_CANDIDATE);
-        $role = $this->role_repo->all();
-        $information_type = $this->information_repo->all();
+        $this->company_repo = $companyRepository;
     }
 
     public function searchFilter(Request $request)
@@ -118,7 +112,10 @@ class BackendController extends Controller
     public function getPostByMajor(Request $request)
     {
         $input = $request->all();
+
         $posts = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, $input['major'],Carbon::now()->subMonth(),Carbon::now());
+        $company_outstanding = $this->company_repo->getPostOutstanding();
+
         if ($request->ajax())
         {
             return response()->json([
@@ -126,7 +123,10 @@ class BackendController extends Controller
             ]);
         }
 
-        return view('user.job.post_major')->with('posts', $posts);
+        return view('user.job.post_major')->with([
+            'posts' => $posts,
+            'company_outstanding' => $company_outstanding
+        ]);
     }
 
     public function searchAjaxName(Request $request)

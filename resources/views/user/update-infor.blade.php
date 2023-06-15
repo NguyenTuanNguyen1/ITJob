@@ -430,6 +430,7 @@
                                                 <a class="pull-left" href="#"><img class="media-object"
                                                                                    src="{{ url('image_avatar') }}/{{ $replied->from_user->img_avatar}}"></a>
                                                 <div class="media-body">
+                                                    <h4 class="media-heading" style="font-size: 20px;color: black">Hệ thống Finding Job</h4>
                                                     <p>{{ $replied->content }}</p>
                                                     <ul class="list-unstyled list-inline media-detail pull-left"
                                                         style="display: flex;">

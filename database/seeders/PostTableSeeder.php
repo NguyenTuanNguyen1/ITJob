@@ -20,7 +20,7 @@ class PostTableSeeder extends Seeder
     {
         for ($i = 1; $i < 3; $i++) {
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
@@ -38,7 +38,7 @@ class PostTableSeeder extends Seeder
             ]);
 
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
@@ -56,7 +56,7 @@ class PostTableSeeder extends Seeder
             ]);
 
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
@@ -74,7 +74,7 @@ class PostTableSeeder extends Seeder
             ]);
 
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
@@ -92,7 +92,7 @@ class PostTableSeeder extends Seeder
             ]);
 
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
@@ -110,7 +110,7 @@ class PostTableSeeder extends Seeder
             ]);
 
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
@@ -128,7 +128,7 @@ class PostTableSeeder extends Seeder
             ]);
 
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
@@ -146,7 +146,7 @@ class PostTableSeeder extends Seeder
             ]);
 
             DB::table('post')->insert([
-                'title' => fake()->text,
+                'title' => fake()->realText(100),
                 'requirements' => fake()->text,
                 'description' => fake()->text,
                 'benefit' => fake()->text,
