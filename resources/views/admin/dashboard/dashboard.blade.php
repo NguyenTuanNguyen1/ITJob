@@ -187,8 +187,8 @@
                                         <td>{{ $approved->user->name }}</td>
                                         <td>{{ $approved->created_at->format('d-m-Y') }}</td>
                                         <td>{{ $approved->approved_user->name }}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                        <td style="display:flex;justify-content:center">
+                                            <button class="btn btn-outline-success" type="submit" style="height: fit-content;margin-right:10px;"
                                                     onclick="window.location='{{ Route('post.detail',['id' => $approved->id]) }}'">
                                                 Chi tiết
                                             </button>
