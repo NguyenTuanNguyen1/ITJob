@@ -133,7 +133,6 @@
                                 <th>Tên hiển thị</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
-                                <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody>
@@ -142,7 +141,6 @@
                                         <td>{{ $admin->name }}</td>
                                         <td>{{ $admin->email }}</td>
                                         <td>{{ $admin->phone }}</td>
-                                        <td>{{ $admin->address }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $admin->id]) }}'">
@@ -180,8 +178,6 @@
                                 <th>Tên công ty</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
-                                <th>Địa chỉ</th>
-                                <th>Chuyên ngành</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody>
@@ -190,8 +186,6 @@
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->email }}</td>
                                         <td>{{ $company->phone }}</td>
-                                        <td>{{ $company->address }}</td>
-                                        <td>{{ $company->major }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $company->id]) }}'">
@@ -229,7 +223,6 @@
                                 <th>Tên hiển thị</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
-                                <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody>
@@ -238,7 +231,6 @@
                                         <td>{{ $candidate->name }}</td>
                                         <td>{{ $candidate->email }}</td>
                                         <td>{{ $candidate->phone }}</td>
-                                        <td>{{ $candidate->address }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $candidate->id]) }}'">
@@ -276,7 +268,6 @@
                                 <th>Tên hiển thị</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
-                                <th>Địa chỉ</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody>
@@ -285,7 +276,6 @@
                                         <td>{{ $trashed->name }}</td>
                                         <td>{{ $trashed->email }}</td>
                                         <td>{{ $trashed->phone }}</td>
-                                        <td>{{ $trashed->address }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $trashed->id]) }}'">

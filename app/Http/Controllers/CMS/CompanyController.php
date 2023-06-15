@@ -97,4 +97,10 @@ class CompanyController extends Controller
         $review = $this->ticket_repo->getTicketReplied($input['id']);
         return view('company.review')->with('reviews', $review);
     }
+
+    public function applied(Request $request)
+    {
+        $input = $request->all();
+        dd($input);
+    }
 }

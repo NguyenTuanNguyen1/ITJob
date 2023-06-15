@@ -139,6 +139,7 @@ Route::group(['prefix' => 'company'], function () {
     Route::get('/replied', [CompanyController::class, 'review'])->name('company.replied');
     Route::get('/post-create', [CompanyController::class, 'post'])->name('company.post.create');
     Route::post('/update-profile', [CompanyController::class, 'update'])->name('company.update');
+    Route::post('/user-applied-post', [CompanyController::class, 'applied'])->name('company.applied.post');
 });
 
 //Social
