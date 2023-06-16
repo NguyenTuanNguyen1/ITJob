@@ -99,7 +99,7 @@
                         <h4 class="card-title"> Danh sách bài liên hệ chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -140,7 +140,7 @@
                         <h4 class="card-title"> Danh sách bài liên hệ đã phản hồi </h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -175,6 +175,11 @@
         </div>
     </div>
     @include('modal.contact.detail-reply')
+    <style>
+    .Scroll {
+    height: 600px;
+    overflow-y: scroll;}
+    </style>
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
 <script src="{{ url('profile/js/core/popper.min.js') }}"></script>

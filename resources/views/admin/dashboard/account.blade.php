@@ -127,7 +127,7 @@
                         <h4 class="card-title"> Quản trị viên</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên hiển thị</th>
@@ -172,7 +172,7 @@
                         <h4 class="card-title"> Nhà tuyển dụng </h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên công ty</th>
@@ -217,7 +217,7 @@
                         <h4 class="card-title"> Ứng cử viên </h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên hiển thị</th>
@@ -262,7 +262,7 @@
                         <h4 class="card-title"> Những tài khoản bạn đã xoá </h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên hiển thị</th>
@@ -308,6 +308,10 @@
             height:fit-content;
             margin-right: 10px;
         }
+            .Scroll {
+        height: 600px;
+        overflow-y: scroll;}
+
     </style>
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>

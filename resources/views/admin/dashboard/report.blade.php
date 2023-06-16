@@ -126,7 +126,7 @@
                         <h4 class="card-title"> Danh sách báo cáo bài viết chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -179,7 +179,7 @@
                         <h4 class="card-title"> Danh sách báo cáo người dùng chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -236,7 +236,7 @@
                         <h4 class="card-title"> Danh sách báo cáo bài viết đã phản hồi </h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -294,7 +294,7 @@
                         <h4 class="card-title"> Danh sách báo cáo người dùng đã phản hồi </h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -344,6 +344,11 @@
             </div>
         </div>
     </div>
+    <style>
+              .Scroll {
+    height: 600px;
+    overflow-y: scroll;}
+    </style>
     @include('modal.contact.detail-reply')
     @include('modal.report.detail-report-user')
 @endsection

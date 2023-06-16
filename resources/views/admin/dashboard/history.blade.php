@@ -9,7 +9,7 @@
                             <h4 class="card-title"> Lịch sử </h4>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="Scroll">
                                 <table class="table">
                                     <thead class=" text-primary">
                                     <th>Thời gian</th>
@@ -32,4 +32,9 @@
             </div>
         </div>
     </div>
+    <style>
+              .Scroll {
+    height: 600px;
+    overflow-y: scroll;}
+    </style>
 @endsection
