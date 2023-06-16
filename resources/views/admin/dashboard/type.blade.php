@@ -21,7 +21,7 @@
                         <h4 class="card-title"> Thông tin thêm</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="Scroll">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Nội dung</th>
@@ -37,6 +37,11 @@
             </div>
         </div>
     </div>
+    <style>
+              .Scroll {
+    height: 600px;
+    overflow-y: scroll;}
+    </style>
 @endsection
 @include('modal.type.edit')
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
