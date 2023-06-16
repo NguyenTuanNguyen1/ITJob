@@ -8,7 +8,9 @@
         <form id="type-create" method="post">
             <div class="d-flex">
                 <input type="text" class="form-control" id="content" style="width: 30%">
-                <button class="btn btn-outline-primary" type="submit" style="margin-left: 10px;margin-top: 0">Thêm thông tin</button>
+                <button class="btn btn-outline-primary" type="submit" style="margin-left: 10px;margin-top: 0">Thêm thông
+                    tin
+                </button>
             </div>
         </form>
     </div>
@@ -21,27 +23,20 @@
                         <h4 class="card-title"> Thông tin thêm</h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                <th>Nội dung</th>
-                                <th class="text-center">Chức năng</th>
-                                </thead>
-                                <tbody id="data">
+                        <table class="table">
+                            <thead class=" text-primary">
+                            <th>Nội dung</th>
+                            <th class="text-center">Chức năng</th>
+                            </thead>
+                            <tbody id="data">
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <style>
-              .Scroll {
-    height: 600px;
-    overflow-y: scroll;}
-    </style>
 @endsection
 @include('modal.type.edit')
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
@@ -66,10 +61,10 @@
                 var data = res.data;
                 data.forEach(function (item) {
                     _li += '<tr>';
-                    _li += '<td>'+ item.content +'</td>'
+                    _li += '<td>' + item.content + '</td>'
                     _li += '<td class="text-center">';
-                    _li += '<button class="btn btn-outline-danger" id="btn-delete" value="'+ item.id +'">Xoá</button>';
-                    _li += '<button class="btn btn-outline-warning" type="submit" data-toggle="modal" style="margin: 5px" data-target="#modalEdit" id="btn-edit" value="'+ item.id +'">Sửa'
+                    _li += '<button class="btn btn-outline-danger" id="btn-delete" value="' + item.id + '">Xoá</button>';
+                    _li += '<button class="btn btn-outline-warning" type="submit" data-toggle="modal" style="margin: 5px" data-target="#modalEdit" id="btn-edit" value="' + item.id + '">Sửa'
                     _li += '</td>';
                     _li += '</tr>';
                 })
@@ -80,8 +75,8 @@
         $('#type-create').submit(function (e) {
             e.preventDefault();
             var value = {
-                content : $("#content").val(),
-                _token :"{{ csrf_token() }}"
+                content: $("#content").val(),
+                _token: "{{ csrf_token() }}"
             }
             $.ajax({
                 url: '{{ Route('type.create') }}',
@@ -96,8 +91,8 @@
         $('#data').on('click', '#btn-delete', function (e) {
             e.preventDefault()
             var value = {
-                id : $(this).attr("value"),
-                _token :"{{ csrf_token() }}"
+                id: $(this).attr("value"),
+                _token: "{{ csrf_token() }}"
             }
             $.ajax({
                 url: '{{ Route('type.delete') }}',
@@ -112,8 +107,8 @@
         $('#data').on('click', '#btn-edit', function (e) {
             e.preventDefault()
             var _li = '';
-            _li += '<input type="hidden" name="id" value="'+ $(this).attr("value") +'">'
-             $('#type-data').html(_li)
+            _li += '<input type="hidden" name="id" value="' + $(this).attr("value") + '">'
+            $('#type-data').html(_li)
         })
     });
 </script>

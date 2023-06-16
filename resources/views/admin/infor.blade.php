@@ -12,7 +12,8 @@
                     <div class="card-body">
                         <div class="container1" id="imgBox">
                             <label for="file">
-                                <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px" height="200px">
+                                <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px"
+                                     height="200px">
                             </label>
                         </div>
                         <div class="d-flex align-items-center text-center p-1 py-3">

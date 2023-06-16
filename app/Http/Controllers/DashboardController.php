@@ -81,7 +81,7 @@ class DashboardController extends Controller
         $user_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
         $user_candidate = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_CANDIDATE);
         $user_trashed = $this->user_repo->trashed();
-
+//        dd($user_admin);
         return view('admin.dashboard.account')->with([
             'all_user' => count($all_user),
             'count_user_admin' => count($user_admin),

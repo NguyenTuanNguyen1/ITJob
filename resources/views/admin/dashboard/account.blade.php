@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-globe text-warning"></i>
+                                    <i class="nc-icon nc-single-copy-04 text-success"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-money-coins text-success"></i>
+                                    <i class="nc-icon nc-settings text-warning"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-vector text-danger"></i>
+                                    <i class="nc-icon nc-badge text-danger"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -95,7 +95,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-favourite-28 text-primary"></i>
+                                    <i class="nc-icon nc-single-02 text-primary"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -127,7 +127,7 @@
                         <h4 class="card-title"> Quản trị viên</h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div class="@if($user_admin->isNotEmpty() && count($user_admin) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên hiển thị</th>
@@ -142,11 +142,13 @@
                                         <td>{{ $admin->email }}</td>
                                         <td>{{ $admin->phone }}</td>
                                         <td class="text-content1">
-                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
+                                            <button class="btn btn-outline-success" type="submit"
+                                                    style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $admin->id]) }}'">
                                                 Chi tiết
                                             </button>
-                                            <form action="{{ Route('admin.delete.user') }}" method="POST" id="btn-delete-admin">
+                                            <form action="{{ Route('admin.delete.user') }}" method="POST"
+                                                  id="btn-delete-admin">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $admin->id }}">
                                                 <button class="btn btn-outline-danger" type="submit">
@@ -172,7 +174,7 @@
                         <h4 class="card-title"> Nhà tuyển dụng </h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div class="@if($user_company->isNotEmpty() && count($user_company) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên công ty</th>
@@ -187,16 +189,18 @@
                                         <td>{{ $company->email }}</td>
                                         <td>{{ $company->phone }}</td>
                                         <td class="text-content1">
-                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
+                                            <button class="btn btn-outline-success" type="submit"
+                                                    style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $company->id]) }}'">
                                                 Chi tiết
                                             </button>
-                                            <form action="{{ Route('admin.delete.user') }}" method="POST" id="btn-delete-company">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $company->id }}">
-                                            <button class="btn btn-outline-danger" type="submit">
-                                                Xoá
-                                            </button>
+                                            <form action="{{ Route('admin.delete.user') }}" method="POST"
+                                                  id="btn-delete-company">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $company->id }}">
+                                                <button class="btn btn-outline-danger" type="submit">
+                                                    Xoá
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -217,7 +221,7 @@
                         <h4 class="card-title"> Ứng cử viên </h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div class="@if($user_candidate->isNotEmpty() && count($user_candidate) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên hiển thị</th>
@@ -232,16 +236,18 @@
                                         <td>{{ $candidate->email }}</td>
                                         <td>{{ $candidate->phone }}</td>
                                         <td class="text-content1">
-                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
+                                            <button class="btn btn-outline-success" type="submit"
+                                                    style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $candidate->id]) }}'">
                                                 Chi tiết
                                             </button>
-                                            <form action="{{ Route('admin.delete.user') }}" method="POST" id="btn-delete-candidate">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $candidate->id }}">
-                                            <button class="btn btn-outline-danger" type="submit">
-                                                Xoá
-                                            </button>
+                                            <form action="{{ Route('admin.delete.user') }}" method="POST"
+                                                  id="btn-delete-candidate">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $candidate->id }}">
+                                                <button class="btn btn-outline-danger" type="submit">
+                                                    Xoá
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -262,7 +268,7 @@
                         <h4 class="card-title"> Những tài khoản bạn đã xoá </h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div class="@if($user_trashed->isNotEmpty() && count($user_trashed) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên hiển thị</th>
@@ -277,11 +283,13 @@
                                         <td>{{ $trashed->email }}</td>
                                         <td>{{ $trashed->phone }}</td>
                                         <td class="text-content1">
-                                            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px"
+                                            <button class="btn btn-outline-success" type="submit"
+                                                    style="margin-right: 10px"
                                                     onclick="window.location='{{ Route('dashboard.profile.user',['id' => $trashed->id]) }}'">
                                                 Chi tiết
                                             </button>
-                                            <form action="{{ Route('admin.restore.user') }}" method="POST" id="btn-restore-user">
+                                            <form action="{{ Route('admin.restore.user') }}" method="POST"
+                                                  id="btn-restore-user">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $trashed->id }}">
                                                 <button class="btn btn-outline-dark" type="submit">
@@ -300,17 +308,20 @@
         </div>
     </div>
     <style>
-        .text-content1{
-            display:flex;
-            justify-content:center;
+        .text-content1 {
+            display: flex;
+            justify-content: center;
         }
-        .text-content1 button{
-            height:fit-content;
+
+        .text-content1 button {
+            height: fit-content;
             margin-right: 10px;
         }
-            .Scroll {
-        height: 600px;
-        overflow-y: scroll;}
+
+        .Scroll {
+            height: 580px;
+            overflow-y: scroll;
+        }
 
     </style>
 @endsection

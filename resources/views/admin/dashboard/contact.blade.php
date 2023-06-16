@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-globe text-warning"></i>
+                                    <i class="nc-icon nc-email-85 text-success"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-money-coins text-success"></i>
+                                    <i class="nc-icon nc-email-85 text-warning"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-vector text-danger"></i>
+                                    <i class="nc-icon nc-chat-33 text-danger"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -99,7 +99,8 @@
                         <h4 class="card-title"> Danh sách liên hệ chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div
+                            class="@if($contact_not_reply->isNotEmpty() && count($contact_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -144,7 +145,7 @@
                         <h4 class="card-title"> Danh sách bài liên hệ đã phản hồi </h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div class="@if($contact_reply->isNotEmpty() && count($contact_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -169,7 +170,8 @@
                                                     id="btn-replied" value="{{ $reply->id }}">Phản hồi
                                             </button>
                                             <button class="btn btn-outline-warning" type="submit" style="margin: 5px"
-                                                    onclick="window.location='{{ Route('contact.delete',['id' => $reply->id]) }}'">Xoá
+                                                    onclick="window.location='{{ Route('contact.delete',['id' => $reply->id]) }}'">
+                                                Xoá
                                             </button>
                                         </td>
                                     </tr>
@@ -184,9 +186,10 @@
     </div>
     @include('modal.contact.detail-reply')
     <style>
-    .Scroll {
-    height: 600px;
-    overflow-y: scroll;}
+        .Scroll {
+            height: 580px;
+            overflow-y: scroll;
+        }
     </style>
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
@@ -205,16 +208,16 @@
 
         $('#contact_replied').on('click', '#btn-replied', function () {
             var _li = '';
-            var value = { 'id': $(this).val() }
+            var value = {'id': $(this).val()}
             $.ajax({
                 url: "{{ Route('contact.replied') }}",
                 type: "GET",
                 data: value,
                 success: function (res) {
                     console.log(value)
-                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : '+ res.data.from_user.username +' </label><br>';
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : ' + res.data.from_user.username + ' </label><br>';
                     _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
-                    _li += '<label>'+ res.data.content +'</label>';
+                    _li += '<label>' + res.data.content + '</label>';
                     $('#detail-replied').html(_li)
                 }
             })
@@ -222,15 +225,15 @@
 
         $('#contact_reply').on('click', '#btn-reply', function () {
             var _li = '';
-            var value = { 'id': $(this).val() }
+            var value = {'id': $(this).val()}
             $.ajax({
                 url: "{{ Route('contact.detail') }}",
                 type: "GET",
                 data: value,
                 success: function (res) {
                     console.log(res)
-                    _li += '<input type="hidden" name="ticket_id" value="'+ res.data.id +'">';
-                    _li += '<input type="hidden" name="to_user_id" value="'+ res.data.from_user_id +'">';
+                    _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
+                    _li += '<input type="hidden" name="to_user_id" value="' + res.data.from_user_id + '">';
                     $('#replied_contact').html(_li)
                 }
             })

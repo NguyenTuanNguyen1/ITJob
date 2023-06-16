@@ -18,9 +18,9 @@
 <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
         <div class="logo">
-            <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+            <a href="" class="simple-text logo-mini">
                 <div class="logo-image-small">
-                    <img src="{{ url('Images/') }}/{{ Auth::user()->img_avatar }}">
+                    <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}">
                 </div>
                 <!-- <p>CT</p> -->
             </a>
@@ -39,12 +39,12 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-{{--                <li class="active ">--}}
-{{--                    <a href="{{ Route('home')}}">--}}
-{{--                        <i class="nc-icon nc-app"></i>--}}
-{{--                        <p>Trang chủ Finding Job</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                {{--                <li class="active ">--}}
+                {{--                    <a href="{{ Route('home')}}">--}}
+                {{--                        <i class="nc-icon nc-app"></i>--}}
+                {{--                        <p>Trang chủ Finding Job</p>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
                 <li>
                     <a href="{{ Route('dashboard.profile',['id' => Auth::user()->id]) }}">
                         <i class="nc-icon nc-single-02"></i>
@@ -53,13 +53,13 @@
                 </li>
                 <li>
                     <a href="{{ Route('dashboard.account') }}">
-                        <i class="nc-icon nc-tile-56"></i>
+                        <i class="nc-icon nc-circle-10"></i>
                         <p>Tài khoản</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{ Route('dashboard.contact') }}">
-                        <i class="nc-icon nc-tile-56"></i>
+                        <i class="nc-icon nc-chat-33"></i>
                         <p>Liên hệ</p>
                     </a>
                 </li>
@@ -71,7 +71,7 @@
                 </li>
                 <li>
                     <a href="{{ Route('dashboard.information') }}">
-                        <i class="nc-icon nc-book-bookmark"></i>
+                        <i class="nc-icon nc-bullet-list-67"></i>
                         <p>Thông tin thêm</p>
                     </a>
                 </li>
@@ -116,16 +116,12 @@
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navigation" style="justify-content: flex-start!important;">
-                    <form>
                         <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <i class="nc-icon nc-zoom-split"></i>
-                                </div>
+                                <button class="btn btn-outline-success" style="text-decoration: none;border-radius: 8px" onclick="window.location='{{ Route('home') }}'">Trang chủ Finding Job</button>
                             </div>
                         </div>
-                    </form>
+
                 </div>
             </div>
         </nav>

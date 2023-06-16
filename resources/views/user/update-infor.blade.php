@@ -275,9 +275,13 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 @foreach($information as $infor)
-                                    <label
-                                        style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label>
-                                    <br>
+                                    @if($infor->content == null)
+
+                                    @else
+                                        <label
+                                            style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label>
+                                        <br>
+                                    @endif
                                     <label
                                         style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label>
                                     <br>
