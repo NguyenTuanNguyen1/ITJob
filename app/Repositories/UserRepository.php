@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Interfaces\IUserRepository;
@@ -27,14 +28,15 @@ class UserRepository implements IUserRepository
         $user->password = $data['password'];
         $user->setRememberToken(Str::random(60));
         $user->save();
-        return User::where('email',$data['email'])->first();
+        return User::where('email', $data['email'])->first();
     }
+
     public function find($id)
     {
         return User::find($id);
     }
 
-    public function update($id,array $data)
+    public function update($id, array $data)
     {
         return User::find($id)->update([
             'username' => $data['username'],

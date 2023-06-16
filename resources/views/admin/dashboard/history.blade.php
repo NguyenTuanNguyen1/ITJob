@@ -9,20 +9,20 @@
                             <h4 class="card-title"> Lịch sử </h4>
                         </div>
                         <div class="card-body">
-                            <div class="Scroll">
+                            <div class="@if($history->isNotEmpty() && count($history) > 8) Scroll @endif">
                                 <table class="table">
                                     <thead class=" text-primary">
                                     <th>Thời gian</th>
                                     <th>Hoạt động</th>
-{{--                                    <th class="text-center">Chức năng</th>--}}
+                                    {{--                                    <th class="text-center">Chức năng</th>--}}
                                     </thead>
                                     @foreach($history as $data)
-                                    <tbody>
+                                        <tbody>
                                         <tr>
                                             <td>{{ $data->created_at->format('d-m-Y H:i') }}</td>
                                             <td>{{ $data->content }}</td>
                                         </tr>
-                                    </tbody>
+                                        </tbody>
                                     @endforeach
                                 </table>
                             </div>
@@ -33,8 +33,9 @@
         </div>
     </div>
     <style>
-              .Scroll {
-    height: 600px;
-    overflow-y: scroll;}
+        .Scroll {
+            height: 580px;
+            overflow-y: scroll;
+        }
     </style>
 @endsection

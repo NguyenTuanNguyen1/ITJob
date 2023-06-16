@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-globe text-warning"></i>
+                                    <i class="nc-icon nc-single-copy-04 text-success"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-globe text-warning"></i>
+                                    <i class="nc-icon nc-circle-10 text-warning"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-money-coins text-success"></i>
+                                    <i class="nc-icon nc-email-85 text-primary"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -95,7 +95,7 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-vector text-danger"></i>
+                                    <i class="nc-icon nc-chat-33 text-danger"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
@@ -126,7 +126,8 @@
                         <h4 class="card-title"> Danh sách báo cáo bài viết chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div
+                            class="@if($report_post_not_reply->isNotEmpty() && count($report_post_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -179,7 +180,8 @@
                         <h4 class="card-title"> Danh sách báo cáo người dùng chưa phản hồi</h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div
+                            class="@if($report_user_not_reply->isNotEmpty() && count($report_user_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -236,7 +238,8 @@
                         <h4 class="card-title"> Danh sách báo cáo bài viết đã phản hồi </h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div
+                            class="@if($report_post_reply->isNotEmpty() && count($report_post_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -294,7 +297,8 @@
                         <h4 class="card-title"> Danh sách báo cáo người dùng đã phản hồi </h4>
                     </div>
                     <div class="card-body">
-                        <div class="Scroll">
+                        <div
+                            class="@if($report_user_reply->isNotEmpty() && count($report_user_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -345,9 +349,10 @@
         </div>
     </div>
     <style>
-              .Scroll {
-    height: 600px;
-    overflow-y: scroll;}
+        .Scroll {
+            height: 580px;
+            overflow-y: scroll;
+        }
     </style>
     @include('modal.contact.detail-reply')
     @include('modal.report.detail-report-user')
