@@ -62,7 +62,6 @@ class AdminController extends Controller
         $user = $this->user_repo->find($input['id']);
         $this->ActivityLog("Bạn đã xoá người dùng%" . $user['username'] . '*' . $user['id'],Auth::user()->id);
         $this->user_repo->delete($input['id']);
-
         return redirect()->route('dashboard.account');
     }
 

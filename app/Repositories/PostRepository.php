@@ -66,11 +66,6 @@ class PostRepository implements IPostRepository
         return Post::find($id)->delete();
     }
 
-    public function storage($id)
-    {
-        // TODO: Implement storage() method.
-    }
-
     public function findTrashed($id)
     {
         return Post::withTrashed()->find($id);
@@ -110,8 +105,14 @@ class PostRepository implements IPostRepository
             ->get();
     }
 
-    public function getPostByUserId($condition, $action)
+    public function changeStatus($id, $status)
     {
-        return Post::where($condition, $action)->first();
+        return Post::find($id)->update([
+           'status' => $status
+        ]);
+    }
+    public function trashedByUser($user_id)
+    {
+        return Post::onlyTrashed()->where('user_id', $user_id)->get();
     }
 }

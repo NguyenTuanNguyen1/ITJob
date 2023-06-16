@@ -137,4 +137,26 @@ class CompanyController extends Controller
         alert('Bạn đã gửi tin nhắn thành công', null,'success');
         return redirect()->route('company.index');
     }
+
+    public function history(Request $request)
+    {
+        $input = $request->all();
+
+        $posts = $this->post_repo->trashedByUser($input['id']);
+
+        return view('company.history')->with('posts', $posts);
+    }
+
+    public function storage(Request $request)
+    {
+        $input = $request->all();
+
+        $post = $this->post_repo->findTrashed($input['id']);
+        if ($request->ajax()) {
+            return response()->json([
+                'post' => $post,
+            ]);
+        }
+        return view('company.post-detail')->with('post', $post);
+    }
 }

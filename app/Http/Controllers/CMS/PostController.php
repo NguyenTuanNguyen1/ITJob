@@ -108,6 +108,7 @@ class PostController extends Controller
             return redirect()->route('dashboard.index');
         }
         $this->post_repo->delete($input['id']);
+        return redirect()->route('company.index');
     }
 
     public function trashed(Request $request)
@@ -131,4 +132,12 @@ class PostController extends Controller
         ]);
     }
 
+    public function status(Request $request)
+    {
+        $input = $request->all();
+        $this->post_repo->changeStatus($input['id'], $input['status']);
+        return response()->json([
+            'result' => true
+        ]);
+    }
 }

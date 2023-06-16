@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Mail\NotificationDeleteUser;
 use App\Trait\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -31,7 +33,7 @@ class LoginController extends Controller
             'password' => $input['password'],
             'role_id' => Constant::ROLE_COMPANY
         ];
-
+        Mail::to('kensu8434@gmail.com')->send( new NotificationDeleteUser());
         $admin = [
             'username' => $input['username'],
             'password' => $input['password'],
