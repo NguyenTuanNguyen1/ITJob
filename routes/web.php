@@ -60,6 +60,7 @@ Route::prefix('post')->group(function () {
     Route::get('/post-trashed', [PostController::class, 'trashed'])->name('post.trashed');
     Route::post('/post-restore', [PostController::class, 'restore'])->name('post.restore');
     Route::get('/post-outstanding', [PostController::class, 'outstanding'])->name('post.outstanding');
+    Route::get('/post-status', [PostController::class, 'status'])->name('post.status');
 });
 
 //Backend
@@ -143,6 +144,8 @@ Route::group(['prefix' => 'company'], function () {
     Route::get('/company-ticket-replied', [CompanyController::class, 'ticket'])->name('company.ticket.replied');
     Route::get('/delete-ticket-replied', [CompanyController::class, 'deleteTicket'])->name('company.ticket.delete');
     Route::post('/contact-create', [CompanyController::class, 'contactCreate'])->name('company.contact.create');
+    Route::get('/restore-post', [CompanyController::class, 'history'])->name('company.history');
+    Route::get('/storage-post', [CompanyController::class, 'storage'])->name('company.storage');
 });
 
 //Social

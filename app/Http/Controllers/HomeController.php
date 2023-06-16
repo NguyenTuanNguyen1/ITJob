@@ -7,8 +7,6 @@ use App\Interfaces\ICompanyRepository;
 use App\Interfaces\IPostRepository;
 use App\Interfaces\IUserRepository;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 /**
  * @property IPostRepository $post_repo

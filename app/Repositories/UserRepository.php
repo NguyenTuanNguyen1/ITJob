@@ -75,7 +75,7 @@ class UserRepository implements IUserRepository
 
     public function storage($id)
     {
-        return User::withTrashed()->find($id);
+        return User::onlyTrashed()->find($id);
     }
 
     public function restore($id)

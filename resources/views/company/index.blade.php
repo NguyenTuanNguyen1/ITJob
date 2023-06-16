@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 {{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
     <script src="https://unpkg.com/feather-icons"></script>
-    <div class="row g-4 mb-4">
+    <div class="row g-4 mb-4" id="post">
         @foreach($all_post as $post)
 
                 <div class="col-12 col-lg-4">
@@ -27,9 +27,13 @@
                                     <div class="col-auto">
                                         <h4 class="app-card-title">Đã phê duyệt</h4>
                                     </div>
-                                @else
+                                @elseif($post->status == 0)
                                     <div class="col-auto">
                                         <h4 class="app-card-title">Chưa phê duyệt</h4>
+                                    </div>
+                                @else
+                                    <div class="col-auto">
+                                        <h4 class="app-card-title">Ẩn bài viết</h4>
                                     </div>
                                 @endif
                                 <div class="col-auto" style="position: absolute;left: 80%;">
@@ -57,17 +61,18 @@
                                 {{ $post->title }}
                             </div>
                         </div>
-                        <!--//app-card-body-->
-                        <div class="app-card-footer p-4 mt-auto">
-                            <div class="col-auto">
-                                <div class="toggle focus">
-                                    <input type="checkbox">
-                                    <span class="slider focus"></span>
-                                    <span class="label">Ẩn bài viết</span>
+                        @if($post->approved_date != null)
+                            <div class="app-card-footer p-4 mt-auto">
+                                <div class="col-auto">
+                                    <div class="toggle focus">
+                                        <input type="checkbox" value="{{ $post->id }}">
+                                        <span class="slider focus"></span>
+                                        <span class="label">Hiện bài viết</span>
+                                    </div>
                                 </div>
+                                <button class="btn btn-outline-success" id="btn-delete" value="{{ $post->id }}" style="position: absolute;left: 65%;bottom: 25px;"> Xoá bài viết</button>
                             </div>
-                            <a class="btn btn-outline-success" href="#" style="position: absolute;left: 65%;bottom: 25px;">Xoá bài viết</a>
-                        </div>
+                        @endif
                     </div>
                 </div>
         @endforeach
@@ -75,16 +80,78 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function () {
+
+            $('#post').on('click', '#btn-delete', function (e) {
+                e.preventDefault();
+                var data = {
+                    'id': $(this).val(),
+                    'role_id': '{{ Auth::user()->role_id }}',
+                    '_token': '{{ csrf_token() }}'
+                }
+
+                Swal.fire({
+                    title: 'Bạn muốn xoá bài viết?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Không',
+                    confirmButtonText: 'Có',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '{{ Route('post.delete') }}',
+                            type: 'POST',
+                            data: data,
+                            success: function () {
+                                window.location.reload('{{ Route('company.index') }}');
+                            }
+                        })
+                        Swal.fire(
+                            'Đã xoá thành công!',
+                        )
+                    }
+                })
+
+            })
+
             $('.toggle input[type="checkbox"]').click(function () {
                 $(this).parent().toggleClass('on')
                 if ($(this).parent().hasClass('on')) {
-                    console.log(123)
-                    $(this).parent().children('.label').text('Hiện bài viết')
-                } else {
-                    console.log(456)
+                    var value = {
+                        'id' : $(this).val(),
+                        '_token': '{{ csrf_token() }}',
+                        'status': 2
+                    }
+                    $.ajax({
+                        url: '{{ Route('post.status') }}',
+                        type: 'GET',
+                        data: value,
+                        success: function (res){
+
+                        }
+                    })
+
                     $(this).parent().children('.label').text('Ẩn bài viết')
+                } else {
+                    var value = {
+                        'id' : $(this).val(),
+                        '_token': '{{ csrf_token() }}',
+                        'status': 1
+                    }
+                    $.ajax({
+                        url: '{{ Route('post.status') }}',
+                        type: 'GET',
+                        data: value,
+                        success: function (res){
+
+                        }
+                    })
+
+                    $(this).parent().children('.label').text('Hiện bài viết')
                 }
             });
             $('input').focusin(function () {
@@ -168,8 +235,8 @@
             box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.05);
         }
 
-        .toggle .slider { background-color: red; }
-        .toggle.on .slider { background-color: #4287f5; }
+        .toggle .slider { background-color: #4287f5; }
+        .toggle.on .slider { background-color: red; }
         .toggle.on .slider:before { transform: translateX(26px); box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); }
 
         .toggle .label { position: absolute; left: 64px; top: 4px; vertical-align: middle;width: 170%;font-size: 14px; }

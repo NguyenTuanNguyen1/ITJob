@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function ticket()
     {
-        return $this->hasMany(Ticket::class,'user_id');
+        return $this->hasMany(Ticket::class,'from_user_id');
     }
 
     public function applied()
