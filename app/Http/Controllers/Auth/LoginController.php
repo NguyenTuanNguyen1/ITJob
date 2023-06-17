@@ -33,7 +33,7 @@ class LoginController extends Controller
             'password' => $input['password'],
             'role_id' => Constant::ROLE_COMPANY
         ];
-        Mail::to('kensu8434@gmail.com')->send( new NotificationDeleteUser());
+        
         $admin = [
             'username' => $input['username'],
             'password' => $input['password'],

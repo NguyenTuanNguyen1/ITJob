@@ -240,9 +240,9 @@
                                             <td>{{ $trashed->user->name }}</td>
                                             <td>{{ $trashed->deleted_at->format('d-m-Y') }}</td>
                                             <td>{{ $trashed->approved_user->name }}</td>
-                                            <td class="text-center">
+                                            <td style="display:flex;justify-content:center">
                                                 <button class="btn btn-outline-success" type="submit"
-                                                        style="margin: 5px"
+                                                style="height: fit-content;margin-right:10px;"
                                                         onclick="window.location='{{ Route('post.detail',['id' => $trashed->id]) }}'">
                                                     Chi tiết
                                                 </button>
