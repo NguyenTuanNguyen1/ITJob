@@ -64,10 +64,14 @@
                         @if($post->approved_date != null)
                             <div class="app-card-footer p-4 mt-auto">
                                 <div class="col-auto">
-                                    <div class="toggle focus">
+                                    <div class="toggle focus @if($post->status != 1) on @endif ">
                                         <input type="checkbox" value="{{ $post->id }}">
                                         <span class="slider focus"></span>
-                                        <span class="label">Hiện bài viết</span>
+                                        @if($post->status != 1)
+                                            <span class="label">Ẩn bài viết</span>
+                                        @else
+                                            <span class="label">Hiện bài viết</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <button class="btn btn-outline-success" id="btn-delete" value="{{ $post->id }}" style="position: absolute;left: 65%;bottom: 25px;"> Xoá bài viết</button>
@@ -134,7 +138,6 @@
 
                         }
                     })
-
                     $(this).parent().children('.label').text('Ẩn bài viết')
                 } else {
                     var value = {
