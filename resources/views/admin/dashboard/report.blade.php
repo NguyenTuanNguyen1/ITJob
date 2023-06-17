@@ -243,7 +243,7 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
-                                <th>Nội dung</th>
+                                <th  style="width:50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
@@ -302,7 +302,7 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
-                                <th>Nội dung</th>
+                                <th style="width:50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
