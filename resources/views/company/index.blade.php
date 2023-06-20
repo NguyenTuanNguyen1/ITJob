@@ -3,11 +3,10 @@
     @include('company.search')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-{{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
+{{--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
     <script src="https://unpkg.com/feather-icons"></script>
-    <div class="row g-4 mb-4" id="post">
+    <div class="row g-4 mb-4 mt-2" id="post">
         @foreach($all_post as $post)
-
                 <div class="col-12 col-lg-4">
                     <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
                         <div class="app-card-header p-3 border-bottom-0">
@@ -23,10 +22,11 @@
                                         </svg>
                                     </div>
                                 </div>
-                                @if($post->status == 1)
+                                
                                     <div class="col-auto">
-                                        <h4 class="app-card-title">Đã phê duyệt</h4>
+                                        <h4 class="app-card-title"> {{ $post->title }}</h4>
                                     </div>
+                                @if($post->status == 1)
                                 @elseif($post->status == 0)
                                     <div class="col-auto">
                                         <h4 class="app-card-title">Chưa phê duyệt</h4>
@@ -58,7 +58,7 @@
                         <!--//app-card-header-->
                         <div class="app-card-body px-4">
                             <div class="intro">
-                                {{ $post->title }}
+                                {{ $post->description}}
                             </div>
                         </div>
                         @if($post->approved_date != null)
@@ -213,6 +213,7 @@
             width: 50px;
             height: 24px;
             display: inline-block;
+            left: -16px;
         }
 
         .toggle .slider {

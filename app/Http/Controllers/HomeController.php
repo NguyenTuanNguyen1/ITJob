@@ -73,4 +73,8 @@ class HomeController extends Controller
     {
         return view('layout.not-found');
     }
+    public function test()
+    {
+        return view('auth.resetPassword');
+    }
 }

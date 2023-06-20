@@ -36,18 +36,13 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => 'smtp.googlemail.com',
-            'port' => 587,
-            'encryption' => 'tls',
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-//            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-//            'port' => env('MAIL_PORT', 587),
-//            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-//            'username' => env('MAIL_USERNAME'),
-//            'password' => env('MAIL_PASSWORD'),
-//            'timeout' => null,
-//            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+           'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+           'port' => env('MAIL_PORT', 587),
+           'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+           'username' => env('MAIL_USERNAME'),
+           'password' => env('MAIL_PASSWORD'),
+           'timeout' => null,
+           'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
 
         'ses' => [
