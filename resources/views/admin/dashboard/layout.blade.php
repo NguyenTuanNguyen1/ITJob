@@ -25,7 +25,7 @@
                 <!-- <p>CT</p> -->
             </a>
             <a href="https://www.creative-tim.com" class="simple-text logo-normal ">
-                {{ Auth::user()->username }}
+                {{ Auth::user()->name }}
                 <!-- <div class="logo-image-big">
                   <img src="../assets/img/logo-big.png">
                 </div> -->

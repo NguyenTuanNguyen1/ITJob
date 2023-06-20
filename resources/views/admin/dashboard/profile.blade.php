@@ -160,7 +160,13 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label for="job-region">Mô tả</label><br>
+                                    <textarea name="description" cols="100" rows="5">{{ $user->description }}</textarea>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                             <div class="mt-5 text-center">
                                 <button class="btn btn-warning profile-button"
                                         type="submit">Lưu

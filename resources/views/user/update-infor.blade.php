@@ -318,7 +318,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h3>{{ $count_review }} bình luận</h3>
-                                    <div>
+                                    <div id="review">
                                         @foreach($reviews as $review)
                                             <div class="media">
                                                 <a class="pull-left" href="#">
@@ -332,17 +332,9 @@
                                                                aria-expanded="false" ><i class="fas fa-bars"></i></a>
                                                             <div class="dropdown-menu">
                                                                 <button type="submit" class="dropdown-item" data-toggle="modal"
-                                                                        value="{{ $review->from_user_id }}"
+                                                                        value="{{ $review->from_user_id }},{{ $review->id }}"
                                                                         data-target="#modalCompanyReport" id="company_report_user">Báo cáo
                                                                 </button>
-                                                                <form action="{{ Route('report.delete') }}" method="get">
-                                                                    <input type="hidden" name="id" value="{{ $review->id }}">
-                                                                    <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
-                                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                                                    <button type="submit" class="dropdown-item" data-toggle="modal"
-                                                                            data-target="#modalReportPost">Xoá đánh giá
-                                                                    </button>
-                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -560,10 +552,12 @@
         })
 
         $('#report_user').on('click', '#company_report_user', function () {
-            var value = {'id': $(this).val()}
-            // console.log(value)
+            var data = $(this).val().split(',')
+            var id = data[0]
+            var ticket_id = data[1]
             var _li = '';
-            _li = '<input type="hidden" name="to_user_id" value="' + value.id + '">';
+            _li += '<input type="hidden" name="to_user_id" value="' + id + '">';
+            _li += '<input type="hidden" name="ticket_id" value="' + ticket_id + '">';
             $('#company-report').html(_li)
         })
     });

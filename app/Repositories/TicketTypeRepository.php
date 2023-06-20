@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\InformationType;
 use App\Models\TicketType;
 use App\Interfaces\ITypeRepository;
 
@@ -41,5 +42,10 @@ class TicketTypeRepository implements ITypeRepository
     public function restore($id)
     {
         return TicketType::onlyTrashed()->find($id)->restore();
+    }
+
+    public function trashed($id)
+    {
+        return InformationType::onlyTrashed()->find($id)->get();
     }
 }

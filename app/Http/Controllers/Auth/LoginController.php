@@ -33,7 +33,7 @@ class LoginController extends Controller
             'password' => $input['password'],
             'role_id' => Constant::ROLE_COMPANY
         ];
-        
+
         $admin = [
             'username' => $input['username'],
             'password' => $input['password'],
@@ -51,7 +51,7 @@ class LoginController extends Controller
         elseif (Auth::attempt($admin, $input['remember_token']))
         {
             $user = $this->user_repo->getUserByCondition('username', $input['username']);
-            $this->ActivityLog('Bạn đã đăng nhập', $user[0]->id);
+            $this->ActivityLog('Đã đăng nhập', $user[0]->id);
             return redirect()->route('dashboard.index');
         }
         else {

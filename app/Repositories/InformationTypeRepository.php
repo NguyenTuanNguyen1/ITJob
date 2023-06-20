@@ -42,4 +42,9 @@ class InformationTypeRepository implements ITypeRepository
     {
         return InformationType::onlyTrashed()->find($id)->restore();
     }
+
+    public function trashed($id)
+    {
+        return InformationType::onlyTrashed()->find($id)->get();
+    }
 }

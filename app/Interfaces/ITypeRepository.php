@@ -10,4 +10,5 @@ interface ITypeRepository
     public function update($id,array $data);
     public function delete($id);
     public function restore($id);
+    public function trashed($id);
 }

@@ -38,6 +38,7 @@ class UserController extends Controller
 
     public function logout()
     {
+        $this->ActivityLog('Đã đăng xuất', Auth::user()->id);
         Auth::logout();
         return redirect()->route('home');
     }

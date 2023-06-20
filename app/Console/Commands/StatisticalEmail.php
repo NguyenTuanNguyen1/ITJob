@@ -63,6 +63,20 @@ class StatisticalEmail extends Command
         $post_not_approved = $this->search_repo->StatisticalPost(Constant::STATUS_NOT_APPROVED_POST, $from, $to);
         $post_approved = $this->search_repo->StatisticalPost(Constant::STATUS_APPROVED_POST, $from, $to);
 
+        $this->sendMailByRole(Constant::ROLE_ADMIN,new StatisticalMail($post_not_approved, $post_approved, $from, $to));
+
+        $all_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
+        foreach ($all_company as $company)
+        {
+
+            $post_by_company = $this->post_repo->getPostByCondition('user_id', $company->id);
+            foreach ($post_by_company as $post)
+            {
+                $users = $this->admin_repo->getApplied($post->id);
+                $this->sendMailUser($company, new WeeklyMailCompany($users, $post));
+            }
+        }
+
         $users = $this->user_repo->getMajorUser(Constant::ROLE_CANDIDATE);
 
         $data_user = [];
@@ -77,18 +91,5 @@ class StatisticalEmail extends Command
             $this->sendMailUser($data['user'], new WeeeklyMailCandidate($data['user'], $data['post']));
         }
 
-        $all_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
-        foreach ($all_company as $company)
-        {
-
-            $post_by_company = $this->post_repo->getPostByCondition('user_id', $company->id);
-            foreach ($post_by_company as $post)
-            {
-                $users = $this->admin_repo->getApplied($post->id);
-                $this->sendMailUser($company, new WeeklyMailCompany($users, $post));
-            }
-        }
-
-        $this->sendMailByRole(Constant::ROLE_ADMIN,new StatisticalMail($post_not_approved, $post_approved, $from, $to));
     }
 }

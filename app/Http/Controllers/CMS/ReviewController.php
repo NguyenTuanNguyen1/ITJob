@@ -82,15 +82,10 @@ class ReviewController extends Controller
         $input = $request->all();
 
         try {
-            $review = $this->ticket_repo->delete($input['id']);
-            $this->ActivityLog('Bạn đã xoá bài nhận xét', $input['user_id']);
+            $this->ticket_repo->delete($input['id']);
+            $review = $this->ticket_repo->trashed($input['id']);
+            $this->ActivityLog('Đã xoá bài nhận xét*' . $review['id'], $input['user_id']);
 
-            if (empty($review)) {
-                return response()->json([
-                    'result' => true,
-                    'message' => 'Đã xoá bài viết thành công'
-                ]);
-            }
             return response()->json([
                 'result' => false,
                 'message' => 'Xoá bài viết thất bại'

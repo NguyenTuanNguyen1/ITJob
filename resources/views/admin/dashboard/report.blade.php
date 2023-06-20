@@ -396,10 +396,10 @@
                 type: "GET",
                 data: value,
                 success: function (res) {
-                    console.log(res)
+                    console.log(res.data)
                     _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
-                    _li += '<input type="hidden" name="from_user_id" value="' + res.data.from_user_id + '">';
-                    _li += '<input type="hidden" name="to_user_id" value="' + res.data.to_user_id + '">';
+                    _li += '<input type="hidden" name="review_id" value="' + res.data.ticket_id + '">';
+                    _li += '<input type="hidden" name="to_user_id" value="' + res.data.from_user_id + '">';
                     $('#replied_user_report').html(_li)
                 }
             })

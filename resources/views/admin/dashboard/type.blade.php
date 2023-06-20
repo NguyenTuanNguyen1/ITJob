@@ -67,8 +67,8 @@
                     _li += '<button class="btn btn-outline-warning" type="submit" data-toggle="modal" style="margin: 5px" data-target="#modalEdit" id="btn-edit" value="' + item.id + '">Sửa'
                     _li += '</td>';
                     _li += '</tr>';
+                    $('#data').html(_li)
                 })
-                $('#data').html(_li)
             })
         }
 

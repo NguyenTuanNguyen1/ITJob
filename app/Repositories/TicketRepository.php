@@ -24,6 +24,7 @@ class TicketRepository implements ITicketRepository
         $data->type_id = Constant::TICKET_REPORT_USER;
         $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
         $data->to_user_id = $report['to_user_id'];
+        $data->ticket_id = $report['ticket_id'];
         $data->save();
         return $data;
     }
@@ -65,7 +66,7 @@ class TicketRepository implements ITicketRepository
 
     public function find($id)
     {
-        return Ticket::find($id);
+        return Ticket::with('to_user','from_user','type')->find($id);
     }
 
     public function delete($id)
@@ -78,6 +79,11 @@ class TicketRepository implements ITicketRepository
         return Ticket::where('id', $id)->update([
            'status' => Constant::TICKET_REPLIED
         ]);
+    }
+
+    public function trashed($id)
+    {
+        return Ticket::onlyTrashed()->find($id)->get();
     }
 
     public function replyContact(array $contact)
@@ -106,6 +112,16 @@ class TicketRepository implements ITicketRepository
         return $data;
     }
 
+//    public function getTicket($action, $status)
+//    {
+//        return Ticket::with('from_user', 'image')
+//            ->where('type_id', $action)
+//            ->where('status', $status)
+//            ->orWhere('status','=',Constant::TICKET_WAITING_REPORT)
+//            ->orderByDesc('id')
+//            ->get();
+//    }
+
     public function getTicket($action, $status)
     {
         return Ticket::with('from_user', 'image')
@@ -129,6 +145,7 @@ class TicketRepository implements ITicketRepository
         return Ticket::with('from_user')
             ->where('to_user_id', $to_user_id)
             ->where('type_id', $action)
+            ->where('status','<>', Constant::TICKET_WAITING_REPORT)
             ->get();
     }
 
@@ -137,6 +154,7 @@ class TicketRepository implements ITicketRepository
         return Ticket::with('from_user')
             ->where('to_user_id', $id)
             ->where('status','<>', Constant::TICKET_NOT_REPLY)
+            ->where('status','<>', Constant::TICKET_WAITING_REPORT)
             ->get();
     }
 }

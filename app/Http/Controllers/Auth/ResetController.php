@@ -6,6 +6,7 @@ use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordRequest;
 use App\Interfaces\IUserRepository;
+use App\Trait\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class ResetController extends Controller
 {
-
+    use Service;
     public function __construct
     (
         IUserRepository $userRepository
@@ -36,18 +37,16 @@ class ResetController extends Controller
             {
                 $profile['password'] = Hash::make($input['password']);
                 $profile->save();
-
+                toast()->success('Cập nhật tài khoản thành công');
                 if (Auth::user()->role_id == Constant::ROLE_ADMIN)
                 {
-                    alert('Chỉnh sửa tài khoản thành công', null, 'success');
+                    $this->ActivityLog('Đã thay đổi mật khẩu', Auth::user()->id);
                     return redirect()->route('dashboard.profile', $input['id']);
                 }
                 elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
                 {
                     return redirect()->route('company.profile', $input['id']);
                 }
-
-                alert('Thông báo','Cập nhật mật khẩu thành công','success');
                 return redirect()->route('profile.index',['id' => $input['id']]);
             }
             else {

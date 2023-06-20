@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Constant;
 use App\Interfaces\ISearchRepository;
+use App\Models\Activity;
 use App\Models\InformationType;
 use App\Models\Post;
 use App\Models\User;
@@ -58,5 +59,12 @@ class SearchRepository implements ISearchRepository
         return Post::where('status', $action)
             ->where('created_at', '>=', $from)
             ->where('created_at', '<=', $to)->count();
+    }
+
+    public function searchHistoryDatetimeFilter($from, $to)
+    {
+        return Activity::where('created_at', '>=' , $from)
+            ->where('created_at', '<=', Carbon::parse($to)->endOfDay())
+            ->get();
     }
 }

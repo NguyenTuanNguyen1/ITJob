@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 
+use App\Models\InformationType;
 use App\Models\Role;
 use App\Interfaces\ITypeRepository;
 
@@ -41,5 +42,10 @@ class RoleRepository implements ITypeRepository
     public function restore($id)
     {
         return Role::onlyTrashed()->find($id)->restore();
+    }
+
+    public function trashed($id)
+    {
+        return InformationType::onlyTrashed()->find($id)->get();
     }
 }

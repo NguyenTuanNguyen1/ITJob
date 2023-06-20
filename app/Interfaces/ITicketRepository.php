@@ -14,6 +14,7 @@ interface ITicketRepository
     public function find($id);
     public function delete($id);
     public function update($id);
+    public function trashed($id);
     public function replyContact(array $contact);
     public function getTicket($action, $status);
     public function listReplied($id, $action, $type);

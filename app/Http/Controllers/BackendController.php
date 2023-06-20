@@ -166,4 +166,54 @@ class BackendController extends Controller
         $user = $this->user_repo->find($input['id']);
         $this->sendMailUser($user, new NotificationRestoreUser($user->name, $user->email));
     }
+
+    public function user(Request $request)
+    {
+        $input = $request->all();
+
+        $user = $this->user_repo->find($input['id']);
+        if (empty($user))
+        {
+            $user = $this->user_repo->storage($input['id']);
+        }
+        return response()->json([
+           'user' => $user
+        ]);
+    }
+
+    public function post(Request $request)
+    {
+        $input = $request->all();
+
+        $post = $this->post_repo->find($input['id']);
+        if (empty($post))
+        {
+            $post = $this->post_repo->findTrashed($input['id']);
+        }
+        return response()->json([
+            'post' => $post
+        ]);
+    }
+
+    public function ticket(Request $request)
+    {
+        $input = $request->all();
+
+        $ticket = $this->ticket_repo->find($input['id']);
+        if (empty($ticket))
+        {
+            $ticket = $this->ticket_repo->trashed($input['id']);
+        }
+        return response()->json([
+            'ticket' => $ticket
+        ]);
+    }
+
+    public function searchHistory(Request $request)
+    {
+        $input = $request->all();
+
+        $history = $this->search_repo->searchHistoryDatetimeFilter($input['from'], $input['to']);
+        return view('admin.dashboard.searchDatetimeResultHistory')->with('history',$history);
+    }
 }

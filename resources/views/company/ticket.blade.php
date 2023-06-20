@@ -1,5 +1,6 @@
 @extends('company.layout')
 @section('content')
+    @include('sweetalert::alert')
     <div class="content" style="margin-top: 5px">
         <div class="row">
             <div class="col-md-12">
