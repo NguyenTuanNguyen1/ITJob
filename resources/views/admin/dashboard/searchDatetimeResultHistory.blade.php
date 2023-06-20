@@ -3,24 +3,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <div class="content">
-        <form action="{{ Route('search.filter.datetime') }}" method="post">
+        <form action="{{ Route('backend.filter.datetime') }}" method="post">
             @csrf
             <div class="form-group mb-2">
                 <div class="row ">
                     <div class="col-lg-3 col-sm-6">
                         <label for="startDate">Từ</label>
-                        <input id="startDate" class="form-control" type="date" />
+                        <input name="from" class="form-control" type="date" />
                         <!-- <span id="startDateSelected"></span> -->
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <label for="endDate">Đến</label>
-                        <input id="endDate" class="form-control " type="date" />
+                        <input name="to" class="form-control " type="date" />
                         <!-- <span id="endDateSelected"></span> -->
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <button class="search-1" type="submit">Tìm kiếm</button>
                     </div>
-                    <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
                 </div>
             </div>
         </form>

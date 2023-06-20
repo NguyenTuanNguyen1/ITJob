@@ -63,12 +63,12 @@
             <div class="row ">
                 <div class="col-lg-3 col-sm-6">
                     <label for="startDate">Từ</label>
-                    <input id="startDate" class="form-control" type="date" />
+                    <input name="from" class="form-control" type="date" />
                     <!-- <span id="startDateSelected"></span> -->
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <label for="endDate">Đến</label>
-                    <input id="endDate" class="form-control " type="date" />
+                    <input name="to" class="form-control " type="date" />
                     <!-- <span id="endDateSelected"></span> -->
                 </div>
                 <div class="col-lg-3 col-sm-6">
