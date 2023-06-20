@@ -157,7 +157,7 @@
                                         </td>
                                         <td>{{ $post_not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
-                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-toggle="modal" data-target="#modalReport"
                                                     id="btn-reply" value="{{ $post_not_reply->id }}">Phản hồi
                                             </button>
@@ -211,7 +211,7 @@
                                         </td>
                                         <td>{{ $user_not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
-                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-toggle="modal" data-target="#modalReportUser"
                                                     id="btn-user-reply" value="{{ $user_not_reply->id }}">Phản hồi
                                             </button>
@@ -274,7 +274,7 @@
                                                     data-target="#modalDetailReport"
                                                     id="btn-replied" value="{{ $post_reply->id }}">Phản hồi
                                             </button>
-                                            <button class="btn btn-outline-warning" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('report.delete',['id' => $post_reply->id]) }}'">
                                                 Xoá
                                             </button>
@@ -333,7 +333,7 @@
                                                     data-target="#modalDetailReportUser"
                                                     id="btn-user-replied" value="{{ $user_reply->id }}">Phản hồi
                                             </button>
-                                            <button class="btn btn-outline-warning" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-danger   " type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('report.delete',['id' => $user_reply->id]) }}'">
                                                 Xoá
                                             </button>

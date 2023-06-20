@@ -17,14 +17,14 @@
 <body>
 <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
-        <div class="logo">
-            <a href="" class="simple-text logo-mini">
+        <div class="logo" style="text-align:center;">
+            <a href="" class="simple-text logo-big" >
                 <div class="logo-image-small">
-                    <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}">
+                    <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="50%">
                 </div>
                 <!-- <p>CT</p> -->
             </a>
-            <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+            <a href="https://www.creative-tim.com" class="simple-text logo-normal ">
                 {{ Auth::user()->username }}
                 <!-- <div class="logo-image-big">
                   <img src="../assets/img/logo-big.png">

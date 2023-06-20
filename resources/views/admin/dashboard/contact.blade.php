@@ -104,7 +104,7 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
-                                <th>Nội dung</th>
+                                <th width="50%">Nội dung</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
@@ -119,7 +119,7 @@
                                         <td>{{ $not_reply->content }}</td>
                                         <td>{{ $not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
-                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-value="123" data-toggle="modal"
                                                     data-target="#modalRepliedContact"
                                                     id="btn-reply" value="{{ $not_reply->id }}">Phản hồi
