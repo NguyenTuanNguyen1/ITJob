@@ -33,7 +33,7 @@ class Ticket extends Model
         'ticket_id'
     ];
 
-    public function user()
+    public function to_user()
     {
         return $this->belongsTo(User::class);
     }
@@ -41,6 +41,11 @@ class Ticket extends Model
     public function from_user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(TicketType::class);
     }
 
     public function image()

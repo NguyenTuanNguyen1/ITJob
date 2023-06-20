@@ -11,6 +11,7 @@ use App\Interfaces\IPostRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
 use App\Mail\NotificationDeleteUser;
+use App\Models\Ticket;
 use App\Trait\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ class AdminController extends Controller
     {
         $input = $request->all();
 
-        $this->ActivityLog('Bạn đã xoá bài tuyển dụng*' . $input['id'], $input['user_id']);
+        $this->ActivityLog('Bạn đã xoá bài tuyển dụng%' . $input['id'], $input['user_id']);
 
         $post = $this->post_repo->delete($input['id']);
         if (empty($post)) {
@@ -60,7 +61,7 @@ class AdminController extends Controller
         $input = $request->all();
 
         $user = $this->user_repo->find($input['id']);
-        $this->ActivityLog("Bạn đã xoá người dùng%" . $user['username'] . '*' . $user['id'],Auth::user()->id);
+        $this->ActivityLog("Đã xoá người dùng*" . $user['id'],Auth::user()->id);
         $this->user_repo->delete($input['id']);
         return redirect()->route('dashboard.account');
     }
@@ -70,7 +71,7 @@ class AdminController extends Controller
         $input = $request->all();
         $this->user_repo->restore($input['id']);
         $user = $this->user_repo->find($input['id']);
-        $this->ActivityLog("Bạn đã khôi phục người dùng%" . $user['username'] . '*' . $user['id'], Auth::user()->id);
+        $this->ActivityLog("Đã khôi phục người dùng*" . $user['id'], Auth::user()->id);
 
         return redirect()->route('dashboard.account');
     }
@@ -79,7 +80,7 @@ class AdminController extends Controller
     {
         $input = $request->all();
         $this->admin_repo->changeStatusPost($input['id'], Auth::user()->id, Constant::STATUS_APPROVED_POST);
-        $this->ActivityLog("Bạn đã phê duyệt bài viết%" . $input['id'], Auth::user()->id);
+        $this->ActivityLog("Đã phê duyệt bài tuyển dụng*" . $input['id'], Auth::user()->id);
 
         return redirect()->route('dashboard.index');
     }
@@ -94,7 +95,7 @@ class AdminController extends Controller
         $this->ticket_repo->update($input['ticket_id']);
         $this->ticket_repo->replyContact($input);
 
-        $this->ActivityLog('Bạn đã phản hồi liên hệ của người dùng%' . $input['user_id'], $input['admin_id']);
+        $this->ActivityLog('Đã phản hồi liên hệ của người dùng*' . $input['user_id'], $input['admin_id']);
         alert('Bạn đã phản hồi liên hệ', null, 'success');
         return redirect()->route('dashboard.contact', ['admin_id' => $input['admin_id']]);
     }
@@ -107,8 +108,8 @@ class AdminController extends Controller
         $this->ticket_repo->update($input['ticket_id']);
         $this->ticket_repo->replyReport($input);
 
-        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng%' . $input['to_user_id'], $input['admin_id']);
-        alert('Bạn đã phản hồi báo cáo', null, 'success');
+        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng*' . $input['to_user_id'], $input['admin_id']);
+        alert('Đã phản hồi báo cáo', null, 'success');
         return redirect()->route('dashboard.report', ['admin_id' => $input['admin_id']]);
     }
 
@@ -116,11 +117,21 @@ class AdminController extends Controller
     {
         $input = $request->all();
 
-        $input['type_id'] = Constant::TICKET_REPORT_USER;
+        if (isset($input['deleteReview']))
+        {
+            $this->ticket_repo->delete($input['review_id']);
+        }
+        else
+        {
+            Ticket::where('id', $input['review_id'])->update([
+                'status' => Constant::TICKET_NOT_REPLY
+            ]);
+        }
         $this->ticket_repo->update($input['ticket_id']);
+        $input['type_id'] = Constant::TICKET_REPORT_USER;
         $this->ticket_repo->replyReport($input);
 
-        $this->ActivityLog('Bạn đã phản hồi báo cáo của người dùng%' . $input['to_user_id'], $input['admin_id']);
+        $this->ActivityLog('Đã phản hồi báo cáo của người dùng*' . $input['to_user_id'], $input['admin_id']);
         alert('Bạn đã phản hồi báo cáo', null, 'success');
         return redirect()->route('dashboard.report', ['admin_id' => $input['admin_id']]);
     }

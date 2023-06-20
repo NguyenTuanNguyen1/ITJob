@@ -157,13 +157,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'authorize'], function () {
     Route::get('/callback/{provider}', [OAuthController::class, 'callback_Linkedin'])->name('callback.linkedin');
 });
 
-//Email
-Route::group(['prefix' => 'email'], function () {
+//Backend
+Route::group(['prefix' => 'backend'], function () {
     Route::get('/email-delete-post', [BackendController::class, 'deletePostMail'])->name('mail.delete.post');
     Route::get('/email-restore-post', [BackendController::class, 'restorePostMail'])->name('mail.restore.post');
     Route::get('/email-delete-user', [BackendController::class, 'deleteUserMail'])->name('mail.delete.user');
     Route::get('/email-restore-user', [BackendController::class, 'restoreUserMail'])->name('mail.restore.user');
 
+    Route::get('/user', [BackendController::class, 'user'])->name('backend.user');
+    Route::get('/post', [BackendController::class, 'post'])->name('backend.post');
+    Route::get('/ticket', [BackendController::class, 'ticket'])->name('backend.ticket');
+    Route::post('/filter-datetime', [BackendController::class, 'searchHistory'])->name('backend.filter.datetime');
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [HomeController::class, 'notFound'])->name('not.found');

@@ -104,7 +104,7 @@ class PostController extends Controller
         if (Auth::user()->role_id == Constant::ROLE_ADMIN)
         {
             $this->post_repo->delete($input['id']);
-            $this->ActivityLog(  "Bạn đã xoá bài tuyển dụng " , Auth::user()->role_id);
+            $this->ActivityLog(  "Đã xoá bài tuyển dụng*" . $input['id'], Auth::user()->id);
             return redirect()->route('dashboard.index');
         }
         $this->post_repo->delete($input['id']);
@@ -126,7 +126,12 @@ class PostController extends Controller
         $input = $request->all();
 
         $this->post_repo->restore($input['id']);
-        $this->ActivityLog(  "Bạn đã khôi phục bài viết*" . $input['id'] , Auth::user()->id);
+
+        if (Auth::user()->role_id == Constant::ROLE_ADMIN)
+        {
+            $this->ActivityLog(  "Đã khôi phục bài tuyển dụng*" . $input['id'] , Auth::user()->id);
+        }
+
         return response()->json([
             'result' => true
         ]);

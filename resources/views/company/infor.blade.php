@@ -314,7 +314,6 @@
                                                 </label>
                                                 <div id="replied_report"></div>
                                             </div>
-                                            <input type="hidden" name="post_id" value="{{ 123 }}">
                                             <input type="hidden" name="user_id" value="{{ isset(Auth::user()->id) ? Auth::user()->id : null }}">
                                             <input type="hidden" name="username" value="{{ isset(Auth::user()->username) ? Auth::user()->username : null }}">
                                             <input type="hidden" name="email" value="{{ isset(Auth::user()->email) ? Auth::user()->email : null }}">
@@ -330,8 +329,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 </body>
@@ -404,7 +401,13 @@
                     _li += '<div class="media">';
                     _li += '<a class="pull-left" href="#"><img class="media-object" src="{{ url('image_avatar') }}/'+ item.from_user.img_avatar +'" alt=""></a>';
                     _li += '<div class="media-body">';
+                    _li += '<div class="d-flex">';
                     _li += '<h4 class="media-heading" style="color: black">' + item.from_user.name + '</h4>';
+                    if (item.from_user_id == {{ Auth::user()->id }})
+                    {
+                        _li += '<button class="btn" id="delete-review" value="'+ item.id +'" style="position: absolute;left: 95%;margin-top: 0px"><i class="fas fa-trash-alt"></i></button>';
+                    }
+                    _li += '</div>';
                     _li += '<p>' + item.content + '</p>';
                     _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
                     _li += '<li><i class="fa fa-calendar"></i>' + item.created_at + '</li>'
@@ -424,6 +427,24 @@
                 $('#count_review').html(_li);
             })
         }
+
+        $('#load_review').on('click','#delete-review',function (e) {
+            e.preventDefault();
+            var value = {
+                "id": $(this).val(),
+                "role_id": {{ Auth::user()->role_id }},
+                "_token": "{{ csrf_token() }}",
+            }
+            $.ajax({
+                url: '{{ Route('report.delete') }}',
+                type: 'GET',
+                data: value,
+                success: function (res) {
+                    load_count_review()
+                    load_review();
+                }
+            })
+        })
     });
 </script>
 

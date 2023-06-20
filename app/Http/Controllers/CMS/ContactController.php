@@ -64,7 +64,11 @@ class ContactController extends Controller
         $input = $request->all();
 
         $this->ticket_repo->delete($input['id']);
-        $this->ActivityLog('Bạn đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
+
+        if (Auth::user()->role_id == Constant::ROLE_ADMIN)
+        {
+            $this->ActivityLog('Đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
+        }
 
         return redirect()->route('dashboard.contact');
     }

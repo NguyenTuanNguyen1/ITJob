@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\ITicketRepository;
 use App\Mail\ReplyMail;
+use App\Models\Ticket;
 use App\Trait\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,6 +70,7 @@ class ReportController extends Controller
     public function user(Request $request)
     {
         $input = $request->all();
+
         $report = $this->ticket_repo->createReportUser($input);
 
         $nameImage = Str::random(6);
@@ -79,7 +81,9 @@ class ReportController extends Controller
                 $this->saveImageReport($fileName, $report['id']);
             }
         }
-
+        Ticket::where('id', $report->ticket_id)->update([
+            'status' => Constant::TICKET_WAITING_REPORT
+        ]);
         alert('Đã gửi thành công', null, 'success');
         if ($input['role_id'] == Constant::ROLE_COMPANY)
         {
@@ -105,8 +109,11 @@ class ReportController extends Controller
         {
             return redirect()->route('profile.user.detail',['id' => $input['user_id']]);
         }
-        $this->ActivityLog('Bạn đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
-        return redirect()->route('dashboard.report');
+        else
+        {
+            $this->ActivityLog('Đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
+            return redirect()->route('dashboard.report');
+        }
     }
 
     public function reply(Request $request)
@@ -114,7 +121,7 @@ class ReportController extends Controller
         $input = $request->all();
 
         $this->ticket_repo->reply($input['id']);
-        $this->ActivityLog('Bạn đã phản hồi bản báo cáo bài viết*', $input['admin_id']);
+        $this->ActivityLog('Đã phản hồi bản báo cáo bài viết*', $input['admin_id']);
 
         return response()->json([
             'result' => true

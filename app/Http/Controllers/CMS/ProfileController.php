@@ -86,7 +86,7 @@ class ProfileController extends Controller
                 'profile' => $profile
             ]);
         }
-
+        toast()->success('Cập nhật tài khoản thành công');
         if (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
             return redirect()->route('company.profile', $input['id']);
@@ -95,8 +95,8 @@ class ProfileController extends Controller
         {
             return redirect()->route('profile.index', $input['id']);
         }
-
-        return redirect()->route('user.profile', $input['id']);
+        $this->ActivityLog('Đã cập nhật thông tin cá nhân', Auth::user()->id);
+        return redirect()->route('dashboard.profile', $input['id']);
     }
 
     public function handleUpdateBasic(Request $request)
@@ -105,10 +105,10 @@ class ProfileController extends Controller
 
         $input['img_avatar'] = $this->uploadImageAvatar($request);
         $this->user_repo->updateAvatarAndName($input['id'], $input);
-
+        toast()->success('Cập nhật tài khoản thành công');
         if (Auth::user()->role_id == Constant::ROLE_ADMIN)
         {
-            alert('Chỉnh sửa tài khoản thành công', null, 'success');
+            $this->ActivityLog('Đã cập nhật thông tin cá nhân', Auth::user()->id);
             return redirect()->route('dashboard.profile', $input['id']);
         }
         elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
@@ -116,7 +116,6 @@ class ProfileController extends Controller
             return redirect()->route('company.profile', $input['id']);
         }
 
-        alert('Chỉnh sửa tài khoản thành công', null, 'success');
         return redirect()->route('profile.index', $input['id']);
     }
 
@@ -126,26 +125,22 @@ class ProfileController extends Controller
         $input['ticket_reply'] = $input['post_id'] = null;
         $infor = $this->information_repo->update($input['id'], $input);
 
-        $this->ActivityLog("Bạn đã cập nhật thông tin cá nhân", $input['id']);
         if ($request->ajax())
         {
             return response()->json([
                 'infor' => $infor
             ]);
         }
-
+        toast()->success('Cập nhật tài khoản thành công');
         if (Auth::user()->role_id == Constant::ROLE_ADMIN)
         {
-            alert('Cập nhật thông tin thành công', null, 'success');
+            $this->ActivityLog('Đã cập nhật thông tin cá nhân', Auth::user()->id);
             return redirect()->route('dashboard.profile', $input['id']);
         }
         elseif (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
-            alert('Cập nhật thông tin thành công', null, 'success');
             return redirect()->route('company.profile', $input['id']);
         }
-
-        alert('Cập nhật thông tin thành công', null, 'success');
         return redirect()->route('profile.index', $input['id']);
     }
 

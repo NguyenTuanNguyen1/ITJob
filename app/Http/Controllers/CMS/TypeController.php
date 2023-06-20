@@ -12,6 +12,7 @@ use App\Repositories\RoleRepository;
 use App\Repositories\TicketTypeRepository;
 use App\Trait\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property InformationTypeRepository $type_repo
@@ -54,6 +55,8 @@ class TypeController extends Controller
         $input = $request->all();
 
         $this->type_repo->delete($input['id']);
+        $type = $this->type_repo->trashed($input['id']);
+        $this->ActivityLog('Đã xoá thông tin*' . $type['id'], Auth::user()->id);
         return response()->json([
             'result' => true,
             'message' => 'Đã xoá thành công'

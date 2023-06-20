@@ -1,5 +1,6 @@
 @extends('company.layout')
 @section('content')
+    @include('sweetalert::alert')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     {{--    <div class="col-6">--}}
@@ -34,16 +35,9 @@
                                aria-expanded="false" style="position: absolute;left: 160%;bottom: 55px"><i class="fas fa-bars"></i></a>
                             <div class="dropdown-menu">
                                 <button type="submit" class="dropdown-item" data-toggle="modal"
-                                        value="{{ $review->from_user_id }}"
+                                        value="{{ $review->from_user_id }},{{ $review->id }}"
                                         data-target="#modalCompanyReport" id="company_report_user">Báo cáo
                                 </button>
-                                <form action="{{ Route('report.delete') }}" method="get">
-                                    <input type="hidden" name="id" value="{{ $review->id }}">
-                                    <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
-                                    <button type="submit" class="dropdown-item" data-toggle="modal"
-                                            data-target="#modalReportPost">Xoá đánh giá
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -63,10 +57,12 @@
     <script>
         $(document).ready(() => {
             $('#report_user').on('click', '#company_report_user', function () {
-                var value = {'id': $(this).val()}
-                // console.log(value)
+                var data = $(this).val().split(',')
+                var id = data[0]
+                var ticket_id = data[1]
                 var _li = '';
-                _li = '<input type="hidden" name="to_user_id" value="'+ value.id +'">';
+                _li += '<input type="hidden" name="to_user_id" value="'+ id +'">';
+                _li += '<input type="hidden" name="ticket_id" value="'+ ticket_id +'">'
                 $('#company-report').html(_li)
             })
         })

@@ -75,7 +75,6 @@
                     <button class="search-1" type="submit">Tìm kiếm</button>
                 </div>
                 <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
-
             </div>
         </div>
     </form>
