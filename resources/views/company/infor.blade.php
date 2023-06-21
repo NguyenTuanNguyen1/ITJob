@@ -403,10 +403,12 @@
                     _li += '<div class="media-body">';
                     _li += '<div class="d-flex">';
                     _li += '<h4 class="media-heading" style="color: black">' + item.from_user.name + '</h4>';
+                    @if(Auth::check())
                     if (item.from_user_id == {{ Auth::user()->id }})
                     {
                         _li += '<button class="btn" id="delete-review" value="'+ item.id +'" style="position: absolute;left: 95%;margin-top: 0px"><i class="fas fa-trash-alt"></i></button>';
                     }
+                    @endif
                     _li += '</div>';
                     _li += '<p>' + item.content + '</p>';
                     _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
@@ -428,6 +430,7 @@
             })
         }
 
+        @if(Auth::check())
         $('#load_review').on('click','#delete-review',function (e) {
             e.preventDefault();
             var value = {
@@ -445,6 +448,7 @@
                 }
             })
         })
+        @endif
     });
 </script>
 

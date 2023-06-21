@@ -28,7 +28,8 @@ class UserTableSeeder extends Seeder
                 'major' => Constant::MAJOR_MANUFACTURING,
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
-                'email' => 'kensu8434@gmail.com',
+                'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -43,7 +44,8 @@ class UserTableSeeder extends Seeder
                 'major' => Constant::MAJOR_MANUFACTURING,
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
-                'email' => '0306201384@caothang.edu.vn',
+                'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -59,6 +61,7 @@ class UserTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
                 'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -74,6 +77,7 @@ class UserTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
                 'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -89,6 +93,7 @@ class UserTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
                 'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -104,6 +109,7 @@ class UserTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
                 'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -118,6 +124,7 @@ class UserTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
                 'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -133,6 +140,7 @@ class UserTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
                 'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);
@@ -148,6 +156,7 @@ class UserTableSeeder extends Seeder
                 'position' => 'Nhân viên',
                 'description' => fake()->text,
                 'email' => fake()->email,
+                'address' => fake()->address,
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now()
             ]);

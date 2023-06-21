@@ -17,6 +17,7 @@ interface ITicketRepository
     public function trashed($id);
     public function replyContact(array $contact);
     public function getTicket($action, $status);
+    public function getTicketCompany($action, $status);
     public function listReplied($id, $action, $type);
     public function getTicketByUser($to_user_id, $action);
     public function getTicketReplied($id);

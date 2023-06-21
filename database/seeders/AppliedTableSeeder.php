@@ -18,7 +18,7 @@ class AppliedTableSeeder extends Seeder
     {
         for ($i = 1; $i <= 40; $i++) {
             DB::table('applied')->insert([
-                'user_id' => rand(3,22),
+                'user_id' => rand(2,21),
                 'post_id' => rand(1,16),
             ]);
         }

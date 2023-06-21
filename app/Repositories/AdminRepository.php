@@ -33,7 +33,7 @@ class AdminRepository implements IAdminRepository
 
     public function history($id)
     {
-        return Activity::with('user')->where('user_id', $id)->get();
+        return Activity::with('user')->where('user_id', $id)->orderByDesc('id')->get();
     }
 
     public function getImageReport()

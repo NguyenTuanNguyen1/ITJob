@@ -20,8 +20,8 @@ class TicketTableSeeder extends Seeder
         for ($i = 1; $i <= 30; $i++) {
             DB::table('ticket')->insert([
                 'content' => fake()->text,
-                'from_user_id' => rand(1,22),
-                'to_user_id' => rand(3,22),
+                'from_user_id' => rand(2,21),
+                'to_user_id' => rand(2,21),
                 'type_id' => Constant::TICKET_REPORT_USER,
                 'created_at' => Carbon::now()->subWeek()
             ]);
@@ -30,7 +30,7 @@ class TicketTableSeeder extends Seeder
         for ($i = 1; $i <= 30; $i++) {
             DB::table('ticket')->insert([
                 'content' => fake()->text,
-                'from_user_id' => rand(1,22),
+                'from_user_id' => rand(2,21),
                 'post_id' => rand(1,16),
                 'type_id' => Constant::TICKET_REPORT_POST,
                 'created_at' => Carbon::now()->subWeek()
@@ -42,7 +42,7 @@ class TicketTableSeeder extends Seeder
                 'username' => fake()->name,
                 'content' => fake()->text,
                 'email' => fake()->email,
-                'from_user_id' => rand(1,22),
+                'from_user_id' => rand(2,21),
                 'type_id' => Constant::TICKET_CONTACT,
                 'created_at' => Carbon::now()->subWeek()
             ]);
@@ -51,8 +51,8 @@ class TicketTableSeeder extends Seeder
         for ($i = 1; $i <= 30; $i++) {
             DB::table('ticket')->insert([
                 'content' => fake()->text,
-                'from_user_id' => rand(1,22),
-                'to_user_id' => rand(3,22),
+                'from_user_id' => rand(2,21),
+                'to_user_id' => rand(2,21),
                 'type_id' => Constant::TICKET_REVIEW,
                 'created_at' => Carbon::now()->subWeek()
             ]);

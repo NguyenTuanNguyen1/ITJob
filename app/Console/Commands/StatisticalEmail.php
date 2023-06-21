@@ -68,13 +68,14 @@ class StatisticalEmail extends Command
         $all_company = $this->user_repo->getUserByCondition('role_id', Constant::ROLE_COMPANY);
         foreach ($all_company as $company)
         {
-
             $post_by_company = $this->post_repo->getPostByCondition('user_id', $company->id);
-            foreach ($post_by_company as $post)
+            foreach ($post_by_company as $key => $post)
             {
                 $users = $this->admin_repo->getApplied($post->id);
                 $this->sendMailUser($company, new WeeklyMailCompany($users, $post));
+                if ($key >= 2) break;
             }
+            break;
         }
 
         $users = $this->user_repo->getMajorUser(Constant::ROLE_CANDIDATE);
@@ -90,6 +91,5 @@ class StatisticalEmail extends Command
         foreach ($data_user as $data) {
             $this->sendMailUser($data['user'], new WeeeklyMailCandidate($data['user'], $data['post']));
         }
-
     }
 }

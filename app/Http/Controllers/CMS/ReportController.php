@@ -54,10 +54,9 @@ class ReportController extends Controller
 
         $report = $this->ticket_repo->createReportPost($input);
 
-        $nameImage = Str::random(6);
         if ($files = $request->file('image')) {
             foreach ($files as $file) {
-                $fileName = "{$nameImage}.jpg";
+                $fileName =  Str::random(6) .".jpg";
                 $file->move('Images', $fileName, 'public');
                 $this->saveImageReport($fileName, $report['id']);
             }
@@ -73,10 +72,9 @@ class ReportController extends Controller
 
         $report = $this->ticket_repo->createReportUser($input);
 
-        $nameImage = Str::random(6);
         if ($files = $request->file('image')) {
             foreach ($files as $file) {
-                $fileName = "{$nameImage}.jpg";
+                $fileName = Str::random(6) . ".jpg";
                 $file->move('Images', $fileName, 'public');
                 $this->saveImageReport($fileName, $report['id']);
             }

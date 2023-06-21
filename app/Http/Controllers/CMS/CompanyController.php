@@ -87,7 +87,8 @@ class CompanyController extends Controller
 
     public function review(Request $request)
     {
-        $review = $this->ticket_repo->getTicket(Constant::TICKET_REVIEW,Constant::TICKET_NOT_REPLY);
+        $review = $this->ticket_repo->getTicketCompany(Constant::TICKET_REVIEW,Constant::TICKET_NOT_REPLY);
+
         return view('company.review')->with('reviews', $review);
     }
 

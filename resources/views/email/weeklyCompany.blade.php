@@ -26,20 +26,27 @@
             Danh sách ứng cử viên
         </div>
     </div>
-    @foreach($users as $user)
-        <br>
-        <div
-            style="font-size:13px;color:#2d383c; line-height:1.8; font-weight:400; margin:0 0 12px;text-align: left">
+    @if($users->isEmpty())
+        <div style="font-size:14px; line-height:1.8; font-weight:400;color:#2d383c; text-align:center;margin-top:8px; ">
+            <div style="font-size:16px; line-height:1.8; font-weight:400; margin:0; color:red;">
+                Chưa có ứng cử viên
+            </div>
+        </div>
+    @else
+        @foreach($users as $user)
+            <br>
+            <div
+                style="font-size:13px;color:#2d383c; line-height:1.8; font-weight:400; margin:0 0 12px;text-align: left">
             <span>
                 Tên người ứng tuyển : {{ $user->user->name }}
             </span>
-            <span style="float: right">
+                <span style="float: right">
                 <a href="{{ env('APP_DOMAIN') }}/profile/{{ $user->id }}"> Xem chi tiết </a>
             </span>
-        </div>
-        <hr style="opacity: 0.3;width: auto;">
-    @endforeach
-
+            </div>
+            <hr style="opacity: 0.3;width: auto;">
+        @endforeach
+    @endif
     <div style="font-size:14px; line-height:1.8; font-weight:400;color:#2d383c; text-align:center;margin-top:8px; ">
         <div style="font-size:16px; line-height:1.8; font-weight:400; margin:0; color:#2d383c;">
             Bài viết của bạn được tạo ra ngày {{$posts->created_at->format('d-m-Y')}}

@@ -131,6 +131,16 @@ class TicketRepository implements ITicketRepository
             ->get();
     }
 
+    public function getTicketCompany($action, $status)
+    {
+        return Ticket::with('from_user', 'image')
+            ->where('type_id', $action)
+            ->where('status', $status)
+            ->where('to_user_id', Auth::user()->id)
+            ->orderByDesc('id')
+            ->get();
+    }
+
     public function listReplied($id, $action, $type)
     {
         return Ticket::with('from_user')
