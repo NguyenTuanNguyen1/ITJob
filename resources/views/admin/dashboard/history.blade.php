@@ -18,7 +18,7 @@
                         <!-- <span id="endDateSelected"></span> -->
                     </div>
                     <div class="col-lg-3 col-sm-6">
-                        <button class="search-1" type="submit">Tìm kiếm</button>
+                        <button class="btn btn-outline-success search-1" type="submit" style="position: absolute;top: 21px">Tìm kiếm</button>
                     </div>
                 </div>
             </div>
