@@ -1,4 +1,3 @@
-
 <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -14,9 +13,6 @@
                     <form action="{{ Route('send.forgot.mail') }}" method="post">
                         @csrf
                         <input type="email" name="email">
-                        @if(session('success'))
-                        <p style="color:red">{{session('Error')}}</p>
-                        @endif
                         <button class="btn btn-outline-success" type="submit">Gửi</button>
                     </form>
                 </div>
