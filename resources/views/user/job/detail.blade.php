@@ -104,10 +104,11 @@
                             @csrf
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
-                            <button type="submit" class="btn btn-block btn-primary">Ứng tuyển ngay</button>
+                            <button type="submit" class="btn btn-block btn-primary"><p>Ứng tuyển ngay</p></button>
                         </form>
                     </div>
                 @endif
+                <button type="submit" class="btn btn-block btn-primary"><p>Ứng tuyển ngay</p></button>
             </div>
         </div>
     </section>
