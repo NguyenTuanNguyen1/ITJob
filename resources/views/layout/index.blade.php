@@ -68,7 +68,7 @@
                         @foreach($posts as $post)
                             <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                                 <a href="{{env('APP_DOMAIN')}}/post/post-detail/{{ $post->id }}" data-value=""></a>
-                                <div class="job-listing-logo pt-2 pb-2 pr-2">
+                                <div class="job-listing-logo p-2">
                                     <img src="{{ url('image_avatar/')}}/{{ $post->user->img_avatar }}"
                                          alt="Free Website Template by Free-Template.co" class="img-fluid">
                                 </div>

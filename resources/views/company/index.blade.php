@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 {{--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
     <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="shortcut icon" href="favicon.ico">
     <div class="row g-4 mb-4 mt-2" id="post">
         @foreach($all_post as $post)
                 <div class="col-12 col-lg-4">
@@ -71,7 +72,9 @@
                                         @endif
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-success" id="btn-delete" value="{{ $post->id }}" style="position: absolute;left: 65%;bottom: 25px;"> Xoá bài viết</button>
+                                <span tabindex="0" data-toggle="tooltip" title="Xóa bài viết">
+                                    <button class="btn btn-danger" id="btn-delete" value="{{ $post->id }}" style="position: absolute;left: 81%;bottom: 25px;"><span><i class="far fa-trash-alt" style="color: #dcdfe5;"></i></span></button>
+                                </span> 
                             </div>
                         @endif
                     </div>
