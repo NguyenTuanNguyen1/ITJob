@@ -22,8 +22,7 @@
                 </div>
                 <input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">
                 <div class="modal-footer">
-                    <div style="position:absolute;right: 14px">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <div style="position:absolute;right: 14px;margin-top:20px">
                         <button type="submit" class="btn btn-primary">Phản hồi</button>
                     </div>
 

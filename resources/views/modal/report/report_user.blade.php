@@ -24,8 +24,8 @@
                         <span class="slider focus"></span>
                         <span class="label"></span>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Phản hồi</button>
+                    
+                    <button type="submit" class="btn btn-primary" style="position:absolute;right:14px;">Phản hồi</button>
                 </div>
             </form>
         </div>
@@ -81,7 +81,7 @@
 
     .toggle {
         position: relative;
-        left: -38px;
+        left: -203px;
         width: 50px;
         height: 24px;
         display: inline-block;
