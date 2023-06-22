@@ -15,7 +15,7 @@
     {{--    </div>--}}
     <div id="report_user" style="display:flex;flex-wrap:wrap;justify-content:center">
         @foreach($reviews as $review)
-            <div class="app-card app-card-notification shadow-sm m-2 w-25 ">
+            <div class="app-card app-card-notification shadow-sm m-2" style="width:32%">
                 <div class="app-card-header px-4 py-3">
                     <div class="row g-3 align-items-center">
                         <div class="col-12 col-lg-auto text-center text-lg-start">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-6">
                             <a class="btn btn-light" role="button" data-toggle="dropdown"
-                               aria-expanded="false" style="position: absolute;left: 160%;bottom: 55px"><i class="fas fa-bars"></i></a>
+                               aria-expanded="false" style="position: absolute;left: 86%;bottom:0"><i class="fas fa-bars"></i></a>
                             <div class="dropdown-menu">
                                 <button type="submit" class="dropdown-item" data-toggle="modal"
                                         value="{{ $review->from_user_id }},{{ $review->id }}"

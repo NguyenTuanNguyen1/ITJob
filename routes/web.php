@@ -55,7 +55,8 @@ Route::prefix('post')->group(function () {
     Route::get('/list-post', [PostController::class, 'all'])->name('post.all');
     Route::get('/post-detail/{id}', [PostController::class, 'show'])->name('post.detail');
     Route::post('/post-create', [PostController::class, 'store'])->name('post.create');
-    Route::post('/post-update', [PostController::class, 'update'])->name('post.update');
+    Route::get('/post-update', [PostController::class, 'update'])->name('post.update');
+    Route::post('/post-edit', [PostController::class, 'edit'])->name('post.edit');
     Route::post('/post-delete', [PostController::class, 'delete'])->name('post.delete');
     Route::get('/post-trashed', [PostController::class, 'trashed'])->name('post.trashed');
     Route::post('/post-restore', [PostController::class, 'restore'])->name('post.restore');

@@ -1,6 +1,9 @@
 @extends('company.layout')
 @section('content')
 @include('layout.page-css')
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <div class="form-group mb-2">
     <form action="{{ Route('search.company.filter') }}" method="post" class="search-jobs-form">
         @csrf
@@ -56,64 +59,76 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-@foreach($candidates as $candidate)
-<div  style="display:flex;flex-wrap:wrap;justify-content:center">
-    <div class="app-card app-card-notification shadow-sm mb-4 w-25">
-    <div class="app-card-header px-4 py-3">
-        <div class="row g-3 align-items-center">
-            <div class="col-12 col-lg-auto text-center text-lg-start">
-                <img class="profile-image" src="{{ url('image_avatar') }}/{{ $candidate->img_avatar }}" alt="">
+<div style="display:flex;flex-wrap:wrap;justify-content:center">
+    @foreach($candidates as $candidate)
+    <div class="app-card app-card-notification shadow-sm m-1" style="width:32%">
+        <div class="app-card-header px-4 py-3">
+            <div class="row g-3 ">
+                <div class="col-12 col-lg-auto text-center text-lg-start">
+                    <img class="profile-image" src="{{ url('image_avatar') }}/{{ $candidate->img_avatar }}" alt="">
+                </div>
+                <!--//col-->
+                <div class="col-12 col-lg-auto text-lg-start">
+                    <div class="notification-type mb-2"><p>{{ $candidate->username }}</p></div>
+                    <div class="notification-type mb-2"></p>Chuyên ngành</div>
+                    <div class="notification-type mb-2"><p>Vị trí</p></div>
+                </div>
+                <!--//col-->    
             </div>
-            <!--//col-->
-            <div class="col-12 col-lg-auto text-center text-lg-start">
-                <div class="notification-type mb-2">{{ $candidate->username }}</div>
-                <h4 class="notification-title mb-1">{{ $candidate->position }}</h4>
-
-            </div>
-            <!--//col-->
+            <!--//row-->
         </div>
-        <!--//row-->
-    </div>
-    <!--//app-card-header-->
-    <div class="app-card-body p-4">
-        <div class="notification-content">{{ $candidate->description }}</div>
-    </div>
-    <!--//app-card-body-->
-    <div class="app-card-footer px-4 py-3">
-        <a class="action-link" href="{{ Route('profile.user',['id' => $candidate->id]) }}">Xem chi tiết
+        <!--//app-card-header-->
+        <div class="app-card-body p-4">
+            <div class="notification-content" style=" display: -webkit-box;
+                            max-height: 3.2rem;
+                           -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: normal;
+                            -webkit-line-clamp: 2;
+                            line-height: 1.6rem;">{{ $candidate->description }}</div>
+        </div>
+        <!--//app-card-body-->
+        <div class="app-card-footer px-4 py-3">
+            <!-- <a class="action-link" href="{{ Route('profile.user',['id' => $candidate->id]) }}">Xem chi tiết
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ms-2" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                 </svg>
-            </a>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-            Launch demo modal
-        </button>
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            </a> -->
+            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalLong">
+                Xem chi tiết
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ms-2" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg>
+            </button>
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            233123
+                        </div>
+
                     </div>
-                    <div class="modal-body">
-                        233123
-                    </div>
-                   
                 </div>
             </div>
         </div>
+        <!--//app-card-footer-->
     </div>
-    <!--//app-card-footer-->
-</div>
-</div>
 
-<!--//app-card-->
-@endforeach
+    <!--//app-card-->
+    @endforeach
+</div>
 @include('layout.page-js')
-
+@include('modal.history.user')
 @endsection
