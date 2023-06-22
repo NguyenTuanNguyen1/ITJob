@@ -34,7 +34,6 @@ class Post extends Model
         'working',
         'major',
         'status',
-        'image',
         'user_id',
         'approved_user_id',
         'approved_date',
@@ -64,7 +63,7 @@ class Post extends Model
     {
         parent::boot();
         static::deleting(function ($post){
-            $post->ticket()->delete();  
+            $post->ticket()->delete();
             $post->applied()->delete();
         });
         static::restoring(function ($post){

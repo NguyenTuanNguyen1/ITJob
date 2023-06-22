@@ -93,8 +93,16 @@ class PostController extends Controller
     {
         $input = $request->all();
         $this->post_repo->update($input['id'], $input);
-        alert('Cập nhật thành công', null, 'success');
-        return redirect()->route('post.detail', $input['id']);
+        toast()->success('Cập nhật bài viết thành công');
+        return redirect()->route('company.index');
+    }
+
+    public function edit(Request $request)
+    {
+        $input = $request->all();
+
+        $post = $this->post_repo->find($input['id']);
+        return view('company.edit')->with('post', $post);
     }
 
     public function delete(Request $request)

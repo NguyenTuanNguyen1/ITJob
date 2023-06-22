@@ -55,10 +55,6 @@ class PostRepository implements IPostRepository
             'experience' => $data['experience'],
             'working' => $data['working'],
             'major' => $data['major'],
-            'image' => $data['image'],
-            'status' => $data['status'],
-            'approved_user_id' => $data['approved_user_id'],
-            'user_id' => $data['user_id']
         ]);
     }
     public function delete($id)

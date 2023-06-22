@@ -23,7 +23,6 @@ return new class extends Migration
             $table->text('working')->nullable();
             $table->text('experience')->nullable();
             $table->text('major')->nullable();
-            $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
 
             $table->unsignedBigInteger('approved_user_id')->nullable();

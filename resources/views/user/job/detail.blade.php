@@ -96,7 +96,9 @@
                         </ul>
                     </div>
                 </div>
-                @if(Auth::check())
+                @if(!Auth::check())
+
+                @elseif(Auth::check() && Auth::user()->id != $post->user_id)
                     <div class="col-6">
                         <form action="{{ Route('user.applied.post') }}" method="post">
                             @csrf
