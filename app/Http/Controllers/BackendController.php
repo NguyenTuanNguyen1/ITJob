@@ -75,7 +75,7 @@ class BackendController extends Controller
         $users = $this->search_repo->searchCompanyFilter($input);
 
         return view('company.search_result')->with([
-            'users' => $users,
+            'candidates' => $users,
         ]);
     }
 

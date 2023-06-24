@@ -151,13 +151,13 @@
         <div class="col-md-9 border-right">
             <div class="p-3 py-5">
                 <div class="tab" style="display:flex;">
-                    <button class="tablinks" onclick="openCity(event, 'London')">Thông tin cá nhân</button>
+                    <button class="tablinks active" onclick="openCity(event, 'London')" style="font-size:15px;font-weight:bold">Thông tin cá nhân</button>
                     @if($user->role_id == 2)
-                    <button class="tablinks" onclick="openCity(event, 'VietNam')">Công ty</button>
+                    <button class="tablinks" onclick="openCity(event, 'VietNam')" style="font-size:15px;font-weight:bold">Công ty</button>
                     @endif
-                    <button class="tablinks" onclick="openCity(event, 'Paris')">Thông tin thêm</button>
-                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Đánh giá</button>
-                    <button class="tablinks" onclick="openCity(event, 'Berlin')">Báo cáo</button>
+                    <button class="tablinks" onclick="openCity(event, 'Paris')" style="font-size:15px;font-weight:bold">Thông tin thêm</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')" style="font-size:15px;font-weight:bold">Đánh giá</button>
+                    <button class="tablinks" onclick="openCity(event, 'Berlin')" style="font-size:15px;font-weight:bold">Báo cáo</button>
                 </div>
 
                 <div id="London" class="tabcontent" style="display:block">
