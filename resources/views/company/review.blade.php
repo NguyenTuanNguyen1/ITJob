@@ -13,34 +13,36 @@
     {{--            </button>--}}
     {{--        </div>--}}
     {{--    </div>--}}
-    <div id="report_user" style="display:flex;flex-wrap:wrap;justify-content:center">
+    <div id="report_user" style="display:flex;flex-wrap:wrap;">
         @foreach($reviews as $review)
             <div class="app-card app-card-notification shadow-sm m-2" style="width:32%">
-                <div class="app-card-header px-4 py-3">
-                    <div class="row g-3 align-items-center">
-                        <div class="col-12 col-lg-auto text-center text-lg-start">
+                <div class="app-card-header" style="display:flex;">
+                        <div class="col-12 col-lg-auto text-center text-lg-start mt-2">
                             <img class="profile-image"
                                  src="{{ url('image_avatar') }}/{{ $review->from_user->img_avatar }}"
                                  alt="">
                         </div>
-                        <div class="col-12 col-lg-auto text-lg-start" style="padding: 0">
-                            <div class="notification-type mb-2">
-                                <label
-                                    style="font-size: 19px;font-weight: bold">{{ $review->from_user->username }}</label>
+                            <div class="mt-2" style="display:flex;justify-content:space-between;width:100%" >
+                                <div class="col-12 col-lg-auto text-lg-start" style="padding: 0">
+                                <div class="notification-type mb-2">
+                                    <label
+                                        style="font-size: 19px;font-weight: bold">{{ $review->from_user->username }}</label>
+                                </div>
+                                <label style="font-size: 15px">{{ $review->created_at->format('d-m-Y') }}</label>
                             </div>
-                            <label style="font-size: 15px">{{ $review->created_at->format('d-m-Y') }}</label>
+                            <div class="col-3">
+                                <a class="btn btn-light" role="button" data-toggle="dropdown"
+                                aria-expanded="false" ><i class="fas fa-bars"></i></a>
+                                <div class="dropdown-menu">
+                                    <button type="submit" class="dropdown-item" data-toggle="modal"
+                                            value="{{ $review->from_user_id }},{{ $review->id }}"
+                                            data-target="#modalCompanyReport" id="company_report_user">Báo cáo
+                                    </button>
+                                </div>
                         </div>
-                        <div class="col-6">
-                            <a class="btn btn-light" role="button" data-toggle="dropdown"
-                               aria-expanded="false" style="position: absolute;left: 86%;bottom:0"><i class="fas fa-bars"></i></a>
-                            <div class="dropdown-menu">
-                                <button type="submit" class="dropdown-item" data-toggle="modal"
-                                        value="{{ $review->from_user_id }},{{ $review->id }}"
-                                        data-target="#modalCompanyReport" id="company_report_user">Báo cáo
-                                </button>
-                            </div>
+                       
                         </div>
-                    </div>
+                    
 
                 </div>
                 <div class="app-card-body p-4">
