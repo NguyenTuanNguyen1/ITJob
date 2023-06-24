@@ -92,7 +92,7 @@ class BackendController extends Controller
             return $data['status'] == Constant::STATUS_NOT_APPROVED_POST;
         });
         return view('company.searchDatetimeResult')->with([
-            'posts' => $posts,
+            'all_post' => $posts,
             'count_all_post' => count($all_post),
             'count_post_approved' => count($post_approved),
             'count_post_not_approved' => count($post_not_approved),
