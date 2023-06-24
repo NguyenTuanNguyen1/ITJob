@@ -11,4 +11,5 @@ interface ISearchRepository
     public function searchUserByRole($role);
     public function StatisticalPost($action, $from, $to);
     public function searchHistoryDatetimeFilter($from, $to);
+    public function searchAjax();
 }

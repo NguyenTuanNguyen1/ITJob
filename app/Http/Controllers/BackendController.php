@@ -99,10 +99,12 @@ class BackendController extends Controller
         ]);
     }
 
-    public function searchAjax()
+    public function searchAjax(Request $request)
     {
-        $data = Post::search()->get();
-        dd($data);
+        $input = $request->all();
+
+        $data = $this->search_repo->searchAjax($input['key']);
+
         return response()->json([
             'message' => 'Đã tìm thấy ' . $data->count() . ' kết quả',
             'data' => $data,

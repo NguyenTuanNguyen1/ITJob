@@ -9,6 +9,7 @@ use App\Models\InformationType;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class SearchRepository implements ISearchRepository
 {
@@ -66,5 +67,10 @@ class SearchRepository implements ISearchRepository
         return Activity::where('created_at', '>=' , $from)
             ->where('created_at', '<=', Carbon::parse($to)->endOfDay())
             ->get();
+    }
+
+    public function searchAjax()
+    {
+        return Post::with('user')->search()->get();
     }
 }

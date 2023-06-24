@@ -36,7 +36,8 @@ Route::prefix('user')->group(function () {
 
     Route::post('/update-password', [ResetController::class, 'updatePassword'])->name('password.update');
 
-    Route::post('/applied-post', [UserController::class, 'applied'])->name('user.applied.post');
+    Route::get('/applied-post', [UserController::class, 'applied'])->name('user.applied.post');
+    Route::get('/un-applied-post', [UserController::class, 'unApplied'])->name('user.un.applied.post');
 });
 
 //Profile
@@ -175,4 +176,3 @@ Route::get('/error', [HomeController::class, 'notFound'])->name('not.found');
 
 //Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-Route::get('/123', [HomeController::class, 'test'])->name('test');

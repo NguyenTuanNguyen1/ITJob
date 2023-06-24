@@ -1,5 +1,8 @@
 @extends('layout.layout')
 @section('index')
+    </header>
+
+<body>
     <!-- <section class="home-section section-hero overlay bg-image" id="home-section"></section> -->
     @if($posts->isNotEmpty())
         <div class="container" style="padding-top:8%">

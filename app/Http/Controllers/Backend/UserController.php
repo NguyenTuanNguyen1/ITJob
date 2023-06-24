@@ -31,8 +31,23 @@ class UserController extends Controller
     public function applied(Request $request)
     {
         $input = $request->all();
-        $this->appliedPost($input['user_id'], $input['post_id']);
-        alert()->success('Bạn đã ứng tuyển thành công');
+        $data = $this->appliedPost($input['user_id'], $input['post_id']);
+        if (!$data)
+        {
+            return response()->json([
+                'result' => $data
+            ]);
+        }
+//        alert()->success('Bạn đã ứng tuyển thành công');
+        return redirect()->route('post.detail',$input['post_id']);
+    }
+
+    public function unApplied(Request $request)
+    {
+        $input = $request->all();
+
+        $this->unAppliedPost($input['user_id'], $input['post_id']);
+
         return redirect()->route('post.detail',$input['post_id']);
     }
 

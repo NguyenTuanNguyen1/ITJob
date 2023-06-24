@@ -1,6 +1,9 @@
 @extends('layout.layout')
 @section('index')
-    <!-- <section class="home-section section-hero overlay bg-image" id="home-section"></section> -->
+    @include('layout.searchAjax')
+    </header>
+
+<body>
     <div class="site-section">
         <div class="container">
             <div class="row align-items-center justify-content-center">
@@ -175,20 +178,20 @@
                         success: function (res) {
                             var html = '';
                             var message = '';
+                            console.log(res.data)
                             if (res.data != '') {
                                 var pro = res.data;
                                 pro.forEach((function (item) {
                                     message = '<h6 class="media-heading">' + res.message + '</h6>';
                                     html += '<div class="media-body d-flex justify-content-center" >';
-                                    html += '   <img src="{{ url('image_avatar/')}}/' + item.image + ' "class="media-object"  width="30px">'; 
-                                    html += '   <h6 class="media-heading"> <a href="{{env('APP_DOMAIN')}}/post/post-detail/' + item.id + ' ">' + item.title + '</a></h6>';
-                                    // html += '       <p>' + item.Catelogies + '</p>';
+                                    html += '   <img src="{{ url('image_avatar/')}}/' + item.user.img_avatar + ' "class="media-object"  width="30px">';
+                                    html += '   <p style="font-size: 13px;padding: 3px"> <a href="{{env('APP_DOMAIN')}}/post/post-detail/' + item.id + ' ">' + item.title + '</a></p>';
                                     html += '</div>';
 
                                 }))
                                 $('.search-ajax-result').html([message, html])
                             } else {
-                                html += '<h4 class="media-heading"> Không tìm thấy</h4>';
+                                html += '<h4 class="media-heading" style="color: black" > Không tìm thấy</h4>';
                                 $('.search-ajax-result').html(html)
 }
     }

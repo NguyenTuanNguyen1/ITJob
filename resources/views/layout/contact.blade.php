@@ -1,5 +1,8 @@
 @extends('layout.layout')
 @section('content')
+    </header>
+
+<body>
     @include('sweetalert::alert')
     <div class="site-wrap">
         <!-- HOME -->

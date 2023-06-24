@@ -108,10 +108,15 @@ trait Service
 
             return false;
         }
-        return Applied::insert([
+        return Applied::create([
             'user_id' => $user_id,
             'post_id' => $post_id
         ]);
+    }
+
+    public function unAppliedPost($user_id, $post_id)
+    {
+        return Applied::where('user_id', $user_id)->where('post_id', $post_id)->delete();
     }
 
     function createUser($getInfo, $provider)

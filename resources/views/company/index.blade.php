@@ -33,16 +33,17 @@
                                        aria-expanded="false"><i class="fas fa-bars"></i></a>
                                     <div class="dropdown-menu">
                                         <a class="ml-3" href="{{ Route('post.detail',['id' => $post->id]) }}" style="text-decoration: none; color: black">Chi tiết bài viết</a>
-                                        <form action="{{ Route('company.applied.post') }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="user_id" value="{{ Auth::user()->role_id }}">
-                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                            <button type="submit" class="dropdown-item" data-toggle="modal">
-                                                Danh sách ứng tuyển
-                                            </button>
-                                        </form>
+                                        @if($post->status != 0)
+                                            <form action="{{ Route('company.applied.post') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->role_id }}">
+                                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                <button type="submit" class="dropdown-item" data-toggle="modal">
+                                                    Danh sách ứng tuyển
+                                                </button>
+                                            </form>
+                                        @endif
                                         <a class="ml-3" href="{{ Route('post.edit',['id' => $post->id]) }}" style="text-decoration: none; color: black">Chỉnh sửa bài viết</a>
-
                                     </div>
                                 </div>
                                 </div>
@@ -62,19 +63,21 @@
                         @if($post->approved_date != null)
                             <div class="app-card-footer p-4 mt-auto">
                                 <div class="col-auto">
-                                    <div class="toggle focus @if($post->status != 1) on @endif ">
-                                        <input type="checkbox" value="{{ $post->id }}">
-                                        <span class="slider focus"></span>
-                                        @if($post->status != 1)
-                                            <span class="label">Ẩn bài viết</span>
-                                        @else
-                                            <span class="label">Hiện bài viết</span>
-                                        @endif
-                                    </div>
+                                    @if($post->status != 0)
+                                        <div class="toggle focus @if($post->status != 1) on @endif ">
+                                            <input type="checkbox" value="{{ $post->id }}">
+                                            <span class="slider focus"></span>
+                                            @if($post->status != 1)
+                                                <span class="label">Ẩn bài viết</span>
+                                            @else
+                                                <span class="label">Hiện bài viết</span>
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
                                 <span tabindex="0" data-toggle="tooltip" title="Xóa bài viết">
                                     <button class="btn btn-danger" id="btn-delete" value="{{ $post->id }}" style="position: absolute;left: 81%;bottom: 25px;"><span><i class="far fa-trash-alt" style="color: #dcdfe5;"></i></span></button>
-                                </span> 
+                                </span>
                             </div>
                         @endif
                     </div>

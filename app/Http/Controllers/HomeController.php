@@ -39,6 +39,7 @@ class HomeController extends Controller
         $count_major_real_estate = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, Constant::MAJOR_REAL_ESTATE, Carbon::now()->subMonth(), Carbon::now());
         $count_major_car_technology = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, Constant::MAJOR_CAR_TECHNOLOGY, Carbon::now()->subMonth(), Carbon::now());
         $company_outstanding = $this->company_repo->getPostOutstanding();
+
         return view('layout.index')->with([
             'posts' => $posts,
             'companys' => $companys,
@@ -72,9 +73,5 @@ class HomeController extends Controller
     public function notFound()
     {
         return view('layout.not-found');
-    }
-    public function test()
-    {
-        return view('auth.resetPassword');
     }
 }
