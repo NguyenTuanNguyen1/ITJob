@@ -1,22 +1,22 @@
 @extends('layout.layout')
 @section('content')
     @include('sweetalert::alert')
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-    <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css"> -->
+    <!-- <link href="{{ url('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('board-master/css/custom-bs.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/css/jquery.fancybox.min.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/fonts/icomoon/style.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/fonts/line-icons/style.css') }}">
     <link rel="stylesheet" href="{{ url('board-master/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ url('board-master/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url('board-master/css/animate.min.css') }}"> -->
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{{ url('board-master/css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url('board-master/css/style.css') }}"> -->
 
     <!-- HOME -->
-    <section class="section-hero overlay inner-page bg-image"
+    <!-- <section class="section-hero overlay inner-page bg-image"
              id="home-section">
         <div class="container">
             <div class="row">
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="site-section">
         <div class="container" style="background-color: white;padding: 10px;border-radius: 10px;">
@@ -108,7 +108,8 @@
                         </form>
                     </div>
                 @endif
-                <button type="submit" class="btn btn-block btn-primary"><p>Ứng tuyển ngay</p></button>
+                <button type="button" id="AddButton" onclick="AddButtonClick()" class="btn btn-success btn-block ">Ứng tuyển ngay</button> 
+                
             </div>
         </div>
     </section>
@@ -176,7 +177,10 @@
                 $('#detail-post').html(_li).first();
             });
         });
-
+        function AddButtonClick(){ 
+                //change text from add to Update
+            $("#AddButton").text('Đã ứng tuyển');
+        }
         $('#edit-post-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
