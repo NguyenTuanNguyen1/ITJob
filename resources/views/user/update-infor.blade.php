@@ -167,11 +167,11 @@
         <div class="col-md-9 border-right">
             <div class="p-3 py-5">
                 <div class="tab" style="display:flex;">
-                    <button class="tablinks" onclick="openCity(event, 'London')">Thông tin cá nhân</button>
-                    <button class="tablinks" onclick="openCity(event, 'Paris')">Thông tin thêm</button>
-                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Đánh giá</button>
-                    <button class="tablinks" onclick="openCity(event, 'France')">Đổi mật khẩu</button>
-                    <button class="tablinks" onclick="openCity(event, 'VietNam')">Phản hồi</button>
+                    <button class="tablinks active" onclick="openCity(event, 'London')" style="font-size:15px">Thông tin cá nhân</button>
+                    <button class="tablinks" onclick="openCity(event, 'Paris')" style="font-size:15px">Thông tin thêm</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')" style="font-size:15px">Đánh giá</button>
+                    <button class="tablinks" onclick="openCity(event, 'France')" style="font-size:15px">Đổi mật khẩu</button>
+                    <button class="tablinks" onclick="openCity(event, 'VietNam')" style="font-size:15px">Phản hồi</button>
                 </div>
 
                 <div id="London" class="tabcontent" style="display:block">
@@ -325,18 +325,17 @@
                                                     <img class="media-object" src="{{ url('image_avatar') }}/{{ $review->from_user->img_avatar }}" alt="">
                                                 </a>
                                                 <div class="media-body">
-                                                    <div class="d-flex" id="report_user">
-                                                        <h4 class="media-heading" style="color: black">{{ $review->from_user->username }}</h4>
-                                                        <div class="col-6">
-                                                            <a class="btn btn-light" role="button" data-toggle="dropdown"
-                                                               aria-expanded="false" ><i class="fas fa-bars"></i></a>
+                                                    <div id="report_user" style="display:flex;justify-content:space-between">
+                                                        
+                                                            <h4 class="media-heading" style="color: black;margin-top:10px">{{ $review->from_user->username }}</h4>
+                                                            <a class="btn btn-light mb-4" role="button" data-toggle="dropdown"
+                                                               aria-expanded="false" style=""   ><i class="fas fa-bars"></i></a>
                                                             <div class="dropdown-menu">
                                                                 <button type="submit" class="dropdown-item" data-toggle="modal"
                                                                         value="{{ $review->from_user_id }},{{ $review->id }}"
                                                                         data-target="#modalCompanyReport" id="company_report_user">Báo cáo
                                                                 </button>
                                                             </div>
-                                                        </div>
                                                     </div>
                                                     <p>{{ $review->content }}</p>
                                                     <ul class="list-unstyled list-inline media-detail pull-left"

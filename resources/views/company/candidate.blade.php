@@ -43,34 +43,21 @@
         </div>
     </form>
 </div>
-{{--            <div class="position-relative mb-3">--}}
-{{--                <div class="row g-3 justify-content-between">--}}
-{{--                    <div class="col-auto">--}}
-{{--                        <div class="page-utilities">--}}
-{{--                            <select class="form-select form-select-sm w-auto">--}}
-{{--                                <option selected value="option-1">All</option>--}}
-{{--                                <option value="option-2">News</option>--}}
-{{--                                <option value="option-3">Product</option>--}}
-{{--                                <option value="option-4">Project</option>--}}
-{{--                                <option value="option-4">Billing</option>--}}
-{{--                            </select>--}}
-{{--                        </div><!--//page-utilities-->--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-<div style="display:flex;flex-wrap:wrap;justify-content:center">
+
+<div style="display:flex;flex-wrap:wrap;">
     @foreach($candidates as $candidate)
     <div class="app-card app-card-notification shadow-sm m-1" style="width:32%">
         <div class="app-card-header px-4 py-3">
             <div class="row g-3 ">
                 <div class="col-12 col-lg-auto text-center text-lg-start">
                     <img class="profile-image" src="{{ url('image_avatar') }}/{{ $candidate->img_avatar }}" alt="">
+                    <div class="notification-type  mt-3"><p>{{ $candidate->position }}</p></div>
                 </div>
                 <!--//col-->
                 <div class="col-12 col-lg-auto text-lg-start">
-                    <div class="notification-type mb-2"><p>{{ $candidate->username }}</p></div>
-                    <div class="notification-type mb-2"><p>{{ $candidate->major }}</p></div>
-                    <div class="notification-type mb-2"><p>{{ $candidate->position }}</p></div>
+                    <div class="notification-type mb-2"><p style="font-weight:bold;font-size:18px">{{ $candidate->username }}</p></div>
+                    <div class="notification-type mb-2"><p style="font-size:14px">{{ $candidate->major }}</p></div>
+                    
                 </div>
                 <!--//col-->
             </div>
