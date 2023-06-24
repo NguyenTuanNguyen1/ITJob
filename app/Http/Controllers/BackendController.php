@@ -102,7 +102,7 @@ class BackendController extends Controller
     public function searchAjax()
     {
         $data = Post::search()->get();
-
+        dd($data);
         return response()->json([
             'message' => 'Đã tìm thấy ' . $data->count() . ' kết quả',
             'data' => $data,
