@@ -177,51 +177,6 @@
                     </div>
                 </div>
             </div>
-
-            {{--            <div class="col-md-8">--}}
-            {{--                <div class="card card-user">--}}
-            {{--                    <div class="card-header">--}}
-            {{--                        <h5 class="card-title">Chỉnh sửa thông tin cá nhân</h5>--}}
-            {{--                    </div>--}}
-            {{--                    <div class="card-body">--}}
-            {{--                        <div class="row" id="load-information">--}}
-            {{--                            <div class="col-md-12">--}}
-            {{--                                @foreach($type_infor as $type)--}}
-            {{--                                    <form action="{{ Route('profile.update.information') }}" method="post">--}}
-            {{--                                        @csrf--}}
-            {{--                                        <div class="d-flex" style="justify-content:space-between;">--}}
-            {{--                                            <label class="mt-4">{{ $type->content }}</label>--}}
-            {{--                                            <div>--}}
-            {{--                                                <button--}}
-            {{--                                                    class="btn btn-sm btn-outline-success btn-round btn-icon mb-2 mt-4"--}}
-            {{--                                                    id="btn-infor"><i class="fa fa-edit"></i></button>--}}
-            {{--                                            </div>--}}
-            {{--                                        </div>--}}
-            {{--                                        <input type="hidden" name="role_id" value="{{ $user->role_id }}">--}}
-            {{--                                        <input type="hidden" name="id" value="{{ $user->id }}">--}}
-            {{--                                        <input type="hidden" name="type_id" value="{{ $type->id }}">--}}
-
-            {{--                                        @if($information->isNotEmpty())--}}
-            {{--                                            @foreach($information as $infor)--}}
-            {{--                                                @if($infor->type_id == $type->id)--}}
-            {{--                                                    <textarea type="text" class="form-control" name="content"--}}
-            {{--                                                              rows="3">{{ $infor->content }}</textarea>--}}
-            {{--                                                @else--}}
-            {{--                                                    <textarea type="text" class="form-control" name="content"--}}
-            {{--                                                              rows="3"></textarea>--}}
-            {{--                                                @endif--}}
-            {{--                                            @endforeach--}}
-            {{--                                        @else--}}
-            {{--                                            <textarea type="text" class="form-control" name="content"--}}
-            {{--                                                      data-value=""></textarea>--}}
-            {{--                                        @endif--}}
-            {{--                                    </form>--}}
-            {{--                                @endforeach--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
         </div>
     </div>
     @include('layout.page-js')

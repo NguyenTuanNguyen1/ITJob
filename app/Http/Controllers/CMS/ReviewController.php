@@ -38,14 +38,6 @@ class ReviewController extends Controller
         $this->type_repo = $typeRepository;
     }
 
-//    public function index()
-//    {
-//        $review = $this->review_repo->all();
-//        return response()->json([
-//            'data' => $review
-//        ]);
-//    }
-
     public function store(Request $request)
     {
         $input = $request->all();
@@ -56,26 +48,6 @@ class ReviewController extends Controller
             'result' => true
         ]);
     }
-
-//    public function update(Request $request)
-//    {
-//        $input = $request->all();
-//
-//        try {
-//            $this->review_repo->update($input['id'], $input);
-//            $this->ActivityLog("Bạn đã chỉnh sửa nhận xét của mình tại " . $input['id'], $input['user_id']);
-//            toast('Chỉnh sửa thành công', 'success');
-//            return response()->json([
-//                'result' => true,
-//                'message' => 'Chỉnh sửa bài viết thành công'
-//            ]);
-//        } catch (\Exception $e) {
-//            return response()->json([
-//                'result' => false,
-//                'message' => $e->getMessage()
-//            ]);
-//        }
-//    }
 
     public function delete(Request $request)
     {
