@@ -184,7 +184,7 @@
                                 pro.forEach((function (item) {
                                     message = '<h6 class="media-heading">' + res.message + '</h6>';
                                     html += '<div class="media-body d-flex justify-content-center" >';
-                                    html += '   <img src="{{ url('image_avatar/')}}/' + item.user.img_avatar + ' "class="media-object"  width="30px">';
+                                    html += '   <img src="{{ url('image_avatar/')}}/' + item.user.img_avatar + ' "class="media-object"  width="50px" height="50px">' ;
                                     html += '   <p style="font-size: 13px;padding: 3px"> <a href="{{env('APP_DOMAIN')}}/post/post-detail/' + item.id + ' ">' + item.title + '</a></p>';
                                     html += '</div>';
 
