@@ -157,11 +157,11 @@
                                         </td>
                                         <td>{{ $post_not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
-                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-success" type="submit" 
                                                     data-toggle="modal" data-target="#modalReport"
                                                     id="btn-reply" value="{{ $post_not_reply->id }}">Phản hồi
                                             </button>
-                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-danger" type="submit" 
                                                     onclick="window.location='{{ Route('report.delete',['id' => $post_not_reply->id]) }}'">
                                                 Xoá
                                             </button>
@@ -185,27 +185,27 @@
                     </div>
                     <div class="card-body">
                         <div
-                            class="@if($report_user_not_reply->isNotEmpty() && count($report_user_not_reply) > 4) Scroll @endif">
+                            class="@if($report_post_not_reply->isNotEmpty() && count($report_post_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
-                                <th>Nội dung</th>
+                                <th style="width: 50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="report_user_reply">
-                                @foreach($report_user_not_reply as $user_not_reply)
+                                <tbody id="report_reply">
+                                @foreach($report_post_not_reply as $post_not_reply)
                                     <tr>
-                                        <td>{{ $user_not_reply->from_user->name }}</td>
-                                        <td style="width:50%">{{ $user_not_reply->content }}</td>
+                                        <td>{{ $post_not_reply->from_user->name }}</td>
+                                        <td style="width:50%">{{ $post_not_reply->content }}</td>
                                         <td>
                                             @foreach($images as $img)
-                                                @if($img->ticket_id == $user_not_reply->id)
+                                                @if($img->ticket_id == $post_not_reply->id)
                                                     <button class="btn btn-outline-success" type="submit"
                                                             value="{{ $img->ticket_id }}"
                                                             data-toggle="modal" data-target="#modalReportImage"
-                                                            id="btn-user-images">
+                                                            id="btn-post-images">
                                                         <img src="{{ url('Images')}}/{{ $img->image }}"
                                                              width="50px" height="50px">
                                                     </button>
@@ -213,15 +213,14 @@
                                                 @endif
                                             @endforeach
                                         </td>
-                                        <td>{{ $user_not_reply->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $post_not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
-                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                        <button class="btn btn-outline-success" type="submit" 
                                                     data-toggle="modal" data-target="#modalReportUser"
-                                                    id="btn-user-reply" value="{{ $user_not_reply->id }}">Phản hồi
+                                                    id="btn-user-reply" value="{{ $post_not_reply->id }}">Phản hồi
                                             </button>
-                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
-                                                    onclick="window.location='{{ Route('report.delete',['id' => $user_not_reply->id]) }}'">
-                                                Xoá
+                                            <button class="btn btn-outline-danger" type="submit" 
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_not_reply->id]) }}'">Xoá
                                             </button>
                                         </td>
                                     </tr>
