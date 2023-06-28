@@ -169,9 +169,9 @@
                                         <td>{{ $reply->created_at->format('d-m-Y') }}</td>
                                         <td class="d-flex">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
-                                                    data-value="123" data-toggle="modal"
+                                                    data-toggle="modal"
                                                     data-target="#modalDetailRepliedContact"
-                                                    id="btn-replied" value="{{ $reply->id }}">Phản hồi
+                                                    id="btn-replied" value="{{ $reply->id }}">Nội dung
                                             </button>
                                             <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('contact.delete',['id' => $reply->id]) }}'">

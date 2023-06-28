@@ -66,7 +66,7 @@ class TicketRepository implements ITicketRepository
 
     public function find($id)
     {
-        return Ticket::with('to_user','from_user','type')->find($id);
+        return Ticket::with('to_user', 'from_user', 'type')->find($id);
     }
 
     public function delete($id)
@@ -77,7 +77,7 @@ class TicketRepository implements ITicketRepository
     public function update($id)
     {
         return Ticket::where('id', $id)->update([
-           'status' => Constant::TICKET_REPLIED
+            'status' => Constant::TICKET_REPLIED
         ]);
     }
 
@@ -155,7 +155,7 @@ class TicketRepository implements ITicketRepository
         return Ticket::with('from_user')
             ->where('to_user_id', $to_user_id)
             ->where('type_id', $action)
-            ->where('status','<>', Constant::TICKET_WAITING_REPORT)
+            ->where('status', '<>', Constant::TICKET_WAITING_REPORT)
             ->get();
     }
 
@@ -163,8 +163,8 @@ class TicketRepository implements ITicketRepository
     {
         return Ticket::with('from_user')
             ->where('to_user_id', $id)
-            ->where('status','<>', Constant::TICKET_NOT_REPLY)
-            ->where('status','<>', Constant::TICKET_WAITING_REPORT)
+            ->where('status', '<>', Constant::TICKET_NOT_REPLY)
+            ->where('status', '<>', Constant::TICKET_WAITING_REPORT)
             ->get();
     }
 }

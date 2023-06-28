@@ -119,6 +119,15 @@
             </div>
         </div>
     </div>
+
+
+    <form action="{{ Route('search.user') }}" method="post">
+        @csrf
+        <input type="text" name="name" placeholder="Nhập tên hiển thị bạn muốn tìm">
+        <button type="submit" class="btn-outline-success">Tìm kiếm</button>
+    </form>
+
+
     <div class="content" style="margin-top: 5px">
         <div class="row">
             <div class="col-md-12">

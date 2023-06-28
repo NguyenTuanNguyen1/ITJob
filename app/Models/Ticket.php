@@ -33,11 +33,6 @@ class Ticket extends Model
         'ticket_id'
     ];
 
-    public function to_user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function from_user()
     {
         return $this->belongsTo(User::class);
@@ -51,6 +46,11 @@ class Ticket extends Model
     public function image()
     {
         return $this->hasMany(Image::class,'ticket_id');
+    }
+
+    public function to_user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected static function boot()

@@ -12,9 +12,6 @@ class Constant
     public const TICKET_REPORT_POST = 2;
     public const TICKET_CONTACT = 3;
     public const TICKET_REVIEW = 4;
-    public const TYPE_INFORMATION = 1;
-    public const TYPE_TICKET = 2;
-    public const TYPE_ROLE = 3;
     public const TICKET_NOT_REPLY = 0;
     public const TICKET_REPLIED = 2;
     public const TICKET_WAITING_REPORT = 1;

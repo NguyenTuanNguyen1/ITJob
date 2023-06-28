@@ -147,8 +147,9 @@ class DashboardController extends Controller
         $report_post_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST, Constant::TICKET_NOT_REPLY);
         $report_user_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER, Constant::TICKET_NOT_REPLY);
 
-        $report_post_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST, Constant::TICKET_REPLIED);
-        $report_user_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER, Constant::TICKET_REPLIED);
+        $report_post_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST, Constant::TICKET_REPORT_REPLIED);
+        $report_user_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER, Constant::TICKET_REPORT_REPLIED);
+
         $image_report = $this->admin_repo->getImageReport();
 
         return view('admin.dashboard.report')->with([

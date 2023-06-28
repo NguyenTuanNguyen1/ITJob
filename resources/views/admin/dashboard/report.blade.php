@@ -157,11 +157,11 @@
                                         </td>
                                         <td>{{ $post_not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
-                                            <button class="btn btn-outline-success" type="submit" 
+                                            <button class="btn btn-outline-success" type="submit"
                                                     data-toggle="modal" data-target="#modalReport"
                                                     id="btn-reply" value="{{ $post_not_reply->id }}">Phản hồi
                                             </button>
-                                            <button class="btn btn-outline-danger" type="submit" 
+                                            <button class="btn btn-outline-danger" type="submit"
                                                     onclick="window.location='{{ Route('report.delete',['id' => $post_not_reply->id]) }}'">
                                                 Xoá
                                             </button>
@@ -194,7 +194,7 @@
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody id="report_reply">
+                                <tbody id="report_user_reply">
                                 @foreach($report_post_not_reply as $post_not_reply)
                                     <tr>
                                         <td>{{ $post_not_reply->from_user->name }}</td>
@@ -215,12 +215,13 @@
                                         </td>
                                         <td>{{ $post_not_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
-                                        <button class="btn btn-outline-success" type="submit" 
+                                            <button class="btn btn-outline-success" type="submit"
                                                     data-toggle="modal" data-target="#modalReportUser"
                                                     id="btn-user-reply" value="{{ $post_not_reply->id }}">Phản hồi
                                             </button>
-                                            <button class="btn btn-outline-danger" type="submit" 
-                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_not_reply->id]) }}'">Xoá
+                                            <button class="btn btn-outline-danger" type="submit"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_not_reply->id]) }}'">
+                                                Xoá
                                             </button>
                                         </td>
                                     </tr>
@@ -250,7 +251,7 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
-                                <th  style="width:50%">Nội dung</th>
+                                <th style="width:50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
@@ -277,12 +278,12 @@
                                         <td>{{ $post_reply->created_at->format('d-m-Y') }}</td>
                                         <td class="d-flex">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
-                                                    data-value="123" data-toggle="modal"
+                                                    data-toggle="modal"
                                                     data-target="#modalDetailReport"
-                                                    id="btn-replied" value="{{ $post_reply->id }}">Phản hồi
+                                                    id="btn-replied" value="{{ $post_reply->id }}">Nội dung
                                             </button>
                                             <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
-                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_reply->id]) }}'">
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_reply->id, 'role_id' => Auth::user()->role_id]) }}'">
                                                 Xoá
                                             </button>
                                         </td>
@@ -336,12 +337,12 @@
                                         <td>{{ $user_reply->created_at->format('d-m-Y') }}</td>
                                         <td class="d-flex">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
-                                                    data-value="123" data-toggle="modal"
+                                                    data-toggle="modal"
                                                     data-target="#modalDetailReportUser"
-                                                    id="btn-user-replied" value="{{ $user_reply->id }}">Phản hồi
+                                                    id="btn-user-replied" value="{{ $user_reply->id }}">Nội dung
                                             </button>
                                             <button class="btn btn-outline-danger   " type="submit" style="margin: 5px"
-                                                    onclick="window.location='{{ Route('report.delete',['id' => $user_reply->id]) }}'">
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $user_reply->id, 'role_id' => Auth::user()->role_id]) }}'">
                                                 Xoá
                                             </button>
                                         </td>
@@ -387,6 +388,7 @@
                 type: "GET",
                 data: value,
                 success: function (res) {
+                    console.log(res)
                     _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
                     _li += '<input type="hidden" name="post_id" value="' + res.data.post_id + '">';
                     _li += '<input type="hidden" name="to_user_id" value="' + res.data.from_user_id + '">';
@@ -403,7 +405,7 @@
                 type: "GET",
                 data: value,
                 success: function (res) {
-                    console.log(res.data)
+                    console.log(res.data,123)
                     _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
                     _li += '<input type="hidden" name="review_id" value="' + res.data.ticket_id + '">';
                     _li += '<input type="hidden" name="to_user_id" value="' + res.data.from_user_id + '">';

@@ -73,6 +73,7 @@ Route::prefix('search')->group(function () {
     Route::get('/', [BackendController::class, 'searchAjax'])->name('search.ajax');
     Route::get('/get-post-by-major', [BackendController::class, 'getPostByMajor'])->name('post.major');
     Route::get('/messenger/name', [BackendController::class, 'searchAjaxName'])->name('search.name');
+    Route::post('/name', [BackendController::class, 'searchUser'])->name('search.user');
 });
 
 //Contact

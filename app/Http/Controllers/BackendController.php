@@ -141,6 +141,13 @@ class BackendController extends Controller
         ]);
     }
 
+    public function searchUser(Request $request)
+    {
+        $users = User::where('name', $request->name)->get();
+
+        return view('admin.dashboard.searchUserResult')->with('users', $users);
+    }
+
     public function deletePostMail(Request $request)
     {
         $input = $request->all();
@@ -202,6 +209,7 @@ class BackendController extends Controller
         $input = $request->all();
 
         $ticket = $this->ticket_repo->find($input['id']);
+        dd($ticket);
         if (empty($ticket))
         {
             $ticket = $this->ticket_repo->trashed($input['id']);

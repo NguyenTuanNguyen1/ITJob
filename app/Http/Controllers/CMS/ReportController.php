@@ -101,6 +101,7 @@ class ReportController extends Controller
         $this->ticket_repo->delete($input['id']);
         if ($input['role_id'] == Constant::ROLE_COMPANY)
         {
+            alert()->success('Đã xoá thành công');
             return redirect()->route('company.review');
         }
         elseif ($input['role_id'] == Constant::ROLE_CANDIDATE)
@@ -109,6 +110,7 @@ class ReportController extends Controller
         }
         else
         {
+            toast()->success('Đã xoá thành công');
             $this->ActivityLog('Đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
             return redirect()->route('dashboard.report');
         }

@@ -69,7 +69,7 @@ class ContactController extends Controller
         {
             $this->ActivityLog('Đã xoá bản báo cáo bài viết*' . $input['id'], Auth::user()->id);
         }
-
+        toast()->success('Đã xoá thành công');
         return redirect()->route('dashboard.contact');
     }
 

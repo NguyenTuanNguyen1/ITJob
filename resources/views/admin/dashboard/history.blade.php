@@ -246,6 +246,7 @@
             console.log(data)
             $.get('{{ Route('backend.ticket') }}/?id='+ data +'',function (res) {
                 var value = res.ticket;
+                console.log(value.to_user.name)
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
