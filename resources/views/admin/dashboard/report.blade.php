@@ -131,7 +131,7 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
-                                <th>Nội dung</th>
+                                <th style="width: 50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
@@ -160,6 +160,10 @@
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-toggle="modal" data-target="#modalReport"
                                                     id="btn-reply" value="{{ $post_not_reply->id }}">Phản hồi
+                                            </button>
+                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_not_reply->id]) }}'">
+                                                Xoá
                                             </button>
                                         </td>
                                     </tr>
@@ -214,6 +218,10 @@
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-toggle="modal" data-target="#modalReportUser"
                                                     id="btn-user-reply" value="{{ $user_not_reply->id }}">Phản hồi
+                                            </button>
+                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $user_not_reply->id]) }}'">
+                                                Xoá
                                             </button>
                                         </td>
                                     </tr>

@@ -124,6 +124,10 @@
                                                     data-target="#modalRepliedContact"
                                                     id="btn-reply" value="{{ $not_reply->id }}">Phản hồi
                                             </button>
+                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('contact.delete',['id' => $not_reply->id]) }}'">
+                                                Xoá
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -169,7 +173,7 @@
                                                     data-target="#modalDetailRepliedContact"
                                                     id="btn-replied" value="{{ $reply->id }}">Phản hồi
                                             </button>
-                                            <button class="btn btn-outline-warning" type="submit" style="margin: 5px"
+                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
                                                     onclick="window.location='{{ Route('contact.delete',['id' => $reply->id]) }}'">
                                                 Xoá
                                             </button>
