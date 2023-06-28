@@ -24,9 +24,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('password')->nullable();
             $table->string('provider')->nullable();
-            $table->float('start')->nullable();
-            $table->integer('status')->nullable();
-            $table->string('token')->nullable();
             $table->string('remember_token')->nullable();
 
             $table->unsignedBigInteger('role_id')->nullable();

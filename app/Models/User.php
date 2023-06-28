@@ -30,12 +30,9 @@ class User extends Authenticatable
         'position',
         'major',
         'description',
-        'status',
-        'start',
         'password',
         'provider',
         'remember_token',//Dùng để ghi nhớ đăng nhập
-        'token',//Dùng để xác nhận lại mật khẩu
         'role_id',
     ];
 

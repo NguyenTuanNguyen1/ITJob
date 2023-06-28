@@ -151,13 +151,11 @@ Route::group(['prefix' => 'company'], function () {
 });
 
 //Social
-Route::group(['prefix' => 'admin', 'middleware' => 'authorize'], function () {
-    Route::get('/login-google/{provider}', [OAuthController::class, 'redirect_Google'])->name('login.google');
-    Route::get('/callback/{provider}', [OAuthController::class, 'callback_Google'])->name('callback.google');
+Route::get('/login-google/{provider}', [OAuthController::class, 'redirect_Google'])->name('login.google');
+Route::get('/callback/{provider}', [OAuthController::class, 'callback_Google'])->name('callback.google');
 
-    Route::get('/login-linkedin/{provider}', [OAuthController::class, 'redirect_Linkedin'])->name('login.linkedin');
-    Route::get('/callback/{provider}', [OAuthController::class, 'callback_Linkedin'])->name('callback.linkedin');
-});
+Route::get('/login-linkedin/{provider}', [OAuthController::class, 'redirect_Linkedin'])->name('login.linkedin');
+Route::get('/callback/{provider}', [OAuthController::class, 'callback_Linkedin'])->name('callback.linkedin');
 
 //Backend
 Route::group(['prefix' => 'backend'], function () {
