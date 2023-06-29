@@ -145,7 +145,7 @@
         });
     });
 
-    @if(Auth::check())
+    @if(Auth::check() && Auth::user()->role_id == 3)
     $.get('{{ Route('user.applied.post') }}?user_id={{ Auth::user()->id }}&post_id={{ $post->id  }}', function (e) {
         var html = '';
         if (e.result == false) {

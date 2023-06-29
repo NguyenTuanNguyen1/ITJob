@@ -9,16 +9,18 @@
                 <div class="row ">
                     <div class="col-lg-3 col-sm-6">
                         <label for="startDate">Từ</label>
-                        <input name="from" class="form-control" type="date" />
+                        <input name="from" class="form-control" type="date"/>
                         <!-- <span id="startDateSelected"></span> -->
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <label for="endDate">Đến</label>
-                        <input name="to" class="form-control " type="date" />
+                        <input name="to" class="form-control " type="date"/>
                         <!-- <span id="endDateSelected"></span> -->
                     </div>
                     <div class="col-lg-3 col-sm-6">
-                        <button class="btn btn-outline-success search-1" type="submit" style="position: absolute;top: 21px">Tìm kiếm</button>
+                        <button class="btn btn-outline-success search-1" type="submit"
+                                style="position: absolute;top: 21px">Tìm kiếm
+                        </button>
                     </div>
                 </div>
             </div>
@@ -102,33 +104,33 @@
         button.on('click', '#user', function () {
             var data = $(this).val()
             var _li = '';
-            $.get('{{ Route('backend.user') }}/?id='+ data +'',function (res) {
+            $.get('{{ Route('backend.user') }}/?id=' + data + '', function (res) {
                 var value = res.user;
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Họ và tên :</label>';
-                _li += '            <label>'+ value.name +'</label>';
+                _li += '            <label>' + value.name + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Số điện thoại :</label>';
-                _li += '            <label>'+ value.phone +'</label>';
+                _li += '            <label>' + value.phone + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
-                _li += '            <label style="font-size: 17px;font-weight: bold">Email :</label>';
-                _li += '            <label>'+ value.email +'</label>';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Email :</label><br>';
+                _li += '            <label>' + value.email + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Địa chỉ :</label>';
-                _li += '            <label>'+ value.address +'</label>';
+                _li += '            <label>' + value.address + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -136,13 +138,13 @@
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Chuyên ngành :</label>';
-                _li += '            <label>'+ value.major +'</label>';
+                _li += '            <label>' + value.major + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Vị trí :</label>';
-                _li += '            <label>'+ value.position +'</label>';
+                _li += '            <label>' + value.position + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -150,7 +152,7 @@
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Mô tả :</label>';
-                _li += '            <label>'+ value.description +'</label>';
+                _li += '            <label>' + value.description + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -160,14 +162,14 @@
         button.on('click', '#post', function () {
             var data = $(this).val()
             var _li = '';
-            $.get('{{ Route('backend.post') }}/?id='+ data +'',function (res) {
+            $.get('{{ Route('backend.post') }}/?id=' + data + '', function (res) {
                 var value = res.post;
                 console.log(value)
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Tiêu đề :</label>';
-                _li += '            <label>'+ value.title +'</label>';
+                _li += '            <label>' + value.title + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -175,7 +177,7 @@
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Mô tả :</label>';
-                _li += '            <label>'+ value.description +'</label>';
+                _li += '            <label>' + value.description + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -183,7 +185,7 @@
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Lợi ích :</label>';
-                _li += '            <label>'+ value.benefit +'</label>';
+                _li += '            <label>' + value.benefit + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -191,7 +193,7 @@
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Yêu cầu :</label>';
-                _li += '            <label>'+ value.requirements +'</label>';
+                _li += '            <label>' + value.requirements + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -199,13 +201,13 @@
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Chuyên ngành :</label>';
-                _li += '            <label>'+ value.major +'</label>';
+                _li += '            <label>' + value.major + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Kinh nghiệm :</label>';
-                _li += '            <label>'+ value.experience +'</label>';
+                _li += '            <label>' + value.experience + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -213,13 +215,13 @@
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Vị trí :</label>';
-                _li += '            <label>'+ value.position +'</label>';
+                _li += '            <label>' + value.position + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Loại hình :</label>';
-                _li += '            <label>'+ value.working +'</label>';
+                _li += '            <label>' + value.working + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -227,13 +229,13 @@
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Địa chỉ :</label>';
-                _li += '            <label>'+ value.workplace +'</label>';
+                _li += '            <label>' + value.workplace + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Số lượng :</label>';
-                _li += '            <label>'+ value.quantity +'</label>';
+                _li += '            <label>' + value.quantity + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -244,28 +246,31 @@
             var data = $(this).val()
             var _li = '';
             console.log(data)
-            $.get('{{ Route('backend.ticket') }}/?id='+ data +'',function (res) {
+            $.get('{{ Route('backend.ticket') }}/?id=' + data + '', function (res) {
                 var value = res.ticket;
-                console.log(value.to_user.name)
+                var data = res.reply_ticket
+                console.log(data)
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Từ :</label>';
-                _li += '            <label>'+ value.to_user.name +'</label>';
+                _li += '            <label>' + value.from_user.name + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
-                _li += '    <div class="col-md-6">';
-                _li += '        <div class="form-group">';
-                _li += '            <label style="font-size: 17px;font-weight: bold">Đến :</label>';
-                _li += '            <label>'+ value.from_user.name +'</label>';
-                _li += '        </div>';
-                _li += '    </div>';
+                if (value.to_user != null) {
+                    _li += '    <div class="col-md-6">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Đến :</label>';
+                    _li += '            <label>' + value.to_user.name + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                }
                 _li += '</div>';
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Loại :</label>';
-                _li += '            <label>'+ value.type.content +'</label>';
+                _li += '            <label>' + value.type.content + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -273,10 +278,28 @@
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Nội dung :</label>';
-                _li += '            <label>'+ value.content +'</label>';
+                _li += '            <label>' + value.content + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
+                if (data != null) {
+                    _li += '<div class="row mt-3">';
+                    _li += '    <div class="col-md-6">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Tạo bởi :</label>';
+                    _li += '            <label>' + data.from_user.name + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                    _li += '</div>';
+                    _li += '<div class="row mt-3">';
+                    _li += '    <div class="col-md-12">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Nội dung phản hồi:</label><br>';
+                    _li += '            <label>' + data.content + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                    _li += '</div>';
+                }
                 $('#ticket-information').html(_li)
             })
         })

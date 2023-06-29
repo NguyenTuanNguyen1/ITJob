@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Auth;
 class BackendController extends Controller
 {
     use Service;
+
     public function __construct
     (
         IUserRepository $userRepository,
@@ -45,8 +46,7 @@ class BackendController extends Controller
         RoleRepository $roleRepostitory,
         ISearchRepository $searchRepository,
         ICompanyRepository $companyRepository
-    )
-    {
+    ) {
         $this->post_repo = $postRepository;
         $this->user_repo = $userRepository;
         $this->admin_repo = $adminRepository;
@@ -61,7 +61,7 @@ class BackendController extends Controller
     {
         $input = $request->all();
         $posts = $this->search_repo->searchFilter($input)->toArray();
-        $result = array_filter($posts['data'], function ($value){
+        $result = array_filter($posts['data'], function ($value) {
             return $value['status'] == Constant::STATUS_APPROVED_POST;
         });
         $test = collect($result);
@@ -85,10 +85,10 @@ class BackendController extends Controller
 
         $posts = $this->search_repo->searchDatetimeFilter($input['from'], $input['to'], $input['user_id']);
         $all_post = $this->post_repo->getPostByCondition('user_id', Auth::user()->id);
-        $post_approved = array_filter($all_post->toArray(), function ($data){
+        $post_approved = array_filter($all_post->toArray(), function ($data) {
             return $data['status'] == Constant::STATUS_APPROVED_POST;
         });
-        $post_not_approved = array_filter($all_post->toArray(), function ($data){
+        $post_not_approved = array_filter($all_post->toArray(), function ($data) {
             return $data['status'] == Constant::STATUS_NOT_APPROVED_POST;
         });
         return view('company.searchDatetimeResult')->with([
@@ -115,11 +115,11 @@ class BackendController extends Controller
     {
         $input = $request->all();
 
-        $posts = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, $input['major'],Carbon::now()->subMonth(),Carbon::now());
+        $posts = $this->post_repo->getMajorByPost(Constant::STATUS_APPROVED_POST, $input['major'],
+            Carbon::now()->subMonth(), Carbon::now());
         $company_outstanding = $this->company_repo->getPostOutstanding();
 
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             return response()->json([
                 'posts' => $posts
             ]);
@@ -181,12 +181,11 @@ class BackendController extends Controller
         $input = $request->all();
 
         $user = $this->user_repo->find($input['id']);
-        if (empty($user))
-        {
+        if (empty($user)) {
             $user = $this->user_repo->storage($input['id']);
         }
         return response()->json([
-           'user' => $user
+            'user' => $user
         ]);
     }
 
@@ -195,8 +194,7 @@ class BackendController extends Controller
         $input = $request->all();
 
         $post = $this->post_repo->find($input['id']);
-        if (empty($post))
-        {
+        if (empty($post)) {
             $post = $this->post_repo->findTrashed($input['id']);
         }
         return response()->json([
@@ -209,13 +207,37 @@ class BackendController extends Controller
         $input = $request->all();
 
         $ticket = $this->ticket_repo->find($input['id']);
-        dd($ticket);
-        if (empty($ticket))
+
+        if (empty($ticket)) {
+            $ticket = $this->ticket_repo->trashed($input['id']);
+            $ticketTrashed = $this->ticket_repo->trashed($ticket->ticket_id);
+            if (!empty($ticketTrashed))
+            {
+                $reply_ticket = $this->ticket_repo->listRepliedTrashed($ticketTrashed->id, Constant::TICKET_REPORT_REPLIED,
+                    Constant::TICKET_REPORT_POST);
+                return response()->json([
+                    'ticket' => $ticketTrashed,
+                    'reply_ticket' => $reply_ticket
+                ]);
+            }
+
+            return response()->json([
+                'ticket' => $ticket,
+                'reply_ticket' => null
+            ]);
+        }
+
+        $reply_ticket = $this->ticket_repo->listReplied($ticket->id, Constant::TICKET_REPORT_REPLIED,
+            Constant::TICKET_REPORT_POST);
+        if (empty($reply_ticket))
         {
             $ticket = $this->ticket_repo->trashed($input['id']);
+            $reply_ticket = $this->ticket_repo->listRepliedTrashed($ticket->id, Constant::TICKET_REPORT_REPLIED,
+                Constant::TICKET_REPORT_POST);
         }
         return response()->json([
-            'ticket' => $ticket
+            'ticket' => $ticket,
+            'reply_ticket' => $reply_ticket
         ]);
     }
 
@@ -224,6 +246,6 @@ class BackendController extends Controller
         $input = $request->all();
 
         $history = $this->search_repo->searchHistoryDatetimeFilter($input['from'], $input['to']);
-        return view('admin.dashboard.searchDatetimeResultHistory')->with('history',$history);
+        return view('admin.dashboard.searchDatetimeResultHistory')->with('history', $history);
     }
 }

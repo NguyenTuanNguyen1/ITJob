@@ -83,7 +83,7 @@ class TicketRepository implements ITicketRepository
 
     public function trashed($id)
     {
-        return Ticket::onlyTrashed()->find($id)->get();
+        return Ticket::withTrashed()->with('to_user', 'from_user', 'type')->find($id);
     }
 
     public function replyContact(array $contact)
@@ -147,6 +147,14 @@ class TicketRepository implements ITicketRepository
             ->where('ticket_id', $id)
             ->where('status', $action)
             ->where('type_id', $type)
+            ->first();
+    }
+
+    public function listRepliedTrashed($id, $action, $type)
+    {
+        return Ticket::withTrashed()
+            ->with('from_user')
+            ->where('ticket_id', $id)
             ->first();
     }
 

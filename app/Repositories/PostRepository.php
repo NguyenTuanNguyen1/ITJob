@@ -64,7 +64,7 @@ class PostRepository implements IPostRepository
 
     public function findTrashed($id)
     {
-        return Post::withTrashed()->find($id);
+        return Post::withTrashed()->with('user','approved_user')->find($id);
     }
 
     public function trashed()

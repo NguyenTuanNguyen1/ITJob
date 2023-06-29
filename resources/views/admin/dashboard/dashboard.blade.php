@@ -231,7 +231,7 @@
                                 <th>Phê duyệt</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                <tbody>
+                                <tbody id="detail">
                                 @foreach($post_trashed as $trashed)
                                     @if($trashed->user == null || $trashed->approved_user == null)
 
@@ -242,9 +242,9 @@
                                             <td>{{ $trashed->approved_user->name }}</td>
                                             <td style="display:flex;justify-content:center">
                                                 <button class="btn btn-outline-success" type="submit"
-                                                style="height: fit-content;margin-right:10px;"
-                                                        onclick="window.location='{{ Route('post.detail',['id' => $trashed->id]) }}'">
-                                                    Chi tiết
+                                                        value="{{ $trashed->id }}" data-toggle="modal"
+                                                        data-target="#modalPost"
+                                                        id="post">Chi tiết
                                                 </button>
                                                 <form action="{{ Route('post.restore') }}" method="POST"
                                                       id="btn-restore">
@@ -266,7 +266,7 @@
             </div>
         </div>
     </div>
-
+    @include('modal.history.post')
     <style>
         .Scroll {
             height: 580px;
@@ -274,6 +274,7 @@
         }
     </style>
 @endsection
+
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
 
 <script src="{{ url('profile/js/core/bootstrap.min.js') }}"></script>
@@ -372,6 +373,90 @@
                         }
                     })
                 }
+            })
+        })
+
+        $('#detail').on('click', '#post', function () {
+            var data = $(this).val()
+            var _li = '';
+            $.get('{{ Route('backend.post') }}/?id=' + data + '', function (res) {
+                var value = res.post;
+                console.log(value)
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-12">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Tiêu đề :</label>';
+                _li += '            <label>' + value.title + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-12">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Mô tả :</label>';
+                _li += '            <label>' + value.description + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-12">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Lợi ích :</label>';
+                _li += '            <label>' + value.benefit + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-12">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Yêu cầu :</label>';
+                _li += '            <label>' + value.requirements + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Chuyên ngành :</label>';
+                _li += '            <label>' + value.major + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Kinh nghiệm :</label>';
+                _li += '            <label>' + value.experience + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Vị trí :</label>';
+                _li += '            <label>' + value.position + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Loại hình :</label>';
+                _li += '            <label>' + value.working + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Địa chỉ :</label>';
+                _li += '            <label>' + value.workplace + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Số lượng :</label>';
+                _li += '            <label>' + value.quantity + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                $('#post-information').html(_li)
             })
         })
     });

@@ -123,10 +123,16 @@ class PostController extends Controller
     {
         $input = $request->all();
 
-        $post = $this->post_repo->trashed();
-        return response()->json([
-            'data' => $post
-        ]);
+        $post = $this->post_repo->findTrashed($input['id']);
+
+        if ($request->ajax())
+        {
+            return response()->json([
+                'post' => $post
+            ]);
+        }
+
+        return view('admin.dashboard.detailPostTrashed')->with('post', $post);
     }
 
     public function restore(Request $request)
