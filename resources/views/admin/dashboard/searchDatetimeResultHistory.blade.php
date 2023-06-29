@@ -244,27 +244,31 @@
             var data = $(this).val()
             var _li = '';
             console.log(data)
-            $.get('{{ Route('backend.ticket') }}/?id='+ data +'',function (res) {
+            $.get('{{ Route('backend.ticket') }}/?id=' + data + '', function (res) {
                 var value = res.ticket;
+                var data = res.reply_ticket
+                console.log(data)
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Từ :</label>';
-                _li += '            <label>'+ value.to_user.name +'</label>';
+                _li += '            <label>' + value.from_user.name + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
-                _li += '    <div class="col-md-6">';
-                _li += '        <div class="form-group">';
-                _li += '            <label style="font-size: 17px;font-weight: bold">Đến :</label>';
-                _li += '            <label>'+ value.from_user.name +'</label>';
-                _li += '        </div>';
-                _li += '    </div>';
+                if (value.to_user != null) {
+                    _li += '    <div class="col-md-6">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Đến :</label>';
+                    _li += '            <label>' + value.to_user.name + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                }
                 _li += '</div>';
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Loại :</label>';
-                _li += '            <label>'+ value.type.content +'</label>';
+                _li += '            <label>' + value.type.content + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
@@ -272,10 +276,28 @@
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
                 _li += '            <label style="font-size: 17px;font-weight: bold">Nội dung :</label>';
-                _li += '            <label>'+ value.content +'</label>';
+                _li += '            <label>' + value.content + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
                 _li += '</div>';
+                if (data != null) {
+                    _li += '<div class="row mt-3">';
+                    _li += '    <div class="col-md-6">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Tạo bởi :</label>';
+                    _li += '            <label>' + data.from_user.name + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                    _li += '</div>';
+                    _li += '<div class="row mt-3">';
+                    _li += '    <div class="col-md-12">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Nội dung phản hồi:</label><br>';
+                    _li += '            <label>' + data.content + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                    _li += '</div>';
+                }
                 $('#ticket-information').html(_li)
             })
         })

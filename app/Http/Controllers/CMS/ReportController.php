@@ -99,12 +99,12 @@ class ReportController extends Controller
         $input = $request->all();
 
         $this->ticket_repo->delete($input['id']);
-        if ($input['role_id'] == Constant::ROLE_COMPANY)
+        if (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
             alert()->success('Đã xoá thành công');
             return redirect()->route('company.review');
         }
-        elseif ($input['role_id'] == Constant::ROLE_CANDIDATE)
+        elseif (Auth::user()->role_id == Constant::ROLE_CANDIDATE)
         {
             return redirect()->route('profile.user.detail',['id' => $input['user_id']]);
         }
