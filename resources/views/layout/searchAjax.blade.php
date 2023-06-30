@@ -5,14 +5,17 @@
             <div class="row mb-5">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                     <input type="text" class="form-control form-control-lg input-search">
-                    <div class="search-ajax-result" style="background:white;">
-                        <div class="media-left">
+                    <!-- <div class="Scroll"> -->
+                        <div class="search-ajax-result" style="background:white;">
+                            <div class="media-left">
 
-                        </div>
-                        <div class="media-body">
+                            </div>
+                            <div class="media-body">
 
+                            </div>
                         </div>
-                    </div>
+                    <!-- </div> -->
+                   
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                     <select class="selectpicker" data-style="btn-white btn-lg" data-width="30%"
@@ -59,3 +62,9 @@
         </form>
     </div>
 </div>
+<style>
+    .Scroll {
+  height:350px;
+  overflow-y: scroll;
+}
+</style>
