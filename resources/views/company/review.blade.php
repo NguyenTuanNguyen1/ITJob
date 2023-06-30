@@ -15,7 +15,7 @@
     {{--    </div>--}}
     <div id="report_user" style="display:flex;flex-wrap:wrap;">
         @foreach($reviews as $review)
-            <div class="app-card app-card-notification shadow-sm m-2" style="width:32%">
+            <div class="app-card app-card-notification shadow-sm m-2" style="width:30%">
                 <div class="app-card-header" style="display:flex;">
                         <div class="col-12 col-lg-auto text-center text-lg-start mt-2">
                             <img class="profile-image"

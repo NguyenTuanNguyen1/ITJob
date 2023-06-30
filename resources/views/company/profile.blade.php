@@ -36,25 +36,25 @@
                     <div class="card-body">
                         <form action="{{ Route('password.update') }}" method="post">
                             @csrf
-                            <div class="col-md-6" style="margin-left:25%">
+                            <div class="col-md-12" >
                                 <label>Nhập mật khẩu hiện tại</label>
-                                <input type="password" class="inputpass" name="password_old" value="">
+                                <input type="password" style="width:100%"class="inputpass" name="password_old" value="">
                                 @error('password_old')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
                                 @enderror
                             </div>
-                            <div class="col-md-6" style="margin-left:25%">
+                            <div class="col-md-12" >
                                 <label>Nhập mật khẩu mới</label>
-                                <input type="password" class="inputpass" name="password" value="">
+                                <input type="password"style="width:100%" class="inputpass" name="password" value="">
                                 @error('password')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
                                 @enderror
                             </div>
-                            <div class="col-md-6" style="margin-left:25%">
+                            <div class="col-md-12" >
                                 <label>Nhập lại mật khẩu mới</label>
-                                <input type="password" class="inputpass" name="password_confirmation" value="">
+                                <input type="password" style="width:100%"class="inputpass" name="password_confirmation" value="">
                                 @error('password_confirmation')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
@@ -85,7 +85,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên đăng nhập</label><br>
-                                        <label style="color: black;font-size: 20px">{{ $user->username }}</label>
+                                        <input type="text" class="form-control" name="phone" value="{{ $user->username }}" readonly>
                                     </div>
                                     @error('username')
                                     <div style="color:red;">{{ $message }}</div>
@@ -160,7 +160,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label for="job-region">Mô tả</label><br>
-                                    <textarea name="description" rows="3" cols="93">{{ Auth::user()->description }}</textarea>
+                                    <textarea name="description"  rows="4" style="width:100%" >{{ Auth::user()->description }}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="position" value="{{ null }}">
@@ -176,10 +176,10 @@
                 </div>
             </div>
 
-            <div class="col-md-8" style="margin-left:400px">
+            <div class="col-md-8" style="margin-left:364px">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Chỉnh sửa thông tin cá nhân</h5>
+                        <h5 class="card-title">Thông tin thêm</h5>
                     </div>
                     <div class="card-body">
                         <div class="row" id="load-information">
