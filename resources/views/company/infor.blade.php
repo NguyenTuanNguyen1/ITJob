@@ -162,15 +162,16 @@
 
                 <div id="London" class="tabcontent" style="display:block">
                     <div class="row mt-3">
-                        @if($user->id == Auth::user()->id)
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tên đăng nhập</label><br>
-                                    <label style="font-weight: 900;">{{ $user->username }}</label>
+                        @if(Auth::check())
+                            @if($user->id == Auth::user()->id)
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tên đăng nhập</label><br>
+                                        <label style="font-weight: 900;">{{ $user->username }}</label>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         @endif
-
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Số điện thoại</label><br>
