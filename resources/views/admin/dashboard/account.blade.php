@@ -120,12 +120,14 @@
         </div>
     </div>
 
-
+    <div class="content" style="margin-top: 5px">
     <form action="{{ Route('search.user') }}" method="post">
         @csrf
-        <input type="text" name="name" placeholder="Nhập tên hiển thị bạn muốn tìm">
-        <button type="submit" class="btn-outline-success">Tìm kiếm</button>
+        <input type="text" style="width: 22%;padding: 5px;border-radius: 5px;" name="name" placeholder="Nhập tên hiển thị bạn muốn tìm">
+        <button type="submit" style="border-radius:5px;padding:5px" class="btn-outline-success">Tìm kiếm</button>
     </form>
+</div>
+    
 
 
     <div class="content" style="margin-top: 5px">

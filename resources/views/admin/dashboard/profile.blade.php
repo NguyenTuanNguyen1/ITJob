@@ -38,25 +38,25 @@
                     <div class="card-body">
                         <form action="{{ Route('password.update') }}" method="post">
                             @csrf
-                            <div class="col-md-6" style="margin-left:25%">
+                            <div class="col-md-12" >
                                 <label>Nhập mật khẩu hiện tại</label>
-                                <input type="password" class="inputpass" name="password_old" value="">
+                                <input type="password" style="width:100%" class="inputpass" name="password_old" value="">
                                 @error('password_old')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
                                 @enderror
                             </div>
-                            <div class="col-md-6" style="margin-left:25%">
+                            <div class="col-md-12" >
                                 <label>Nhập mật khẩu mới</label>
-                                <input type="password" class="inputpass" name="password" value="">
+                                <input type="password" style="width:100%" class="inputpass" name="password" value="">
                                 @error('password')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
                                 @enderror
                             </div>
-                            <div class="col-md-6" style="margin-left:25%">
+                            <div class="col-md-12" >
                                 <label>Nhập lại mật khẩu mới</label>
-                                <input type="password" class="inputpass" name="password_confirmation" value="">
+                                <input type="password" style="width:100%" class="inputpass" name="password_confirmation" value="">
                                 @error('password_confirmation')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
@@ -163,7 +163,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label for="job-region">Mô tả</label><br>
-                                    <textarea name="description" cols="100" rows="5">{{ $user->description }}</textarea>
+                                    <textarea name="description" cols="95" rows="5">{{ $user->description }}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="id" value="{{ Auth::user()->id }}">
