@@ -180,9 +180,8 @@
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Tên đăng nhập</label>
-                                    <input type="text" class="form-control" name="username"
-                                           value="{{ $user->username }}">
+                                    <label>Tên đăng nhập</label><br>
+                                    <label style="color: black;font-size: 20px">{{ $user->username }}</label>
                                 </div>
                                 @error('username')
                                 <div style="color:red;">{{ $message }}</div>
@@ -326,7 +325,7 @@
                                                 </a>
                                                 <div class="media-body">
                                                     <div id="report_user" style="display:flex;justify-content:space-between">
-                                                        
+
                                                             <h4 class="media-heading" style="color: black;margin-top:10px">{{ $review->from_user->username }}</h4>
                                                             <a class="btn btn-light mb-4" role="button" data-toggle="dropdown"
                                                                aria-expanded="false" style=""   ><i class="fas fa-bars"></i></a>

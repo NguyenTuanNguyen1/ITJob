@@ -87,8 +87,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên đăng nhập</label><br>
-                                        <input type="text" class="form-control" name="username"
-                                               value="{{ $user->username }}">
+                                        <label style="color: black;font-size: 20px">{{ $user->username }}</label>
                                     </div>
                                     @error('username')
                                     <div style="color:red;">{{ $message }}</div>
