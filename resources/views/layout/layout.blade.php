@@ -9,7 +9,7 @@
 <header class="site-navbar mt-3" id="top">
     <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="site-logo col-6"><a href="">ItJob</a></div>
+            <div class="site-logo col-6"><a href="">Finding Job</a></div>
             <nav class="mx-auto site-navigation">
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
                     <li><a href="{{ Route('home') }}" class="nav-link active">Trang chủ</a></li>

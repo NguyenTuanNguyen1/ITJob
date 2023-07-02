@@ -413,10 +413,11 @@
                         _li += '<button class="btn" id="delete-review" value="'+ item.id +'" style="position: absolute;left: 95%;margin-top: 0px"><i class="fas fa-trash-alt"></i></button>';
                     }
                     @endif
+                        var date = new Date(item.created_at).toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"})
                     _li += '</div>';
                     _li += '<p>' + item.content + '</p>';
                     _li += '<ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">';
-                    _li += '<li><i class="fa fa-calendar"></i>' + item.created_at + '</li>'
+                    _li += '<li><i class="fa fa-calendar"></i>' + date + '</li>'
                     _li += '</ul>';
                     _li += '</div>'
                     _li += '</div>'
