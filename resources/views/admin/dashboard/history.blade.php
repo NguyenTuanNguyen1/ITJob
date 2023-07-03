@@ -269,7 +269,7 @@
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-6">';
                 _li += '        <div class="form-group">';
-                _li += '            <label style="font-size: 17px;font-weight: bold">Loại :</label>';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Loại :</label><br>';
                 _li += '            <label>' + value.type.content + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
@@ -277,7 +277,7 @@
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
-                _li += '            <label style="font-size: 17px;font-weight: bold">Nội dung :</label>';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Nội dung :</label><br>';
                 _li += '            <label>' + value.content + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
