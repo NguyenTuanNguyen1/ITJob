@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static where(string $string, string $string1, $from)
+ * @method static find()
  */
 class Activity extends Model
 {
@@ -17,7 +18,6 @@ class Activity extends Model
         'content',
         'user_id'
     ];
-
     public function user()
     {
         return $this->belongsTo(User::class);

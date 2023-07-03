@@ -24,7 +24,7 @@
                                         <td>{{ $user->user->phone }}</td>
                                         <td>
                                             <button class="btn btn-warning" type="submit" style="color: white"
-                                                    onclick="window.location='{{ Route('profile.user',['id' => $user->user_id]) }}'">Xem chi tiết</button>
+                                                    onclick="window.location='{{ Route('profile.user',['id' => $user->user_id]) }}'">Chi tiết</button>
                                         </td>
                                     </tr>
                                 @endforeach

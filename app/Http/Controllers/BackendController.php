@@ -14,8 +14,10 @@ use App\Mail\DeletePostMail;
 use App\Mail\NotificationDeleteUser;
 use App\Mail\NotificationRestoreUser;
 use App\Mail\RestorePostMail;
+use App\Models\Activity;
 use App\Models\Post;
 use App\Models\User;
+use App\Repositories\InformationTypeRepository;
 use App\Repositories\RoleRepository;
 use App\Trait\Service;
 use Carbon\Carbon;
@@ -28,9 +30,9 @@ use Illuminate\Support\Facades\Auth;
  * @property IAdminRepository $admin_repo
  * @property ITicketRepository $ticket_repo
  * @property IInformationRepository $information_repo
- * @property RoleRepository $role_repo
  * @property ISearchRepository $search_repo
  * @property ICompanyRepository $company_repo
+ * @property InformationTypeRepository $infor_type
  */
 class BackendController extends Controller
 {
@@ -43,18 +45,18 @@ class BackendController extends Controller
         IAdminRepository $adminRepository,
         ITicketRepository $ticketRepository,
         IInformationRepository $informationRepository,
-        RoleRepository $roleRepostitory,
         ISearchRepository $searchRepository,
-        ICompanyRepository $companyRepository
+        ICompanyRepository $companyRepository,
+        InformationTypeRepository $informationTypeRepository
     ) {
         $this->post_repo = $postRepository;
         $this->user_repo = $userRepository;
         $this->admin_repo = $adminRepository;
         $this->ticket_repo = $ticketRepository;
         $this->information_repo = $informationRepository;
-        $this->role_repo = $roleRepostitory;
         $this->search_repo = $searchRepository;
         $this->company_repo = $companyRepository;
+        $this->infor_type = $informationTypeRepository;
     }
 
     public function searchFilter(Request $request)
@@ -238,6 +240,23 @@ class BackendController extends Controller
         return response()->json([
             'ticket' => $ticket,
             'reply_ticket' => $reply_ticket
+        ]);
+    }
+
+    public function information(Request $request)
+    {
+        $input = $request->all();
+
+        $activity = Activity::with('user')->find($input['id']);
+        $information = $this->infor_type->find($input['idType']);
+        if (empty($information))
+        {
+            $information = $this->infor_type->trashed($input['idType']);
+        }
+
+        return response()->json([
+            'activity' => $activity,
+            'information' => $information
         ]);
     }
 

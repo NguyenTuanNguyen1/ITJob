@@ -22,15 +22,14 @@ class InformationTypeRepository implements ITypeRepository
 
     public function find($id)
     {
-        return InformationType::find('id')->get();
+        return InformationType::find($id);
     }
 
     public function update($id, array $data)
     {
-        $result = InformationType::find($id)->update([
+        return InformationType::find($id)->update([
             'content' => $data['content'],
         ]);
-        return $result;
     }
 
     public function delete($id)
@@ -45,6 +44,6 @@ class InformationTypeRepository implements ITypeRepository
 
     public function trashed($id)
     {
-        return InformationType::onlyTrashed()->find($id)->get();
+        return InformationType::onlyTrashed()->find($id);
     }
 }

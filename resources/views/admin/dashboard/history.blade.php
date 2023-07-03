@@ -72,6 +72,13 @@
                                                             data-target="#modalUser"
                                                             id="user">Chi tiết
                                                     </button>
+                                                @elseif(strpos($data->content, 'thông tin'))
+                                                    <button class="btn btn-outline-success" type="submit"
+                                                            style="margin: 5px"
+                                                            value="{{ $value[1] }},{{ $data->id }}" data-toggle="modal"
+                                                            data-target="#modalInformation"
+                                                            id="information">Chi tiết
+                                                    </button>
                                                 @endif
                                             </td>
                                         </tr>
@@ -88,6 +95,7 @@
     @include('modal.history.post')
     @include('modal.history.user')
     @include('modal.history.ticket')
+    @include('modal.history.information')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
@@ -283,13 +291,6 @@
                 _li += '    </div>';
                 _li += '</div>';
                 if (data != null) {
-                    _li += '<div class="row mt-3">';
-                    _li += '    <div class="col-md-6">';
-                    _li += '        <div class="form-group">';
-                    _li += '            <label style="font-size: 17px;font-weight: bold">Tạo bởi :</label>';
-                    _li += '            <label>' + data.from_user.name + '</label>';
-                    _li += '        </div>';
-                    _li += '    </div>';
                     _li += '</div>';
                     _li += '<div class="row mt-3">';
                     _li += '    <div class="col-md-12">';
@@ -301,6 +302,33 @@
                     _li += '</div>';
                 }
                 $('#ticket-information').html(_li)
+            })
+        })
+        button.on('click', '#information', function () {
+            var data = $(this).val().split(',')
+            var idType = data[0]
+            var id = data[1]
+            var _li = '';
+            console.log(data)
+            $.get('{{ Route('backend.information') }}/?idType=' + idType + '&id=' + id + '', function (res) {
+                var value = res.information;
+                var activity = res.activity
+                console.log(value)
+                _li += '<div class="row mt-3">';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Nội dung :</label>';
+                _li += '            <label>' + value.content + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '    <div class="col-md-6">';
+                _li += '        <div class="form-group">';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Người tạo :</label>';
+                _li += '            <label>' + activity.user.name + '</label>';
+                _li += '        </div>';
+                _li += '    </div>';
+                _li += '</div>';
+                $('#type-information').html(_li)
             })
         })
     </script>

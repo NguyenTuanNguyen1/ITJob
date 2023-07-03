@@ -57,11 +57,11 @@
 
         <div>
             <form action="{{ Route('post.major') }}" method="get">
-                <input name="major" type="hidden" value="Kế toán/Kiểm toán">
+                <input name="major" type="hidden" value="Kế toán">
                 <button class="SL-job1" type="submit"
                         style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
                     <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
-                    <p>Kế toán/Kiểm toán</p>
+                    <p>Kế toán</p>
                     <p>{{ $count_major_accountant }} việc làm</p>
                 </button>
             </form>

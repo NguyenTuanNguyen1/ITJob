@@ -170,6 +170,7 @@ Route::group(['prefix' => 'backend'], function () {
     Route::get('/user', [BackendController::class, 'user'])->name('backend.user');
     Route::get('/post', [BackendController::class, 'post'])->name('backend.post');
     Route::get('/ticket', [BackendController::class, 'ticket'])->name('backend.ticket');
+    Route::get('/information', [BackendController::class, 'information'])->name('backend.information');
     Route::post('/filter-datetime', [BackendController::class, 'searchHistory'])->name('backend.filter.datetime');
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
