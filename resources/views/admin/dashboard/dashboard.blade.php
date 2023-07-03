@@ -139,14 +139,14 @@
                                 <th>Ngày đăng</th>
                                 <th class="text-center">Chức năng</th>
                                 </thead>
-                                @foreach($post_not_approved as $not_approved)
                                     <tbody>
+                                        @foreach($post_not_approved as $not_approved)
                                     <tr>
                                         <td>{{ $not_approved->user->name }}</td>
                                         <td>{{ $not_approved->created_at->format('d-m-Y') }}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-outline-success" style="margin: 5px"
-                                                    onclick="window.location='{{ Route('post.detail',['id' => $not_approved->id]) }}'">
+                                        <td style="display:flex;justify-content:center">
+                                            <button class="btn btn-outline-success" 
+                                                    onclick="window.location='{{ Route('post.detail',['id' => $not_approved->id]) }}'" style="height: fit-content;margin-right:10px;">
                                                 Chi tiết
                                             </button>
                                             <form action="{{ Route('admin.approved.post') }}" method="POST"
@@ -159,8 +159,9 @@
                                             </form>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
-                                @endforeach
+                                
                             </table>
                         </div>
                     </div>
@@ -244,7 +245,7 @@
                                                 <button class="btn btn-outline-success" type="submit"
                                                         value="{{ $trashed->id }}" data-toggle="modal"
                                                         data-target="#modalPost"
-                                                        id="post">Chi tiết
+                                                        id="post" style="height: fit-content;margin-right:10px;">Chi tiết
                                                 </button>
                                                 <form action="{{ Route('post.restore') }}" method="POST"
                                                       id="btn-restore">
