@@ -9,6 +9,7 @@ interface ITicketRepository
     public function all($action);
     public function createReportUser(array $report);
     public function createReportPost(array $post);
+    public function createReportReview(array $review);
     public function createContact(array $contact);
     public function createReview(array $review);
     public function find($id);

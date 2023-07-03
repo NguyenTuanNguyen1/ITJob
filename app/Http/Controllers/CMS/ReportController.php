@@ -94,6 +94,35 @@ class ReportController extends Controller
         return redirect()->route('post.detail', ['id' => $input['post_id']]);
     }
 
+    public function review(Request $request)
+    {
+        $input = $request->all();
+
+        $report = $this->ticket_repo->createReportReview($input);
+
+        if ($files = $request->file('image')) {
+            foreach ($files as $file) {
+                $fileName = Str::random(6) . ".jpg";
+                $file->move('Images', $fileName, 'public');
+                $this->saveImageReport($fileName, $report['id']);
+            }
+        }
+
+        Ticket::where('id', $report->ticket_id)->update([
+            'status' => Constant::TICKET_WAITING_REPORT
+        ]);
+        alert('Đã gửi thành công', null, 'success');
+        if ($input['role_id'] == Constant::ROLE_COMPANY)
+        {
+            return redirect()->route('company.review');
+        }
+        elseif ($input['role_id'] == Constant::ROLE_CANDIDATE)
+        {
+            return redirect()->route('profile.user.detail',['id' => $input['user_id']]);
+        }
+        return redirect()->route('post.detail', ['id' => $input['post_id']]);
+    }
+
     public function delete(Request $request)
     {
         $input = $request->all();
@@ -134,9 +163,11 @@ class ReportController extends Controller
 
         $report_post = $this->ticket_repo->listReplied($input['id'],Constant::TICKET_REPORT_REPLIED ,Constant::TICKET_REPORT_POST);
         $report_user = $this->ticket_repo->listReplied($input['id'],Constant::TICKET_REPORT_REPLIED ,Constant::TICKET_REPORT_USER);
+        $report_review = $this->ticket_repo->listReplied($input['id'],Constant::TICKET_REPORT_REPLIED ,Constant::TICKET_REPORT_REVIEW);
         return response()->json([
             'data' => $report_post,
-            'result' => $report_user
+            'result' => $report_user,
+            'value' => $report_review
         ]);
     }
 

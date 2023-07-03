@@ -14,6 +14,11 @@ class CompanyRepository implements ICompanyRepository
         return Company::where('user_id', $id)->first();
     }
 
+    public function storage($id)
+    {
+        return Company::withTrashed()->find($id);
+    }
+
     public function create($user_id, array $company)
     {
         $data = new Company();

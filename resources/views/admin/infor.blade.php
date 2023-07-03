@@ -106,12 +106,6 @@
                                     <label style="font-size: 18px">{{ $company->website }}</label><br>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <label style="font-weight: bold;font-size: 18px">Giấy phép kinh doanh : </label>
-                                    <label style="font-size: 18px">{{ $company->business_license }}</label><br>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 @endif

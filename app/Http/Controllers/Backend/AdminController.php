@@ -117,6 +117,19 @@ class AdminController extends Controller
     {
         $input = $request->all();
 
+        $this->ticket_repo->update($input['ticket_id']);
+        $input['type_id'] = Constant::TICKET_REPORT_USER;
+        $this->ticket_repo->replyReport($input);
+
+        $this->ActivityLog('Đã phản hồi báo cáo của người dùng*' . $input['ticket_id'], $input['admin_id']);
+        alert('Bạn đã phản hồi báo cáo', null, 'success');
+        return redirect()->route('dashboard.report', ['admin_id' => $input['admin_id']]);
+    }
+
+    public function repliedReportReview(Request $request)
+    {
+        $input = $request->all();
+
         if (isset($input['deleteReview']))
         {
             $this->ticket_repo->delete($input['review_id']);
@@ -128,7 +141,7 @@ class AdminController extends Controller
             ]);
         }
         $this->ticket_repo->update($input['ticket_id']);
-        $input['type_id'] = Constant::TICKET_REPORT_USER;
+        $input['type_id'] = Constant::TICKET_REPORT_REVIEW;
         $this->ticket_repo->replyReport($input);
 
         $this->ActivityLog('Đã phản hồi báo cáo của người dùng*' . $input['ticket_id'], $input['admin_id']);

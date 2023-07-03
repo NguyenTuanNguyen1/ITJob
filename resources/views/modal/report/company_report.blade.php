@@ -2,7 +2,7 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ Route('report.user') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ Route('report.review') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Báo cáo</h5>

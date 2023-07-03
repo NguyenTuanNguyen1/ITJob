@@ -41,6 +41,18 @@ class TicketRepository implements ITicketRepository
 
     }
 
+    public function createReportReview(array $review)
+    {
+        $data = new Ticket();
+        $data->content = $review['content'];
+        $data->type_id = Constant::TICKET_REPORT_REVIEW;
+        $data->ticket_id = $review['ticket_id'];
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->save();
+        return $data;
+
+    }
+
     public function createContact(array $contact)
     {
         $data = new Ticket();

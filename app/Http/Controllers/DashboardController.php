@@ -121,6 +121,15 @@ class DashboardController extends Controller
     {
         $user = $this->user_repo->find($id);
         $company = $this->company_repo->find($id);
+        if (empty($user)) {
+            $user = $this->user_repo->storage($id);
+            $company = $this->company_repo->storage($id);
+            return view('admin.infor')
+                ->with([
+                    'user' => $user,
+                    'company' => $company
+                ]);
+        }
         return view('admin.infor')
             ->with([
                 'user' => $user,
@@ -144,23 +153,43 @@ class DashboardController extends Controller
 
     public function report()
     {
-        $report_post_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST, Constant::TICKET_NOT_REPLY);
-        $report_user_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER, Constant::TICKET_NOT_REPLY);
+        $report_post_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST,
+            Constant::TICKET_NOT_REPLY);
+        $report_user_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER,
+            Constant::TICKET_NOT_REPLY);
+        $report_ticket_not_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_REVIEW,
+            Constant::TICKET_NOT_REPLY);
 
-        $report_post_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST, Constant::TICKET_REPORT_REPLIED);
-        $report_user_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER, Constant::TICKET_REPORT_REPLIED);
+        $report_post_replied = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST,
+            Constant::TICKET_REPLIED);
+        $report_user_replied = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER,
+            Constant::TICKET_REPLIED);
+        $report_ticket_replied = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_REVIEW,
+            Constant::TICKET_REPLIED);
+
+        $report_post_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_POST,
+            Constant::TICKET_REPORT_REPLIED);
+        $report_user_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_USER,
+            Constant::TICKET_REPORT_REPLIED);
+        $report_ticket_reply = $this->ticket_repo->getTicket(Constant::TICKET_REPORT_REVIEW,
+            Constant::TICKET_REPORT_REPLIED);
 
         $image_report = $this->admin_repo->getImageReport();
 
         return view('admin.dashboard.report')->with([
             'count_report_post' => count($report_post_not_reply),
-            'count_report_user' =>count($report_user_not_reply),
+            'count_report_user' => count($report_user_not_reply),
             'count_report_not_reply' => count($report_post_not_reply) + count($report_user_not_reply),
             'count_report_reply' => count($report_post_reply) + count($report_user_reply),
             'report_post_not_reply' => $report_post_not_reply,
             'report_user_not_reply' => $report_user_not_reply,
+            'report_ticket_not_reply' => $report_ticket_not_reply,
             'report_post_reply' => $report_post_reply,
             'report_user_reply' => $report_user_reply,
+            'report_ticket_reply' => $report_ticket_reply,
+            'report_post_replied' => $report_post_replied,
+            'report_user_replied' => $report_user_replied,
+            'report_ticket_replied' => $report_ticket_replied,
             'images' => $image_report
         ]);
     }
@@ -169,10 +198,9 @@ class DashboardController extends Controller
     {
         $type = $this->type_repo->all();
 
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             return response()->json([
-               'data' => $type
+                'data' => $type
             ]);
         }
 

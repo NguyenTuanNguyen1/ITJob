@@ -185,7 +185,7 @@
                     </div>
                     <div class="card-body">
                         <div
-                            class="@if($report_post_not_reply->isNotEmpty() && count($report_post_not_reply) > 4) Scroll @endif">
+                            class="@if($report_user_not_reply->isNotEmpty() && count($report_user_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -195,13 +195,13 @@
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="report_user_reply">
-                                @foreach($report_post_not_reply as $post_not_reply)
+                                @foreach($report_user_not_reply as $post_user_reply)
                                     <tr>
-                                        <td>{{ $post_not_reply->from_user->name }}</td>
-                                        <td style="width:50%">{{ $post_not_reply->content }}</td>
+                                        <td>{{ $post_user_reply->from_user->name }}</td>
+                                        <td style="width:50%">{{ $post_user_reply->content }}</td>
                                         <td>
                                             @foreach($images as $img)
-                                                @if($img->ticket_id == $post_not_reply->id)
+                                                @if($img->ticket_id == $post_user_reply->id)
                                                     <button class="btn btn-outline-success" type="submit"
                                                             value="{{ $img->ticket_id }}"
                                                             data-toggle="modal" data-target="#modalReportImage"
@@ -213,14 +213,72 @@
                                                 @endif
                                             @endforeach
                                         </td>
-                                        <td>{{ $post_not_reply->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $post_user_reply->created_at->format('d-m-Y') }}</td>
                                         <td>
                                             <button class="btn btn-outline-success" type="submit"
                                                     data-toggle="modal" data-target="#modalReportUser"
-                                                    id="btn-user-reply" value="{{ $post_not_reply->id }}">Phản hồi
+                                                    id="btn-user-reply" value="{{ $post_user_reply->id }}">Phản hồi
                                             </button>
                                             <button class="btn btn-outline-danger" type="submit"
-                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_not_reply->id]) }}'">
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $post_user_reply->id]) }}'">
+                                                Xoá
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" style="margin-top: 5px">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Danh sách báo cáo đánh giá chưa phản hồi</h4>
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="@if($report_ticket_not_reply->isNotEmpty() && count($report_ticket_not_reply) > 4) Scroll @endif">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>Người gửi</th>
+                                <th style="width: 50%">Nội dung</th>
+                                <th>Ảnh</th>
+                                <th>Ngày đăng</th>
+                                <th class="text-center">Chức năng</th>
+                                </thead>
+                                <tbody id="report_ticket_reply">
+                                @foreach($report_ticket_not_reply as $ticket_not_reply)
+                                    <tr>
+                                        <td>{{ $ticket_not_reply->from_user->name }}</td>
+                                        <td style="width:50%">{{ $ticket_not_reply->content }}</td>
+                                        <td>
+                                            @foreach($images as $img)
+                                                @if($img->ticket_id == $ticket_not_reply->id)
+                                                    <button class="btn btn-outline-success" type="submit"
+                                                            value="{{ $img->ticket_id }}"
+                                                            data-toggle="modal" data-target="#modalReportImage"
+                                                            id="btn-ticket-images">
+                                                        <img src="{{ url('Images')}}/{{ $img->image }}"
+                                                             width="50px" height="50px">
+                                                    </button>
+                                                    @break
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $ticket_not_reply->created_at->format('d-m-Y') }}</td>
+                                        <td>
+                                            <button class="btn btn-outline-success" type="submit"
+                                                    data-toggle="modal" data-target="#modalReportReview"
+                                                    id="btn-ticket-reply" value="{{ $ticket_not_reply->id }}">Phản hồi
+                                            </button>
+                                            <button class="btn btn-outline-danger" type="submit"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $ticket_not_reply->id]) }}'">
                                                 Xoá
                                             </button>
                                         </td>
@@ -238,6 +296,7 @@
     @include('modal.report.report')
     @include('modal.report.report_user')
     @include('modal.report.detail-report')
+    @include('modal.report.report_review')
     <div class="content" style="margin-top: 5px">
         <div class="row">
             <div class="col-md-12">
@@ -257,7 +316,7 @@
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="report_replied">
-                                @foreach($report_post_reply as $post_reply)
+                                @foreach($report_post_replied as $post_reply)
                                     <tr>
                                         <td>{{ $post_reply->from_user->name }}</td>
                                         <td>{{ $post_reply->content }}</td>
@@ -306,7 +365,7 @@
                     </div>
                     <div class="card-body">
                         <div
-                            class="@if($report_user_reply->isNotEmpty() && count($report_user_reply) > 4) Scroll @endif">
+                            class="@if($report_user_replied->isNotEmpty() && count($report_user_replied) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Người gửi</th>
@@ -316,13 +375,13 @@
                                 <th class="text-center">Chức năng</th>
                                 </thead>
                                 <tbody id="report_user_replied">
-                                @foreach($report_user_reply as $user_reply)
+                                @foreach($report_user_replied as $user_replied)
                                     <tr>
-                                        <td>{{ $user_reply->from_user->name }}</td>
-                                        <td>{{ $user_reply->content }}</td>
+                                        <td>{{ $user_replied->from_user->name }}</td>
+                                        <td>{{ $user_replied->content }}</td>
                                         <td>
                                             @foreach($images as $img)
-                                                @if($img->ticket_id == $user_reply->id)
+                                                @if($img->ticket_id == $user_replied->id)
                                                     <button class="btn btn-outline-success" type="submit"
                                                             value="{{ $img->ticket_id }}"
                                                             data-toggle="modal" data-target="#modalReportImage"
@@ -334,15 +393,74 @@
                                                 @endif
                                             @endforeach
                                         </td>
-                                        <td>{{ $user_reply->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $user_replied->created_at->format('d-m-Y') }}</td>
                                         <td class="d-flex">
                                             <button class="btn btn-outline-success" type="submit" style="margin: 5px"
                                                     data-toggle="modal"
                                                     data-target="#modalDetailReportUser"
-                                                    id="btn-user-replied" value="{{ $user_reply->id }}">Nội dung
+                                                    id="btn-user-replied" value="{{ $user_replied->id }}">Nội dung
                                             </button>
-                                            <button class="btn btn-outline-danger   " type="submit" style="margin: 5px"
-                                                    onclick="window.location='{{ Route('report.delete',['id' => $user_reply->id, 'role_id' => Auth::user()->role_id]) }}'">
+                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $user_replied->id, 'role_id' => Auth::user()->role_id]) }}'">
+                                                Xoá
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" style="margin-top: 5px">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Danh sách báo cáo đánh giá đã phản hồi </h4>
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="@if($report_ticket_replied->isNotEmpty() && count($report_ticket_replied) > 4) Scroll @endif">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>Người gửi</th>
+                                <th style="width:50%">Nội dung</th>
+                                <th>Ảnh</th>
+                                <th>Ngày đăng</th>
+                                <th class="text-center">Chức năng</th>
+                                </thead>
+                                <tbody id="report_ticket_replied">
+                                @foreach($report_ticket_replied as $ticket_replied)
+                                    <tr>
+                                        <td>{{ $ticket_replied->from_user->name }}</td>
+                                        <td>{{ $ticket_replied->content }}</td>
+                                        <td>
+                                            @foreach($images as $img)
+                                                @if($img->ticket_id == $ticket_replied->id)
+                                                    <button class="btn btn-outline-success" type="submit"
+                                                            value="{{ $img->ticket_id }}"
+                                                            data-toggle="modal" data-target="#modalReportImage"
+                                                            id="btn-user-images">
+                                                        <img src="{{ url('Images')}}/{{ $img->image }}"
+                                                             width="50px" height="50px">
+                                                    </button>
+                                                    @break
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $ticket_replied->created_at->format('d-m-Y') }}</td>
+                                        <td class="d-flex">
+                                            <button class="btn btn-outline-success" type="submit" style="margin: 5px"
+                                                    data-toggle="modal"
+                                                    data-target="#modalDetailReportTicket"
+                                                    id="btn-ticket-replied" value="{{ $ticket_replied->id }}">Nội dung
+                                            </button>
+                                            <button class="btn btn-outline-danger" type="submit" style="margin: 5px"
+                                                    onclick="window.location='{{ Route('report.delete',['id' => $ticket_replied->id, 'role_id' => Auth::user()->role_id]) }}'">
                                                 Xoá
                                             </button>
                                         </td>
@@ -364,6 +482,7 @@
     </style>
     @include('modal.contact.detail-reply')
     @include('modal.report.detail-report-user')
+    @include('modal.report.detail-report-review')
 @endsection
 <script src="{{ url('profile/js/core/jquery.min.js') }}"></script>
 <script src="{{ url('profile/js/core/popper.min.js') }}"></script>
@@ -405,11 +524,28 @@
                 type: "GET",
                 data: value,
                 success: function (res) {
-                    console.log(res.data,123)
+                    console.log(res.data, 123)
                     _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
                     _li += '<input type="hidden" name="review_id" value="' + res.data.ticket_id + '">';
                     _li += '<input type="hidden" name="to_user_id" value="' + res.data.from_user_id + '">';
                     $('#replied_user_report').html(_li)
+                }
+            })
+        })
+
+        $('#report_ticket_reply').on('click', '#btn-ticket-reply', function () {
+            var _li = '';
+            var value = {'id': $(this).val()}
+            $.ajax({
+                url: "{{ Route('report.detail') }}",
+                type: "GET",
+                data: value,
+                success: function (res) {
+                    console.log(res.data, 123)
+                    _li += '<input type="hidden" name="ticket_id" value="' + res.data.id + '">';
+                    _li += '<input type="hidden" name="review_id" value="' + res.data.ticket_id + '">';
+                    _li += '<input type="hidden" name="to_user_id" value="' + res.data.from_user_id + '">';
+                    $('#replied_ticket_report').html(_li)
                 }
             })
         })
@@ -444,6 +580,23 @@
                     _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
                     _li += '<label>' + res.result.content + '</label>';
                     $('#detail-replied-user').html(_li)
+                }
+            })
+        })
+
+        $('#report_ticket_replied').on('click', '#btn-ticket-replied', function () {
+            var _li = '';
+            var value = {'id': $(this).val()}
+            $.ajax({
+                url: "{{ Route('report.replied') }}",
+                type: "GET",
+                data: value,
+                success: function (res) {
+                    console.log(res.value)
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Người gửi : ' + res.value.from_user.username + ' </label><br>';
+                    _li += '<label for="recipient-name" class="col-form-label" style="font-weight: bold;">Nội dung : </label><br>'
+                    _li += '<label>' + res.value.content + '</label>';
+                    $('#detail-replied-ticket').html(_li)
                 }
             })
         })
@@ -530,6 +683,33 @@
             })
         })
         $('#report_user_replied').on('click', '#btn-user-images', function () {
+            var _li = '';
+            var value = {'id': $(this).val()}
+            $.ajax({
+                url: "{{ Route('report.image') }}",
+                type: "GET",
+                data: value,
+                success: function (res) {
+                    var data = res.images;
+                    var key = 0;
+                    data.forEach(function (item) {
+                        if (key == 0) {
+                            _li += '<div class="carousel-item active">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
+                            _li += '</div>'
+                        } else {
+                            _li += '<div class="carousel-item">';
+                            _li += '<img src="{{ url('Images')}}/' + item.image + '" class="d-block w-100" alt="...">';
+                            _li += '</div>'
+                        }
+                        key += 1;
+                        console.log(key)
+                    })
+                    $('#images').html(_li)
+                }
+            })
+        })
+        $('#report_ticket_reply').on('click', '#btn-ticket-images', function () {
             var _li = '';
             var value = {'id': $(this).val()}
             $.ajax({

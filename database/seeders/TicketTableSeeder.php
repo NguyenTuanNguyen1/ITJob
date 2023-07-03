@@ -39,6 +39,16 @@ class TicketTableSeeder extends Seeder
 
         for ($i = 1; $i <= 30; $i++) {
             DB::table('ticket')->insert([
+                'content' => fake()->text,
+                'from_user_id' => rand(2,21),
+                'ticket_id' => rand(121,150),
+                'type_id' => Constant::TICKET_REPORT_REVIEW,
+                'created_at' => Carbon::now()->subWeek()
+            ]);
+        }
+
+        for ($i = 1; $i <= 30; $i++) {
+            DB::table('ticket')->insert([
                 'username' => fake()->name,
                 'content' => fake()->text,
                 'email' => fake()->email,
@@ -58,10 +68,10 @@ class TicketTableSeeder extends Seeder
             ]);
         }
 
-        for ($i = 1; $i <= 150; $i++) {
+        for ($i = 1; $i <= 200; $i++) {
             DB::table('images')->insert([
                 'image' => 'image-' . rand(1,20) . '.jpg',
-                'ticket_id' => rand(1,60),
+                'ticket_id' => rand(1,90),
                 'created_at' => Carbon::now()->subWeek()
             ]);
         }

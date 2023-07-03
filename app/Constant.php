@@ -10,6 +10,7 @@ class Constant
     public const STATUS_APPROVED_POST = 1;
     public const TICKET_REPORT_USER = 1;
     public const TICKET_REPORT_POST = 2;
+    public const TICKET_REPORT_REVIEW = 5;
     public const TICKET_CONTACT = 3;
     public const TICKET_REVIEW = 4;
     public const TICKET_NOT_REPLY = 0;

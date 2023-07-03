@@ -92,6 +92,7 @@ Route::prefix('report')->group(function () {
     Route::get('/image', [ReportController::class, 'image'])->name('report.image');
     Route::post('/report-create', [ReportController::class, 'store'])->name('report.create');
     Route::post('/report-user', [ReportController::class, 'user'])->name('report.user');
+    Route::post('/report-review', [ReportController::class, 'review'])->name('report.review');
     Route::get('/report-delete', [ReportController::class, 'delete'])->name('report.delete');
     Route::get('/report-reply', [ReportController::class, 'reply'])->name('report.reply');
     Route::get('/list-report-replied', [ReportController::class, 'replied'])->name('report.replied');
@@ -133,6 +134,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'authorize'], function () {
     Route::post('/replied-contact', [AdminController::class, 'repliedContact'])->name('admin.replied.contact');
     Route::post('/replied-report', [AdminController::class, 'repliedReport'])->name('admin.replied.report');
     Route::post('/replied-report-user', [AdminController::class, 'repliedReportUser'])->name('admin.replied.report.user');
+    Route::post('/replied-report-review', [AdminController::class, 'repliedReportReview'])->name('admin.replied.report.review');
 });
 
 //Company
