@@ -130,7 +130,7 @@
                             class="@if($report_post_not_reply->isNotEmpty() && count($report_post_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Người gửi</th>
+                                <th style="width:145px">Người gửi</th>
                                 <th style="width: 50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
@@ -188,7 +188,7 @@
                             class="@if($report_user_not_reply->isNotEmpty() && count($report_user_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Người gửi</th>
+                                <th style="width: 145px" >Người gửi</th>
                                 <th style="width: 50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
@@ -246,7 +246,7 @@
                             class="@if($report_ticket_not_reply->isNotEmpty() && count($report_ticket_not_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Người gửi</th>
+                                <th style="width:145px">Người gửi</th>
                                 <th style="width: 50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
@@ -309,7 +309,7 @@
                             class="@if($report_post_reply->isNotEmpty() && count($report_post_reply) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Người gửi</th>
+                                <th style="width:145px">Người gửi</th>
                                 <th style="width:50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
@@ -368,7 +368,7 @@
                             class="@if($report_user_replied->isNotEmpty() && count($report_user_replied) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Người gửi</th>
+                                <th style="width:145px">Người gửi</th>
                                 <th style="width:50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
@@ -427,7 +427,7 @@
                             class="@if($report_ticket_replied->isNotEmpty() && count($report_ticket_replied) > 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
-                                <th>Người gửi</th>
+                                <th style="width:145px">Người gửi</th>
                                 <th style="width:50%">Nội dung</th>
                                 <th>Ảnh</th>
                                 <th>Ngày đăng</th>
