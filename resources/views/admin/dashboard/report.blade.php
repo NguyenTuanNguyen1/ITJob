@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Báo cáo người dùng</p>
+                                    <p class="card-category" style="font-size:15px">Báo cáo người dùng</p>
                                     <p class="card-title">
                                     <p>{{ $count_report_user }}
                                 </div>
