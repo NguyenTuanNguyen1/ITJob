@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\ITypeRepository;
+use App\Models\InformationType;
 use App\Repositories\InformationTypeRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\TicketTypeRepository;
@@ -32,22 +33,39 @@ class TypeController extends Controller
     {
         $input = $request->all();
 
-        $this->type_repo->create($input);
+        $checkExist = InformationType::where('content', $input['content'])->first();
+        if (empty($checkExist)) {
+            $type = $this->type_repo->create($input);
+            $this->ActivityLog('Đã thêm thông tin*' . $type['id'], Auth::user()->id);
+            return response()->json([
+                'result' => true,
+                'message' => 'Đã tạo thành công'
+            ]);
+        }
         return response()->json([
-            'result' => true,
-            'message' => 'Đã tạo thành công'
+            'result' => false,
+            'message' => 'Thông tin đã tồn tại'
         ]);
-
-
     }
 
     public function update(Request $request)
     {
         $input = $request->all();
 
-        $this->type_repo->update($input['id'], $input);
-        return redirect()->route('dashboard.information');
+        $checkExist = InformationType::where('content', $input['content'])->first();
 
+        if (empty($checkExist)) {
+            $this->type_repo->update($input['id'], $input);
+
+            $this->ActivityLog('Đã cập nhật thông tin*' . $input['id'], Auth::user()->id);
+            return response()->json([
+                'result' => true,
+                'message' => 'Chỉnh sửa thành công'
+            ]);
+        }
+
+        toast()->error('Thông tin đã tồn tại');
+        return redirect()->route('dashboard.information');
     }
 
     public function delete(Request $request)
@@ -55,12 +73,11 @@ class TypeController extends Controller
         $input = $request->all();
 
         $this->type_repo->delete($input['id']);
-        $type = $this->type_repo->trashed($input['id']);
-        $this->ActivityLog('Đã xoá thông tin*' . $type['id'], Auth::user()->id);
+        $this->ActivityLog('Đã xoá thông tin*' . $input['id'], Auth::user()->id);
+
         return response()->json([
             'result' => true,
             'message' => 'Đã xoá thành công'
         ]);
-
     }
 }

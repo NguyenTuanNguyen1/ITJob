@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Thông tin người dùng {{ $user->name }}</title>
     @include('layout.page-css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
     .content-item {
         padding: 30px 0;
@@ -312,24 +310,35 @@
                                         @foreach($reviews as $review)
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    <img class="media-object" src="{{ url('image_avatar') }}/{{ $review->from_user->img_avatar }}" alt="">
+                                                    <img class="media-object"
+                                                         src="{{ url('image_avatar') }}/{{ $review->from_user->img_avatar }}"
+                                                         alt="">
                                                 </a>
                                                 <div class="media-body">
                                                     <div class="d-flex" id="report_user">
-                                                        <h4 class="media-heading" style="color: black">{{ $review->from_user->username }}</h4>
+                                                        <h4 class="media-heading"
+                                                            style="color: black">{{ $review->from_user->username }}</h4>
                                                         <div class="col-6">
-                                                            <a class="btn btn-light" role="button" data-toggle="dropdown"
+                                                            <a class="btn btn-light" role="button"
+                                                               data-toggle="dropdown"
                                                                aria-expanded="false"><i class="fas fa-bars"></i></a>
                                                             <div class="dropdown-menu">
-                                                                <button type="submit" class="dropdown-item" data-toggle="modal"
+                                                                <button type="submit" class="dropdown-item"
+                                                                        data-toggle="modal"
                                                                         value="{{ $review->from_user_id }}"
-                                                                        data-target="#modalCompanyReport" id="company_report_user">Báo cáo
+                                                                        data-target="#modalCompanyReport"
+                                                                        id="company_report_user">Báo cáo
                                                                 </button>
-                                                                <form action="{{ Route('report.delete') }}" method="get">
-                                                                    <input type="hidden" name="id" value="{{ $review->id }}">
-                                                                    <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
-                                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                                                    <button type="submit" class="dropdown-item" data-toggle="modal"
+                                                                <form action="{{ Route('report.delete') }}"
+                                                                      method="get">
+                                                                    <input type="hidden" name="id"
+                                                                           value="{{ $review->id }}">
+                                                                    <input type="hidden" name="role_id"
+                                                                           value="{{ Auth::user()->role_id }}">
+                                                                    <input type="hidden" name="user_id"
+                                                                           value="{{ Auth::user()->id }}">
+                                                                    <button type="submit" class="dropdown-item"
+                                                                            data-toggle="modal"
                                                                             data-target="#modalReportPost">Xoá đánh giá
                                                                     </button>
                                                                 </form>
@@ -424,6 +433,8 @@
                                                 <a class="pull-left" href="#"><img class="media-object"
                                                                                    src="{{ url('image_avatar') }}/{{ $replied->from_user->img_avatar}}"></a>
                                                 <div class="media-body">
+                                                    <h4 class="media-heading" style="font-size: 20px;color: black">Hệ
+                                                        thống Finding Job</h4>
                                                     <p>{{ $replied->content }}</p>
                                                     <ul class="list-unstyled list-inline media-detail pull-left"
                                                         style="display: flex;">
@@ -557,5 +568,3 @@
         })
     });
 </script>
-
-</html>

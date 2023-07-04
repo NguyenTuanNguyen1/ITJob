@@ -20,7 +20,7 @@
                 <input type="hidden" name="from_user_id" value="{{ Auth::user()->id }}">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Phản hồi</button>
+                    <button type="submit" class="btn btn-primary">Gửi</button>
                 </div>
             </form>
         </div>

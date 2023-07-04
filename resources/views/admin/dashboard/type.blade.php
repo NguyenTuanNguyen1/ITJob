@@ -1,9 +1,11 @@
 @extends('admin.dashboard.layout')
 @section('content')
+    @include('sweetalert::alert')
     <link href="{{ url('profile/demo/demo.css')  }}" rel="stylesheet"/>
     <link href="{{ url('profile/css/paper-dashboard.css?v=2.0.1')  }}" rel="stylesheet"/>
     <link href="{{ url('profile/css/bootstrap.min.css')  }}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <div class="content">
         <form id="type-create" method="post">
             <div class="d-flex">
@@ -50,7 +52,7 @@
 
 <script src="{{ url('profile/demo/demo.js')  }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
 <script>
     $(document).ready(function () {
         load_data()
@@ -82,7 +84,11 @@
                 url: '{{ Route('type.create') }}',
                 type: 'POST',
                 data: value,
-                success: function () {
+                success: function (res) {
+                    if (res.result == false) {
+                        toastr.error(res.message);
+                        load_data()
+                    }
                     load_data()
                 }
             })
