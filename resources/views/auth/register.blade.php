@@ -161,12 +161,8 @@ body {
                     </div>
                 </form>
             </div>
-
-
-
         </div>
         <!--//form-ends-here-->
-
     </div>
     <!--//main-->
     <!--footer-->
@@ -229,6 +225,7 @@ function openCity(evt, cityName) {
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+    console.log(cityName)
 }
 /*
 We want to preview images, so we need to register the Image Preview plugin
