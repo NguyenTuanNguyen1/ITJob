@@ -72,7 +72,7 @@
                                                             data-target="#modalUser"
                                                             id="user">Chi tiết
                                                     </button>
-                                                @elseif(strpos($data->content, 'thông tin'))
+                                                @elseif(strpos($data->content, 'thông tin thêm'))
                                                     <button class="btn btn-outline-success" type="submit"
                                                             style="margin: 5px"
                                                             value="{{ $value[1] }},{{ $data->id }}" data-toggle="modal"
@@ -108,7 +108,6 @@
     <script>
 
         var button = $('#history')
-
         button.on('click', '#user', function () {
             var data = $(this).val()
             var _li = '';
@@ -200,7 +199,7 @@
                 _li += '<div class="row mt-3">';
                 _li += '    <div class="col-md-12">';
                 _li += '        <div class="form-group">';
-                _li += '            <label style="font-size: 17px;font-weight: bold">Yêu cầu :</label>';
+                _li += '            <label style="font-size: 17px;font-weight: bold">Yêu cầu :</label><br>';
                 _li += '            <label>' + value.requirements + '</label>';
                 _li += '        </div>';
                 _li += '    </div>';
@@ -258,13 +257,25 @@
                 var value = res.ticket;
                 var data = res.reply_ticket
                 console.log(data)
-                _li += '<div class="row mt-3">';
-                _li += '    <div class="col-md-6">';
-                _li += '        <div class="form-group">';
-                _li += '            <label style="font-size: 17px;font-weight: bold">Từ :</label>';
-                _li += '            <label>' + value.from_user.name + '</label>';
-                _li += '        </div>';
-                _li += '    </div>';
+                if(value == null)
+                {
+                    _li += '<div class="row mt-3">';
+                    _li += '    <div class="col-md-6">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Từ :</label><br>';
+                    _li += '            <label>' + data.from_user.name + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                }
+                else{
+                    _li += '<div class="row mt-3">';
+                    _li += '    <div class="col-md-6">';
+                    _li += '        <div class="form-group">';
+                    _li += '            <label style="font-size: 17px;font-weight: bold">Từ :</label><br>';
+                    _li += '            <label>' + value.from_user.name + '</label>';
+                    _li += '        </div>';
+                    _li += '    </div>';
+                }
                 if (value.to_user != null) {
                     _li += '    <div class="col-md-6">';
                     _li += '        <div class="form-group">';

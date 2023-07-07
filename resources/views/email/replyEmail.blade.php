@@ -1,1 +1,1 @@
-<?php
+<p>{{ $content }}</p>

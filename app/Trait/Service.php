@@ -105,7 +105,6 @@ trait Service
         $checkExist = Applied::where('user_id', $user_id)->where('post_id', $post_id)->count();
         if ($checkExist > 0)
         {
-
             return false;
         }
         return Applied::create([

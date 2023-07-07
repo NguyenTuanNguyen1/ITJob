@@ -36,7 +36,7 @@
                                aria-expanded="false"><span
                                     class="icon-th-large mr-2 text-danger"></span>Chức năng</a>
                             <div class="dropdown-menu">
-                                <button type="submit" class="dropdown-item" data-toggle="modal"
+                                <button type="submit" id="report_post" class="dropdown-item" data-toggle="modal"
                                         data-target="#modalReportPost">Báo cáo bài viết
                                 </button>
                             </div>

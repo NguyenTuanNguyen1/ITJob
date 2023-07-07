@@ -11,6 +11,7 @@ use App\Interfaces\IPostRepository;
 use App\Interfaces\ITicketRepository;
 use App\Interfaces\IUserRepository;
 use App\Mail\NotificationDeleteUser;
+use App\Mail\ReplyMail;
 use App\Models\Ticket;
 use App\Trait\Service;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class AdminController extends Controller
         $input = $request->all();
 
         $user = $this->user_repo->find($input['id']);
-        $this->ActivityLog("Đã xoá người dùng*" . $user['id'],Auth::user()->id);
+        $this->ActivityLog("Đã xoá người dùng*" . $user['id'], Auth::user()->id);
         $this->user_repo->delete($input['id']);
         return redirect()->route('dashboard.account');
     }
@@ -92,8 +93,16 @@ class AdminController extends Controller
         $input['type_id'] = Constant::TICKET_CONTACT;
         $input['status'] = Constant::TICKET_CONTACT_REPLIED;
 
+        if ($input['to_user_id'] != null) {
+            $this->ticket_repo->update($input['ticket_id']);
+            $this->ticket_repo->replyContact($input);
+            $this->ActivityLog('Đã phản hồi liên hệ của người dùng*' . $input['ticket_id'], $input['admin_id']);
+            alert('Bạn đã phản hồi liên hệ', null, 'success');
+            return redirect()->route('dashboard.contact', ['admin_id' => $input['admin_id']]);
+        }
         $this->ticket_repo->update($input['ticket_id']);
-        $this->ticket_repo->replyContact($input);
+        $this->sendMailUser($input, new ReplyMail($input['content']));
+        $this->ticket_repo->replyContactEmail($input);
 
         $this->ActivityLog('Đã phản hồi liên hệ của người dùng*' . $input['ticket_id'], $input['admin_id']);
         alert('Bạn đã phản hồi liên hệ', null, 'success');
@@ -130,12 +139,9 @@ class AdminController extends Controller
     {
         $input = $request->all();
 
-        if (isset($input['deleteReview']))
-        {
+        if (isset($input['deleteReview'])) {
             $this->ticket_repo->delete($input['review_id']);
-        }
-        else
-        {
+        } else {
             Ticket::where('id', $input['review_id'])->update([
                 'status' => Constant::TICKET_NOT_REPLY
             ]);

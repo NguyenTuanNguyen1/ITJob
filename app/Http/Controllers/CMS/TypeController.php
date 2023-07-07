@@ -36,7 +36,7 @@ class TypeController extends Controller
         $checkExist = InformationType::where('content', $input['content'])->first();
         if (empty($checkExist)) {
             $type = $this->type_repo->create($input);
-            $this->ActivityLog('Đã thêm thông tin*' . $type['id'], Auth::user()->id);
+            $this->ActivityLog('Đã tạo thông tin thêm*' . $type['id'], Auth::user()->id);
             return response()->json([
                 'result' => true,
                 'message' => 'Đã tạo thành công'
@@ -56,12 +56,9 @@ class TypeController extends Controller
 
         if (empty($checkExist)) {
             $this->type_repo->update($input['id'], $input);
-
-            $this->ActivityLog('Đã cập nhật thông tin*' . $input['id'], Auth::user()->id);
-            return response()->json([
-                'result' => true,
-                'message' => 'Chỉnh sửa thành công'
-            ]);
+            toast()->success('Cập nhật thông tin thành công');
+            $this->ActivityLog('Đã cập nhật thông tin thêm*' . $input['id'], Auth::user()->id);
+            return redirect()->route('dashboard.information');
         }
 
         toast()->error('Thông tin đã tồn tại');
@@ -73,7 +70,7 @@ class TypeController extends Controller
         $input = $request->all();
 
         $this->type_repo->delete($input['id']);
-        $this->ActivityLog('Đã xoá thông tin*' . $input['id'], Auth::user()->id);
+        $this->ActivityLog('Đã xoá thông tin thêm*' . $input['id'], Auth::user()->id);
 
         return response()->json([
             'result' => true,

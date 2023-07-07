@@ -14,14 +14,16 @@
                             @csrf
                             <div class="container1" id="imgBox">
                                 <label for="file">
-                                    <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px"height="200px">
+                                    <img src="{{ url('image_avatar/') }}/{{ Auth::user()->img_avatar }}" width="200px"
+                                         height="200px">
                                 </label>
                                 <input type="file" name="img_avatar" id="file" onchange="loadFile(event)">
                             </div>
                             <div class="d-flex align-items-center text-center p-1 py-3">
                                 <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
                                 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                <input type="text" name="name" value="{{ $user->name }}" id="" style="border-radius:5px;width:75%">
+                                <input type="text" name="name" value="{{ $user->name }}" id=""
+                                       style="border-radius:5px;width:75%">
                                 <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="test">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -36,25 +38,27 @@
                     <div class="card-body">
                         <form action="{{ Route('password.update') }}" method="post">
                             @csrf
-                            <div class="col-md-12" >
+                            <div class="col-md-12">
                                 <label>Nhập mật khẩu hiện tại</label>
-                                <input type="password" style="width:100%"class="inputpass" name="password_old" value="">
+                                <input type="password" style="width:100%" class="inputpass" name="password_old"
+                                       value="">
                                 @error('password_old')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
                                 @enderror
                             </div>
-                            <div class="col-md-12" >
+                            <div class="col-md-12">
                                 <label>Nhập mật khẩu mới</label>
-                                <input type="password"style="width:100%" class="inputpass" name="password" value="">
+                                <input type="password" style="width:100%" class="inputpass" name="password" value="">
                                 @error('password')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
                                 @enderror
                             </div>
-                            <div class="col-md-12" >
+                            <div class="col-md-12">
                                 <label>Nhập lại mật khẩu mới</label>
-                                <input type="password" style="width:100%"class="inputpass" name="password_confirmation" value="">
+                                <input type="password" style="width:100%" class="inputpass" name="password_confirmation"
+                                       value="">
                                 @error('password_confirmation')
                                 <div style="color:red;">{{ $message }}</div>
                                 <br>
@@ -85,7 +89,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên đăng nhập</label><br>
-                                        <input type="text" class="form-control" name="phone" value="{{ $user->username }}" readonly>
+                                        <input type="text" class="form-control" name="phone"
+                                               value="{{ $user->username }}" readonly>
                                     </div>
                                     @error('username')
                                     <div style="color:red;">{{ $message }}</div>
@@ -160,7 +165,8 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label for="job-region">Mô tả</label><br>
-                                    <textarea name="description"  rows="4" style="width:100%" >{{ Auth::user()->description }}</textarea>
+                                    <textarea name="description" rows="4"
+                                              style="width:100%">{{ Auth::user()->description }}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="position" value="{{ null }}">
@@ -185,16 +191,25 @@
                         <div class="row" id="load-information">
                             <div class="col-md-12">
                                 @foreach($information as $infor)
-                                    <label style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label><br>
-                                    <label style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label><br>
+                                    @if($infor->content == null)
+
+                                    @else
+                                        <label
+                                            style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label>
+                                        <br>
+                                    @endif
+                                    <label
+                                        style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label>
+                                    <br>
                                 @endforeach
 
                                 <form action="{{ Route('profile.update.information') }}" method="post">
                                     @csrf
                                     <div class="d-flex" style="justify-content:space-between;">
-                                        <select class="selectpicker border rounded" style=" padding: 10px; ; width: 30%; margin-top: 25px;"
+                                        <select class="selectpicker border rounded"
+                                                style=" padding: 10px; width: 30%; margin-top: 25px;"
                                                 id="job-region"
-                                                data-style="btn-black" data-width="100%" data-live-search="true"
+                                                data-style="btn-black" data-live-search="true"
                                                 title="Select Region" name="type_id">
                                             @foreach($type_infor as $type)
                                                 <option value="{{ $type->id }}">{{ $type->content }}</option>
@@ -203,8 +218,9 @@
                                     </div>
                                     <textarea type="text" class="form-control" name="content" style="margin-top: 15px;"
                                               rows="3"></textarea>
-                                    <input type="hidden"  name="id" value="{{ $user->id }}">
-                                    <button type="submit" style="margin-top: 15px;" class="btn btn-sm btn-outline-success">Lưu thông tin
+                                    <input type="hidden" name="id" value="{{ $user->id }}">
+                                    <button type="submit" style="margin-top: 15px;"
+                                            class="btn btn-sm btn-outline-success">Lưu thông tin
                                     </button>
                                 </form>
                             </div>
