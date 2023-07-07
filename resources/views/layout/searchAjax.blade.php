@@ -7,8 +7,6 @@
                     <input type="text" class="form-control form-control-lg input-search">
 
                     <div class="search-ajax-result" style="background:white;">
-{{--                        <div class="Scroll">--}}
-{{--                        </div>--}}
 
                     </div>
 

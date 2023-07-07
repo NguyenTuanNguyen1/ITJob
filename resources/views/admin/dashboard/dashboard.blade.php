@@ -131,8 +131,8 @@
                         <h4 class="card-title"> Danh sách bài viết chưa phê duyệt</h4>
                     </div>
                     <div class="card-body">
-                        <div
-                            class="@if($post_not_approved->isNotEmpty() && count($approved_last_week) > 4) Scroll @endif">
+                        <div style="height: 370px;"
+                            class="@if($post_not_approved->isNotEmpty() && count($post_not_approved) >= 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>Tên công ty</th>
@@ -145,7 +145,7 @@
                                         <td>{{ $not_approved->user->name }}</td>
                                         <td>{{ $not_approved->created_at->format('d-m-Y') }}</td>
                                         <td style="display:flex;justify-content:center">
-                                            <button class="btn btn-outline-success" 
+                                            <button class="btn btn-outline-success"
                                                     onclick="window.location='{{ Route('post.detail',['id' => $not_approved->id]) }}'" style="height: fit-content;margin-right:10px;">
                                                 Chi tiết
                                             </button>
@@ -161,7 +161,7 @@
                                     </tr>
                                     @endforeach
                                     </tbody>
-                                
+
                             </table>
                         </div>
                     </div>

@@ -77,7 +77,7 @@ class Post extends Model
         if (request('key'))
         {
             $key = request('key');
-            $query = $query->where('title', 'like', '%' . $key . '%');
+            $query = $query->where('title', 'like', '%' . $key . '%')->where('status', 1);
         }
         return $query;
     }
