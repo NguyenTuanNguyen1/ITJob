@@ -32,7 +32,7 @@ Vào 9h sáng T2 hàng tuần, hệ thống sẽ gửi mail tất cả người 
  + email : tranlequangthinh24122002@gmail.com
    
 ### Frontend : Nguyễn Tuấn Nguyên
- + linkedin : linkedin.com/in/nguyên-nguyễn-6a59b1282
+ + linkedin : https://www.linkedin.com/in/nguyên-nguyễn-6a59b1282
  + email : Nguyentuannguyen.tnt@gmail.com
 
 ### Mọi ý kiến đóng góp hoặc thắc mắc bạn có thể liên hệ chúng tôi qua Mail hoặc Linkedin. Xin cảm ơn
