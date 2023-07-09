@@ -1,66 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Mô tả  sơ lược về dự án
+Đây là dự án Website tìm việc làm FindingJob PHP Laravel nơi mọi người có thể giúp mọi người:
++ Tìm việc làm phù hợp với chuyên ngành (Quản lý thông tin cá nhân, tìm kiếm việc làm, công ty, v.v...)
++ Giúp nhà tuyển dụng đăng bài tuyển dụng tìm kiếm ứng viên phù hợp (Quản lý bài viết, quản lý thông tin công ty, tìm kiếm ứng cử viên, v.v...)
++ Quản lý Website (Quản lý tài khoản, quản lý bài viết, v.v...)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Sơ lược về hệ thống
 
-## About Laravel
+### Vai trò người dùng:
+ + Ứng cử viên
+ + Nhà tuyển dụng   
+ + Admin
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Chức năng chính
+ + Đăng nhập/ Đăng ký
+ + Quản lý thông tin cá nhân
+ + Quản lý bài tuyển dụng
+ + Quản lý tài khoản
+ + Đánh giá, báo cáo ứng cử viên, nhà tuyển dụng,  
+ + Liên hệ với Admin Website
+ + Phản hồi người dùng
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Đặc biệt
+Vào 9h sáng T2 hàng tuần, hệ thống sẽ gửi mail tất cả người dùng : 
+ + Ứng cử viên : tất cả bài viết phù hợp với chuyên ngành của người đó ở tuần trước
+ + Nhà tuyển dụng : danh sách ứng cử viên đã ứng tuyển vào mỗi bài tuyển dụng ở tuần trước
+ + Admin : tổng số lượng tất cả bài viết ở tuần trước (đã phê duyệt, chưa phê duyệt)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tác giả
+### Backend : Trần Lê Quang Thịnh
+ + linkedin : https://www.linkedin.com/in/quang-thinh-tran-le-aaaa44258/
+ + email : tranlequangthinh24122002@gmail.com
+   
+### Frontend : Nguyễn Tuấn Nguyên
+ + linkedin :
+ + email :
 
-## Learning Laravel
+### Mọi ý kiến đóng góp hoặc thắc mắc bạn có thể liên hệ chúng tôi qua Mail hoặc Linkedin. Xin cảm ơn
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Cấu hình dự án
+- PHP : 8.1
+- Laravel/framework : 10.0
+- MySQL : 5.7
+- Composer : 2.5.2
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Thiết lập Composser
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```sh
+composer install
+```
 
-## Laravel Sponsors
+### Thiết lập .env
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```sh
+Tạo thêm file .env sau đó copy nội dung file .env.exmple vào file .env rồi vào terminal nhập lệnh : 
+php artisan key:generate
+```
 
-### Premium Partners
+### Khởi tạo Database
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```sh
+php artisan migrate
+```
 
-## Contributing
+### Thiết lập Data
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```sh
+php artisan set-database
+```
 
-## Code of Conduct
+### Config env và cache
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```sh
+php artisan config
+```
