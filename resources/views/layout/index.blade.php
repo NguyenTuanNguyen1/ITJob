@@ -82,7 +82,7 @@
                 <input name="major" type="hidden" value="Chế tạo máy">
                 <button class="SL-job1" type="submit"
                         style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+                    <img class="img-job" src="board-master/images/co-khi.png" alt="">
                     <p>Chế tạo máy</p>
                     <p>{{ $count_major_manufacturing }} việc làm</p>
                 </button>
@@ -93,7 +93,7 @@
                 <input name="major" type="hidden" value="Điện/ Điện tử">
                 <button class="SL-job1" type="submit"
                         style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+                    <img class="img-job" src="board-master/images/dien-dien-tu-1.jpg" alt="">
                     <p>Điện/ Điện tử</p>
                     <p>{{ $count_major_electronics }} việc làm</p>
                 </button>
@@ -104,7 +104,7 @@
                 <input name="major" type="hidden" value="Báo chí/ Truyền hình">
                 <button class="SL-job1" type="submit"
                         style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+                    <img class="img-job" src="board-master/images/news.jpg" alt="">
                     <p>Báo chí/ Truyền hình</p>
                     <p>{{ $count_major_newspapers }} việc làm</p>
                 </button>
@@ -115,7 +115,7 @@
                 <input name="major" type="hidden" value="Bất động sản">
                 <button class="SL-job1" type="submit"
                         style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/tu-van.jpg" alt="">
+                    <img class="img-job" src="board-master/images/bat-dong-san.png" alt="">
                     <p>Bất động sản</p>
                     <p>{{ $count_major_real_estate }} việc làm</p>
                 </button>
@@ -126,7 +126,7 @@
                 <input name="major" type="hidden" value="Công nghệ Ô tô">
                 <button class="SL-job1" type="submit"
                         style="background-color:#f3f5f7;margin: 10px;border-radius: 10px;border: none;">
-                    <img class="img-job" src="board-master/images/ke-toan-kiem-toan.jpg" alt="">
+                    <img class="img-job" src="board-master/images/oto.jpg" alt="">
                     <p>Công nghệ Ô tô</p>
                     <p>{{ $count_major_car_technology }} việc làm</p>
                 </button>

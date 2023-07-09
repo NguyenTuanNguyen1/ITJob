@@ -126,7 +126,7 @@
 <script>
     $(document).ready(() => {
         let _li = '';
-        $.get('http://itjob.vn/post/post-detail/{{$post->id}}', (res) => {
+        $.get('http://127.0.0.1:8000/post/post-detail/{{$post->id}}', (res) => {
             var data = res.post;
             console.log(data.requirements)
             _li += '<div class="mb-5">';

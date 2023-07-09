@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group d-flex">
                                     <label>Số nhân viên : </label><br>
                                     <label style="font-weight: bold">{{ $company->staff }}</label><br>
                                 </div>

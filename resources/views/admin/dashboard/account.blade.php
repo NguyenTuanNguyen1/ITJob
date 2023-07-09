@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Tổng số người dùng</p>
+                                    <p class="card-category" style="font-size:15px">Tổng số người dùng</p>
                                     <p class="card-title">
                                     {{ $all_user }}
                                     <p>
