@@ -12,7 +12,7 @@ class UserRepository implements IUserRepository
 
     public function all()
     {
-        return User::orderBy('id', 'DESC')->get();
+        return User::orderBy('id', 'DESC')->where('role_id', 3)->get();
     }
 
     public function create(array $data)

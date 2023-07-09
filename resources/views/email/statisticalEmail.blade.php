@@ -60,7 +60,7 @@
             align="center;">
             <button style="background-color: #4284e4;color: #fff;border: none;outline: none;padding: 10px 30px">
                 <a style="padding: 0 12px; color:white;text-decoration: none"
-                   href="{{env('APP_DOMAIN')}}/manage/item">Xem chi tiết</a></button>
+                   href="{{env('APP_DOMAIN')}}/user/user-login">Xem chi tiết</a></button>
         </div>
         <div style="margin:36px 0 24px;padding:0">
             <hr style="background-color:#d0d6da;min-height:1px;width:120px;margin:0 auto;border:none">

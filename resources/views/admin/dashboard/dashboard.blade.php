@@ -131,7 +131,7 @@
                         <h4 class="card-title"> Danh sách bài viết chưa phê duyệt</h4>
                     </div>
                     <div class="card-body">
-                        <div style="height: 370px;"
+                        <div style="@if($post_not_approved->isNotEmpty())height: 370px; @endif"
                             class="@if($post_not_approved->isNotEmpty() && count($post_not_approved) >= 4) Scroll @endif">
                             <table class="table">
                                 <thead class=" text-primary">

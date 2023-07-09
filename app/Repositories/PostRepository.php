@@ -32,7 +32,6 @@ class PostRepository implements IPostRepository
         $post->position = $data['position'];
         $post->workplace = $data['workplace'];
         $post->major = $data['major'];
-        $post->image = $data['image'];
         $post->user_id = $data['user_id'];
         $post->save();
         return Post::where('title', $data['title'])->first();

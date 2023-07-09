@@ -85,11 +85,11 @@ class ReportController extends Controller
         alert('Đã gửi thành công', null, 'success');
         if ($input['role_id'] == Constant::ROLE_COMPANY)
         {
-            return redirect()->route('company.review');
+            return redirect()->route('profile.user',['id' => $input['user_id']]);
         }
         elseif ($input['role_id'] == Constant::ROLE_CANDIDATE)
         {
-            return redirect()->route('profile.user.detail',['id' => $input['user_id']]);
+            return redirect()->route('profile.user',['id' => $input['user_id']]);
         }
         return redirect()->route('post.detail', ['id' => $input['post_id']]);
     }
@@ -130,12 +130,15 @@ class ReportController extends Controller
         $this->ticket_repo->delete($input['id']);
         if (Auth::user()->role_id == Constant::ROLE_COMPANY)
         {
-            alert()->success('Đã xoá thành công');
-            return redirect()->route('company.review');
+            return response()->json([
+                'result' => true
+            ]);
         }
         elseif (Auth::user()->role_id == Constant::ROLE_CANDIDATE)
         {
-            return redirect()->route('profile.user.detail',['id' => $input['user_id']]);
+            return response()->json([
+                'result' => true
+            ]);
         }
         else
         {

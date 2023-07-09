@@ -193,7 +193,7 @@ class UserTableSeeder extends Seeder
         DB::table('information')->insert([
             'content' => $information[rand(0,1)],
             'user_id' => rand(7,22),
-            'type_id' => rand(2,3),
+            'type_id' => 2,
         ]);
     }
 }

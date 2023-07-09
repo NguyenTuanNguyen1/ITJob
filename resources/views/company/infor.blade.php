@@ -247,8 +247,16 @@
                     <div class="row" id="load-information">
                         <div class="col-md-12">
                             @foreach($information as $infor)
-                                <label class="mt-4">{{ $infor->type->content }}</label><br>
-                                <label style="font-weight: 900;">{{ $infor->content }}</label>
+                                @if($infor->content == null)
+
+                                @else
+                                    <label
+                                        style="font-size: 17px; margin-top: 15px;">{{ $infor->type->content }}</label>
+                                    <br>
+                                @endif
+                                <label
+                                    style="font-weight: bold;font-size: 15px;color: black">{{ $infor->content }}</label>
+                                <br>
                             @endforeach
                         </div>
                     </div>
@@ -318,9 +326,10 @@
                                                 </label>
                                                 <div id="replied_report"></div>
                                             </div>
-                                            <input type="hidden" name="user_id" value="{{ isset(Auth::user()->id) ? Auth::user()->id : null }}">
-                                            <input type="hidden" name="username" value="{{ isset(Auth::user()->username) ? Auth::user()->username : null }}">
-                                            <input type="hidden" name="email" value="{{ isset(Auth::user()->email) ? Auth::user()->email : null }}">
+                                            <input type="hidden" name="role_id" value="{{ isset(Auth::user()->id) ? Auth::user()->role_id : null }}">
+                                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                            <input type="hidden" name="to_user_id" value="{{ $user->id }}">
+                                            <input type="hidden" name="ticket_id" value="{{ null }}">
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Gửi</button>
                                             </div>
@@ -375,8 +384,9 @@
     }
 
     $(document).ready(() => {
-        load_count_review()
         load_review()
+        load_count_review()
+
 
         $('#create-review').submit(function (e) {
             e.preventDefault();
@@ -435,14 +445,13 @@
             })
         }
 
-        @if(Auth::check())
         $('#load_review').on('click','#delete-review',function (e) {
             e.preventDefault();
             var value = {
                 "id": $(this).val(),
-                "role_id": {{ Auth::user()->role_id }},
                 "_token": "{{ csrf_token() }}",
             }
+            console.log(value)
             $.ajax({
                 url: '{{ Route('report.delete') }}',
                 type: 'GET',
@@ -453,7 +462,6 @@
                 }
             })
         })
-        @endif
     });
 </script>
 

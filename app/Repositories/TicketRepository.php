@@ -60,7 +60,7 @@ class TicketRepository implements ITicketRepository
         $data->email = $contact['email'];
         $data->content = $contact['content'];
         $data->type_id = Constant::TICKET_CONTACT;
-        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
+        $data->from_user_id = isset(Auth::user()->id) ? Auth::user()->id : null;
         $data->save();
         return $data;
     }
@@ -107,6 +107,18 @@ class TicketRepository implements ITicketRepository
         $data->status = Constant::TICKET_CONTACT_REPLIED;
         $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
         $data->to_user_id = $contact['to_user_id'];
+        $data->save();
+        return $data;
+    }
+
+    public function replyContactEmail(array $contact)
+    {
+        $data = new Ticket();
+        $data->ticket_id = $contact['ticket_id'];
+        $data->content = $contact['content'];
+        $data->type_id = Constant::TICKET_CONTACT;
+        $data->status = Constant::TICKET_CONTACT_REPLIED;
+        $data->from_user_id = is_null(Auth::user()->id) ?: Auth::user()->id;
         $data->save();
         return $data;
     }

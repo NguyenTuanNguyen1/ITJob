@@ -5,7 +5,7 @@
             <form action="{{ route('user.register') }}" method="post">
                 @csrf
                 <div class="form-sub-w3">
-                    <input class="p-1 m-2 w-25" type="text" name="name" placeholder="Tên doanh nghiệp"/>
+                    <input class="p-1 m-2 w-25" type="text" name="name" placeholder="Tên hiển thị"/>
                 </div>
                 @error('name')
                 <div style="color:red;">{{ $message }}</div>

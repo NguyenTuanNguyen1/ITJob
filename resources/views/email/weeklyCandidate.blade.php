@@ -28,9 +28,6 @@
             style="color:#2d383c;font-family:Lato,'Hiragino Sans','\0030d2\0030e9\0030ae\0030ce\0089d2\0030b4\0030b7\0030c3\0030af','Hiragino Kaku Gothic ProN','\0030d2\0030e9\0030ae\0030ce\0089d2\0030b4 Pro W3','Helvetica Neue',Helvetica,Arial,'\0030e1\0030a4\0030ea\0030aa',Meiryo,'\00ff2d\00ff33 \00ff30\0030b4\0030b7\0030c3\0030af',sans-serif;font-size:20px; line-height:1.5; font-weight:bold; margin:0 0 12px; text-align: center;">
             {{ $post->title }}
         </div>
-        <div style="font-size:16px; line-height:1.8; font-weight: 500; margin:0 0 12px;color:#2d383c;">
-            {{ $post->description }}
-        </div>
         <div style="font-size:16px; line-height:1.8; font-weight:400; margin:0; color:#2d383c;">
             Đăng ngày {{ $post->created_at }}
         </div>

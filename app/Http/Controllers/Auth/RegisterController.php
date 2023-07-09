@@ -52,15 +52,12 @@ class RegisterController extends Controller
                 Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
                 return redirect()->route('home');
-
             case Constant::ROLE_COMPANY:
                 $this->company_repo->create($getUser['id'], (array)null);
                 Auth::login($getUser);
                 toast('Đăng ký thành công', 'success');
                 return redirect()->route('company.index');
             default:
-                Auth::login($getUser);
-                toast('Đăng ký thành công', 'success');
                 return redirect()->route('dashboard.index');
         }
     }

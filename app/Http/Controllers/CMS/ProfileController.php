@@ -197,7 +197,7 @@ class ProfileController extends Controller
         $information = $this->information_repo->find($id);
         $type = $this->type_repo->all();
         $review = $this->ticket_repo->getTicketByUser($id, Constant::TICKET_REVIEW);
-
+//        dd($information);
         if ($request->ajax()) {
             return response()->json([
                 'information' => $information,

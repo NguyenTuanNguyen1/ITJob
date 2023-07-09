@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS;
 
 use App\Constant;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Interfaces\IAdminRepository;
 use App\Interfaces\IInformationRepository;
 use App\Interfaces\IPostRepository;
@@ -76,7 +77,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $input = $request->all();
 

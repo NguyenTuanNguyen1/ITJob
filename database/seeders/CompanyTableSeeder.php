@@ -35,6 +35,7 @@ class CompanyTableSeeder extends Seeder
                 'position' => 'Trưởng phòng',
                 'role_id' => Constant::ROLE_COMPANY,
                 'email' => vnfaker()->email(),
+                'img_avatar' => 'company' . rand(1,10) . '.jpg',
                 'address' => rand(50, 300) . ' ' . $street[rand(0,5)] . ', ' . $district[rand(0,5)] . ', TP Hồ Chí Minh',
                 'description' => $description,
                 'password' => Hash::make('12345678'),
